@@ -1,5 +1,7 @@
 # ConnectEdu
-
+## __Group Members__
+1. Aaron Chee Thian Shin (u2102810)
+2. 
 ## Overview
 
 **Web Application Title:** ConnectEdu
