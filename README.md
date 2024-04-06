@@ -2,6 +2,7 @@
 ## __Group Members__
 1. Aaron Chee Thian Shin (u2102810)
 2. Siti Maisarah (u2000534)
+3. Muhammad Muqri Qawiem (u2000726)
 ## Overview
 
 **Web Application Title:** ConnectEdu
