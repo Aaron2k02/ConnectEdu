@@ -3,6 +3,7 @@
 1. Aaron Chee Thian Shin (u2102810)
 2. Siti Maisarah (u2000534)
 3. Muhammad Muqri Qawiem (u2000726)
+4. Surin Pubalan (u2001368)
 ## Overview
 
 **Web Application Title:** ConnectEdu
