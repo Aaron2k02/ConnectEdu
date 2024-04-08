@@ -1,24 +1,31 @@
-import logo from '../Images/logo.svg';
-import '../Styles/App.css';
+import React from 'react';
+// navigation of pages
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import Course from './Components/Pages/Course';
+import Dashboard from './Components/Pages/Dashboard';
+import Invoices from './Components/Pages/Invoices';
+import Notification from './Components/Pages/Notification';
+import ProfilePage from './Components/Pages/ProfilePage';
+
+import Sidebar from './Components/Navigation/Sidebar';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Sidebar>
+          <Routes>
+            <Route path="/course" element={<Course />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/invoices" element={<Invoices />} />
+            <Route path="/notification" element={<Notification />} />
+            <Route path="/profilePage" element={<ProfilePage />} />
+          </Routes>
+        </Sidebar>
+      </BrowserRouter>
     </div>
+
   );
 }
 
