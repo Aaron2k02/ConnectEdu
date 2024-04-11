@@ -42,7 +42,7 @@ const Navbar = () => {
           <span> Be LifeLong Learners </span>
           <span> Explore </span>
           <span> English </span>
-          <span> Sign in </span>
+          <Link className='link' to="/signin">Sign in</Link>
           {!currentUser?.isSeller && <span> Become an Educator </span>}
           {!currentUser && <button> Start Learning </button>}
           {currentUser && (
