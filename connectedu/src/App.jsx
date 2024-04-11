@@ -9,7 +9,7 @@ import {
 
 // Import Page Component
 import Navbar from "./components/navbar/Navbar";
-import Home from "./pages/home/Home";
+import Home from "./pages/home/home";
 import Footer from "./components/footer/Footer";
 import MyPurchase from "./pages/MyPurchase/MyPurchase";
 import MyCourse from "./pages/mycourse/mycourse";
