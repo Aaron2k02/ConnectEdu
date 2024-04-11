@@ -1,10 +1,10 @@
 import React from 'react'
-import "./createCourse.scss"
+import "./CreateCourse.scss"
 
-const createCourse = () => {
+const CreateCourse = () => {
   return (
-    <div className='create'>createCourse</div>
+    <div className='create'>CreateCourse</div>
   )
 }
 
-export default createCourse
+export default CreateCourse

@@ -1,9 +1,15 @@
 import { useEffect, useState } from 'react'
 import "./Navbar.scss"
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const Navbar = () => {
 
   const [active, setActive] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const {pathname} = useLocation();
 
   const isActive = () => {
     window.scrollY > 0 ? setActive(true) : setActive(false);
@@ -24,10 +30,12 @@ const Navbar = () => {
   }
 
   return (
-    <div className={active ? "navbar active": "navbar"}>
+    <div className={active || pathname !=="/" ? "navbar active": "navbar"}>
       <div className='container'>
         <div className='logo'>
-          <span className='text'> ConnectEdu </span>
+          <Link className='link' to="/">
+            <span className='text'> ConnectEdu </span>
+          </Link>
           <span className='dot'> . </span>
         </div>
         <div className='links'>
@@ -38,34 +46,56 @@ const Navbar = () => {
           {!currentUser?.isSeller && <span> Become an Educator </span>}
           {!currentUser && <button> Start Learning </button>}
           {currentUser && (
-            <div className='user'>
-              <img src="" alt="" />
+            <div className='user' onClick={() => setOpen(!open)}>
+              <AccountCircleIcon />
+              {/* <img src="" alt="" /> */}
               <span>{currentUser?.userName}</span>
-              <div className='options'>
-                {
-                  currentUser?.isSeller && (
-                    <>
-                      <span>My Courses</span>
-                      <span>Create New Courses</span>
-                    </>
-                  )
-                }
-                <span>Orders</span>
-                <span>Notifications</span>
-                <span>Logout</span>
-              </div>
+              { open &&
+                <div className='options'>
+                  {
+                    currentUser?.isSeller && (
+                      <>
+                        <span className='link' to="/myCourse">My Courses</span>
+                        <span className='link' to="/createCourse">Create New Courses</span>
+                      </>
+                    )
+                  }
+                  <Link className='link' to="/myPurchase">My Purchase</Link>
+                  <Link className='link' to="/notifications">Notifications</Link>
+                  <Link className='link' to="/createCourse">Logout</Link>
+                </div>
+              }
             </div>
           )}
         </div>
       </div>
-      {active && (
+      {(active || pathname !=="/" ) && (
         <>
           <hr />
             <div className="menu">
-            <span> Test </span>
-            <span> Test 2 </span>
-            <span> Test 3 </span>
-          </div>
+            <Link className='link' to='/'>
+              UI UX Design
+            </Link>
+            <Link className='link' to='/'>
+              Web Development
+            </Link>
+            <Link className='link' to='/'>
+              Mobile App Development
+            </Link>
+            <Link className='link' to='/'>
+              Data Science
+            </Link>
+            <Link className='link' to='/'>
+              Software Engineering
+            </Link>
+            <Link className='link' to='/'>
+              Artificial Intelligence
+            </Link>
+            <Link className='link' to='/'>
+              Cybersecurity
+            </Link>
+
+            </div>
         </>
       ) }
     </div>
