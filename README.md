@@ -1,7 +1,11 @@
 # ConnectEdu
 ## __Group Members__
 1. Aaron Chee Thian Shin (u2102810)
-2. 
+2. Siti Maisarah (u2000534)
+3. Muhammad Muqri Qawiem (u2000726)
+4. Surin Pubalan (u2001368)
+5. Mohamad Qhalish (u2102865)
+
 ## Overview
 
 **Web Application Title:** ConnectEdu
