@@ -18,9 +18,11 @@ import Courses from "./pages/courses/courses";
 import Course from "./pages/course/course";
 import Notifications from "./pages/notifications/Notifications";
 import Notification from "./pages/notification/Notification";
+import Register from "./pages/register/register";
 
 // Import Page Styling -- General css
 import './app.scss';
+import Login from "./pages/login/login";
 
 function App() {
 
@@ -70,6 +72,10 @@ function App() {
         {
           path: "/notification/:id",
           element: <Notification />
+        },
+        {
+          path:"/signin",
+          element:<Register/>
         }
       ]
     },
