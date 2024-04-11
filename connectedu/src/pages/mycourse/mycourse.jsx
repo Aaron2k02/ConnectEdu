@@ -1,10 +1,9 @@
 import React from 'react'
-import './mycourse.scss'
 
-const mycourse = () => {
+const MyCourse = () => {
   return (
-    <div>mycourse</div>
+    <div>MyCourse</div>
   )
 }
 
-export default mycourse
+export default MyCourse
