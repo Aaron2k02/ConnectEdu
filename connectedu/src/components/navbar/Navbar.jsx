@@ -30,7 +30,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className={active || pathname !=="/" ? "navbar active": "navbar"}>
+    <div className={active || (pathname !== "/" && pathname !== "/signin") ? "navbar active": "navbar"}>
       <div className='container'>
         <div className='logo'>
           <Link className='link' to="/">
@@ -69,7 +69,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
-      {(active || pathname !=="/" ) && (
+      {(active || (pathname !== "/" && pathname !== "/signin")) && (
         <>
           <hr />
             <div className="menu">

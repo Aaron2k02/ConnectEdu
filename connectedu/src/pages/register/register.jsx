@@ -64,15 +64,20 @@ const Register = () => {
   }
   return (
     <div className='register'>
-      <form onSubmit={handleSubmit}>
-        <h1>Register an account</h1>
-        {inputs.map((input)=>(
-           <FormInput key={input.id}{...input} value={values[input.name]} onChange={onChange} />
-        ))}
-       
-       
-        <button>Submit</button>
-      </form>
+      <div className="container">
+        <div className="left">
+          <form onSubmit={handleSubmit}>
+            <h1>Register an account</h1>
+            {inputs.map((input)=>(
+              <FormInput key={input.id}{...input} value={values[input.name]} onChange={onChange} />
+            ))}
+            <button>Submit</button>
+          </form>
+        </div>
+        <div className="right">
+          <img src={"/images/ConnectEduLogo-bg.png"} />
+        </div>
+      </div>
     </div>
   )
 }

@@ -18,11 +18,11 @@ import Courses from "./pages/courses/courses";
 import Course from "./pages/course/course";
 import Notifications from "./pages/notifications/Notifications";
 import Notification from "./pages/notification/Notification";
-import Register from "./pages/register/register";
 
 // Import Page Styling -- General css
 import './app.scss';
 import Login from "./pages/login/login";
+import Register from "./pages/register/Register";
 
 function App() {
 
@@ -75,7 +75,7 @@ function App() {
         },
         {
           path:"/signin",
-          element:<Register/>
+          element: <Register />
         }
       ]
     },
