@@ -30,7 +30,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className={active || pathname !=="/" ? "navbar active": "navbar"}>
+    <div className={active || (pathname !== "/" && pathname !== "/signin") ? "navbar active": "navbar"}>
       <div className='container'>
         <div className='logo'>
           <Link className='link' to="/">
@@ -42,7 +42,7 @@ const Navbar = () => {
           <span> Be LifeLong Learners </span>
           <span> Explore </span>
           <span> English </span>
-          <span> Sign in </span>
+          <Link className='link' to="/signin">Sign in</Link>
           {!currentUser?.isSeller && <span> Become an Educator </span>}
           {!currentUser && <button> Start Learning </button>}
           {currentUser && (
@@ -69,7 +69,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
-      {(active || pathname !=="/" ) && (
+      {(active || (pathname !== "/" && pathname !== "/signin")) && (
         <>
           <hr />
             <div className="menu">
