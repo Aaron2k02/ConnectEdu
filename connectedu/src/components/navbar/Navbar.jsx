@@ -39,11 +39,10 @@ const Navbar = () => {
           <span className='dot'> . </span>
         </div>
         <div className='links'>
-          <span> Be LifeLong Learners </span>
           <span> Explore </span>
           <span> English </span>
           <Link className='link' to="/signin">Sign in</Link>
-          {!currentUser?.isSeller && <span> Become an Educator </span>}
+          {!currentUser?.isEducator && <span> Become an Educator </span>}
           {!currentUser && <button> Start Learning </button>}
           {currentUser && (
             <div className='user' onClick={() => setOpen(!open)}>
@@ -53,10 +52,10 @@ const Navbar = () => {
               { open &&
                 <div className='options'>
                   {
-                    currentUser?.isSeller && (
+                    currentUser?.isEducator && (
                       <>
-                        <span className='link' to="/myCourse">My Courses</span>
-                        <span className='link' to="/createCourse">Create New Courses</span>
+                        <Link className='link' to="/myCourse">My Courses</Link>
+                        <Link className='link' to="/createCourse">Create New Courses</Link>
                       </>
                     )
                   }
@@ -66,6 +65,22 @@ const Navbar = () => {
                 </div>
               }
             </div>
+            // <div className="user">
+            //   {
+            //     currentUser?.isEducator && (
+            //       <>
+            //         <Link className='link' to="/myCourse">My Courses</Link>
+            //         <Link className='link' to="/createCourse">Create New Courses</Link>
+            //         <Link className='link' to="/myPurchase">My Purchase</Link>
+            //       </>
+            //     )
+            //   }
+            //   <Link className='link' to="/notifications">Notifications</Link>
+            //   <Link className='link' to="/createCourse">Logout</Link>
+            //   <AccountCircleIcon />
+            //   {/* <img src="" alt="" /> */}
+            //   <span>{currentUser?.userName}</span>
+            // </div>
           )}
         </div>
       </div>
@@ -73,28 +88,27 @@ const Navbar = () => {
         <>
           <hr />
             <div className="menu">
-            <Link className='link' to='/'>
-              UI UX Design
-            </Link>
-            <Link className='link' to='/'>
-              Web Development
-            </Link>
-            <Link className='link' to='/'>
-              Mobile App Development
-            </Link>
-            <Link className='link' to='/'>
-              Data Science
-            </Link>
-            <Link className='link' to='/'>
-              Software Engineering
-            </Link>
-            <Link className='link' to='/'>
-              Artificial Intelligence
-            </Link>
-            <Link className='link' to='/'>
-              Cybersecurity
-            </Link>
-
+              <Link className='link' to='/'>
+                UI UX Design
+              </Link>
+              <Link className='link' to='/'>
+                Web Development
+              </Link>
+              <Link className='link' to='/'>
+                Mobile App Development
+              </Link>
+              <Link className='link' to='/'>
+                Data Science
+              </Link>
+              <Link className='link' to='/'>
+                Software Engineering
+              </Link>
+              <Link className='link' to='/'>
+                Artificial Intelligence
+              </Link>
+              <Link className='link' to='/'>
+                Cybersecurity
+              </Link>
             </div>
         </>
       ) }
