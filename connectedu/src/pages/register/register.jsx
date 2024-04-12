@@ -72,7 +72,7 @@ const Register = () => {
               <FormInput key={input.id}{...input} value={values[input.name]} onChange={onChange} />
             ))}
             <div className='Login'>
-              Already have an account? <a href='/login'>Login</a>
+              Already have an account? <a href='/login' className='link'>Login</a>
             </div>
             <button>Submit</button>
           </form>
