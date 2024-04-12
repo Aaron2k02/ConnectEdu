@@ -23,6 +23,7 @@ import Notification from "./pages/notification/Notification";
 import './app.scss';
 import Login from "./pages/login/login";
 import Register from "./pages/register/Register";
+import ForgotPass from "./pages/forgotPass/ForgotPass";
 
 function App() {
 
@@ -76,6 +77,14 @@ function App() {
         {
           path:"/signin",
           element: <Register />
+        },
+        {
+          path:'/login',
+          element:<Login/>
+        },
+        {
+          path:'/forgotPassword',
+          element:<ForgotPass/>
         }
       ]
     },

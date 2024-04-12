@@ -1,7 +1,7 @@
 
 import FormInput from './featured/FormInput'
 import "./register.scss"
-import React, { useEffect, useState } from "react"
+import React, {  useState } from "react"
 
 
 const Register = () => {
@@ -71,6 +71,9 @@ const Register = () => {
             {inputs.map((input)=>(
               <FormInput key={input.id}{...input} value={values[input.name]} onChange={onChange} />
             ))}
+            <div className='Login'>
+              Already have an account? <a href='/login'>Login</a>
+            </div>
             <button>Submit</button>
           </form>
         </div>
