@@ -56,6 +56,7 @@ const Navbar = () => {
                       <>
                         <Link className='link' to="/myCourse">My Courses</Link>
                         <Link className='link' to="/createCourse">Create New Courses</Link>
+                        <Link className='link' to='/users/accountSettings'>Profile</Link>
                       </>
                     )
                   }
