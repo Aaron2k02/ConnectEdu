@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     background-color: #fcffe7;
+    
     .container{
         width: 1400px;
         padding: 30px 0px;
@@ -73,9 +74,9 @@
 
                 .rightMenu{
                     padding: 20px;
-                    background-color: #fcffe7;
+                    background-color: white;
                     border-radius: 5px;
-                    border: 0.5px solid #fcffe7;
+                    border: 0.5px solid white;
                     position: absolute;
                     top: 30px;
                     right: 0;
