@@ -24,6 +24,8 @@ import './app.scss';
 import Login from "./pages/login/login";
 import Register from "./pages/register/Register";
 import ForgotPass from "./pages/forgotPass/ForgotPass";
+import Profile from "./pages/profile/Profile";
+import AccountSettings from "./components/userProfilecard/accountSettings";
 
 function App() {
 
@@ -85,7 +87,15 @@ function App() {
         {
           path:'/forgotPassword',
           element:<ForgotPass/>
-        }
+        },
+        {
+          path:'/users/:activePage',
+          element:<Profile/>
+        },
+        
+       
+       
+
       ]
     },
   ]);

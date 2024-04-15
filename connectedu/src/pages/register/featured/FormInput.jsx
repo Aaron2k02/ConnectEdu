@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react"
 const FormInput = (props) => {
   const [focused,setFocused] = useState(false);
 
-  const {label,errorMessage,onChange,id,...inputProps} =props;
+  const {label,errorMessage,onChange,id,disabled,...inputProps} =props;
 
   const handleFocus = (e) =>{
     setFocused(true);
@@ -18,7 +18,8 @@ const FormInput = (props) => {
         onBlur={handleFocus} 
         onFocus={()=>
         inputProps.name=="confirmPassword" && setFocused(true)}
-        focused={focused.toString()} />
+        focused={focused.toString()}
+        disabled={disabled} />
         <span>{errorMessage}</span>
       </div>
     </div>
