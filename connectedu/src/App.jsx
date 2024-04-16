@@ -26,6 +26,8 @@ import Register from "./pages/register/Register";
 import ForgotPass from "./pages/forgotPass/ForgotPass";
 import Profile from "./pages/profile/Profile";
 import AccountSettings from "./components/userProfilecard/accountSettings";
+import VerifyOTP from "./pages/forgotPass/verifyOTP";
+import ResetPassword from "./pages/forgotPass/resetPassword";
 
 function App() {
 
@@ -92,6 +94,14 @@ function App() {
           path:'/users/:activePage',
           element:<Profile/>
         },
+        {
+          path:'/forgotPassword/verifyOTP',
+          element:<VerifyOTP/>
+        },
+        {
+          path:'/forgotPassword/resetPass',
+          element:<ResetPassword/>
+        }
         
        
        

@@ -1,18 +1,19 @@
 import React from 'react'
 import "./ForgotPass.scss"
 
-const ForgotPass = () => {
+const VerifyOTP = () => {
   return (
     <div className='forgotPass'>
       <div className='container'>
         <div className='left'>
           <form action="">
-            <h1>Forgot Password?</h1>
+            <h1>Verify OTP</h1>
+            <h4>An authentication code has been sent to your email</h4>
             <div className='input-box'>
-            <input type="email" placeholder=' Email address' required />
-            </div>
             
-           <button><a href='/forgotPassword/verifyOTP' className="link">Submit</a></button>
+            <input type="text" placeholder='Enter code' required />
+            </div>
+            <button><a href='/forgotPassword/resetPass' className="link">Verify</a></button>
           </form>
         </div>
         <div className='right'>
@@ -26,4 +27,4 @@ const ForgotPass = () => {
   )
 }
 
-export default ForgotPass
+export default VerifyOTP
