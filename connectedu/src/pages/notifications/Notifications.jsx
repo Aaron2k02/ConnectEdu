@@ -6,7 +6,7 @@ const Notifications = () => {
   const currentUser = {
     id: 1,
     username: "Anna",
-    isSeller: true,
+    isEducator: true,
   };
 
   const notification = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
@@ -22,12 +22,12 @@ const Notifications = () => {
         </div>
         <table>
           <tr>
-            <th>{currentUser.isSeller ? "Buyer" : "Seller"}</th>
+            <th>{currentUser.isEducator ? "Educator" : "Student"}</th>
             <th>Last notification</th>
             <th>Date</th>
             <th>Action</th>
           </tr>
-          <tr className="active">
+          <tr className="unread">
             <td>Charley Sharp</td>
             <td>
               <Link to="/notification/123" className="link">
@@ -39,9 +39,8 @@ const Notifications = () => {
               <button>Mark as Read</button>
             </td>
           </tr>
-          <tr className="active">
+          <tr className="unread">
             <td>John Doe</td>
-
             <td>
               <Link to="/notification/123" className="link">
                 {notification.substring(0, 100)}...
@@ -52,7 +51,7 @@ const Notifications = () => {
               <button>Mark as Read</button>
             </td>
           </tr>
-          <tr>
+          <tr className="read">
             <td>Elinor Good</td>
             <td>
               <Link to="/notification/123" className="link">
@@ -61,7 +60,7 @@ const Notifications = () => {
             </td>
             <td>1 day ago</td>
           </tr>
-          <tr>
+          <tr className="read">
             <td>Garner David </td>
             <td>
               <Link to="/notification/123" className="link">
@@ -70,9 +69,13 @@ const Notifications = () => {
             </td>
             <td>2 days ago</td>
           </tr>
-          <tr>
+          <tr className="read">
             <td>Troy Oliver</td>
-            <td>{notification.substring(0, 100)}</td>
+            <td>
+              <Link to="/notification/123" className="link">
+                {notification.substring(0, 100)}
+              </Link>
+            </td>
             <td>1 week ago</td>
           </tr>
         </table>
