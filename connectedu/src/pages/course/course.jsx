@@ -8,6 +8,7 @@ const Course = () => {
       <div className="container">
         <div className="left">
           <span className="breadCrumbs"> ConnectEdu `&gt;` Information System </span>
+          
           <h1>We will explore the world of web development </h1>
 
           <div className="user">
@@ -22,6 +23,7 @@ const Course = () => {
               <span> 5 </span>
             </div>
           </div>
+
           <Slide slidesToSlide={1}>
             <img
               src="https://images.pexels.com/photos/1074535/pexels-photo-1074535.jpeg?auto=compress&cs=tinysrgb&w=1600"
@@ -36,8 +38,9 @@ const Course = () => {
               alt=""
             />
           </Slide>
-        
-        <h2>About This Course</h2>
+
+          <h2>About This Course</h2>
+          
         <p>
           I use an AI program to create images based on text prompts. This
           means I can help you to create a vision you have through a textual
@@ -108,14 +111,111 @@ const Course = () => {
           </div>
           <div className="reviews">
             <h2>Reviews</h2>
-            <img src="" alt="" />
-            <div className="info">
-              <span>
-                John Doe
-              </span>
-              <div className="country">
-                <img src="https://www.bing.com/images/search?view=detailV2&ccid=GmaXo9cV&id=9AE2C6D3DC493DC2E8391EECD77C7FAC2775A612&thid=OIP.GmaXo9cVKIJQR-YgA0hyZgHaDt&mediaurl=https%3a%2f%2fupload.wikimedia.org%2fwikipedia%2fcommons%2fthumb%2f6%2f66%2fFlag_of_Malaysia.svg%2f2800px-Flag_of_Malaysia.svg.png&exph=1400&expw=2800&q=malaysia+country+flag&simid=608008430258356451&FORM=IRPRST&ck=2747D549698A037C5649F23EE1B099F7&selectedIndex=0&itb=0" alt="" />
-                <span>Malaysia</span>
+            <div className="item">
+              <div className="user">
+                <img src="" alt="" />
+                <div className="info">
+                  <span>John Doe</span>
+                  <div className="country">
+                    <img src="https://www.bing.com/images/search?view=detailV2&ccid=GmaXo9cV&id=9AE2C6D3DC493DC2E8391EECD77C7FAC2775A612&thid=OIP.GmaXo9cVKIJQR-YgA0hyZgHaDt&mediaurl=https%3a%2f%2fupload.wikimedia.org%2fwikipedia%2fcommons%2fthumb%2f6%2f66%2fFlag_of_Malaysia.svg%2f2800px-Flag_of_Malaysia.svg.png&exph=1400&expw=2800&q=malaysia+country+flag&simid=608008430258356451&FORM=IRPRST&ck=2747D549698A037C5649F23EE1B099F7&selectedIndex=0&itb=0" alt="" />
+                    <span>Malaysia</span>
+                  </div>
+                </div>
+              </div>
+              <div className="stars">
+                <img src="/images/star.png" alt="" />
+                <img src="/images/star.png" alt="" />
+                <img src="/images/star.png" alt="" />
+                <img src="/images/star.png" alt="" />
+                <img src="/images/star.png" alt="" />
+                <span> 5 </span>
+              </div>
+              <p>
+                I just want to say that art_with_ai was the first, and after
+                this, the only artist Ill be using on Fiverr. Communication was
+                amazing, each and every day he sent me images that I was free to
+                request changes to. They listened, understood, and delivered
+                above and beyond my expectations. I absolutely recommend this
+                gig, and know already that Ill be using it again very very soon
+              </p>
+              <div className="helpful">
+                <span>Helpful?</span>
+                <img src="/img/like.png" alt="" />
+                <span>Yes</span>
+                <img src="/img/dislike.png" alt="" />
+                <span>No</span>
+              </div>
+            </div>
+            <hr />
+            <div className="item">
+              <div className="user">
+                <img src="" alt="" />
+                <div className="info">
+                  <span>John Doe</span>
+                  <div className="country">
+                    <img src="https://www.bing.com/images/search?view=detailV2&ccid=GmaXo9cV&id=9AE2C6D3DC493DC2E8391EECD77C7FAC2775A612&thid=OIP.GmaXo9cVKIJQR-YgA0hyZgHaDt&mediaurl=https%3a%2f%2fupload.wikimedia.org%2fwikipedia%2fcommons%2fthumb%2f6%2f66%2fFlag_of_Malaysia.svg%2f2800px-Flag_of_Malaysia.svg.png&exph=1400&expw=2800&q=malaysia+country+flag&simid=608008430258356451&FORM=IRPRST&ck=2747D549698A037C5649F23EE1B099F7&selectedIndex=0&itb=0" alt="" />
+                    <span>Malaysia</span>
+                  </div>
+                </div>
+              </div>
+              <div className="stars">
+                <img src="/images/star.png" alt="" />
+                <img src="/images/star.png" alt="" />
+                <img src="/images/star.png" alt="" />
+                <img src="/images/star.png" alt="" />
+                <img src="/images/star.png" alt="" />
+                <span> 5 </span>
+              </div>
+              <p>
+                I just want to say that art_with_ai was the first, and after
+                this, the only artist Ill be using on Fiverr. Communication was
+                amazing, each and every day he sent me images that I was free to
+                request changes to. They listened, understood, and delivered
+                above and beyond my expectations. I absolutely recommend this
+                gig, and know already that Ill be using it again very very soon
+              </p>
+              <div className="helpful">
+                <span>Helpful?</span>
+                <img src="/img/like.png" alt="" />
+                <span>Yes</span>
+                <img src="/img/dislike.png" alt="" />
+                <span>No</span>
+              </div>
+            </div>
+            <hr />
+            <div className="item">
+              <div className="user">
+                <img src="" alt="" />
+                <div className="info">
+                  <span>John Doe</span>
+                  <div className="country">
+                    <img src="https://www.bing.com/images/search?view=detailV2&ccid=GmaXo9cV&id=9AE2C6D3DC493DC2E8391EECD77C7FAC2775A612&thid=OIP.GmaXo9cVKIJQR-YgA0hyZgHaDt&mediaurl=https%3a%2f%2fupload.wikimedia.org%2fwikipedia%2fcommons%2fthumb%2f6%2f66%2fFlag_of_Malaysia.svg%2f2800px-Flag_of_Malaysia.svg.png&exph=1400&expw=2800&q=malaysia+country+flag&simid=608008430258356451&FORM=IRPRST&ck=2747D549698A037C5649F23EE1B099F7&selectedIndex=0&itb=0" alt="" />
+                    <span>Malaysia</span>
+                  </div>
+                </div>
+              </div>
+              <div className="stars">
+                <img src="/images/star.png" alt="" />
+                <img src="/images/star.png" alt="" />
+                <img src="/images/star.png" alt="" />
+                <img src="/images/star.png" alt="" />
+                <img src="/images/star.png" alt="" />
+                <span> 5 </span>
+              </div>
+              <p>
+                I just want to say that art_with_ai was the first, and after
+                this, the only artist Ill be using on Fiverr. Communication was
+                amazing, each and every day he sent me images that I was free to
+                request changes to. They listened, understood, and delivered
+                above and beyond my expectations. I absolutely recommend this
+                gig, and know already that Ill be using it again very very soon
+              </p>
+              <div className="helpful">
+                <span>Helpful?</span>
+                <img src="/img/like.png" alt="" />
+                <span>Yes</span>
+                <img src="/img/dislike.png" alt="" />
+                <span>No</span>
               </div>
             </div>
           </div>
