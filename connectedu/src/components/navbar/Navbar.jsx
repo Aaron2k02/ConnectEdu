@@ -33,10 +33,12 @@ const Navbar = () => {
     <div className={active || (pathname !== "/" && pathname !== "/signin") ? "navbar active": "navbar"}>
       <div className='container'>
         <div className='logo'>
+          
           <Link className='link' to="/">
             <span className='text'> ConnectEdu </span>
           </Link>
           <span className='dot'> . </span>
+          <img src={'/images/ConnectEduLogo-bg.png'} alt="" />
         </div>
         <div className='links'>
           <span> Explore </span>
