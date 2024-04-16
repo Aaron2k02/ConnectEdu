@@ -19,12 +19,22 @@
         display: flex;
         justify-content: space-between;
         padding: 20px 0px;
+
         .logo {
             font-size: 34px;
             font-weight: bold;
-            .text {}
+            display: flex;
+            align-items:end;
+            .text {
+                
+            }
             .dot {
                 color: #EB455F;
+            }
+            img {
+                height: 50px;
+                width: 50px;
+                margin-bottom: 3px;
             }
         }
 

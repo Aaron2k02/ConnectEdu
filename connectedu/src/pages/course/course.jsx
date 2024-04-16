@@ -37,7 +37,7 @@ const Course = () => {
             />
           </Slide>
         
-        <h2>About This Gig</h2>
+        <h2>About This Course</h2>
         <p>
           I use an AI program to create images based on text prompts. This
           means I can help you to create a vision you have through a textual
