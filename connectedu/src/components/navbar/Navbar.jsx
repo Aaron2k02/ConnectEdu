@@ -27,7 +27,7 @@ const Navbar = () => {
   {
     id: 1,
     userName: "Educators",
-    isEducator: true
+    isEducator: false
   };
 
   return (
@@ -45,7 +45,7 @@ const Navbar = () => {
             <>
               <span> Explore </span>
               <Link className='link' to="/signin">Sign in</Link>
-              <button > Start Learning </button>
+              <button> Start Learning </button>
             </>
           )}
           {currentUser && (
@@ -71,7 +71,7 @@ const Navbar = () => {
             //     </div>
             //   }
             // </div>
-            <div className="user">
+            <div className="user" onClick={() => setOpen(!open)}>
               {
                 currentUser?.isEducator ? (
                   <>
@@ -87,12 +87,17 @@ const Navbar = () => {
               <Link className='link item' to="/myPurchase">My Purchase</Link>
               <Link className='link item' to="/paymentCheckout">My Payment</Link>
               <Link className='link item' to="/notifications">Notifications</Link>
-              <Link className='link item' to="/createCourse">Logout</Link>
-              <Link className='link item' to='/users/accountSettings'>
+              <div className="item">
                 <AccountCircleIcon />
                 {/* <img src="" alt="" /> */}
                 <span>{currentUser?.userName}</span>
-              </Link>
+              </div>
+              {open &&
+                <div className='options'>
+                  <Link className='link' to='/users/accountSettings'> My Profile </Link>
+                  <Link className='link' to="/createCourse">Logout</Link>
+                </div>
+              }
             </div>
           )}
         </div>
