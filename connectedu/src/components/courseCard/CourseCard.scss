@@ -1,17 +1,23 @@
 .courseCard{
     width: 324px;
-    height: 370px;
-    border: 1px solid #fcffe7;
+    height: auto;
+    border: 5px solid #2B3467;
     margin-bottom: 25px;
-
+    border-radius: 1rem;
+    background-color: #BAD7E9;
+    border-width: 1px;
+    overflow: hidden;
+    gap: 10px;
+    
+    
     img{
         width: 100%;
         height: 50%;
-        object-fit: cover;
+        object-fit:cover;
     }
 
     .info{
-        padding: 10px 20px;
+        padding: 10px 0px;
         display: flex;
         flex-direction: column;
         gap: 15px;
@@ -21,22 +27,49 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        margin-left: 5px;
 
         img{
             width: 26px;
             height: 26px;
             border-radius: 50%;
         }
+
     }
+
+    .courseInfo{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin: 5px;
+        p{
+            font-weight: bold;
+        }
+    }
+
+    .courseDescription{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin:10px 5px 5px 5px;
+
+        .item{
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+        
 
     p {
         color: black;
+        
     }
 
-    .star{
+    .stars{
         display: flex;
         align-items: center;
         gap: 5px;
+        margin: 10px 10px 10px 5px;
 
         img{
             width: 14px;
@@ -46,7 +79,7 @@
         span {
             font-size: 14px;
             font-weight: bold;
-            color: wheat;
+            color: black;
         }
     }
 
@@ -56,10 +89,10 @@
     }
 
     .details{
-        display: 10px 20px;
+        display: 20px 20px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
 
         img{
             width: 16px;
@@ -78,5 +111,25 @@
                 font-weight: 400;
             }
         }
+
+        .detailsLink{
+            padding-top: 0.5rem;
+            padding-bottom: 0.25rem;
+            margin-top: 0.5rem;
+            margin-bottom: 60px;
+            font-weight: 700;
+            border-radius: 12px;
+            background-color: #2B3467;
+            width: 250px;
+            height: 25px;
+            text-align: center;
+            color: white;
+        }
     }
+}
+
+.courseCard:hover {
+            transition: all 0.3s;
+            transform: translate(0px, -10px);
+                box-shadow: 0px 30px 20px rgba(0, 0, 0, 0.2)
 }
