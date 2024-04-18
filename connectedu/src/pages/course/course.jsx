@@ -101,6 +101,7 @@ const Course = () => {
                   <span className="desc">English</span>
                 </div>
               </div>
+              <hr/>
               <p>
                 My name is Anna, I enjoy creating AI generated art in my spare
                 time. I have a lot of experience using the AI program and that
