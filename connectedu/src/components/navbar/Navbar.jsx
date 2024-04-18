@@ -64,6 +64,7 @@ const Navbar = () => {
                   }
                   <Link className='link' to="/myPurchase">My Purchase</Link>
                   <Link className='link' to="/notifications">Notifications</Link>
+                  <Link className='link' to="/Dashboard">Dashboard</Link>
                   <Link className='link' to="/createCourse">Logout</Link>
                 </div>
               }

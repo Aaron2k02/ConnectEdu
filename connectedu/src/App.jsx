@@ -28,7 +28,7 @@ import Profile from "./pages/profile/Profile";
 import AccountSettings from "./components/userProfilecard/accountSettings";
 import VerifyOTP from "./pages/forgotPass/verifyOTP";
 import ResetPassword from "./pages/forgotPass/resetPassword";
-import CourseAnalytics from "./pages/dataAnalytics/CourseAnalytics";
+import Dashboard from "./pages/dataAnalytics/Dashboard";
 
 function App() {
 
@@ -102,11 +102,13 @@ function App() {
         {
           path:'/forgotPassword/resetPass',
           element:<ResetPassword/>
-        }
+        },
         
-       
-       
+        { 
 
+        path: "/dashboard", 
+        element: <Dashboard /> },
+       
       ]
     },
   ]);
