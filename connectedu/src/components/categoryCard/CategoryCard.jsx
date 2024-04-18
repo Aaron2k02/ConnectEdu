@@ -8,7 +8,7 @@ const CategoryCard = ({ item }) => {
     <Link to='/courses'>
       <div className='categoryCard'>
         <img src={item.img} />
-        <span className='title'>{ item.title }</span>
+        <span className='title'>{item.title}</span>
       </div>
     </Link>
   )

@@ -53,7 +53,7 @@ const Footer = () => {
             <span>Learning Community</span>
           </div>
         </div>
-        <hr/>
+        <hr />
         <div className="bottom">
           <div className="left">
             <h2>ConnectEdu</h2>
@@ -69,7 +69,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      </div>
+    </div>
   )
 }
 

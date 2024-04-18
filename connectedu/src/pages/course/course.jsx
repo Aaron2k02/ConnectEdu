@@ -8,7 +8,7 @@ const Course = () => {
       <div className="container">
         <div className="left">
           <span className="breadCrumbs"> ConnectEdu `&gt;` Information System </span>
-          
+
           <h1>We will explore the world of web development </h1>
 
           <div className="user">
@@ -40,21 +40,21 @@ const Course = () => {
           </Slide>
 
           <h2>About This Course</h2>
-          
-        <p>
-          I use an AI program to create images based on text prompts. This
-          means I can help you to create a vision you have through a textual
-          description of your scene without requiring any reference images.
-          Some things I've found it often excels at are: Character portraits
-          (E.g. a picture to go with your DnD character) Landscapes (E.g.
-          wallpapers, illustrations to compliment a story) Logos (E.g. Esports
-          team, business, profile picture) You can be as vague or as
-          descriptive as you want. Being more vague will allow the AI to be
-          more creative which can sometimes result in some amazing images. You
-          can also be incredibly precise if you have a clear image of what you
-          want in mind. All of the images I create are original and will be
-          found nowhere else. If you have any questions you're more than
-          welcome to send me a message.
+
+          <p>
+            I use an AI program to create images based on text prompts. This
+            means I can help you to create a vision you have through a textual
+            description of your scene without requiring any reference images.
+            Some things I've found it often excels at are: Character portraits
+            (E.g. a picture to go with your DnD character) Landscapes (E.g.
+            wallpapers, illustrations to compliment a story) Logos (E.g. Esports
+            team, business, profile picture) You can be as vague or as
+            descriptive as you want. Being more vague will allow the AI to be
+            more creative which can sometimes result in some amazing images. You
+            can also be incredibly precise if you have a clear image of what you
+            want in mind. All of the images I create are original and will be
+            found nowhere else. If you have any questions you're more than
+            welcome to send me a message.
           </p>
           <div className="seller">
             <h2>About The Seller</h2>
@@ -101,6 +101,7 @@ const Course = () => {
                   <span className="desc">English</span>
                 </div>
               </div>
+              <hr />
               <p>
                 My name is Anna, I enjoy creating AI generated art in my spare
                 time. I have a lot of experience using the AI program and that
