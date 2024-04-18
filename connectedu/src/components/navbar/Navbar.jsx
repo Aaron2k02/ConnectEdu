@@ -85,6 +85,7 @@ const Navbar = () => {
               }
               <Link className='link item' to="/myCourse">My Courses</Link>
               <Link className='link item' to="/myPurchase">My Purchase</Link>
+              <Link className='link item' to="/paymentCheckout">My Payment</Link>
               <Link className='link item' to="/notifications">Notifications</Link>
               <Link className='link item' to="/createCourse">Logout</Link>
               <Link className='link item' to='/users/accountSettings'>
