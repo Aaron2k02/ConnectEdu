@@ -19,6 +19,7 @@ import Course from "./pages/course/course";
 import Notifications from "./pages/notifications/Notifications";
 import Notification from "./pages/notification/Notification";
 import PaymentCheckout from "./pages/paymentCheckout/paymentCheckout";
+import CheckoutSuccess from "./components/checkoutSuccess/checkoutSuccess";
 
 // Import Page Styling -- General css
 import './app.scss';
@@ -107,6 +108,10 @@ function App() {
         {
           path: '/paymentCheckout',
           element: <PaymentCheckout />
+        },
+        {
+          path: '/checkout-success',
+          element: <CheckoutSuccess />
         }
       ]
     },
