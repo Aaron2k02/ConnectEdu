@@ -1,13 +1,15 @@
 import React from 'react'
 import './course.scss'
-import Slide from '../../components/Slide/Slide'
+// import Slide from '../../components/Slide/Slide'
+import SlideShow from '../../components/slideshow/SlideShow';
+import {slideImages} from '../../data/coursesDetail';
 
 const Course = () => {
   return (
     <div className='course'>
       <div className="container">
         <div className="left">
-          <span className="breadCrumbs"> ConnectEdu `&gt;` Information System </span>
+          <span className="breadCrumbs"> ConnectEdu &gt; Information System </span>
 
           <h1>We will explore the world of web development </h1>
 
@@ -24,20 +26,7 @@ const Course = () => {
             </div>
           </div>
 
-          <Slide className='slider'>
-            <img
-              src="https://images.pexels.com/photos/1074535/pexels-photo-1074535.jpeg?auto=compress&cs=tinysrgb&w=1600"
-              alt=""
-            />
-            <img
-              src="https://images.pexels.com/photos/1462935/pexels-photo-1462935.jpeg?auto=compress&cs=tinysrgb&w=1600"
-              alt=""
-            />
-            <img
-              src="https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600"
-              alt=""
-            />
-          </Slide>
+          <SlideShow data={slideImages} className='slider' />
 
           <h2>About This Course</h2>
 
@@ -114,11 +103,14 @@ const Course = () => {
             <h2>Reviews</h2>
             <div className="item">
               <div className="user">
-                <img src="" alt="" />
+                <img
+                  className="pp"
+                  src="https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                  alt="" />
                 <div className="info">
                   <span>John Doe</span>
                   <div className="country">
-                    <img src="https://www.bing.com/images/search?view=detailV2&ccid=GmaXo9cV&id=9AE2C6D3DC493DC2E8391EECD77C7FAC2775A612&thid=OIP.GmaXo9cVKIJQR-YgA0hyZgHaDt&mediaurl=https%3a%2f%2fupload.wikimedia.org%2fwikipedia%2fcommons%2fthumb%2f6%2f66%2fFlag_of_Malaysia.svg%2f2800px-Flag_of_Malaysia.svg.png&exph=1400&expw=2800&q=malaysia+country+flag&simid=608008430258356451&FORM=IRPRST&ck=2747D549698A037C5649F23EE1B099F7&selectedIndex=0&itb=0" alt="" />
+                    <img src="https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
                     <span>Malaysia</span>
                   </div>
                 </div>
@@ -141,20 +133,23 @@ const Course = () => {
               </p>
               <div className="helpful">
                 <span>Helpful?</span>
-                <img src="/img/like.png" alt="" />
+                <img src="/images/like.png" alt="" />
                 <span>Yes</span>
-                <img src="/img/dislike.png" alt="" />
+                <img src="/images/dislike.png" alt="" />
                 <span>No</span>
               </div>
             </div>
             <hr />
             <div className="item">
               <div className="user">
-                <img src="" alt="" />
+                <img
+                  className="pp"
+                  src="https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                  alt="" />
                 <div className="info">
                   <span>John Doe</span>
                   <div className="country">
-                    <img src="https://www.bing.com/images/search?view=detailV2&ccid=GmaXo9cV&id=9AE2C6D3DC493DC2E8391EECD77C7FAC2775A612&thid=OIP.GmaXo9cVKIJQR-YgA0hyZgHaDt&mediaurl=https%3a%2f%2fupload.wikimedia.org%2fwikipedia%2fcommons%2fthumb%2f6%2f66%2fFlag_of_Malaysia.svg%2f2800px-Flag_of_Malaysia.svg.png&exph=1400&expw=2800&q=malaysia+country+flag&simid=608008430258356451&FORM=IRPRST&ck=2747D549698A037C5649F23EE1B099F7&selectedIndex=0&itb=0" alt="" />
+                    <img src="https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
                     <span>Malaysia</span>
                   </div>
                 </div>
@@ -177,20 +172,23 @@ const Course = () => {
               </p>
               <div className="helpful">
                 <span>Helpful?</span>
-                <img src="/img/like.png" alt="" />
+                <img src="/images/like.png" alt="" />
                 <span>Yes</span>
-                <img src="/img/dislike.png" alt="" />
+                <img src="/images/dislike.png" alt="" />
                 <span>No</span>
               </div>
             </div>
             <hr />
             <div className="item">
               <div className="user">
-                <img src="" alt="" />
+                <img
+                  className="pp"
+                  src="https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                  alt="" />
                 <div className="info">
                   <span>John Doe</span>
                   <div className="country">
-                    <img src="https://www.bing.com/images/search?view=detailV2&ccid=GmaXo9cV&id=9AE2C6D3DC493DC2E8391EECD77C7FAC2775A612&thid=OIP.GmaXo9cVKIJQR-YgA0hyZgHaDt&mediaurl=https%3a%2f%2fupload.wikimedia.org%2fwikipedia%2fcommons%2fthumb%2f6%2f66%2fFlag_of_Malaysia.svg%2f2800px-Flag_of_Malaysia.svg.png&exph=1400&expw=2800&q=malaysia+country+flag&simid=608008430258356451&FORM=IRPRST&ck=2747D549698A037C5649F23EE1B099F7&selectedIndex=0&itb=0" alt="" />
+                    <img src="https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
                     <span>Malaysia</span>
                   </div>
                 </div>
@@ -213,15 +211,52 @@ const Course = () => {
               </p>
               <div className="helpful">
                 <span>Helpful?</span>
-                <img src="/img/like.png" alt="" />
+                <img src="/images/like.png" alt="" />
                 <span>Yes</span>
-                <img src="/img/dislike.png" alt="" />
+                <img src="/images/dislike.png" alt="" />
                 <span>No</span>
               </div>
             </div>
           </div>
         </div>
-        <div className="right"> </div>
+        <div className="right">
+          <div className="price">
+            <h3>I teach Information System</h3>
+            <h2>$ 59.99 </h2>
+          </div>
+          <p>
+            I will teach on how to study information system
+          </p>
+          <div className="details">
+            <div className="item">
+              <img src="/images/clock.png" alt="" />
+              <span>2 classes per week</span>
+            </div>
+            <div className="item">
+              <img src="/images/recycle.png" alt="" />
+              <span>3 Iteration of Dicussion</span>
+            </div>
+          </div>
+          <div className="features">
+            <div className="item">
+              <img src="/images/greencheck.png" alt="" />
+              <span>Information Literacy</span>
+            </div>
+            <div className="item">
+              <img src="/images/greencheck.png" alt="" />
+              <span>Information Literacy</span>
+            </div>
+            <div className="item">
+              <img src="/images/greencheck.png" alt="" />
+              <span>Information Literacy</span>
+            </div>
+            <div className="item">
+              <img src="/images/greencheck.png" alt="" />
+              <span>Information Literacy</span>
+            </div>
+          </div>
+          <button>Purchase Course</button>
+        </div>
       </div>
     </div>
   )
