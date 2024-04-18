@@ -19,13 +19,18 @@ const Home = () => {
     <div className='home'>
       <Featured />
       <TrustedBy />
-      <Slide slidesToSlide={1}>
-        {
-          cards.map(card => (
-            <CategoryCard key={card.id} item={card} />
-          ))
-        }
-      </Slide>
+      <div className="courseCategory">
+        <h1> Explore our popular Courses Category </h1>
+        <p> Here are some popular courses category based on number of student Enrolled</p>
+        <Slide slidesToSlide={1}>
+          {
+            cards.map(card => (
+              <CategoryCard key={card.id} item={card} />
+            ))
+          }
+        </Slide>
+      </div>
+      
       <div className="features">
         <div className="container">
           <div className="item">
@@ -59,13 +64,18 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <Slide slidesToSlide={1}>
-        {
-          educators.map(card => (
-            <EducatorCard key={card.id} item={card} />
-          ))
-        }
-      </Slide>
+
+      <div className="educators">
+        <h1> Our Amazing Educators </h1>
+        <Slide slidesToSlide={1}>
+          {
+            educators.map(card => (
+              <EducatorCard key={card.id} item={card} />
+            ))
+          }
+        </Slide>
+      </div>
+      
       <div className="features dark">
         <div className="container">
           <div className="item">

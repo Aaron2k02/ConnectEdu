@@ -23,17 +23,17 @@ const Navbar = () => {
     };
   }, []);
 
-  const currentUser = {
+  const currentUser = 
+  {
     id: 1,
     userName: "Educators",
-    isEducator:true
-  }
+    isEducator: true
+  };
 
   return (
     <div className={active || (pathname !== "/" && pathname !== "/signin") ? "navbar active": "navbar"}>
       <div className='container'>
         <div className='logo'>
-          
           <Link className='link' to="/">
             <span className='text'> ConnectEdu </span>
           </Link>
@@ -41,49 +41,58 @@ const Navbar = () => {
           <img src={'/images/ConnectEduLogo-bg.png'} alt="" />
         </div>
         <div className='links'>
-          <span> Explore </span>
-          <span> English </span>
-          <Link className='link' to="/signin">Sign in</Link>
-          {!currentUser?.isEducator && <span> Become an Educator </span>}
-          {!currentUser && <button> Start Learning </button>}
+          {!currentUser && (
+            <>
+              <span> Explore </span>
+              <Link className='link' to="/signin">Sign in</Link>
+              <button > Start Learning </button>
+            </>
+          )}
           {currentUser && (
-            <div className='user' onClick={() => setOpen(!open)}>
-              <AccountCircleIcon />
-              {/* <img src="" alt="" /> */}
-              <span>{currentUser?.userName}</span>
-              { open &&
-                <div className='options'>
-                  {
-                    currentUser?.isEducator && (
-                      <>
-                        <Link className='link' to="/myCourse">My Courses</Link>
-                        <Link className='link' to="/createCourse">Create New Courses</Link>
-                        <Link className='link' to='/users/accountSettings'>Profile</Link>
-                      </>
-                    )
-                  }
-                  <Link className='link' to="/myPurchase">My Purchase</Link>
-                  <Link className='link' to="/notifications">Notifications</Link>
-                  <Link className='link' to="/createCourse">Logout</Link>
-                </div>
-              }
-            </div>
-            // <div className="user">
-            //   {
-            //     currentUser?.isEducator && (
-            //       <>
-            //         <Link className='link' to="/myCourse">My Courses</Link>
-            //         <Link className='link' to="/createCourse">Create New Courses</Link>
-            //         <Link className='link' to="/myPurchase">My Purchase</Link>
-            //       </>
-            //     )
-            //   }
-            //   <Link className='link' to="/notifications">Notifications</Link>
-            //   <Link className='link' to="/createCourse">Logout</Link>
+            // <div className='user' onClick={() => setOpen(!open)}>
             //   <AccountCircleIcon />
             //   {/* <img src="" alt="" /> */}
             //   <span>{currentUser?.userName}</span>
+            //   { open &&
+            //     <div className='options'>
+            //       {
+            //         currentUser?.isEducator && (
+            //           <>
+            //             <Link className='link' to="/myCourse">My Courses</Link>
+            //             <Link className='link' to="/createCourse">Create New Courses</Link>
+            //             <Link className='link' to='/users/accountSettings'>Profile</Link>
+            //           </>
+            //         )
+            //       }
+            //       {!currentUser?.isEducator && <span> Become an Educator </span>}
+            //       <Link className='link' to="/myPurchase">My Purchase</Link>
+            //       <Link className='link' to="/notifications">Notifications</Link>
+            //       <Link className='link' to="/createCourse">Logout</Link>
+            //     </div>
+            //   }
             // </div>
+            <div className="user">
+              {
+                currentUser?.isEducator ? (
+                  <>
+                    <Link className='link item' to="/createCourse">Create New Courses</Link>
+                  </>
+                ):(
+                  <>
+                    <Link className='link item' to="/createCourse">Become an Educator</Link>
+                  </>
+                )
+              }
+              <Link className='link item' to="/myCourse">My Courses</Link>
+              <Link className='link item' to="/myPurchase">My Purchase</Link>
+              <Link className='link item' to="/notifications">Notifications</Link>
+              <Link className='link item' to="/createCourse">Logout</Link>
+              <Link className='link item' to='/users/accountSettings'>
+                <AccountCircleIcon />
+                {/* <img src="" alt="" /> */}
+                <span>{currentUser?.userName}</span>
+              </Link>
+            </div>
           )}
         </div>
       </div>
