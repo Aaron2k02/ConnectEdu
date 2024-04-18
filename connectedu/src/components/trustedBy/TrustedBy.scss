@@ -1,9 +1,10 @@
-.trustedBy{
+.trustedBy {
     background-color: #FCFFE7;
     height: 100px;
     display: flex;
     justify-content: center;
-    .container{
+
+    .container {
         width: 760px;
         display: flex;
         align-items: center;
@@ -13,7 +14,7 @@
         justify-content: center;
     }
 
-    img{
+    img {
         height: 50px;
         object-fit: contain;
     }

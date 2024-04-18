@@ -26,15 +26,15 @@ const Slide = ({ children, slidesToSlide }) => {
             items: 1
         }
     };
-  return (
-      <div className='slide'>
-          <div className="container">
-              <Carousel responsive={responsive} slidesToSlide={slidesToSlide} infinite autoPlay>
-                  {children}
-              </Carousel>
-          </div>    
-      </div>
-  )
+    return (
+        <div className='slide'>
+            <div className="container">
+                <Carousel responsive={responsive} slidesToSlide={slidesToSlide} infinite autoPlay>
+                    {children}
+                </Carousel>
+            </div>
+        </div>
+    )
 }
 
 export default Slide

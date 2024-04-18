@@ -1,26 +1,77 @@
 .notifications {
-    display: flex;
-    justify-content: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-  
-    .container {
+
+  .container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 50px;
+
+    .title {
+      display: flex;
+      justify-content: space-between;
+
+
+      button {
+        background-color: #2B3467;
+        color: white;
+        font-weight: 500;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #1f2551;
+        }
+      }
+    }
+
+    table {
       width: 100%;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 50px;
-  
-      .title {
-        display: flex;
-        justify-content: space-between;
-        
-  
+      border-collapse: collapse;
+
+      tr {
+        height: 100px;
+        transition: background-color 0.3s ease;
+
+        th {
+          text-align: left;
+        }
+
+        td {
+          padding: 10px;
+          border-bottom: 1px solid #ddd;
+          // Set default font color to black
+          color: black;
+        }
+
+        &.unread {
+          background-color: #1dbf730f;
+
+          td {
+            color: black; // Font color for unread notifications
+          }
+        }
+
+        &.read {
+          td {
+            color: grey; // Font color for read notifications
+          }
+        }
+
+        tr:hover {
+          background-color: #f0f0f0;
+        }
+
         button {
           background-color: #2B3467;
           color: white;
-          font-weight: 500;
+          padding: 5px 10px;
           border: none;
-          padding: 10px;
           cursor: pointer;
           transition: background-color 0.3s ease;
 
@@ -28,58 +79,8 @@
             background-color: #1f2551;
           }
         }
-      }
-  
-      table {
-        width: 100%;
-        border-collapse: collapse;
-  
-        tr {
-          height: 100px;
-          transition: background-color 0.3s ease;
 
-          th {
-            text-align: left;
-          }
-  
-          td {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            // Set default font color to black
-            color: black;
-          }
-
-          &.unread {
-            background-color: #1dbf730f;
-            td {
-              color: black; // Font color for unread notifications
-            }
-          }
-  
-          &.read {
-            td {
-              color: grey; // Font color for read notifications
-            }
-          }
-
-          tr:hover {
-            background-color: #f0f0f0;
-          }
-  
-          button {
-            background-color: #2B3467;
-            color: white;
-            padding: 5px 10px;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-
-            &:hover {
-              background-color: #1f2551;
-            }
-          }
-
-        }
       }
     }
   }
+}

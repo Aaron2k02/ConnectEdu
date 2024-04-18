@@ -1,14 +1,14 @@
-.login{
+.login {
     display: flex;
-    align-items:center;
+    align-items: center;
     justify-content: center;
     height: 100vh;
-    background:#2B3467;
+    background: #2B3467;
 
-    .container{
+    .container {
         display: flex;
 
-        .left{
+        .left {
             display: flex;
             flex-direction: column;
             gap: 30px;
@@ -19,20 +19,20 @@
                 border-radius: 10px;
                 width: 800px;
             }
-        
+
             h1 {
                 margin-top: 30px;
                 color: #2B3467;
                 text-align: center;
             }
 
-            h2{
+            h2 {
                 margin-top: 0px;
                 margin-bottom: 15px;
                 text-align: center;
-            
+
             }
-        
+
             button {
                 width: 30%;
                 height: 50px;
@@ -46,10 +46,10 @@
                 cursor: pointer;
                 margin-top: 15px;
                 margin-bottom: 10px;
-                align-self: center;       
+                align-self: center;
             }
 
-            .register-link{
+            .register-link {
                 font-size: 16px;
                 margin-bottom: 30px;
             }
@@ -58,25 +58,22 @@
                 color: #EB455F;
                 font-weight: 1000;
             }
-            
+
         }
 
         .welcome-container {
             display: flex;
-            align-items: center; 
-            
+            align-items: center;
+
             justify-content: center;
         }
-        
+
         .welcome-image {
-            width: 100px; 
-            height: 100px; 
-            
+            width: 100px;
+            height: 100px;
+
         }
-        
+
     }
-    
+
 }
-
-
-
