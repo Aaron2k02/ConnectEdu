@@ -24,7 +24,7 @@ const Course = () => {
             </div>
           </div>
 
-          <Slide className='slider'>
+          <Slide slidesToSlide={1}>
             <img
               src="https://images.pexels.com/photos/1074535/pexels-photo-1074535.jpeg?auto=compress&cs=tinysrgb&w=1600"
               alt=""
