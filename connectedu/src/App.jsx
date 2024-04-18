@@ -11,21 +11,22 @@ import {
 import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/home/home";
 import Footer from "./components/footer/Footer";
-import MyPurchase from "./pages/MyPurchase/MyPurchase";
+import MyPurchase from "./pages/myPurchase/MyPurchase";
 import MyCourse from "./pages/mycourse/mycourse";
-import CreateCourse from "./pages/createCourse/CreateCourse";
+import CreateCourse from "./pages/createCourse/createCourse";
 import Courses from "./pages/courses/courses";
 import Course from "./pages/course/course";
 import Notifications from "./pages/notifications/Notifications";
 import Notification from "./pages/notification/Notification";
+import PaymentCheckout from "./pages/paymentCheckout/paymentCheckout";
 
 // Import Page Styling -- General css
 import './app.scss';
 import Login from "./pages/login/login";
-import Register from "./pages/register/Register";
+import Register from "./pages/register/register";
 import ForgotPass from "./pages/forgotPass/ForgotPass";
 import Profile from "./pages/profile/Profile";
-import AccountSettings from "./components/userProfilecard/accountSettings";
+import AccountSettings from "./components/userProfilecard/AccountSettings";
 import VerifyOTP from "./pages/forgotPass/verifyOTP";
 import ResetPassword from "./pages/forgotPass/resetPassword";
 import Dashboard from "./pages/dataAnalytics/Dashboard";
@@ -35,9 +36,9 @@ function App() {
   const Layout = () => {
     return (
       <div className="app">
-        <Navbar/>
-        <Outlet/>
-        <Footer/>
+        <Navbar />
+        <Outlet />
+        <Footer />
       </div>
     )
   }
@@ -49,7 +50,7 @@ function App() {
       children: [
         {
           path: "/",
-          element:<Home/>
+          element: <Home />
         },
         {
           path: "/courses",
@@ -80,35 +81,33 @@ function App() {
           element: <Notification />
         },
         {
-          path:"/signin",
+          path: "/signin",
           element: <Register />
         },
         {
-          path:'/login',
-          element:<Login/>
+          path: '/login',
+          element: <Login />
         },
         {
-          path:'/forgotPassword',
-          element:<ForgotPass/>
+          path: '/forgotPassword',
+          element: <ForgotPass />
         },
         {
-          path:'/users/:activePage',
-          element:<Profile/>
+          path: '/users/:activePage',
+          element: <Profile />
         },
         {
-          path:'/forgotPassword/verifyOTP',
-          element:<VerifyOTP/>
+          path: '/forgotPassword/verifyOTP',
+          element: <VerifyOTP />
         },
         {
-          path:'/forgotPassword/resetPass',
-          element:<ResetPassword/>
+          path: '/forgotPassword/resetPass',
+          element: <ResetPassword />
         },
-        
-        { 
-
-        path: "/dashboard", 
-        element: <Dashboard /> },
-       
+        {
+          path: '/paymentCheckout',
+          element: <PaymentCheckout />
+        }
       ]
     },
   ]);

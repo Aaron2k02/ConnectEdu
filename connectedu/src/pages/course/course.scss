@@ -1,52 +1,52 @@
-.course{
+.course {
     display: flex;
     justify-content: center;
 
-    .container{
+    .container {
         width: 1400px;
         padding: 30px 0px;
         display: flex;
         gap: 50px;
 
-        .left{
+        .left {
             flex: 2;
             display: flex;
             flex-direction: column;
             gap: 20px;
 
-            .breadCrumbs{
+            .breadCrumbs {
                 font-weight: 300;
                 font-style: 13px;
                 color: #555;
-            } 
+            }
 
-            .user{
+            .user {
                 display: flex;
                 align-items: center;
                 gap: 10px;
 
-                .pp{
+                .pp {
                     width: 32px;
                     height: 32px;
                     border-radius: 50%;
                 }
 
-                span{
+                span {
                     font-size: 14px;
                     font-weight: 500;
                 }
 
-                .stars{
+                .stars {
                     display: flex;
                     align-items: center;
                     gap: 5px;
 
-                    img{
+                    img {
                         width: 14px;
                         height: 14px;
                     }
 
-                    span{
+                    span {
                         font-size: 14px;
                         font-weight: bold;
                         color: black;
@@ -54,42 +54,42 @@
                 }
             }
 
-            .slider{
-                img{
+            .slider {
+                img {
                     max-height: 500px;
                     object-fit: contain;
                 }
             }
 
-            h2{
+            h2 {
                 font-weight: 400;
             }
 
-            p{
+            p {
                 font-weight: 300;
                 color: #555;
-                line-height: 25px;                
+                line-height: 25px;
             }
 
-            .seller{
+            .seller {
                 margin-top: 50px;
                 display: flex;
                 flex-direction: column;
                 gap: 20px;
 
-                .user{
+                .user {
                     display: flex;
                     align-items: center;
                     gap: 20px;
 
-                    img{
+                    img {
                         width: 100px;
                         height: 100px;
                         border-radius: 50%;
                         object-fit: cover;
                     }
 
-                    .info{
+                    .info {
                         display: flex;
                         flex-direction: column;
                         gap: 10px;
@@ -98,18 +98,19 @@
                             display: flex;
                             align-items: center;
                             gap: 5px;
-                    
+
                             img {
                                 width: 14px;
                                 height: 14px;
                             }
-                    
+
                             span {
                                 font-size: 14px;
                                 font-weight: bold;
                                 color: black;
                             }
                         }
+
                         button {
                             background-color: white;
                             border: 5px;
@@ -120,43 +121,43 @@
                     }
                 }
 
-                .box{
+                .box {
                     border: 1px solid gray;
                     border-radius: 5px;
                     padding: 20px;
                     margin-top: 20px;
 
-                    .items{
+                    .items {
                         display: flex;
                         flex-wrap: wrap;
                         justify-content: space-between;
 
-                        .item{
+                        .item {
                             width: 500px;
                             display: flex;
                             flex-direction: column;
                             gap: 10px;
                             margin-bottom: 20px;
 
-                            .title{
+                            .title {
                                 font-weight: 300;
 
                             }
                         }
 
-                        hr{
+                        hr {
                             height: 0;
                             border: 1px solid lightgray;
                             margin-bottom: 20px;
                         }
 
-                        
+
                     }
                 }
             }
         }
 
-        .right{
+        .right {
             flex: 1;
         }
     }

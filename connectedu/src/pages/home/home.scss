@@ -1,34 +1,37 @@
-.home{
-    
-    .features{
-        background-color:#2B3467;
+.home {
+
+    .features {
+        background-color: #2B3467;
         display: flex;
         justify-content: center;
         padding: 100px 0px;
 
-        &.dark{
+        &.dark {
             background-color: #2B3467;
             padding: 0px !important;
+
             // emphasize important to avoid element being overide
-            h1{
+            h1 {
                 margin-bottom: 10px !important;
                 color: #FCFFE7 !important;
             }
-            p{
+
+            p {
                 color: #FCFFE7 !important;
                 margin-bottom: 20px !important;
             }
-            .title{
+
+            .title {
                 color: #FCFFE7 !important;
                 font-weight: 300 !important;
                 font-size: 14px !important;
             }
 
-            img{
+            img {
                 width: 100%;
             }
 
-            button{
+            button {
                 background-color: #FCFFE7;
                 color: #2B3467;
                 padding: 10px 20px;
@@ -41,34 +44,34 @@
             }
         }
 
-        .container{
+        .container {
             width: 1400px;
             display: flex;
             align-items: center;
             gap: 200px;
 
-            .item{
+            .item {
                 display: flex;
                 flex-direction: column;
                 gap: 15px;
 
                 // left side child
-                &:first-child{
+                &:first-child {
                     flex: 2;
                 }
 
                 // right side child
-                &:last-child{
+                &:last-child {
                     flex: 3;
                 }
 
-                h1{
+                h1 {
                     font-weight: 500;
                     margin-bottom: 50px;
                     color: #FCFFE7;
                 }
 
-                p{
+                p {
                     font-size: 10px;
                     font-weight: 300;
                     color: #FCFFE7;
@@ -76,7 +79,7 @@
                     letter-spacing: 1px;
                 }
 
-                .title{
+                .title {
                     display: flex;
                     align-items: center;
                     gap: 10px;
@@ -84,16 +87,46 @@
                     font-size: 18px;
                     color: #FCFFE7;
 
-                    img{
+                    img {
                         width: 24px;
                         height: 24px;
                     }
                 }
 
-                .vedio{
+                .vedio {
                     width: 720px;
                 }
-            }        
+            }
+        }
+    }
+
+    .educators {
+        background-color: #FCFFE7;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h1 {
+            padding: 50px 0px 0px;
+            margin-top: 10px;
+            color: #2B3467;
+        }
+    }
+
+    .courseCategory {
+        background-color: #FCFFE7;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h1 {
+            margin-top: 10px;
+            color: #2B3467;
+            margin-bottom: 30px;
+        }
+
+        p {
+            color: #2B3467;
         }
     }
 }

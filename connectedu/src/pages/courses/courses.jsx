@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { courses } from '../../data/coursesData';
 
-import CourseCard from '../../components/courseCard/courseCard';
+import CourseCard from '../../components/courseCard/CourseCard';
 
 const Courses = () => {
 
@@ -21,7 +21,7 @@ const Courses = () => {
     <div className='courses'>
       <div className="container">
         <span className="breadcrumbs">
-           ConnectEdu | CyberSecurity
+          ConnectEdu | CyberSecurity
         </span>
         <h1>
           CyberSecurity Experts
@@ -39,8 +39,8 @@ const Courses = () => {
           </div>
           <div className="right">
             <div className="sortBy">Sort By: </div>
-            <div className="sortType"> {sort === 'sales' ? 'Best Selling':'Newest' }</div>
-            <img src={"/images/down.png"} alt="" onClick={()=>setOpen(!open)}/>
+            <div className="sortType"> {sort === 'sales' ? 'Best Selling' : 'Newest'}</div>
+            <img src={"/images/down.png"} alt="" onClick={() => setOpen(!open)} />
             {open && (
               <div className="rightMenu">
                 {sort === 'sales' ?
@@ -54,7 +54,7 @@ const Courses = () => {
         <div className="cards">
           {
             courses.map((course) => (
-              <CourseCard key={course.id} item={course}/>
+              <CourseCard key={course.id} item={course} />
             ))
           }
         </div>
