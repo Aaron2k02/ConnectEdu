@@ -18,6 +18,7 @@ import Courses from "./pages/courses/courses";
 import Course from "./pages/course/course";
 import Notifications from "./pages/notifications/Notifications";
 import Notification from "./pages/notification/Notification";
+import PaymentCheckout from  "./pages/paymentCheckout/paymentCheckout";
 
 // Import Page Styling -- General css
 import './app.scss';
@@ -102,6 +103,10 @@ function App() {
         {
           path:'/forgotPassword/resetPass',
           element:<ResetPassword/>
+        },
+        {
+          path:'/paymentCheckout',
+          element:<PaymentCheckout/>
         }
         
        
