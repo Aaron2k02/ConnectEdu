@@ -41,8 +41,11 @@ const courseCard = ({ item }) => {
                         <span> Course Price </span>
                         <h2>${item.price}</h2>
                     </div> */}
-                    <Link to='/course/123' className='link detailsLink'>
-                    <span>View Course</span>
+                    <Link to='/course/123' className='link courseDetail'>
+                        <span>View Course</span>
+                    </Link>
+                    <Link to='/course/123' className='link courseDetail'>
+                        <span>Purchase Course</span>
                     </Link>
                 </div>
         </div>
