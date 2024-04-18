@@ -12,7 +12,7 @@ router.post('/create-checkout-session', async (req, res) => {
         line_items: [
             {
                 price_data: {
-                    currency: 'usd',
+                    currency: 'myr',
                     product_data: {
                         name: 'T-shirt',
                     },
@@ -25,7 +25,7 @@ router.post('/create-checkout-session', async (req, res) => {
         // success_url: 'http://localhost:4242/success',
         // cancel_url: 'http://localhost:4242/cancel',
         success_url: `${process.env.CLIENT_URL}/checkout-success`,
-        cancel_url: `${process.env.CLIENT_URL}/cart`,
+        cancel_url: `${process.env.CLIENT_URL}/paymentCheckout`,
     });
 
     res.send({url: session.url});
