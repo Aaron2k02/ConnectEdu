@@ -105,29 +105,30 @@ const Navbar = () => {
       {(active || (pathname !== "/" && pathname !== "/signin")) && (
         <>
           <hr />
-          <div className="menu">
-            <Link className='link' to='/'>
-              UI UX Design
-            </Link>
-            <Link className='link' to='/'>
-              Web Development
-            </Link>
-            <Link className='link' to='/'>
-              Mobile App Development
-            </Link>
-            <Link className='link' to='/'>
-              Data Science
-            </Link>
-            <Link className='link' to='/'>
-              Software Engineering
-            </Link>
-            <Link className='link' to='/'>
-              Artificial Intelligence
-            </Link>
-            <Link className='link' to='/'>
-              Cybersecurity
-            </Link>
-          </div>
+            <div className="menu">
+              <Link className='link' to='/'>
+                UI UX Design
+              </Link>
+              <Link className='link' to='/'>
+                Web Development
+              </Link>
+              <Link className='link' to='/'>
+                Mobile App Development
+              </Link>
+              <Link className='link' to='/'>
+                Data Science
+              </Link>
+              <Link className='link' to='/'>
+                Software Engineering
+              </Link>
+              <Link className='link' to='/'>
+                Artificial Intelligence
+              </Link>
+              <Link className='link' to='/'>
+                Cybersecurity
+              </Link>
+            </div>
+          <hr />
         </>
       )}
     </div>
