@@ -9,19 +9,19 @@ const ForgotPass = () => {
           <form action="">
             <h1>Forgot Password?</h1>
             <div className='input-box'>
-            <input type="email" placeholder=' Email address' required />
+              <input type="email" placeholder=' Email address' required />
             </div>
-            
-           <button><a href='/forgotPassword/verifyOTP' className="link">Submit</a></button>
+
+            <button><a href='/forgotPassword/verifyOTP' className="link">Submit</a></button>
           </form>
         </div>
         <div className='right'>
           <img src={"/images/ConnectEduLogo-bg.png"} />
         </div>
-      
+
       </div>
-      
-      
+
+
     </div>
   )
 }

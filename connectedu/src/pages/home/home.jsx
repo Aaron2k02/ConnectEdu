@@ -12,7 +12,7 @@ import Slide from '../../components/Slide/Slide';
 import { cards } from '../../data/categoryData';
 import { educators } from '../../data/educatorsData';
 import CategoryCard from '../../components/categoryCard/CategoryCard';
-import EducatorCard from '../../components/educatorCard/educatorCard';
+import EducatorCard from '../../components/educatorCard/EducatorCard';
 
 const Home = () => {
   return (
@@ -30,12 +30,12 @@ const Home = () => {
           }
         </Slide>
       </div>
-      
+
       <div className="features">
         <div className="container">
           <div className="item">
             <h1>
-             Embrace lifelong learning with ConnectEdu at your fingertips.
+              Embrace lifelong learning with ConnectEdu at your fingertips.
             </h1>
             <div className="title">
               <img src={'/gif/icons8-check.gif'} alt="" />
@@ -60,7 +60,7 @@ const Home = () => {
             </p>
           </div>
           <div className="item">
-            <video src={''} controls/>
+            <video src={''} controls />
           </div>
         </div>
       </div>
@@ -75,14 +75,14 @@ const Home = () => {
           }
         </Slide>
       </div>
-      
+
       <div className="features dark">
         <div className="container">
           <div className="item">
             <h1> Educator Business </h1>
             <h1> Teach others and commercialize your educational content</h1>
             <p>
-              Upgrade to a curated experience packed with tools and benefits, 
+              Upgrade to a curated experience packed with tools and benefits,
               dedicated to businesses
             </p>
             <div className="title">
@@ -104,7 +104,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      
+
     </div>
   )
 }

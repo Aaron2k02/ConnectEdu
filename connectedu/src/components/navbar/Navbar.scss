@@ -9,7 +9,7 @@
     top: 0;
     z-index: 999;
 
-    &.active{
+    &.active {
         background-color: #fcffe7;
         color: #2B3467;
 
@@ -34,13 +34,14 @@
             font-size: 34px;
             font-weight: bold;
             display: flex;
-            align-items:end;
-            .text {
-                
-            }
+            align-items: end;
+
+            .text {}
+
             .dot {
                 color: #EB455F;
             }
+
             img {
                 height: 50px;
                 width: 50px;
@@ -54,37 +55,37 @@
             font-weight: 500;
             gap: 24px;
 
-            .user{
+            .user {
                 display: flex;
                 align-items: center;
                 gap: 10px;
                 cursor: pointer;
                 position: relative;
 
-                img{
+                img {
                     width: 32px;
                     height: 32px;
                     border-radius: 50%;
                     object-fit: cover;
                 }
 
-                .options{
-                   position: absolute;
-                   top: 50px;
-                   right: 0;
-                   padding: 20px; 
-                   background-color: white;
-                   border-radius: 10px;
-                   border: 1px solid lightgray;
-                   display: flex;
-                   flex-direction: column;
-                   gap: 10px;
-                   color: #2B3467;
-                   width: 200px;
-                   font-weight: 300;
+                .options {
+                    position: absolute;
+                    top: 50px;
+                    right: 0;
+                    padding: 20px;
+                    background-color: white;
+                    border-radius: 10px;
+                    border: 1px solid lightgray;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    color: #2B3467;
+                    width: 200px;
+                    font-weight: 300;
                 }
 
-                .item{
+                .item {
                     display: flex;
                     gap: 10px;
                     align-items: center;
@@ -95,36 +96,36 @@
                     font-weight: 300;
 
                     &:hover {
-                            background-color: #BAD7E9;
-                            border-color: #BAD7E9;
-                        }
+                        background-color: #BAD7E9;
+                        border-color: #BAD7E9;
+                    }
                 }
 
             }
 
             button {
                 color: white;
-                padding: 10px 20px; 
+                padding: 10px 20px;
                 border-radius: 5px;
                 border: 1px solid white;
                 cursor: pointer;
                 background-color: transparent;
 
-                &:hover{
-                    background-color:#BAD7E9;
+                &:hover {
+                    background-color: #BAD7E9;
                     border-color: #BAD7E9;
                 }
             }
         }
     }
 
-    hr{
+    hr {
         width: 100%;
         height: 0;
         border: 0.5 solid lightgrey;
     }
 
-    .menu{
+    .menu {
         width: 1400px;
         padding: 10px 0px;
         display: flex;

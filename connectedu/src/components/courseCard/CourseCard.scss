@@ -1,4 +1,4 @@
-.courseCard{
+.courseCard {
     width: 324px;
     height: 620px;
     border: 5px solid #2B3467;
@@ -8,28 +8,28 @@
     border-width: 1px;
     overflow: hidden;
     gap: 10px;
-    
-    
-    img{
+
+
+    img {
         width: 100%;
         height: 50%;
-        object-fit:cover;
+        object-fit: cover;
     }
 
-    .info{
+    .info {
         padding: 10px 0px;
         display: flex;
         flex-direction: column;
         gap: 15px;
     }
 
-    .user{
+    .user {
         display: flex;
         align-items: center;
         gap: 10px;
         margin-left: 5px;
 
-        img{
+        img {
             width: 26px;
             height: 26px;
             border-radius: 50%;
@@ -37,41 +37,42 @@
 
     }
 
-    .courseInfo{
+    .courseInfo {
         display: flex;
         flex-direction: column;
         gap: 5px;
         margin: 5px;
-        p{
+
+        p {
             font-weight: bold;
         }
     }
 
-    .courseDescription{
+    .courseDescription {
         display: flex;
         flex-direction: column;
         gap: 5px;
-        margin:10px 5px 5px 5px;
+        margin: 10px 5px 5px 5px;
 
-        .item{
+        .item {
             display: flex;
             justify-content: space-between;
         }
     }
-        
+
 
     p {
         color: black;
-        
+
     }
 
-    .stars{
+    .stars {
         display: flex;
         align-items: center;
         gap: 5px;
         margin: 10px 10px 10px 5px;
 
-        img{
+        img {
             width: 14px;
             height: 14px;
         }
@@ -83,37 +84,38 @@
         }
     }
 
-    hr{
+    hr {
         height: 0;
         bottom: 0.5px solid #fcffe7;
     }
 
-    .details{
+    .details {
         display: 20px 20px;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
 
-        img{
+        img {
             width: 16px;
             height: 16px;
             cursor: pointer;
         }
 
-        .price{
-            span{
+        .price {
+            span {
                 color: black;
                 font-size: 12px;
             }
-            h2{
-                color:black;
+
+            h2 {
+                color: black;
                 font-size: 18px;
                 font-weight: 400;
             }
         }
 
-        .courseDetail{
+        .courseDetail {
             padding-top: 0.5rem;
             padding-bottom: 0.25rem;
             margin-top: 0.5rem;
@@ -130,7 +132,7 @@
 }
 
 .courseCard:hover {
-            transition: all 0.3s;
-            transform: translate(0px, -10px);
-                box-shadow: 0px 30px 20px rgba(0, 0, 0, 0.2)
+    transition: all 0.3s;
+    transform: translate(0px, -10px);
+    box-shadow: 0px 30px 20px rgba(0, 0, 0, 0.2)
 }
