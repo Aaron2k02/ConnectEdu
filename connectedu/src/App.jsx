@@ -112,7 +112,12 @@ function App() {
         {
           path: '/checkout-success',
           element: <CheckoutSuccess />
-        }
+        },
+        {
+          path: '/Dashboard',
+          element: <Dashboard />
+          
+        }    
       ]
     },
   ]);
