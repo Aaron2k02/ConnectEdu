@@ -2,41 +2,44 @@ import React from 'react';
 import './ReviewForm.scss';
 import { useState } from 'react'
 
+
 const ReviewForm = (props) => {
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+    const [comment, setComment] = useState('');
+    const [rating, setRating] = useState(0);
 
-    function handleLogin(e) {
-        e.preventDefault()
-        console.log('Username:', username);
-        console.log('Password:', password);
-        // Code to handle login goes here
-        props.toggle()
-    }
+    const handleStarClick = (index) => {
+        setRating(index + 1);
+    };
 
-    console.log('Username:', username);
-    console.log('Password:', password);
+    const handleReviewSubmit = (e) => {
+        e.preventDefault();
+        console.log('Comment:', comment);
+        console.log('Rating:', rating);
+        // Code to handle review submission goes here
+        props.toggle();
+    };
 
     return (
         <div className="popup">
             <div className="popup-inner">
-                <h2>Login</h2>
-                <form onSubmit={handleLogin}>
+                <h2><b>Leave a Review</b></h2>
+                <form onSubmit={handleReviewSubmit}>
+                    
                     <label>
-                        Username:
-                        <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-                        console.log(username);
+                        <textarea
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                            placeholder='Your opinion...'
+                        />
                     </label>
-                    <label>
-                        Password:
-                        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-                    </label>
-                    <button type="submit">Login</button>
+                    <div className="button-group">
+                        <button type="submit">Submit</button>
+                        <button onClick={props.toggle}>Cancel</button>
+                    </div>
                 </form>
-                <button onClick={props.toggle}>Close</button>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default ReviewForm
+export default ReviewForm;
