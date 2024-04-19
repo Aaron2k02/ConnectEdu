@@ -21,6 +21,7 @@ const PaymentButton = styled(Button)(({ theme }) => ({
     '&:hover': {
         backgroundColor: green[700],
     },
+    textTransform: 'none'
 }));
 
 const PayButton = ({ cartItems }) => {
@@ -42,7 +43,7 @@ const PayButton = ({ cartItems }) => {
 
     return (
         <Stack>
-            <PaymentButton size='large' onClick={() => handleCheckout()}>Pay Now</PaymentButton>
+            <PaymentButton onClick={() => handleCheckout()}>Enroll Course</PaymentButton>
         </Stack>
     );
 }

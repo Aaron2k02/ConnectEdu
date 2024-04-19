@@ -8,24 +8,35 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY)
 const router = express.Router()
 
 router.post('/create-checkout-session', async (req, res) => {
-    const session = await stripe.checkout.sessions.create({
-        line_items: [
-            {
-                price_data: {
-                    currency: 'myr',
-                    product_data: {
-                        name: 'T-shirt',
-                    },
-                    unit_amount: 2000,
-                },
-                quantity: 1,
+
+const line_items = req.body.cartItems.map(item => {
+    return {
+        price_data: {
+            currency: 'myr',
+            product_data: {
+                name: item.name,
+                images:[item.image],
+                description: item.desc,
+                metadata:{
+                    id:item.id
+                }
             },
-        ],
+            unit_amount: item.price * 100,
+        },
+        quantity: item.cartQuantity,
+    };
+});
+
+    const session = await stripe.checkout.sessions.create({
+        line_items,
         mode: 'payment',
+        invoice_creation:{
+            enabled: true,
+        },
         // success_url: 'http://localhost:4242/success',
         // cancel_url: 'http://localhost:4242/cancel',
         success_url: `${process.env.CLIENT_URL}/checkout-success`,
-        cancel_url: `${process.env.CLIENT_URL}/paymentCheckout`,
+        cancel_url: `${process.env.CLIENT_URL}/course/123`,
     });
 
     res.send({url: session.url});
