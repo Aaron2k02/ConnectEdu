@@ -107,13 +107,17 @@ const Course = () => {
                 incredibly detailed result.
               </p>
             </div>
+            <div className="write">
+              <textarea name="" placeholder="Ask a question" cols="30" rows="10"></textarea>
+              <button>Send</button>
+            </div>
+          </div>
+          <div className="reviewHeader">
+            <h2>Reviews</h2>
+            <button onClick={togglePop} >Add Review</button>
+            {seen ? <ReviewForm toggle={togglePop} /> : null}
           </div>
           <div className="reviews">
-            <div className="reviewHeader">
-              <h2>Reviews</h2>
-              <button onClick={togglePop} >Add Review</button>
-              {seen ? <ReviewForm toggle={togglePop} /> : null}
-            </div>
             <div className="item">
               <div className="user">
                 <img
