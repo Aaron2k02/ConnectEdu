@@ -158,6 +158,23 @@
             .reviews {
                 margin-top: 50px;
 
+                .reviewHeader{
+                    display: flex;
+                    justify-content: space-between;
+
+                    button {
+                            background-color: #2B3467;
+                            width: 200px;
+                            padding: 10px;
+                            color: white;
+                            font-weight: 500;
+                            border: none;
+                            font-size: 18px;
+                            cursor: pointer;
+                            border-radius: 12px;
+                        }
+                }
+
                 .item {
                     display: flex;
                     flex-direction: column;
@@ -294,6 +311,7 @@
                 border: none;
                 font-size: 18px;
                 cursor: pointer;
+                border-radius: 12px;
             }
         }
     }

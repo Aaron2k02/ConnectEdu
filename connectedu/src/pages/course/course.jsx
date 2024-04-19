@@ -1,10 +1,19 @@
 import React from 'react'
+import { useState } from 'react'
 import './course.scss'
 // import Slide from '../../components/Slide/Slide'
 import SlideShow from '../../components/slideshow/SlideShow';
 import {slideImages} from '../../data/coursesDetail';
+import ReviewForm from '../../components/ReviewForm/ReviewForm';
 
 const Course = () => {
+
+  const [seen, setSeen] = useState(false)
+
+  function togglePop() {
+    setSeen(!seen);
+  };
+
   return (
     <div className='course'>
       <div className="container">
@@ -100,7 +109,11 @@ const Course = () => {
             </div>
           </div>
           <div className="reviews">
-            <h2>Reviews</h2>
+            <div className="reviewHeader">
+              <h2>Reviews</h2>
+              <button onClick={togglePop} >Add Review</button>
+              {seen ? <ReviewForm toggle={togglePop} /> : null}
+            </div>
             <div className="item">
               <div className="user">
                 <img
@@ -255,7 +268,8 @@ const Course = () => {
               <span>Information Literacy</span>
             </div>
           </div>
-          <button>Purchase Course</button>
+          <button>Enroll Course</button>
+          <button>Print Certification</button>
         </div>
       </div>
     </div>
