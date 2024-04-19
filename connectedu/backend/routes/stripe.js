@@ -30,6 +30,9 @@ const line_items = req.body.cartItems.map(item => {
     const session = await stripe.checkout.sessions.create({
         line_items,
         mode: 'payment',
+        invoice_creation:{
+            enabled: true,
+        },
         // success_url: 'http://localhost:4242/success',
         // cancel_url: 'http://localhost:4242/cancel',
         success_url: `${process.env.CLIENT_URL}/checkout-success`,
