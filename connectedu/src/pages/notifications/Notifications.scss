@@ -33,32 +33,45 @@
     table {
       width: 100%;
       border-collapse: collapse;
+      table-layout: fixed;
+      margin-top: 20px;
 
       tr {
         height: 100px;
         transition: background-color 0.3s ease;
 
         th {
-          text-align: left;
+          text-align: center;
+          background-color: #2B3467;
+          color: white;
         }
 
+        .notificationContent {
+          text-align: justify;
+          /* Adjust the width value as needed */
+        }
+        
         td {
+          text-align: center;
           padding: 10px;
           border-bottom: 1px solid #ddd;
           // Set default font color to black
           color: black;
+          
         }
 
         &.unread {
           background-color: #1dbf730f;
 
           td {
+            
             color: black; // Font color for unread notifications
           }
         }
 
         &.read {
           td {
+            
             color: grey; // Font color for read notifications
           }
         }

@@ -6,6 +6,20 @@ import SlideShow from '../../components/slideshow/SlideShow';
 import {slideImages} from '../../data/coursesDetail';
 import ReviewForm from '../../components/ReviewForm/ReviewForm';
 
+/** ----------------- MUQRI CODE ------------------------- */
+// import components
+import PayButton from "../../components/PayButton/PayButton"
+
+// dummy data for the cartItems
+const cartItems = [
+  {id:1, name:"Mobile App Development",price: 59.99, cartQuantity: 1, image: "https://i.imgur.com/2xH1X44.png" ,desc: "We will explore the world of web development"},
+];
+
+// Define the cart object
+const cart = {cartItems};
+
+/** ----------------- MUQRI CODE ------------------------- */
+
 const Course = () => {
 
   const [seen, setSeen] = useState(false)
@@ -107,13 +121,17 @@ const Course = () => {
                 incredibly detailed result.
               </p>
             </div>
+            <div className="write">
+              <textarea name="" placeholder="Ask a question" cols="30" rows="10"></textarea>
+              <button>Send</button>
+            </div>
+          </div>
+          <div className="reviewHeader">
+            <h2>Reviews</h2>
+            <button onClick={togglePop} >Add Review</button>
+            {seen ? <ReviewForm toggle={togglePop} /> : null}
           </div>
           <div className="reviews">
-            <div className="reviewHeader">
-              <h2>Reviews</h2>
-              <button onClick={togglePop} >Add Review</button>
-              {seen ? <ReviewForm toggle={togglePop} /> : null}
-            </div>
             <div className="item">
               <div className="user">
                 <img
@@ -268,7 +286,7 @@ const Course = () => {
               <span>Information Literacy</span>
             </div>
           </div>
-          <button>Enroll Course</button>
+          <PayButton cartItems ={cart.cartItems} />
           <button>Print Certification</button>
         </div>
       </div>

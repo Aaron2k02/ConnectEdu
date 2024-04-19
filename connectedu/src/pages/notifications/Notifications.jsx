@@ -30,7 +30,7 @@ const Notifications = () => {
             </tr>
             <tr className="unread">
               <td>Charley Sharp</td>
-              <td>
+              <td className="notificationContent">
                 <Link to="/notification/123" className="link">
                   {notification.substring(0, 100)}...
                 </Link>
@@ -42,7 +42,7 @@ const Notifications = () => {
             </tr>
             <tr className="unread">
               <td>John Doe</td>
-              <td>
+              <td className="notificationContent">
                 <Link to="/notification/123" className="link">
                   {notification.substring(0, 100)}...
                 </Link>
@@ -54,7 +54,7 @@ const Notifications = () => {
             </tr>
             <tr className="read">
               <td>Elinor Good</td>
-              <td>
+              <td className="notificationContent">
                 <Link to="/notification/123" className="link">
                   {notification.substring(0, 100)}...
                 </Link>
@@ -63,7 +63,7 @@ const Notifications = () => {
             </tr>
             <tr className="read">
               <td>Garner David </td>
-              <td>
+              <td className="notificationContent">
                 <Link to="/notification/123" className="link">
                   {notification.substring(0, 100)}...
                 </Link>
@@ -72,9 +72,9 @@ const Notifications = () => {
             </tr>
             <tr className="read">
               <td>Troy Oliver</td>
-              <td>
+              <td className="notificationContent">
                 <Link to="/notification/123" className="link">
-                  {notification.substring(0, 100)}
+                  {notification.substring(0, 100)}....
                 </Link>
               </td>
               <td>1 week ago</td>
