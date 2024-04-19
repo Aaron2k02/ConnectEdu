@@ -23,11 +23,11 @@ const Navbar = () => {
     };
   }, []);
 
-  const currentUser =
+  const currentUser = 
   {
     id: 1,
     userName: "Educators",
-    isEducator: false
+    isEducator: true
   };
 
   return (

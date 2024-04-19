@@ -15,24 +15,22 @@ const courseCard = ({ item }) => {
             <div className="courseInfo">
                 <p> {item.desc}</p>
             </div>
+            <div className="stars">
+                <span> Rating: </span>
+                <div className="rating">
+                    <span>{item.star}</span>
+                    <img src={"/images/star.png"} alt="" />
+                </div>
+            </div>
             <div className="courseDescription">
                 <div className="item">
                     <span> Avaliable Seats: </span>
                     <p> {item.price}</p>
                 </div>
-                <div className="item">
-                    <span> Total Student: </span>
-                    <p> {item.price}</p>
-                </div>
-                <div className="item">
+                <div className="item price">
                     <span> Course Price: </span>
                     <p> RM {item.price}</p>
                 </div>
-            </div>
-            <div className="stars">
-                <span> Rating: </span>
-                <span>{item.star}</span>
-                <img src={"/images/star.png"} alt="" />
             </div>
             <hr />
             <div className="details">
@@ -44,9 +42,9 @@ const courseCard = ({ item }) => {
                 <Link to='/course/123' className='link courseDetail'>
                     <span>View Course</span>
                 </Link>
-                <Link to='/course/123' className='link courseDetail'>
+                {/* <Link to='/course/123' className='link courseDetail'>
                     <span>Purchase Course</span>
-                </Link>
+                </Link> */}
             </div>
         </div>
 
