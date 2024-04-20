@@ -31,6 +31,7 @@ import AccountSettings from "./components/userProfilecard/AccountSettings";
 import VerifyOTP from "./pages/forgotPass/verifyOTP";
 import ResetPassword from "./pages/forgotPass/resetPassword";
 import Dashboard from "./pages/dataAnalytics/Dashboard";
+import StudentDashboard from "./pages/dashboard/StudentDashboard";
 
 function App() {
 
@@ -112,7 +113,12 @@ function App() {
         {
           path: '/checkout-success',
           element: <CheckoutSuccess />
-        }
+        },
+        {
+          path: '/dashboard/:activePage',
+          element: <StudentDashboard/>
+        },
+
       ]
     },
   ]);

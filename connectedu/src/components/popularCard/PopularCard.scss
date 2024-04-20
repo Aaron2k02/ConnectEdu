@@ -1,0 +1,48 @@
+.popularCard{
+    border: 1px solid black;
+    margin-bottom: 25px;
+    border-radius: 1rem;
+    background-color: wheat;
+    border-width: 1px;
+    overflow: hidden;
+    gap: 10px;
+    height: 200px;
+
+    .imgCard{
+        display: flex;
+        flex-direction: row;
+
+        img{
+            width: 50%;
+            height: 200px;
+            object-fit: cover;
+            
+        }
+
+        .desc{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-top: 10px;
+            padding-left: 10px;
+            color: black;
+
+            .btn{
+                padding-bottom: 10px;
+                padding-left: 10px;
+                
+                
+                button{
+                   
+                    border: 5px solid #2B3467;
+                    border-radius: 30px;
+                    background-color:#2B3467;
+                    color: white;
+                    height: 50px;
+                    width: 150px;
+                    font-size: 24px;
+                    }
+            }
+        }
+    }
+}
