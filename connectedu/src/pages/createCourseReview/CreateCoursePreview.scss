@@ -1,0 +1,216 @@
+.createCourseContent {
+    display: flex;
+    justify-content: center;
+
+    .container {
+        width: 1400px;
+        padding: 50px 0px;
+
+        h1 {
+            color: gray;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+
+        .sections {
+            display: flex;
+            justify-content: space-between;
+            gap: 100px;
+
+            .left {
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+                gap: 10px;
+                justify-content: space-between;
+                width: 100%;
+
+                h3 {
+                    font-weight: 500;
+                    font-size: 30px;
+                    margin: 20px 0px;
+                }
+
+                button {
+                    width: 200px;
+                    height: 50px;
+                    padding: 10px;
+                    color: white;
+                    font-weight: 500;
+                    border: none;
+                    font-size: 12px;
+                    cursor: pointer;
+                    border-radius: 12px;
+                }
+
+                .courseDescription{
+                    display: flex ;
+                    flex-direction: column;
+                    gap: 20px;
+
+                    p {
+                        text-align: justify;
+                    }
+                }
+
+                
+
+                .courseImage{
+                    display: flex;
+                    align-self: center;
+                    flex-direction: column;
+
+                    img{
+                        width: 500px;
+                        height: 500px;
+                    }
+                }
+
+                .stars {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                
+                    img {
+                        height: 14px;
+                        width: 14px;
+                    }
+                
+                    span {
+                        font-size: 14px;
+                        font-weight: bold;
+                        color: #ffc108;
+                    }
+                }
+
+                .details {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    font-size: 14px;
+                    margin: 20px 0px;
+
+                    .item {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+
+                        img {
+                            width: 20px;
+                        }
+                    }
+
+                    .stars {
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+
+                        img {
+                            height: 14px;
+                            width: 14px;
+                        }
+
+                        span {
+                            margin-top: 3px;
+                            font-size: 14px;
+                            font-weight: bold;
+                            color: #ffc108;
+                        }
+                    }
+
+                    .price {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+
+                        h2 {
+                            font-weight: 300;
+                        }
+                    }
+                }
+
+                .createCourseNav {
+                    margin: 20px 0px;
+                    display: flex;
+                    justify-content: space-between;
+                    text-align: center;
+
+                    button {
+                        width: 200px;
+                        height: 50px;
+                        padding: 10px;
+                        color: white;
+                        font-weight: 500;
+                        border: none;
+                        font-size: 12px;
+                        cursor: pointer;
+                        border-radius: 12px;
+                        background-color: #2B3467;
+                    }
+                }
+
+                .features {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px 0px;
+
+                    h2 {
+                        margin: 10px 0px;
+                        font-weight: 500;
+                    }
+                
+                    .item {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        font-weight: 300;
+                        color: gray;
+                        margin-bottom: 5px;
+                
+                        img {
+                            width: 14px;
+                        }
+                    }
+                }
+
+            }
+
+            .right {
+                flex: 0.3;
+                border: 1px solid lightgray;
+                padding: 20px;
+                border-radius: 5px;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                height: max-content;
+                max-height: 500px;
+                position: sticky;
+                top: 150px;
+
+                .items {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+
+                    .item {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+
+                        h3 {
+                            font-size: 20px;
+                            font-weight: 300;
+                        }
+
+                        img {
+                            height: 30px;
+                            width: 30px;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}

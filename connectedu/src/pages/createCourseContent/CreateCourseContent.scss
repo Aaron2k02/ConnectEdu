@@ -1,0 +1,165 @@
+.createCourseContent {
+    display: flex;
+    justify-content: center;
+
+    .container {
+        width: 1400px;
+        padding: 50px 0px;
+
+        h1 {
+            color: gray;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+
+        .sections {
+            display: flex;
+            justify-content: space-between;
+            gap: 100px;
+
+            .left {
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+                gap: 10px;
+                justify-content: space-between;
+
+                button {
+                    width: 200px;
+                    height: 50px;
+                    padding: 10px;
+                    color: white;
+                    font-weight: 500;
+                    border: none;
+                    font-size: 12px;
+                    cursor: pointer;
+                    border-radius: 12px;
+                }
+
+                .courseSections{
+
+                    .form-field{
+
+                        h3{
+                            color: gray;
+                            font-weight: 300;
+                            margin-bottom: 30px;
+                        }
+
+                        .sectionItem{
+                            display: flex;
+                            flex-direction: column;
+
+                            .input-header{
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+
+                                button{
+                                    
+                                    &.remove-btn{
+                                        height: 50px;
+                                        width: 200px;
+                                        background-color: #EB455F;
+                                    }
+                                }
+                            }
+
+                            .input-group{
+                                margin: 10px 0px;
+                                display: flex;
+                                flex-direction: column;
+                                gap: 10px;
+
+                                label{
+                                    color: gray;
+                                    font-size: 18px;
+                                }
+
+                                input{
+                                    padding: 20px;
+                                }
+                                textarea{
+                                    padding: 20px;
+                                    resize: vertical;
+                                    height: 100px;
+                                }
+                            }
+
+                           .second-division{
+                                display: flex;
+                                margin: 20px 0px;
+                                flex-direction: row-reverse;
+
+                                button{
+                                    &.add-btn {
+                                        background-color: green;
+                                        width: 200px;
+                                        height: 50px;
+                                    }
+                                }
+                           }
+                        }
+                    }
+                }
+
+                .createCourseNav {
+                    display: flex;
+                    justify-content: space-between;
+                    text-align: center;
+
+                    button {
+                        width: 200px;
+                        height: 50px;
+                        padding: 10px;
+                        color: white;
+                        font-weight: 500;
+                        border: none;
+                        font-size: 12px;
+                        cursor: pointer;
+                        border-radius: 12px;
+                        background-color: #2B3467;
+                    }
+                }
+
+            }
+
+            .right {
+                flex: 0.3;
+                border: 1px solid lightgray;
+                padding: 20px;
+                border-radius: 5px;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                height: max-content;
+                max-height: 500px;
+                position: sticky;
+                top: 150px;
+
+                .items {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+
+                    .item {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+
+                        h3 {
+                            font-size: 20px;
+                            font-weight: 300;
+                        }
+
+                        img {
+                            height: 30px;
+                            width: 30px;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
