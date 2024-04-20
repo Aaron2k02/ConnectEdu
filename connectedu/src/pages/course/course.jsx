@@ -36,19 +36,6 @@ const Course = () => {
 
           <h1>We will explore the world of web development </h1>
 
-          <div className="user">
-            <img src="" alt="" />
-            <span>John Doe</span>
-            <div className="stars">
-              <img src="/images/star.png" alt="" />
-              <img src="/images/star.png" alt="" />
-              <img src="/images/star.png" alt="" />
-              <img src="/images/star.png" alt="" />
-              <img src="/images/star.png" alt="" />
-              <span> 5 </span>
-            </div>
-          </div>
-
           <SlideShow data={slideImages} className='slider' />
 
           <h2>About This Course</h2>
@@ -68,8 +55,8 @@ const Course = () => {
             found nowhere else. If you have any questions you're more than
             welcome to send me a message.
           </p>
-          <div className="seller">
-            <h2>About The Seller</h2>
+          <div className="educator">
+            <h2>About The Educator</h2>
             <div className="user">
               <img
                 src="https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600"
@@ -97,20 +84,8 @@ const Course = () => {
                   <span className="desc">USA</span>
                 </div>
                 <div className="item">
-                  <span className="title">Member since</span>
+                  <span className="title">Educator since</span>
                   <span className="desc">Aug 2022</span>
-                </div>
-                <div className="item">
-                  <span className="title">Avg. response time</span>
-                  <span className="desc">4 hours</span>
-                </div>
-                <div className="item">
-                  <span className="title">Last delivery</span>
-                  <span className="desc">1 day</span>
-                </div>
-                <div className="item">
-                  <span className="title">Languages</span>
-                  <span className="desc">English</span>
                 </div>
               </div>
               <hr />
@@ -180,7 +155,7 @@ const Course = () => {
                 <div className="info">
                   <span>John Doe</span>
                   <div className="country">
-                    <img src="https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
+                    <img src="ht10px;/images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
                     <span>Malaysia</span>
                   </div>
                 </div>
@@ -255,20 +230,29 @@ const Course = () => {
             <h3>I teach Information System</h3>
             <h2>$ 59.99 </h2>
           </div>
-          <p>
+          {/* <p>
             I will teach on how to study information system
-          </p>
+          </p> */}
           <div className="details">
             <div className="item">
               <img src="/images/clock.png" alt="" />
-              <span>2 classes per week</span>
+              <span>10 Hours</span>
             </div>
-            <div className="item">
+            {/* <div className="item">
               <img src="/images/recycle.png" alt="" />
               <span>3 Iteration of Dicussion</span>
+            </div> */}
+            <div className="stars">
+              <img src="/images/star.png" alt="" />
+              <img src="/images/star.png" alt="" />
+              <img src="/images/star.png" alt="" />
+              <img src="/images/star.png" alt="" />
+              <img src="/images/star.png" alt="" />
+              <span> 5 </span>
             </div>
           </div>
           <div className="features">
+            <h3>What you will learn from this course?</h3>
             <div className="item">
               <img src="/images/greencheck.png" alt="" />
               <span>Information Literacy</span>
@@ -286,7 +270,7 @@ const Course = () => {
               <span>Information Literacy</span>
             </div>
           </div>
-          <PayButton cartItems ={cart.cartItems} />
+          <PayButton className='payButton' cartItems ={cart.cartItems} />
           <button>Print Certification</button>
         </div>
       </div>
