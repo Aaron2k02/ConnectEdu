@@ -31,6 +31,10 @@ import AccountSettings from "./components/userProfilecard/AccountSettings";
 import VerifyOTP from "./pages/forgotPass/verifyOTP";
 import ResetPassword from "./pages/forgotPass/resetPassword";
 import Dashboard from "./pages/dataAnalytics/Dashboard";
+import ManageClass from "./pages/ManageClass/ManageClass";
+import ManageUser from "./pages/ManageUser/ManageUser";
+import CreateCoursePreview from "./pages/createCourseReview/CreateCoursePreview";
+import CreateCourseContent from "./pages/createCourseContent/CreateCourseContent";
 
 function App() {
 

@@ -19,7 +19,6 @@ const ManageClass = () => {
       <div className="container">
         <div className="title">
           <h1> Manage Courses</h1>
-          {/* Remove the Link and Button element for creating new course */}
         </div>
         <table>
           <thead>
