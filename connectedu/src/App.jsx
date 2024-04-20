@@ -31,6 +31,9 @@ import AccountSettings from "./components/userProfilecard/AccountSettings";
 import VerifyOTP from "./pages/forgotPass/verifyOTP";
 import ResetPassword from "./pages/forgotPass/resetPassword";
 import Dashboard from "./pages/dataAnalytics/Dashboard";
+import ManageUser from "./pages/ManageUser/ManageUser";
+import ManageClass from "./pages/ManageClass/ManageClass";
+
 
 function App() {
 
@@ -117,7 +120,16 @@ function App() {
           path: '/Dashboard',
           element: <Dashboard />
           
-        }    
+        },
+        {
+          path: '/ManageUser',
+          element: <ManageUser />
+        },
+        {
+          path: '/ManageClass',
+          element: <ManageClass />
+        },
+
       ]
     },
   ]);
