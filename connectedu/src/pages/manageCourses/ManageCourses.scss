@@ -1,17 +1,17 @@
-.myCourse{
+.manageCourses {
     display: flex;
     justify-content: center;
-    
-    .container{
+
+    .container {
         width: 1400px;
         padding: 50px 0px;
 
-        .title{
+        .title {
             display: flex;
             align-items: center;
             justify-content: space-between;
 
-            button{
+            button {
                 background-color: #2B3467;
                 color: white;
                 font-weight: 500;
@@ -21,38 +21,38 @@
             }
         }
 
-        table{
+        table {
             width: 100%;
             border-spacing: 0;
             table-layout: fixed;
             margin-top: 20px;
 
-            tr{
+            tr {
                 height: 50px;
                 // overflow: hidden;
                 white-space: nowrap;
 
                 .courseTitle {
-                        width: 100px;
-                        // overflow: hidden;
-                    }
+                    width: 100px;
+                    // overflow: hidden;
+                }
 
-                th{
-                    text-align: center; 
+                th {
+                    text-align: center;
                     background-color: #2B3467;
                     color: white;
                 }
 
-                td{
+                td {
                     text-align: center;
-                    
-                    img{
+
+                    img {
                         width: 50px;
                         height: 25px;
                         object-fit: cover;
                     }
 
-                    button{
+                    button {
                         color: #2B3467;
                         font-weight: 500;
                         border: none;
@@ -62,16 +62,16 @@
                         width: 100px;
                     }
 
-                    .update{
+                    .update {
                         background-color: yellow;
                     }
-                    
-                    .delete{
+
+                    .delete {
                         background-color: #EB455F;
                     }
                 }
 
-                &:nth-child(even){
+                &:nth-child(even) {
                     background-color: #BAD7E9;
                 }
             }

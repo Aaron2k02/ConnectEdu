@@ -7,7 +7,7 @@ const MyPurchase = () => {
   const PurchaseTitle = 'This is the Purchase title for the connectEdu';
 
   return (
-    <div className='myCourse'>
+    <div className='MyPurchase'>
       <div className="container">
         <div className="title">
           <h1> My Purchases</h1>
