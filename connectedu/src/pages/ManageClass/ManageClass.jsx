@@ -1,6 +1,5 @@
 import React from 'react';
 import './ManageClass.scss';
-import { Link } from 'react-router-dom';
 
 const ManageClass = () => {
   
@@ -20,9 +19,7 @@ const ManageClass = () => {
       <div className="container">
         <div className="title">
           <h1> Manage Courses</h1>
-          <Link to='/add-class'>
-            <button> Create New Course </button>
-          </Link>
+          {/* Remove the Link and Button element for creating new course */}
         </div>
         <table>
           <thead>

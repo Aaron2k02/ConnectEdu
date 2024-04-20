@@ -1,6 +1,5 @@
 import React from 'react';
 import './ManageUser.scss';
-import { Link } from 'react-router-dom';
 
 const ManageUser = () => {
   
@@ -15,10 +14,7 @@ const ManageUser = () => {
     <div className='manageUser'>
       <div className="container">
         <div className="title">
-          <h1> Manage Users</h1>
-          <Link to='/add-user'>
-            <button> Add New User </button>
-          </Link>
+          <h1> Manage User</h1>
         </div>
         <table>
           <tr>
