@@ -19,9 +19,9 @@ const ManageClass = () => {
     <div className='manageClass'>
       <div className="container">
         <div className="title">
-          <h1> Manage Classes</h1>
+          <h1> Manage Courses</h1>
           <Link to='/add-class'>
-            <button> Create New Class </button>
+            <button> Create New Course </button>
           </Link>
         </div>
         <table>
