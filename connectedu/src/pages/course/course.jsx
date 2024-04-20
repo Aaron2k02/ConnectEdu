@@ -96,10 +96,6 @@ const Course = () => {
                 incredibly detailed result.
               </p>
             </div>
-            <div className="write">
-              <textarea name="" placeholder="Ask a question" cols="30" rows="10"></textarea>
-              <button>Send</button>
-            </div>
           </div>
           <div className="reviewHeader">
             <h2>Reviews</h2>
@@ -271,7 +267,7 @@ const Course = () => {
             </div>
           </div>
           <PayButton className='payButton' cartItems ={cart.cartItems} />
-          <button>Print Certification</button>
+          {/* <button>Print Certification</button> */}
         </div>
       </div>
     </div>
