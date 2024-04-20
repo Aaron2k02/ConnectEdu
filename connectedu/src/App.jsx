@@ -37,6 +37,7 @@ import CreateCoursePreview from "./pages/createCourseReview/CreateCoursePreview"
 import CreateCourseContent from "./pages/createCourseContent/CreateCourseContent";
 import ManageCourses from "./pages/manageCourses/ManageCourses";
 import ViewCourse from "./pages/viewCourse/viewCourse";
+import StudentDashboard from "./pages/dashboard/StudentDashboard";
 
 function App() {
 
@@ -146,6 +147,10 @@ function App() {
         {
           path: '/ManageClass',
           element: <ManageClass/>
+        },
+        {
+          path: '/dashboard/:activePage',
+          element:<StudentDashboard/>
         }
 
       ]
