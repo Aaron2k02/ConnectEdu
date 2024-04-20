@@ -32,7 +32,7 @@ const CreateCourse = () => {
   }
 
   const routeCancel = () => {
-    let path = '/myCourse';
+    let path = '/manageCourses';
     navigate(path);
   }
 

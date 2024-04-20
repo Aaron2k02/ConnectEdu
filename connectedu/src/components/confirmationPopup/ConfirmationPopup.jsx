@@ -9,7 +9,7 @@ const ConfirmationPopup = (props) => {
     function handleLogin(e) {
         e.preventDefault();
         // Here you can add your login logic, for now, let's just close the popup
-        let path = '/myCourse';
+        let path = '/manageCourses';
         navigate(path);
         props.toggle();
     }
