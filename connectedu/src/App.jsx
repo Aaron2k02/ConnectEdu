@@ -150,7 +150,7 @@ function App() {
         {
           path: '/dashboard/:activePage',
           element:<StudentDashboard/>
-        }
+        },
         {
           path: '/create-course-content',
           element: <CreateCourseContent />
