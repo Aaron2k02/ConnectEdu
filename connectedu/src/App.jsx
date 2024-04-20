@@ -12,7 +12,7 @@ import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/home/home";
 import Footer from "./components/footer/Footer";
 import MyPurchase from "./pages/myPurchase/MyPurchase";
-import MyCourse from "./pages/mycourse/mycourse";
+import MyCourses from "./pages/myCourses/MyCourses";
 import CreateCourse from "./pages/createCourse/createCourse";
 import Courses from "./pages/courses/courses";
 import Course from "./pages/course/course";
@@ -32,6 +32,12 @@ import VerifyOTP from "./pages/forgotPass/verifyOTP";
 import ResetPassword from "./pages/forgotPass/resetPassword";
 import Dashboard from "./pages/dataAnalytics/Dashboard";
 import StudentDashboard from "./pages/dashboard/StudentDashboard";
+import ManageClass from "./pages/ManageClass/ManageClass";
+import ManageUser from "./pages/ManageUser/ManageUser";
+import CreateCoursePreview from "./pages/createCourseReview/CreateCoursePreview";
+import CreateCourseContent from "./pages/createCourseContent/CreateCourseContent";
+import ManageCourses from "./pages/manageCourses/ManageCourses";
+import ViewCourse from "./pages/viewCourse/viewCourse";
 
 function App() {
 
@@ -67,8 +73,8 @@ function App() {
           element: <MyPurchase />
         },
         {
-          path: "/myCourse",
-          element: <MyCourse />
+          path: "/manageCourses",
+          element: <ManageCourses />
         },
         {
           path: "/createCourse",

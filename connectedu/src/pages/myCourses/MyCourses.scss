@@ -1,4 +1,4 @@
-.MyPurchase{
+.myCourses{
     display: flex;
     justify-content: center;
     
@@ -32,7 +32,7 @@
                 // overflow: hidden;
                 white-space: nowrap;
 
-                .PurchaseTitle {
+                .courseTitle {
                         width: 100px;
                         // overflow: hidden;
                     }
@@ -53,21 +53,19 @@
                     }
 
                     button{
-                        color: #2B3467;
+                        color: white;
                         font-weight: 500;
                         border: none;
                         padding: 10px;
                         cursor: pointer;
                         border-radius: 12px;
-                        width: 100px;
+                        width: auto;
+                        height: 40px;
+                        margin: 15px 0px;
                     }
 
-                    .update{
-                        background-color: yellow;
-                    }
-                    
-                    .delete{
-                        background-color: #EB455F;
+                    .continue{
+                        background-color: green;
                     }
                 }
 
