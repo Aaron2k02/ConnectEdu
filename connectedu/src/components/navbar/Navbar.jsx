@@ -85,7 +85,6 @@ const Navbar = () => {
               }
               <Link className='link item' to="/myCourse">My Courses</Link>
               <Link className='link item' to="/myPurchase">My Purchase</Link>
-              <Link className='link item' to="/paymentCheckout">My Payment</Link>
               <Link className='link item' to="/notifications">Notifications</Link>
               <div className="item">
                 <AccountCircleIcon />
