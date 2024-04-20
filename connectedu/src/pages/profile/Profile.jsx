@@ -18,10 +18,10 @@ const Profile = () => {
         <div className='left'>
           <UserSidebar activePage={activePage} />
         </div>
+
         <div className='right'>
           {activePage === 'accountSettings' && <AccountSettings />}
           {activePage === 'changepassword' && <ChangePassword />}
-
         </div>
       </div>
     </div>

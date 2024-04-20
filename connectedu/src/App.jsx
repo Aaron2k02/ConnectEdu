@@ -31,6 +31,8 @@ import AccountSettings from "./components/userProfilecard/AccountSettings";
 import VerifyOTP from "./pages/forgotPass/verifyOTP";
 import ResetPassword from "./pages/forgotPass/resetPassword";
 import Dashboard from "./pages/dataAnalytics/Dashboard";
+import CreateCourseContent from "./pages/createCourseContent/CreateCourseContent";
+import CreateCoursePreview from "./pages/createCourseReview/CreateCoursePreview";
 
 function App() {
 
@@ -112,6 +114,14 @@ function App() {
         {
           path: '/checkout-success',
           element: <CheckoutSuccess />
+        },
+        {
+          path: '/create-course-content',
+          element: <CreateCourseContent />
+        },
+        {
+          path: '/create-course-preview',
+          element: <CreateCoursePreview />
         }
       ]
     },
