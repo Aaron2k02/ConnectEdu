@@ -1,0 +1,106 @@
+.manageClass {
+    display: flex;
+    justify-content: center;
+    
+    .container {
+        width: 1400px;
+        padding: 50px 0px;
+
+        .title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            button {
+                background-color: #2B3467;
+                color: white;
+                font-weight: 500;
+                border: none;
+                padding: 15px;
+                cursor: pointer;
+            }
+        }
+
+        table {
+            width: 100%;
+            border-spacing: 0;
+            table-layout: fixed;
+            margin-top: 20px;
+
+            thead {
+                th {
+                    text-align: center;
+                    background-color: #2B3467;
+                    color: white;
+                    padding: 10px;
+                }
+            }
+
+            tbody {
+                tr {
+                    height: auto;
+                    white-space: nowrap;
+
+                    &:nth-child(even) {
+                        background-color: #BAD7E9;
+                    }
+
+                    td {
+                        text-align: center;
+                        padding: 10px;
+
+                        img {
+                            width: 50px;
+                            height: 50px;
+                            object-fit: cover;
+                            border-radius: 50%;
+                        }
+
+                        .status {
+                            padding: 5px 10px;
+                            font-size: 0.75rem;
+                            border-radius: 5px;
+                            border: none;
+                            cursor: pointer;
+                            transition: background-color 0.3s;
+
+                            &.approved {
+                                background-color: green;// Green for "Approved" status
+                                color: white;
+                            }
+
+                            &.pending {
+                                background-color: yellow; // Yellow for "Pending" status
+                                color: black; 
+                            }
+                        }
+
+                        button {
+                            color: white;
+                            font-weight: 500;
+                            border: none;
+                            padding: 5px 10px;
+                            cursor: pointer;
+                            border-radius: 5px;
+                            margin: 2px;
+                            min-width: 75px;
+                            transition: background-color 0.3s;
+
+                            &.approve {
+                                background-color: green;
+                            }
+                            
+                            &.deny {
+                                background-color: red;
+                            }
+
+                            &.feedback {
+                                background-color: blue;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

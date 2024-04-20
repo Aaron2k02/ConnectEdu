@@ -94,6 +94,9 @@ const Navbar = () => {
               {open &&
                 <div className='options'>
                   <Link className='link' to='/users/accountSettings'> My Profile </Link>
+                  <Link className='link' to="/Dashboard">Dashboard</Link>
+                  <Link className='link' to="/ManageUser">Manage User</Link>
+                  <Link className='link' to="/ManageClass">Manage Courses</Link>
                   <Link className='link' to="/">Logout</Link>
                 </div>
               }

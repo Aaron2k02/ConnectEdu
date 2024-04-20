@@ -31,8 +31,10 @@ import AccountSettings from "./components/userProfilecard/AccountSettings";
 import VerifyOTP from "./pages/forgotPass/verifyOTP";
 import ResetPassword from "./pages/forgotPass/resetPassword";
 import Dashboard from "./pages/dataAnalytics/Dashboard";
-import CreateCourseContent from "./pages/createCourseContent/CreateCourseContent";
+import ManageClass from "./pages/ManageClass/ManageClass";
+import ManageUser from "./pages/ManageUser/ManageUser";
 import CreateCoursePreview from "./pages/createCourseReview/CreateCoursePreview";
+import CreateCourseContent from "./pages/createCourseContent/CreateCourseContent";
 import ManageCourses from "./pages/manageCourses/ManageCourses";
 import ViewCourse from "./pages/viewCourse/viewCourse";
 
@@ -132,7 +134,20 @@ function App() {
         {
           path: '/viewCourse',
           element: <ViewCourse />
+        },
+        {
+          path: '/Dashboard',
+          element: <Dashboard />
+        },
+        {
+          path: '/ManageUser',
+          element: <ManageUser/>
+        },
+        {
+          path: '/ManageClass',
+          element: <ManageClass/>
         }
+
       ]
     },
   ]);
