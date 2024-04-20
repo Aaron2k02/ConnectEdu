@@ -75,7 +75,7 @@ const Navbar = () => {
               {
                 currentUser?.isEducator ? (
                   <>
-                    <Link className='link item' to="/createCourse">Create New Courses</Link>
+                    <Link className='link item' to="/manageCourses">Manage Courses</Link>
                   </>
                 ) : (
                   <>
@@ -83,8 +83,8 @@ const Navbar = () => {
                   </>
                 )
               }
-              <Link className='link item' to="/myCourse">My Courses</Link>
-              <Link className='link item' to="/myPurchase">My Purchase</Link>
+              <Link className='link item' to="/myCourses">My Courses</Link>
+              <Link className='link item' to="/myPurchase">Purchase History</Link>
               <Link className='link item' to="/notifications">Notifications</Link>
               <div className="item">
                 <AccountCircleIcon />
@@ -94,7 +94,7 @@ const Navbar = () => {
               {open &&
                 <div className='options'>
                   <Link className='link' to='/users/accountSettings'> My Profile </Link>
-                  <Link className='link' to="/createCourse">Logout</Link>
+                  <Link className='link' to="/">Logout</Link>
                 </div>
               }
             </div>
