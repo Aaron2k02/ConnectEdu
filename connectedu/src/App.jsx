@@ -30,13 +30,13 @@ import Profile from "./pages/profile/Profile";
 import VerifyOTP from "./pages/forgotPass/verifyOTP";
 import ResetPassword from "./pages/forgotPass/resetPassword";
 import Dashboard from "./pages/dataAnalytics/Dashboard";
-import StudentDashboard from "./pages/dashboard/StudentDashboard";
 import ManageClass from "./pages/ManageClass/ManageClass";
 import ManageUser from "./pages/ManageUser/ManageUser";
 import CreateCoursePreview from "./pages/createCourseReview/CreateCoursePreview";
 import CreateCourseContent from "./pages/createCourseContent/CreateCourseContent";
 import ManageCourses from "./pages/manageCourses/ManageCourses";
 import ViewCourse from "./pages/viewCourse/viewCourse";
+import StudentDashboard from "./pages/dashboard/StudentDashboard";
 
 function App() {
 
@@ -120,9 +120,37 @@ function App() {
           element: <CheckoutSuccess />
         },
         {
-          path: '/dashboard/:activePage',
-          element: <StudentDashboard/>
+          path: '/create-course-content',
+          element: <CreateCourseContent />
         },
+        {
+          path: '/create-course-preview',
+          element: <CreateCoursePreview />
+        },
+        {
+          path: '/myCourses',
+          element: <MyCourses />
+        },
+        {
+          path: '/viewCourse',
+          element: <ViewCourse />
+        },
+        {
+          path: '/Dashboard',
+          element: <Dashboard />
+        },
+        {
+          path: '/ManageUser',
+          element: <ManageUser/>
+        },
+        {
+          path: '/ManageClass',
+          element: <ManageClass/>
+        },
+        {
+          path: '/dashboard/:activePage',
+          element:<StudentDashboard/>
+        }
         {
           path: '/create-course-content',
           element: <CreateCourseContent />
