@@ -88,7 +88,6 @@ const Navbar = ({ filterCoursesByCategory }) => {
                     <>
                       <Link className='link' to='/users/accountSettings'> My Profile </Link>
                       <Link className='link' to="/dashboard/MainDashboard">My Dashboard</Link>
-                     
                     </>
                   )}
                   <Link className='link' to="/">Logout</Link>
@@ -98,7 +97,7 @@ const Navbar = ({ filterCoursesByCategory }) => {
           )}
         </div>
       </div>
-      {(active || (pathname !== "/" && pathname !== "/signin")) && (
+      {(!(pathname !== "/courses")) && (
         <>
           <hr />
           <div className="menu">
