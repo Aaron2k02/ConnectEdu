@@ -1,6 +1,7 @@
 .manageClass {
     display: flex;
     justify-content: center;
+    background-color: #BAD7E9;
     
     .container {
         width: 1400px;
@@ -98,6 +99,14 @@
                                 background-color: blue;
                             }
                         }
+                    }
+
+                    &:nth-child(even) {
+                        background-color: #fcffe7;
+                    }
+
+                    &:nth-child(odd) {
+                        background-color: white;
                     }
                 }
             }

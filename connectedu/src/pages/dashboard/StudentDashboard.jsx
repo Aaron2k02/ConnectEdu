@@ -25,12 +25,6 @@ const StudentDashboard = () => {
         <div className='center'>
           {activePage === 'MainDashboard' && <MainDashboard/>}
           {activePage=== 'MyLearning'&& <LearningPage/>}
-         
-
-        
-        
-         
-
         </div>
       </div>
     </div>
