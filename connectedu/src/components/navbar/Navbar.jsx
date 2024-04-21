@@ -23,6 +23,14 @@ const Navbar = ({ filterCoursesByCategory }) => {
     };
   }, []);
 
+  // Reset active category when the pathname changes
+  useEffect(() => {
+    if (pathname !== "/courses") {
+      setActiveCategory(null);
+      filterCoursesByCategory(null);
+    }
+  }, [pathname]);
+
   const [activeCategory, setActiveCategory] = useState(null);
 
   const handleCategoryClick = (category) => {
