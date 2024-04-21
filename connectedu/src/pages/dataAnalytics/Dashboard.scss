@@ -1,7 +1,7 @@
 .dashboard-container {
     display: flex;
     flex-direction: column;
-    align-items: center; // Change this to align the title to the left
+    align-items: center; 
     padding: 50px 0px; 
     justify-content: center;
     gap: 20px 0px;
@@ -22,7 +22,7 @@
     .dashboard-stats {
       display: flex;
       justify-content: space-around;
-      align-self: center; // This will center the stats while the title stays left-aligned
+      align-self: center; 
       margin-top: 20px;
       width: 1400px;
     }
