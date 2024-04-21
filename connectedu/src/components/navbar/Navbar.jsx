@@ -81,7 +81,7 @@ const Navbar = () => {
                     <>
                       <Link className='link' to='/users/accountSettings'> My Profile </Link>
                       <Link className='link' to="/dashboard/MainDashboard">My Dashboard</Link>
-                      <Link className='link item' to="/educatorRegister">Become an Educator</Link>
+                     
                     </>
                   )}
                   <Link className='link' to="/">Logout</Link>
