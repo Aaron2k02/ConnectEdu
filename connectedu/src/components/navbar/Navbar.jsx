@@ -54,7 +54,7 @@ const Navbar = () => {
                 <Link className='link item' to="/manageCourses">Manage Courses</Link>
               )}
               {currentUser.Role === "User" && (
-                <Link className='link item' to="/createCourse">Become an Educator</Link>
+                <Link className='link item' to="/educatorRegister">Become an Educator</Link>
               )}
               {currentUser.Role === "Admin" && (
                 <>
@@ -81,6 +81,7 @@ const Navbar = () => {
                     <>
                       <Link className='link' to='/users/accountSettings'> My Profile </Link>
                       <Link className='link' to="/dashboard/MainDashboard">My Dashboard</Link>
+                     
                     </>
                   )}
                   <Link className='link' to="/">Logout</Link>

@@ -49,7 +49,7 @@ const MainDashboard = () => {
                     <div className='learninghead'>
                         <h2>Learning</h2>
                         
-                          <Link className='view' to=''><span>View all</span>
+                          <Link className='view' to='/dashboard/MyLearning'><span>View all</span>
                           <ArrowForwardOutlinedIcon/>
                           </Link>
                           

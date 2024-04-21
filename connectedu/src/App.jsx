@@ -38,6 +38,7 @@ import ManageCourses from "./pages/manageCourses/ManageCourses";
 import ViewCourse from "./pages/viewCourse/viewCourse";
 import StudentDashboard from "./pages/dashboard/StudentDashboard";
 import UserForm from "./pages/userForm/userForm";
+import EducatorRegister from "./pages/register/educatorsRegister";
 
 function App() {
 
@@ -155,6 +156,10 @@ function App() {
         {
           path: '/userForm',
           element: <UserForm />
+        },
+        {
+          path: '/educatorRegister',
+          element: <EducatorRegister/>
         }
       ]
     },
