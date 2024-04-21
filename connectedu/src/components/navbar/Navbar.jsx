@@ -79,12 +79,13 @@ const Navbar = () => {
                   </>
                 ) : (
                   <>
-                    <Link className='link item' to="/createCourse">Become an Educator</Link>
+                    <Link className='link item' to="/educatorRegister">Become an Educator</Link>
                   </>
                 )
               }
               <Link className='link item' to="/myCourses">My Courses</Link>
               <Link className='link item' to="/myPurchase">Purchase History</Link>
+              <Link className='link item' to="/educatorRegister">Become an Educator</Link>
               <Link className='link item' to="/notifications">Notifications</Link>
               <div className="item">
                 <AccountCircleIcon />

@@ -1,6 +1,6 @@
 import React from 'react'
 import './LearningCard.scss'
-
+import { Link } from 'react-router-dom';
 
 
 
@@ -20,7 +20,9 @@ const LearningCard = ({item}) => {
 
         
         <div className='btn'>
+        <Link to='/viewCourse'> 
         <button>Continue..</button>
+        </Link>
         </div>
     </div>
   )

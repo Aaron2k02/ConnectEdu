@@ -17,7 +17,7 @@ const LearnCard = ({item}) => {
     
 
     <div className='bottom'>
-    <Link className='view' to=''>
+    <Link className='view' to='/viewCourse' >
         <span>Continue</span>
         <ArrowForwardOutlinedIcon/>
     </Link>

@@ -37,6 +37,7 @@ import CreateCourseContent from "./pages/createCourseContent/CreateCourseContent
 import ManageCourses from "./pages/manageCourses/ManageCourses";
 import ViewCourse from "./pages/viewCourse/viewCourse";
 import StudentDashboard from "./pages/dashboard/StudentDashboard";
+import EducatorRegister from "./pages/register/educatorsRegister";
 
 function App() {
 
@@ -178,6 +179,10 @@ function App() {
         {
           path: '/ManageClass',
           element: <ManageClass />
+        },
+        {
+          path: '/educatorRegister',
+          element: <EducatorRegister/>
         }
       ]
     },
