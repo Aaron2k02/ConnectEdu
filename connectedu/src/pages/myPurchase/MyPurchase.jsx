@@ -4,73 +4,64 @@ import { Link } from 'react-router-dom';
 
 const MyPurchase = () => {
 
-  const PurchaseTitle = 'This is the Purchase title for the connectEdu';
+  const PurchaseDate = '2 May 2024'
+  const CustomerName = 'John Doe';
+  const CustomerEmail = 'customer@email.com';
+  const CourseTitle = 'Mobile App Development';
+  const CoursePrice = 'RM59.99'
 
   return (
     <div className='MyPurchase'>
       <div className="container">
         <div className="title">
           <h1> My Purchases</h1>
-          <Link to='/'>
-            <button> Create New Payment </button>
-          </Link>
         </div>
         <table>
           <tbody>
             <tr>
-              <th>Image</th>
-              <th>Title</th>
+              <th>Date</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Course Title</th>
               <th>Price</th>
-              <th>Sales</th>
-              <th>Update</th>
-              <th>Action</th>
             </tr>
             <tr>
               <td>
-                <img src="" alt="" />
-              </td>
-              <td className='PurchaseTitle'>
-                {PurchaseTitle.length > 30 ? PurchaseTitle.substring(0, 30) + '...' : PurchaseTitle}
-              </td>
-              <td> 50 </td>
-              <td> 123 </td>
-              <td>
-                <button className='update'>Update</button>
+                {PurchaseDate}
               </td>
               <td>
-                <button className='delete'>Delete</button>
+                {CustomerName}
+              </td>
+              <td> {CustomerEmail} </td>
+              <td> {CourseTitle} </td>
+              <td>
+                {CoursePrice}
               </td>
             </tr>
             <tr>
               <td>
-                <img src="" alt="" />
-              </td>
-              <td> 
-                {PurchaseTitle.length > 30 ?PurchaseTitle.substring(0, 30) + '...' :PurchaseTitle}
-              </td>
-              <td> 50 </td>
-              <td> 123 </td>
-              <td>
-                <button className='update'>Update</button>
+              {PurchaseDate}
               </td>
               <td>
-                <button className='delete'>Delete</button>
+                {CustomerName}
+              </td>
+              <td> {CustomerEmail} </td>
+              <td> {CourseTitle} </td>
+              <td>
+                {CoursePrice}
               </td>
             </tr>
             <tr>
               <td>
-                <img src="" alt="" />
+              {PurchaseDate}
               </td>
               <td>
-                {PurchaseTitle.length > 30 ?PurchaseTitle.substring(0, 30) + '...' :PurchaseTitle}
+                {CustomerName}
               </td>
-              <td> 50 </td>
-              <td> 123 </td>
+              <td> {CustomerEmail} </td>
+              <td> {CourseTitle} </td>
               <td>
-                <button className='update'>Update</button>
-              </td>
-              <td>
-                <button className='delete'>Delete</button>
+                {CoursePrice}
               </td>
             </tr>
           </tbody>
