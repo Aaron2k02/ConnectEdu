@@ -1,8 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Notifications.scss";
+import { useState } from 'react'
+import QuestionAnswerPopupForm from "../../components/questionAnswerPopupForm/QuestionAnswerPopupForm";
 
 const Notifications = () => {
+
+  const [seen, setSeen] = useState(false)
+
+  function togglePop() {
+    setSeen(!seen);
+  };
+
   const currentUser = {
     id: 1,
     username: "Anna",
@@ -37,7 +46,8 @@ const Notifications = () => {
               </td>
               <td>1 hour ago</td>
               <td>
-                <button>Mark as Read</button>
+                <button onClick={togglePop}> Answer </button>
+                {seen ? <QuestionAnswerPopupForm toggle={togglePop} /> : null}
               </td>
             </tr>
             <tr className="unread">
@@ -49,7 +59,7 @@ const Notifications = () => {
               </td>
               <td>2 hours ago</td>
               <td>
-                <button>Mark as Read</button>
+                <button >Mark as Read</button>
               </td>
             </tr>
             <tr className="read">
