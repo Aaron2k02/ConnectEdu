@@ -20,48 +20,50 @@ const MyCourse = () => {
           <h1> My Learning </h1>
         </div>
         <table>
-          <tr>
-            <th>Image</th>
-            <th>Title</th>
-            <th>Price</th>
-            <th>Action</th>
-          </tr>
-          <tr>
-            <td>
-              <img src="" alt="" />
-            </td>
-            <td className='courseTitle'>
-              {CourseTitle.length > 30 ? CourseTitle.substring(0, 100) + '...' : CourseTitle}
-            </td>
-            <td> 50 </td>
-            <td>
-              <button className='continue' onClick={viewCourse}>Continue Learning</button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img src="" alt="" />
-            </td>
-            <td> 
-              {CourseTitle.length > 30 ? CourseTitle.substring(0, 100) + '...' : CourseTitle}
-            </td>
-            <td> 50 </td>
-            <td>
-              <button className='continue' onClick={viewCourse}>Continue Learning</button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img src="" alt="" />
-            </td>
-            <td>
-              {CourseTitle.length > 30 ? CourseTitle.substring(0, 100) + '...' : CourseTitle}
-            </td>
-            <td> 50 </td>
-            <td>
-              <button className='continue' onClick={viewCourse}>Continue Learning</button>
-            </td>
-          </tr>
+          <tbody>
+            <tr>
+              <th>Image</th>
+              <th>Title</th>
+              <th>Price</th>
+              <th>Action</th>
+            </tr>
+            <tr>
+              <td>
+                <img src="" alt="" />
+              </td>
+              <td className='courseTitle'>
+                {CourseTitle.length > 30 ? CourseTitle.substring(0, 100) + '...' : CourseTitle}
+              </td>
+              <td> 50 </td>
+              <td>
+                <button className='continue' onClick={viewCourse}>Continue Learning</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="" alt="" />
+              </td>
+              <td> 
+                {CourseTitle.length > 30 ? CourseTitle.substring(0, 100) + '...' : CourseTitle}
+              </td>
+              <td> 50 </td>
+              <td>
+                <button className='continue' onClick={viewCourse}>Continue Learning</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="" alt="" />
+              </td>
+              <td>
+                {CourseTitle.length > 30 ? CourseTitle.substring(0, 100) + '...' : CourseTitle}
+              </td>
+              <td> 50 </td>
+              <td>
+                <button className='continue' onClick={viewCourse}>Continue Learning</button>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
