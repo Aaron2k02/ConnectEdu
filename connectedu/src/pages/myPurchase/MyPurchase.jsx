@@ -16,62 +16,64 @@ const MyPurchase = () => {
           </Link>
         </div>
         <table>
-          <tr>
-            <th>Image</th>
-            <th>Title</th>
-            <th>Price</th>
-            <th>Sales</th>
-            <th>Update</th>
-            <th>Action</th>
-          </tr>
-          <tr>
-            <td>
-              <img src="" alt="" />
-            </td>
-            <td className='PurchaseTitle'>
-              {PurchaseTitle.length > 30 ? PurchaseTitle.substring(0, 30) + '...' : PurchaseTitle}
-            </td>
-            <td> 50 </td>
-            <td> 123 </td>
-            <td>
-              <button className='update'>Update</button>
-            </td>
-            <td>
-              <button className='delete'>Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img src="" alt="" />
-            </td>
-            <td> 
-              {PurchaseTitle.length > 30 ?PurchaseTitle.substring(0, 30) + '...' :PurchaseTitle}
-            </td>
-            <td> 50 </td>
-            <td> 123 </td>
-            <td>
-              <button className='update'>Update</button>
-            </td>
-            <td>
-              <button className='delete'>Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img src="" alt="" />
-            </td>
-            <td>
-              {PurchaseTitle.length > 30 ?PurchaseTitle.substring(0, 30) + '...' :PurchaseTitle}
-            </td>
-            <td> 50 </td>
-            <td> 123 </td>
-            <td>
-              <button className='update'>Update</button>
-            </td>
-            <td>
-              <button className='delete'>Delete</button>
-            </td>
-          </tr>
+          <tbody>
+            <tr>
+              <th>Image</th>
+              <th>Title</th>
+              <th>Price</th>
+              <th>Sales</th>
+              <th>Update</th>
+              <th>Action</th>
+            </tr>
+            <tr>
+              <td>
+                <img src="" alt="" />
+              </td>
+              <td className='PurchaseTitle'>
+                {PurchaseTitle.length > 30 ? PurchaseTitle.substring(0, 30) + '...' : PurchaseTitle}
+              </td>
+              <td> 50 </td>
+              <td> 123 </td>
+              <td>
+                <button className='update'>Update</button>
+              </td>
+              <td>
+                <button className='delete'>Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="" alt="" />
+              </td>
+              <td> 
+                {PurchaseTitle.length > 30 ?PurchaseTitle.substring(0, 30) + '...' :PurchaseTitle}
+              </td>
+              <td> 50 </td>
+              <td> 123 </td>
+              <td>
+                <button className='update'>Update</button>
+              </td>
+              <td>
+                <button className='delete'>Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="" alt="" />
+              </td>
+              <td>
+                {PurchaseTitle.length > 30 ?PurchaseTitle.substring(0, 30) + '...' :PurchaseTitle}
+              </td>
+              <td> 50 </td>
+              <td> 123 </td>
+              <td>
+                <button className='update'>Update</button>
+              </td>
+              <td>
+                <button className='delete'>Delete</button>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
