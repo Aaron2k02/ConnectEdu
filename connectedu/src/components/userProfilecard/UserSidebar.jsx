@@ -38,6 +38,21 @@ const UserSidebar = ({ activePage }) => {
           </Link>
       }
 
+      {
+           activePage === 'personalexperience' ?
+              <div className='s2'>
+               <span>Personal Experience</span>
+               </div>
+
+          :
+          <Link
+            to='/users/personalexperience' className='link'>
+            <div className='s1'>
+              <span>Personal Experience</span>
+            </div>
+          </Link>
+      }
+
 
 
     </div>

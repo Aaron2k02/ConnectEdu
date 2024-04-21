@@ -5,6 +5,7 @@ import AccountSettings from '../../components/userProfilecard/AccountSettings'
 import { useParams } from 'react-router-dom'
 import Course from '../course/course'
 import ChangePassword from '../../components/userProfilecard/ChangePassword'
+import PersonalExperience from '../../components/userProfilecard/PersonalExperience'
 
 const Profile = () => {
 
@@ -22,6 +23,7 @@ const Profile = () => {
         <div className='right'>
           {activePage === 'accountSettings' && <AccountSettings />}
           {activePage === 'changepassword' && <ChangePassword />}
+          {activePage==='personalexperience' && <PersonalExperience/>}
         </div>
       </div>
     </div>
