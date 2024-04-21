@@ -27,7 +27,7 @@ const Navbar = () => {
   {
     id: 1,
     userName: "Educators",
-    Role: "Admin", // Role can be "User", "Admin", or "Educator"
+    Role: "Educator", // Role can be "User", "Admin", or "Educator"
   };
 
   return (
