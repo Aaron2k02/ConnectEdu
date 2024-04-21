@@ -1,6 +1,7 @@
 .manageUser{
     display: flex;
     justify-content: center;
+    background-color: #BAD7E9;
     
     .container{
         width: 1400px;
@@ -74,7 +75,11 @@
                 }
 
                 &:nth-child(even){
-                    background-color: #BAD7E9;
+                    background-color: #fcffe7;
+                }
+
+                &:nth-child(odd){
+                    background-color: white;
                 }
             }
         }

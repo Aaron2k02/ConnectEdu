@@ -27,7 +27,7 @@ const Navbar = () => {
   {
     id: 1,
     userName: "Educators",
-    isEducator: true
+    Role: "Educator", // Role can be "User", "Admin", or "Educator"
   };
 
   return (
@@ -49,56 +49,40 @@ const Navbar = () => {
             </>
           )}
           {currentUser && (
-            // <div className='user' onClick={() => setOpen(!open)}>
-            //   <AccountCircleIcon />
-            //   {/* <img src="" alt="" /> */}
-            //   <span>{currentUser?.userName}</span>
-            //   { open &&
-            //     <div className='options'>
-            //       {
-            //         currentUser?.isEducator && (
-            //           <>
-            //             <Link className='link' to="/myCourse">My Courses</Link>
-            //             <Link className='link' to="/createCourse">Create New Courses</Link>
-            //             <Link className='link' to='/users/accountSettings'>Profile</Link>
-            //           </>
-            //         )
-            //       }
-            //       {!currentUser?.isEducator && <span> Become an Educator </span>}
-            //       <Link className='link' to="/myPurchase">My Purchase</Link>
-            //       <Link className='link' to="/notifications">Notifications</Link>
-            //       <Link className='link' to="/createCourse">Logout</Link>
-            //     </div>
-            //   }
-            // </div>
-            <div className="user" onClick={() => setOpen(!open)}>
-              {
-                currentUser?.isEducator ? (
-                  <>
-                    <Link className='link item' to="/manageCourses">Manage Courses</Link>
-                  </>
-                ) : (
-                  <>
-                    <Link className='link item' to="/educatorRegister">Become an Educator</Link>
-                  </>
-                )
-              }
-              <Link className='link item' to="/myCourses">My Courses</Link>
-              <Link className='link item' to="/myPurchase">Purchase History</Link>
-              <Link className='link item' to="/educatorRegister">Become an Educator</Link>
-              <Link className='link item' to="/notifications">Notifications</Link>
-              <div className="item">
+            <div className="user">
+              {currentUser.Role === "Educator" && (
+                <Link className='link item' to="/manageCourses">Manage Courses</Link>
+              )}
+              {currentUser.Role === "User" && (
+                <Link className='link item' to="/createCourse">Become an Educator</Link>
+              )}
+              {currentUser.Role === "Admin" && (
+                <>
+                  <Link className='link item' to="/Dashboard">Admin Dashboard</Link>
+                  <Link className='link item' to="/ManageUser">Manage User</Link>
+                  <Link className='link item' to="/ManageClass">Manage Courses</Link>
+                </>
+              )}
+              {currentUser.Role !== "Admin" && (
+                <>
+                  <Link className='link item' to="/myCourses">My Courses</Link>
+                  <Link className='link item' to="/myPurchase">Purchase History</Link>
+                  <Link className='link item' to="/notifications">Notifications</Link>
+                </>
+              )}
+              <div className="item" onClick={() => setOpen(!open)}>
                 <AccountCircleIcon />
                 {/* <img src="" alt="" /> */}
                 <span>{currentUser?.userName}</span>
               </div>
               {open &&
                 <div className='options'>
-                  <Link className='link' to='/users/accountSettings'> My Profile </Link>
-                  <Link className='link' to="/Dashboard">Admin Dashboard</Link>
-                  <Link className='link' to="/ManageUser">Manage User</Link>
-                  <Link className='link' to="/ManageClass">Manage Courses</Link>
-                  <Link className='link' to="/dashboard/MainDashboard">My Dashboard</Link>
+                  {currentUser.Role !== "Admin" && (
+                    <>
+                      <Link className='link' to='/users/accountSettings'> My Profile </Link>
+                      <Link className='link' to="/dashboard/MainDashboard">My Dashboard</Link>
+                    </>
+                  )}
                   <Link className='link' to="/">Logout</Link>
                 </div>
               }

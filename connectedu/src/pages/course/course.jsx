@@ -3,12 +3,14 @@ import { useState } from 'react'
 import './course.scss'
 // import Slide from '../../components/Slide/Slide'
 import SlideShow from '../../components/slideshow/SlideShow';
-import {slideImages} from '../../data/coursesDetail';
+import { slideImages } from '../../data/coursesDetail';
+import RatingForm from '../../components/ratingForm/RatingForm';
 import ReviewForm from '../../components/ReviewForm/ReviewForm';
 
 /** ----------------- MUQRI CODE ------------------------- */
 // import components
 import PayButton from "../../components/PayButton/PayButton"
+
 
 // dummy data for the cartItems
 const cartItems = [
@@ -100,7 +102,7 @@ const Course = () => {
           <div className="reviewHeader">
             <h2>Reviews</h2>
             <button onClick={togglePop} >Add Review</button>
-            {seen ? <ReviewForm toggle={togglePop} /> : null}
+            {seen ? <RatingForm toggle={togglePop} /> : null}
           </div>
           <div className="reviews">
             <div className="item">
