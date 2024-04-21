@@ -8,6 +8,7 @@
     border-width: 1px;
     overflow: hidden;
     gap: 10px;
+    
 
     img {
         width: 100%;
@@ -27,6 +28,7 @@
         align-items: center;
         gap: 10px;
         margin-left: 5px;
+        padding: 0px 10px;
 
         img {
             width: 26px;
@@ -41,6 +43,7 @@
         flex-direction: column;
         gap: 5px;
         margin: 5px;
+        padding: 0px 10px;
 
         p {
             font-weight: bold;
@@ -52,6 +55,7 @@
         flex-direction: column;
         gap: 5px;
         margin: 10px 5px 5px 5px;
+        padding: 0px 10px;
 
         .item {
             display: flex;
@@ -70,6 +74,7 @@
     }
 
     .stars {
+        padding: 0px 10px;
         display: flex;
         align-items: center;
         gap: 5px;

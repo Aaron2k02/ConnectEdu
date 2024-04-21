@@ -7,7 +7,7 @@ const UserForm = () => {
 
     let navigate = useNavigate();
 
-    const routeNext = () => {
+    const routeConfirm = () => {
         let path = '/ManageUser';
         navigate(path);
     }
@@ -73,7 +73,7 @@ const UserForm = () => {
                     </div>
                     <div className="userFormNav">
                         <button className='cancel-btn' onClick={routeBack}> Cancel </button>
-                        <button className='confirm-btn' onClick={routeNext}> Next </button>
+                        <button className='confirm-btn' onClick={routeConfirm}> Confirm </button>
                     </div>
                 </div>
             </div>
