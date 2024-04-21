@@ -1,6 +1,6 @@
 
 import FormInput from './featured/FormInput'
-import "./register.scss"
+import "./educatorRegister.scss"
 import React, { useState } from "react"
 
 
@@ -70,35 +70,36 @@ const EducatorRegister = () => {
     setValues({ ...values, [e.target.name]: e.target.value })
   }
 
-  const [isChecked, setIsChecked] = useState(false);
+  // const [isChecked, setIsChecked] = useState(false);
 
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
+  // const handleCheckboxChange = () => {
+  //   setIsChecked(!isChecked);
+  // };
   return (
-    <div className='register'>
+    <div className='educatorRegister'>
       <div className="container">
+        
         <div className="left">
+        <div className='header'>
+          <div>
+          <h1>Empower Minds, Shape Futures:</h1>
+          <h2> Join us as an educator</h2>
+          </div>
+          <div>
+          <img src={"/images/ConnectEduLogo-bg.png"} />
+          </div>
+        </div>
+      
           <form onSubmit={handleSubmit}>
-            <h1>Empower Minds, Shape Futures:</h1>
-            <h2> Join us as an educator</h2>
+            
             {inputs.map((input) => (
               <FormInput key={input.id}{...input} value={values[input.name]} onChange={onChange} />
             ))}
-            {/* <div className="checkbox-container">
-                <label>
-                <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange}/>
-                <span className="checkbox-text">I would like to become an EDUCATOR</span></label>
-                </div> */}
-            {/* <div className='Login'>
-              Already have an account? <a href='/login' className='link'>Login</a>
-            </div> */}
+           
             <button>Submit</button>
           </form>
         </div>
-        <div className="right">
-          <img src={"/images/ConnectEduLogo-bg.png"} />
-        </div>
+        
       </div>
     </div>
   )
