@@ -3,9 +3,9 @@ import styled from "styled-components";
 const CheckoutSuccess = () => {
   return (
     <Container>
-            <h2>Payment Successful</h2>
-            <p>Your purchased course available <a href="/myCourses">here</a> !</p>
-        </Container>
+      <h2>Payment Successful</h2>
+      <p>Your purchased course available <a href="/myCourses">here</a> !</p>
+    </Container>
   );
 };
 export default CheckoutSuccess;
