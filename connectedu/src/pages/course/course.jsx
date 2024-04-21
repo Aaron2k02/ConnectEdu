@@ -6,6 +6,9 @@ import SlideShow from '../../components/slideshow/SlideShow';
 import { slideImages } from '../../data/coursesDetail';
 import RatingForm from '../../components/ratingForm/RatingForm';
 import ReviewForm from '../../components/ReviewForm/ReviewForm';
+import ReviewItem from '../../components/reviewItem/ReviewItem'; // Import the ReviewItem component
+import { reviewData } from '../../data/reviewData'; // Import the review data
+
 
 /** ----------------- MUQRI CODE ------------------------- */
 // import components
@@ -105,122 +108,9 @@ const Course = () => {
             {seen ? <RatingForm toggle={togglePop} /> : null}
           </div>
           <div className="reviews">
-            <div className="item">
-              <div className="user">
-                <img
-                  className="pp"
-                  src="https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                  alt="" />
-                <div className="info">
-                  <span>John Doe</span>
-                  <div className="country">
-                    <img src="https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
-                    <span>Malaysia</span>
-                  </div>
-                </div>
-              </div>
-              <div className="stars">
-                <img src="/images/star.png" alt="" />
-                <img src="/images/star.png" alt="" />
-                <img src="/images/star.png" alt="" />
-                <img src="/images/star.png" alt="" />
-                <img src="/images/star.png" alt="" />
-                <span> 5 </span>
-              </div>
-              <p>
-                I just want to say that art_with_ai was the first, and after
-                this, the only artist Ill be using on Fiverr. Communication was
-                amazing, each and every day he sent me images that I was free to
-                request changes to. They listened, understood, and delivered
-                above and beyond my expectations. I absolutely recommend this
-                gig, and know already that Ill be using it again very very soon
-              </p>
-              <div className="helpful">
-                <span>Helpful?</span>
-                <img src="/images/like.png" alt="" />
-                <span>Yes</span>
-                <img src="/images/dislike.png" alt="" />
-                <span>No</span>
-              </div>
-            </div>
-            <hr />
-            <div className="item">
-              <div className="user">
-                <img
-                  className="pp"
-                  src="https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                  alt="" />
-                <div className="info">
-                  <span>John Doe</span>
-                  <div className="country">
-                    <img src="ht10px;/images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
-                    <span>Malaysia</span>
-                  </div>
-                </div>
-              </div>
-              <div className="stars">
-                <img src="/images/star.png" alt="" />
-                <img src="/images/star.png" alt="" />
-                <img src="/images/star.png" alt="" />
-                <img src="/images/star.png" alt="" />
-                <img src="/images/star.png" alt="" />
-                <span> 5 </span>
-              </div>
-              <p>
-                I just want to say that art_with_ai was the first, and after
-                this, the only artist Ill be using on Fiverr. Communication was
-                amazing, each and every day he sent me images that I was free to
-                request changes to. They listened, understood, and delivered
-                above and beyond my expectations. I absolutely recommend this
-                gig, and know already that Ill be using it again very very soon
-              </p>
-              <div className="helpful">
-                <span>Helpful?</span>
-                <img src="/images/like.png" alt="" />
-                <span>Yes</span>
-                <img src="/images/dislike.png" alt="" />
-                <span>No</span>
-              </div>
-            </div>
-            <hr />
-            <div className="item">
-              <div className="user">
-                <img
-                  className="pp"
-                  src="https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                  alt="" />
-                <div className="info">
-                  <span>John Doe</span>
-                  <div className="country">
-                    <img src="https://images.pexels.com/photos/1054777/pexels-photo-1054777.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
-                    <span>Malaysia</span>
-                  </div>
-                </div>
-              </div>
-              <div className="stars">
-                <img src="/images/star.png" alt="" />
-                <img src="/images/star.png" alt="" />
-                <img src="/images/star.png" alt="" />
-                <img src="/images/star.png" alt="" />
-                <img src="/images/star.png" alt="" />
-                <span> 5 </span>
-              </div>
-              <p>
-                I just want to say that art_with_ai was the first, and after
-                this, the only artist Ill be using on Fiverr. Communication was
-                amazing, each and every day he sent me images that I was free to
-                request changes to. They listened, understood, and delivered
-                above and beyond my expectations. I absolutely recommend this
-                gig, and know already that Ill be using it again very very soon
-              </p>
-              <div className="helpful">
-                <span>Helpful?</span>
-                <img src="/images/like.png" alt="" />
-                <span>Yes</span>
-                <img src="/images/dislike.png" alt="" />
-                <span>No</span>
-              </div>
-            </div>
+            {reviewData.map(review => (
+              <ReviewItem key={review.id} review={review} />
+            ))}
           </div>
         </div>
         <div className="right">

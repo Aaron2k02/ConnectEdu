@@ -4,7 +4,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ filterCoursesByCategory }) => {
 
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
@@ -22,6 +22,13 @@ const Navbar = () => {
       window.removeEventListener("scroll", isActive)
     };
   }, []);
+
+  const [activeCategory, setActiveCategory] = useState(null);
+
+  const handleCategoryClick = (category) => {
+    setActiveCategory(category);
+    filterCoursesByCategory(category);
+  };  
 
   const currentUser = 
   {
@@ -94,29 +101,29 @@ const Navbar = () => {
       {(active || (pathname !== "/" && pathname !== "/signin")) && (
         <>
           <hr />
-            <div className="menu">
-              <Link className='link' to='/'>
-                UI UX Design
-              </Link>
-              <Link className='link' to='/'>
-                Web Development
-              </Link>
-              <Link className='link' to='/'>
-                Mobile App Development
-              </Link>
-              <Link className='link' to='/'>
-                Data Science
-              </Link>
-              <Link className='link' to='/'>
-                Software Engineering
-              </Link>
-              <Link className='link' to='/'>
-                Artificial Intelligence
-              </Link>
-              <Link className='link' to='/'>
-                Cybersecurity
-              </Link>
-            </div>
+          <div className="menu">
+            <span className={`link ${activeCategory === "UI UX Design" ? "active" : ""}`} onClick={() => handleCategoryClick("UI UX Design")}>
+              UI UX Design
+            </span>
+            <span className={`link ${activeCategory === "Web Development" ? "active" : ""}`} onClick={() => handleCategoryClick("Web Development")}>
+              Web Development
+            </span>
+            <span className={`link ${activeCategory === "Mobile App Development" ? "active" : ""}`} onClick={() => handleCategoryClick("Mobile App Development")}>
+              Mobile App Development
+            </span>
+            <span className={`link ${activeCategory === "Data Science" ? "active" : ""}`} onClick={() => handleCategoryClick("Data Science")}>
+              Data Science
+            </span>
+            <span className={`link ${activeCategory === "Software Engineering" ? "active" : ""}`} onClick={() => handleCategoryClick("Software Engineering")}>
+              Software Engineering
+            </span>
+            <span className={`link ${activeCategory === "Artificial Intelligence" ? "active" : ""}`} onClick={() => handleCategoryClick("Artificial Intelligence")}>
+              Artificial Intelligence
+            </span>
+            <span className={`link ${activeCategory === "Cybersecurity" ? "active" : ""}`} onClick={() => handleCategoryClick("Cybersecurity")}>
+              Cybersecurity
+            </span>
+          </div>
           <hr />
         </>
       )}

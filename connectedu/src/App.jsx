@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 
 // Import Router functions
 import {
@@ -42,10 +42,16 @@ import EducatorRegister from "./pages/register/educatorsRegister";
 
 function App() {
 
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const filterCoursesByCategory = (category) => {
+    setSelectedCategory(category);
+  };
+
   const Layout = () => {
     return (
       <div className="app">
-        <Navbar />
+        <Navbar filterCoursesByCategory={filterCoursesByCategory} />
         <Outlet />
         <Footer />
       </div>
@@ -63,7 +69,7 @@ function App() {
         },
         {
           path: "/courses",
-          element: <Courses />
+          element: <Courses selectedCategory={selectedCategory} />
         },
         {
           path: "/course/:id",

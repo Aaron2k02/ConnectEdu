@@ -13,7 +13,7 @@ const courseCard = ({ item }) => {
                 </div>
             </div>
             <div className="courseInfo">
-                <p> {item.desc}</p>
+                <p> {item.desc.length > 30 ? item.desc.substring(0, 70) + '...' : item.desc}</p>
             </div>
             <div className="stars">
                 <span> Rating: </span>

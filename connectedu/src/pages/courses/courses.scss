@@ -2,6 +2,12 @@
     display: flex;
     justify-content: center;
     background-color: #fcffe7;
+    transition: opacity 0.5s ease;
+    opacity: 0; 
+    
+    &.active {
+        opacity: 1; /* Fade in the content */
+    }
 
     .container {
         width: 1400px;
@@ -97,7 +103,31 @@
         .cards {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: flex-start;
+            /* Start positioning from the left */
+            gap: 20px;
+            /* Add space between cards */
         }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .card {
+        width: calc((100% - 40px) / 3);
+        /* Adjust card width for smaller screens to have 3 cards per row */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .card {
+        width: calc((100% - 30px) / 2);
+        /* Adjust card width for even smaller screens to have 2 cards per row */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .card {
+        width: calc(100% - 20px);
+        /* Adjust card width for the smallest screens to have 1 card per row */
     }
 }
