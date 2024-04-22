@@ -39,10 +39,10 @@ const Courses = ({ selectedCategory }) => {
           ConnectEdu | {selectedCategory ? selectedCategory : "Courses"}
         </span>
         <h1>
-          CyberSecurity Experts
+          {selectedCategory ? selectedCategory : "Courses"}
         </h1>
         <p>
-          Explore the world of CyberSecurity
+          Explore {selectedCategory ? selectedCategory : "Courses"}
         </p>
         <div className="menu">
           <div className="left">
