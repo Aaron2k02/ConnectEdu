@@ -5,10 +5,13 @@ import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
+import LogOutPopup from '../logOutPopup/LogOutPopup';
+
 const Navbar = ({ currentUser, handleLogout, filterCoursesByCategory }) => {
 
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
+  const [showLogoutPopup, setShowLogoutPopup] = useState(false);
 
   const { pathname } = useLocation();
 
@@ -39,9 +42,15 @@ const Navbar = ({ currentUser, handleLogout, filterCoursesByCategory }) => {
     filterCoursesByCategory(category);
   };  
 
-  const logout = () => {
-    handleLogout();
+  const handleLogoutClick = () => {
+    setShowLogoutPopup(true);
   };
+
+  const handleLogoutConfirm = () => {
+    handleLogout();
+    navigate('/'); // Navigate to logout route after confirmation
+  };
+
 
   let navigate = useNavigate();
 
@@ -102,7 +111,13 @@ const Navbar = ({ currentUser, handleLogout, filterCoursesByCategory }) => {
                       <Link className='link' to="/dashboard/MainDashboard">My Dashboard</Link>
                     </>
                   )}
-                  <Link className='link' to="/" onClick={logout}>Logout</Link>
+                  <Link className='link' to="/" onClick={handleLogoutClick}>Logout</Link>
+                  {showLogoutPopup && (
+                    <LogOutPopup
+                      toggle={() => setShowLogoutPopup(false)}
+                      handleConfirm={handleLogoutConfirm}
+                    />
+                  )}
                 </div>
               }
             </div>
