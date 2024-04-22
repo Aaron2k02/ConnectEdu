@@ -3,8 +3,9 @@ import "./Navbar.scss"
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const Navbar = ({ filterCoursesByCategory }) => {
+const Navbar = ({ currentUser, handleLogout, filterCoursesByCategory }) => {
 
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
@@ -38,12 +39,16 @@ const Navbar = ({ filterCoursesByCategory }) => {
     filterCoursesByCategory(category);
   };  
 
-  const currentUser = 
-  {
-    id: 1,
-    userName: "Educators",
-    Role: "Educator", // Role can be "User", "Admin", or "Educator"
+  const logout = () => {
+    handleLogout();
   };
+
+  let navigate = useNavigate();
+
+  const routeSignIn = () => {
+    navigate('/signin');
+  }
+
 
   return (
     <div className={active || (pathname !== "/" && pathname !== "/signin") ? "navbar active" : "navbar"}>
@@ -58,9 +63,9 @@ const Navbar = ({ filterCoursesByCategory }) => {
         <div className='links'>
           {!currentUser && (
             <>
-              <span> Explore </span>
-              <Link className='link' to="/signin">Sign in</Link>
-              <button> Start Learning </button>
+              <Link className='link' to="/courses">Explore</Link>
+              <Link className='link' to="/login">Sign in</Link>
+              <button onClick={routeSignIn}> Start Learning </button>
             </>
           )}
           {currentUser && (
@@ -98,7 +103,7 @@ const Navbar = ({ filterCoursesByCategory }) => {
                       <Link className='link' to="/dashboard/MainDashboard">My Dashboard</Link>
                     </>
                   )}
-                  <Link className='link' to="/">Logout</Link>
+                  <Link className='link' to="/" onClick={logout}>Logout</Link>
                 </div>
               }
             </div>

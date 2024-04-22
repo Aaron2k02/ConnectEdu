@@ -1,7 +1,15 @@
 import React from "react";
 import "./Featured.scss";
+import { useNavigate } from 'react-router-dom';
 
 function Featured() {
+
+  let navigate = useNavigate();
+
+  const handleCategoryClick = () => {
+      navigate('/courses'); // navigate to courses page after selecting category
+  } 
+
   return (
     <div className="featured">
       <div className="container">
@@ -14,15 +22,15 @@ function Featured() {
               <img src={"/images/search.png"} alt="" />
               <input type="text" placeholder='Try "building mobil app"' />
             </div>
-            <button>Search</button>
+            <button >Search</button>
           </div>
           <div className="popular">
             <span>Popular:</span>
-            <button>Web Development</button>
-            <button>Mobile App Development:</button>
-            <button>Data Science</button>
-            <button>Artificial Intelligence</button>
-            <button>Cybersecurity</button>
+            <button onClick={() => handleCategoryClick()}>Web Development</button>
+            <button onClick={() => handleCategoryClick()}>Mobile App Development:</button>
+            <button onClick={() => handleCategoryClick()}>Data Science</button>
+            <button onClick={() => handleCategoryClick()}>Artificial Intelligence</button>
+            <button onClick={() => handleCategoryClick()}>Cybersecurity</button>
           </div>
         </div>
         <div className="right">

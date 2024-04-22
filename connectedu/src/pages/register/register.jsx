@@ -5,12 +5,6 @@ import React, { useState } from "react"
 
 
 const Register = () => {
-  const [values, setValues] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPass: "",
-  })
 
   const inputs = [
     {
@@ -37,31 +31,43 @@ const Register = () => {
       name: "password",
       type: "password",
       placeholder: "Password",
-      errorMessage: "Password should be 8-12 charcters and include 1 letter, 1 number and 1 special character",
+      errorMessage: "Password should be 8-12 characters and include 1 letter, 1 number, and 1 special character",
       label: "Password",
-      pattern: `^(?=.*[0-9])(?-.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z)-9!@#$%^&*](8,20)$`,
+      pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
       required: true,
     },
     {
-      id: 1,
-      name: "confirmPAss",
+      id: 4,
+      name: "confirmPass",
       type: "password",
       placeholder: "Confirm Password",
-      errorMessage: "Password is not a match",
+      errorMessage: "Password does not match",
       label: "Confirm Password",
       required: true
     },
-  ]
+  ];
 
+  const [values, setValues] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPass: "",
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.target)
   }
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues({ ...values, [name]: value });
+  };
+
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
   }
+
   return (
     <div className='register'>
       <div className="container">
@@ -69,7 +75,18 @@ const Register = () => {
           <form onSubmit={handleSubmit}>
             <h1>Register an account</h1>
             {inputs.map((input) => (
-              <FormInput key={input.id}{...input} value={values[input.name]} onChange={onChange} />
+              <div key={input.id} className="form-group">
+                <FormInput
+                  label={input.label}
+                  errorMessage={input.errorMessage}
+                  id={input.name} // Assign input name as id
+                  type={input.type}
+                  placeholder={input.placeholder}
+                  value={values[input.name]}
+                  onChange={handleChange}
+                  name={input.name}
+                />
+              </div>
             ))}
             <div className='Login'>
               Already have an account? <a href='/login' className='link'>Login</a>

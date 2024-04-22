@@ -2,24 +2,33 @@
 import "./formInput.scss"
 import React, { useEffect, useState } from "react"
 
-const FormInput = (props) => {
+const FormInput = ({ label, errorMessage, name, disabled, onChange, id, ...inputProps }) => {
+
   const [focused, setFocused] = useState(false);
 
-  const { label, errorMessage, onChange, id, disabled, ...inputProps } = props;
-
-  const handleFocus = (e) => {
+  const handleFocus = () => {
     setFocused(true);
   }
+
+  const handleBlur = () => {
+    setFocused(false);
+  };
+
   return (
     <div className="formInput">
       <div className="container">
-        <label>{label}</label>
-        <input {...inputProps} onChange={onChange}
-          onBlur={handleFocus}
+        <label htmlFor={name}>{label}</label>
+        <input
+          {...inputProps}
+          onChange={(e) => onChange(e.target.name, e.target.value)}
+          onBlur={handleBlur}
           onFocus={() =>
-            inputProps.name == "confirmPassword" && setFocused(true)}
+          inputProps.name == "confirmPassword" && setFocused(true)}
           focused={focused.toString()}
-          disabled={disabled} />
+          disabled={disabled}
+          id={name} 
+          autoComplete="off" // Add the autocomplete attribute
+        />
         <span>{errorMessage}</span>
       </div>
     </div>
