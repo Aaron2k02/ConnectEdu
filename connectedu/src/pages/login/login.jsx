@@ -80,7 +80,13 @@ const Login = ({ handleLogin }) => {
             </div>
             <h2>We miss you!</h2>
             {fields.map((field) => (
-              <FormInput key={field.id}{...field} value={user[field.name]} onChange={onChange} />
+              <FormInput
+                key={field.id}
+                {...field}
+                value={user[field.name]}
+                onChange={onChange}
+                autoComplete="off"
+              />
             ))}
             <div>
               <a href="/forgotPassword" className="link">Forgot Password?</a>

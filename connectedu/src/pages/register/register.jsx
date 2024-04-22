@@ -70,7 +70,13 @@ const Register = () => {
           <form onSubmit={handleSubmit}>
             <h1>Register an account</h1>
             {inputs.map((input) => (
-              <FormInput key={input.id}{...input} value={values[input.name]} onChange={onChange} />
+              <FormInput
+                key={input.id}
+                {...input}
+                value={values[input.name]}
+                onChange={onChange}
+                autoComplete="off"
+              />
             ))}
             <div className='Login'>
               Already have an account? <a href='/login' className='link'>Login</a>
