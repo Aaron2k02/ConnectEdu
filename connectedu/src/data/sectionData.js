@@ -5,7 +5,7 @@ export const sectionData = [
         "duration": "45 minutes",
         "videoTitle": "Exploring React Basics",
         "description": "In this section, we will dive into the fundamentals of React, including setting up your development environment, understanding JSX syntax, and creating your first React components.",
-        "videoId": "9OGhwqWQ8fI?si=8l3oVV4Sr2Ci6IHo&t=1",
+        "videoId": "tIdNeoHniEY",
         "timestamp": "1"
     },
     {
@@ -14,7 +14,7 @@ export const sectionData = [
         "duration": "1 hour",
         "videoTitle": "Mastering React Components",
         "description": "This section will focus on working with React components, including creating functional and class components, passing props, and managing state within components.",
-        "videoId": "9OGhwqWQ8fI",
+        "videoId": "7K9kDrtc4S8",
         "timestamp": "127"
     },
     {
@@ -23,7 +23,7 @@ export const sectionData = [
         "duration": "50 minutes",
         "videoTitle": "Advanced State Management Techniques",
         "description": "Here, we'll explore advanced state management techniques in React, such as using hooks like useState and useEffect, managing complex state structures, and implementing context for global state management.",
-        "videoId": "9OGhwqWQ8fI",
+        "videoId": "7vVqMR96T5o",
         "timestamp": "12764"
     },
     {
@@ -32,7 +32,7 @@ export const sectionData = [
         "duration": "30 minutes",
         "videoTitle": "Navigating with React Router",
         "description": "This section will cover the basics of React Router, including setting up routes, navigating between different pages or views in a React application, and passing route parameters.",
-        "videoId": "9OGhwqWQ8fI",
+        "videoId": "PNQGbczXkMI",
         "timestamp": "20187"
     },
     {

@@ -49,7 +49,6 @@ const Navbar = ({ currentUser, handleLogout, filterCoursesByCategory }) => {
     navigate('/signin');
   }
 
-
   return (
     <div className={active || (pathname !== "/" && pathname !== "/signin") ? "navbar active" : "navbar"}>
       <div className='container'>
@@ -70,20 +69,20 @@ const Navbar = ({ currentUser, handleLogout, filterCoursesByCategory }) => {
           )}
           {currentUser && (
             <div className="user">
-              {currentUser.Role === "Educator" && (
+              {currentUser.role === "Educator" && (
                 <Link className='link item' to="/manageCourses">Manage Courses</Link>
               )}
-              {currentUser.Role === "User" && (
+              {currentUser.role === "User" && (
                 <Link className='link item' to="/educatorRegister">Become an Educator</Link>
               )}
-              {currentUser.Role === "Admin" && (
+              {currentUser.role === "Admin" && (
                 <>
                   <Link className='link item' to="/Dashboard">Admin Dashboard</Link>
                   <Link className='link item' to="/ManageUser">Manage User</Link>
                   <Link className='link item' to="/ManageClass">Manage Courses</Link>
                 </>
               )}
-              {currentUser.Role !== "Admin" && (
+              {currentUser.role !== "Admin" && (
                 <>
                   <Link className='link item' to="/myCourses">My Courses</Link>
                   <Link className='link item' to="/myPurchase">Purchase History</Link>
@@ -97,7 +96,7 @@ const Navbar = ({ currentUser, handleLogout, filterCoursesByCategory }) => {
               </div>
               {open &&
                 <div className='options'>
-                  {currentUser.Role !== "Admin" && (
+                  {currentUser.role !== "Admin" && (
                     <>
                       <Link className='link' to='/users/accountSettings'> My Profile </Link>
                       <Link className='link' to="/dashboard/MainDashboard">My Dashboard</Link>
