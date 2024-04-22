@@ -93,7 +93,7 @@ const Navbar = ({ currentUser, handleLogout, filterCoursesByCategory }) => {
               <div className="item" onClick={() => setOpen(!open)}>
                 <AccountCircleIcon />
                 {/* <img src="" alt="" /> */}
-                <span>{currentUser?.userName}</span>
+                <span>{currentUser?.username}</span>
               </div>
               {open &&
                 <div className='options'>

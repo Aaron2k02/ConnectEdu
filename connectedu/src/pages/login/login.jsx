@@ -70,38 +70,24 @@ const Login = ({ handleLogin }) => {
   };
 
   return (
-    <div className="login">
+    <div className='login'>
       <div className="container">
         <div className="left">
           <form onSubmit={handleSubmit}>
             <div className="welcome-container">
               <h1>Welcome back!</h1>
-              <img
-                src={"/images/ConnectEduLogo-bg.png"}
-                className="welcome-image"
-                alt="Welcome"
-              />
+              <img src={"/images/ConnectEduLogo-bg.png"} className="welcome-image" />
             </div>
             <h2>We miss you!</h2>
             {fields.map((field) => (
-              <FormInput
-                key={field.id}
-                {...field}
-                value={user[field.name]}
-                onChange={onChange}
-              />
+              <FormInput key={field.id}{...field} value={user[field.name]} onChange={onChange} />
             ))}
             <div>
-              <a href="/forgotPassword" className="link">
-                Forgot Password?
-              </a>
+              <a href="/forgotPassword" className="link">Forgot Password?</a>
             </div>
             <button>Login</button>
             <div className="register-link">
-              Don't have an account?{" "}
-              <a href="/signin" className="link">
-                Register
-              </a>
+              Dont have an account? <a href="/signin" className="link">Register</a>
             </div>
           </form>
         </div>

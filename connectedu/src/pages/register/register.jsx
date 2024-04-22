@@ -59,11 +59,6 @@ const Register = () => {
     const data = new FormData(e.target)
   }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-  };
-
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
   }
@@ -75,18 +70,7 @@ const Register = () => {
           <form onSubmit={handleSubmit}>
             <h1>Register an account</h1>
             {inputs.map((input) => (
-              <div key={input.id} className="form-group">
-                <FormInput
-                  label={input.label}
-                  errorMessage={input.errorMessage}
-                  id={input.name} // Assign input name as id
-                  type={input.type}
-                  placeholder={input.placeholder}
-                  value={values[input.name]}
-                  onChange={handleChange}
-                  name={input.name}
-                />
-              </div>
+              <FormInput key={input.id}{...input} value={values[input.name]} onChange={onChange} />
             ))}
             <div className='Login'>
               Already have an account? <a href='/login' className='link'>Login</a>
