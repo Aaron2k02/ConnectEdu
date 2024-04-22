@@ -49,7 +49,7 @@ const Courses = ({ selectedCategory }) => {
             <span>
               Search Course
             </span>
-            <input type="text" placeholder='Search Course' />
+            <input type="text" id="searchCourseInput" placeholder='Search Course' />
             <button> Search </button>
           </div>
           <div className="right">

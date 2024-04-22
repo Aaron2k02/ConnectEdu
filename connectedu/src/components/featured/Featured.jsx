@@ -20,7 +20,7 @@ function Featured() {
           <div className="search">
             <div className="searchInput">
               <img src={"/images/search.png"} alt="" />
-              <input type="text" placeholder='Try "building mobil app"' />
+              <input type="text" id="searchInput" placeholder='Try "building mobil app"' />
             </div>
             <button onClick={() => handleCategoryClick()}>Search</button>
           </div>
