@@ -1,16 +1,20 @@
-import React, { useState } from "react"
-import FormInput from "../register/featured/FormInput"
-import "./login.scss"
+import React, { useState } from "react";
+import FormInput from "../register/featured/FormInput";
+import { useNavigate } from 'react-router-dom';
+import { users } from "../../data/userData"; // Import the JSON data
+import "./login.scss";
 
-const Login = () => {
-  const [values, setValues] = useState({
+const Login = ({ handleLogin }) => {
+
+  const [user, setUser] = useState({
     username: "",
     email: "",
-    password: "",
+    password: ""
+  });
 
-  })
+  let navigate = useNavigate();
 
-  const inputs = [
+  const fields = [
     {
       id: 1,
       name: "username",
@@ -19,27 +23,52 @@ const Login = () => {
       label: "Username",
       required: true
     },
-
     {
       id: 2,
+      name: "email",
+      type: "email",
+      placeholder: "Email",
+      label: "Email",
+      required: true
+    },
+    {
+      id: 3,
       name: "password",
       type: "password",
       placeholder: "Password",
       label: "Password",
-      required: true,
-    },
-
-  ]
-
+      required: true
+    }
+  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-  }
+    // Find user with matching username, email, and password
+    const matchedUser = users.find(
+      (u) =>
+        u.username === user.username &&
+        u.email === user.email &&
+        u.password === user.password
+    );
+    if (matchedUser) {
+      // Call handleLogin function with the matched user object
+      handleLogin(matchedUser);
+      // Navigate to home page after successful login
+      navigate("/");
+    } else {
+      // Handle invalid credentials
+      if (!user.username || !user.email || !user.password) {
+        alert("Please fill in all fields");
+      } else {
+        alert("Incorrect username, email, or password");
+      }
+    }
+  };
 
   const onChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value })
-  }
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
   return (
     <div className='login'>
       <div className="container">
@@ -50,16 +79,19 @@ const Login = () => {
               <img src={"/images/ConnectEduLogo-bg.png"} className="welcome-image" />
             </div>
             <h2>We miss you!</h2>
-            {inputs.map((input) => (
-              <FormInput key={input.id}{...input} value={values[input.name]} onChange={onChange} />
+            {fields.map((field) => (
+              <FormInput
+                key={field.id}
+                {...field}
+                value={user[field.name]}
+                onChange={onChange}
+                autoComplete="off"
+              />
             ))}
-
-
             <div>
               <a href="/forgotPassword" className="link">Forgot Password?</a>
             </div>
             <button>Login</button>
-
             <div className="register-link">
               Dont have an account? <a href="/signin" className="link">Register</a>
             </div>
@@ -67,7 +99,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

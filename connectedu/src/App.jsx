@@ -42,6 +42,17 @@ import EducatorRegister from "./pages/register/educatorsRegister";
 
 function App() {
 
+  //Handle local login annd logout
+  const [currentUser, setCurrentUser] = useState(null);
+
+  const handleLogin = (user) => {
+    setCurrentUser(user);
+  };
+
+  const handleLogout = () => {
+    setCurrentUser(null);
+  };
+
   const [selectedCategory, setSelectedCategory] = useState("");
 
   const filterCoursesByCategory = (category) => {
@@ -51,7 +62,7 @@ function App() {
   const Layout = () => {
     return (
       <div className="app">
-        <Navbar filterCoursesByCategory={filterCoursesByCategory} />
+        <Navbar filterCoursesByCategory={filterCoursesByCategory} currentUser={currentUser} handleLogout={handleLogout} />
         <Outlet />
         <Footer />
       </div>
@@ -65,7 +76,7 @@ function App() {
       children: [
         {
           path: "/",
-          element: <Home />
+          element: <Home/>
         },
         {
           path: "/courses",
@@ -101,7 +112,7 @@ function App() {
         },
         {
           path: '/login',
-          element: <Login />
+          element: <Login handleLogin={handleLogin} />
         },
         {
           path: '/forgotPassword',
@@ -166,11 +177,10 @@ function App() {
         {
           path: '/educatorRegister',
           element: <EducatorRegister/>
-        }
+        },
       ]
     },
   ]);
-
 
   return (
     <div>

@@ -14,10 +14,19 @@ import { educators } from '../../data/educatorsData';
 import CategoryCard from '../../components/categoryCard/CategoryCard';
 import EducatorCard from '../../components/educatorCard/EducatorCard';
 
+import { useNavigate } from 'react-router-dom';
+
 const Home = () => {
+
+  let navigate = useNavigate();
+
+  const routeSignIn = () => {
+    navigate('/signin');
+  }
+
   return (
     <div className='home'>
-      <Featured />
+      <Featured/>
       <TrustedBy />
       <div className="courseCategory">
         <h1> Explore our popular Courses Category </h1>
@@ -97,7 +106,7 @@ const Home = () => {
               <img src={'/gif/icons8-check.gif'} alt="" />
               Grow Skills, Enrich Life
             </div>
-            <button>Explore ConnectEdu Business</button>
+            <button onClick={routeSignIn}>Explore ConnectEdu Business</button>
           </div>
           <div className="item">
             <img src={"/images/ConnectEduLogo-bg.png"} />
