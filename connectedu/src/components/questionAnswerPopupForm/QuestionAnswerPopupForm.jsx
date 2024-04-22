@@ -24,10 +24,10 @@ const QuestionAnswerPopupForm = (props) => {
                 <div className="popup-inner-item">
                     <label htmlFor="question">Question</label>
                     <textarea
-                    id="question"
-                    cols="30"
-                    rows="16"
-                    placeholder='Question from student'
+                        id="question"
+                        cols="30"
+                        rows="16"
+                        placeholder='Question from student'
                     >
                     </textarea>
                 </div>

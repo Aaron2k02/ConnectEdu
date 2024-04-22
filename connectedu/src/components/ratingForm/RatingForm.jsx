@@ -35,7 +35,7 @@ const RatingForm = (props) => {
                                 <label key={index} htmlFor={id}>
                                     <input
                                         type='radio'
-                                        id= {id}
+                                        id={id}
                                         name='rating'
                                         value={currentRating}
                                         onClick={() => setRating(currentRating)}
@@ -45,7 +45,7 @@ const RatingForm = (props) => {
                                         size={50}
                                         color={currentRating <= (hover || rating) ? '#ffc107' : '#e4e5e9'}
                                         onMouseEnter={() => setHover(currentRating)}
-                                        // onMouseLeave={() => setHover(null)}
+                                    // onMouseLeave={() => setHover(null)}
                                     />
                                 </label>
                             );

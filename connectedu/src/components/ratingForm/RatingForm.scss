@@ -41,7 +41,7 @@
             align-items: center;
             margin: 20px 0px;
 
-            p{
+            p {
                 font-weight: 500;
                 margin-bottom: 15px;
             }
@@ -52,14 +52,14 @@
                 width: 490px;
             }
 
-            .popup-inner-item-star{
+            .popup-inner-item-star {
                 display: flex;
                 margin: 10px 0px;
 
                 input[type=radio] {
                     display: none;
                 }
-            
+
                 .star {
                     cursor: pointer;
                 }
