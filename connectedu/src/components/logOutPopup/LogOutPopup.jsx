@@ -4,16 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 const LogOutPopup = (props) => {
 
-    let navigate = useNavigate();
-
-    function handleLogin(e) {
-        e.preventDefault();
-        // Here you can add your login logic, for now, let's just close the popup
-        let path = '/';
-        navigate(path);
-        props.toggle();
-    }
-
     return (
         <div className="popup">
             <div className="popup-inner">
