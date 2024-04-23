@@ -6,10 +6,6 @@ import DashboardSidebar from '../../components/userDashboard/DashboardSidebar'
 import MainDashboard from '../../components/userDashboard/activePage/MainDashboard'
 import LearningPage from '../../components/userDashboard/activePage/LearningPage'
 
-
-
-
-
 const StudentDashboard = () => {
 
   const { activePage } = useParams()

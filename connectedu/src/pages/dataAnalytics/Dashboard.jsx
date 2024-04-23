@@ -15,10 +15,11 @@ const StatCard = ({ icon, label, count }) => {
 
 const Dashboard = () => {
   const icons = {
-    member: '👥', 
-    class: '🎓',
-    instructor: '🧑‍🏫',
-    pending: '⏳'
+    user: '👥', 
+    courses: '🎓',
+    educators: '🧑‍🏫',
+    pending: '⏳',
+    application: '🎒'
   };
 
   return (
@@ -26,10 +27,11 @@ const Dashboard = () => {
       {/* <h1 className="dashboard-title">My Dashboard</h1> */}
       <h1>Hi, <span> UserName </span> Welcome To Your Dashboard </h1>
       <div className="dashboard-stats">
-        <StatCard icon={icons.member} label="Total Member" count={16} />
-        <StatCard icon={icons.class} label="Approved Class" count={6} />
-        <StatCard icon={icons.instructor} label="Instructors" count={1} />
-        <StatCard icon={icons.pending} label="Pending Class" count={0} />
+        <StatCard icon={icons.user} label="Total Users" count={16} />
+        <StatCard icon={icons.courses} label="Approved Courses" count={6} />
+        <StatCard icon={icons.educators} label="Educators" count={1} />
+        <StatCard icon={icons.pending} label="Pending Courses" count={0} />
+        <StatCard icon={icons.application} label="Pending Applications" count={2} />
       </div>
       <img src={'/images/ConnectEduLogo-bg.png'} alt="" />
     </div>
