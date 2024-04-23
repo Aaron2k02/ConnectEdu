@@ -94,7 +94,7 @@ const Navbar = ({ currentUser, handleLogout, filterCoursesByCategory }) => {
               {currentUser.role !== "Admin" && (
                 <>
                   <Link className='link item' to="/myCourses">My Courses</Link>
-                  <Link className='link item' to="/myPurchase">Purchase History</Link>
+                  <Link className='link item' to="/myPurchase">Transaction History</Link>
                   <Link className='link item' to="/notifications">Notifications</Link>
                 </>
               )}
