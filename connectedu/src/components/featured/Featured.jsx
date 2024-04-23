@@ -27,7 +27,7 @@ function Featured() {
           <div className="popular">
             <span>Popular:</span>
             <button onClick={() => handleCategoryClick()}>Web Development</button>
-            <button onClick={() => handleCategoryClick()}>Mobile App Development:</button>
+            <button onClick={() => handleCategoryClick()}>Mobile App Development</button>
             <button onClick={() => handleCategoryClick()}>Data Science</button>
             <button onClick={() => handleCategoryClick()}>Artificial Intelligence</button>
             <button onClick={() => handleCategoryClick()}>Cybersecurity</button>
