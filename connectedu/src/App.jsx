@@ -35,7 +35,7 @@ import ManageUser from "./pages/ManageUser/ManageUser";
 import CreateCoursePreview from "./pages/createCourseReview/CreateCoursePreview";
 import CreateCourseContent from "./pages/createCourseContent/CreateCourseContent";
 import ManageCourses from "./pages/manageCourses/ManageCourses";
-import ViewCourse from "./pages/viewCourse/viewCourse";
+import ViewCourse from "./pages/viewCourse/ViewCourse";
 import StudentDashboard from "./pages/dashboard/StudentDashboard";
 import UserForm from "./pages/userForm/userForm";
 import EducatorRegister from "./pages/register/educatorsRegister";
