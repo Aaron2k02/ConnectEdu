@@ -73,14 +73,14 @@ const MainDashboard = () => {
                 
 
                 <div className='qnaDash'>
-                    <h2>QnA</h2>
+                    <h2>Join Us Now!</h2>
                     <div className='qnaBox'>
                       <div className='qnaLine'>
-                      <h3>Have some question?</h3>
-                      <span>Curiosity is the spark that ignites knowledge. Ask away and illuminate your path to understanding</span>
+                      <h3>Transform passion into purpose!</h3>
+                      <span>Take the leap and become an educator with us</span>
                       </div>
                         
-                        <button>Ask Question</button>
+                        <button>Join us</button>
                     </div>
 
                 </div>
