@@ -21,6 +21,17 @@
             }
         }
 
+        select{
+            padding: 10px 10px;
+            margin: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            color: #333;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
         table{
             width: 100%;
             border-spacing: 0;
@@ -73,6 +84,10 @@
 
                 &:nth-child(even){
                     background-color: #BAD7E9;
+                }
+
+                &:hover{
+                    background-color: #e0e0e0;
                 }
             }
         }
