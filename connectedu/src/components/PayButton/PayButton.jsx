@@ -8,11 +8,11 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { url } from "../../slices/api"
 
-//Dummy user data
+//Dummy user data from userData.js
 const user = {
-    _id:"12345",
-    username:"dummyuser",
-    email:"dummyuser@gmail.com"
+    id:1,
+    username:"user1",
+    email:"user1@example.com"
 };
 
 const PaymentButton = styled(Button)(({ theme }) => ({
@@ -32,7 +32,7 @@ const PayButton = ({ cartItems }) => {
         //console.log(cartItems);
         axios.post(`${url}/stripe/create-checkout-session`, {
             cartItems,
-            userId: user._id
+            userId: user.id
         }).then((res) => {
             if (res.data.url) {
                 window.location.href = res.data.url;

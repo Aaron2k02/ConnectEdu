@@ -14,7 +14,7 @@ const MyPurchase = () => {
     <div className='MyPurchase'>
       <div className="container">
         <div className="title">
-          <h1> My Purchases</h1>
+          <h1> Transaction History </h1>
         </div>
         <table>
           <tbody>
