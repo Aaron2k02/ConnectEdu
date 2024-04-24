@@ -5,7 +5,6 @@ import './course.scss'
 import SlideShow from '../../components/slideshow/SlideShow';
 import { slideImages } from '../../data/coursesDetail';
 import RatingForm from '../../components/ratingForm/RatingForm';
-import ReviewForm from '../../components/ReviewForm/ReviewForm';
 import ReviewItem from '../../components/reviewItem/ReviewItem'; // Import the ReviewItem component
 import { reviewData } from '../../data/reviewData'; // Import the review data
 

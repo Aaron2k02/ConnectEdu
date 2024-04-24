@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ManageClass.scss';
+import FeedbackPopup from '../../components/feedbackPopup/FeedbackPopup';
 
 const ManageClass = () => {
   
@@ -12,6 +13,12 @@ const ManageClass = () => {
 
   const getStatusClassName = (status) => {
     return status === "Approved" ? "approved" : status === "Pending" ? "pending" : "";
+  };
+
+  const [seen, setSeen] = useState(false)
+
+  function togglePop() {
+    setSeen(!seen);
   };
 
   return (
@@ -46,7 +53,8 @@ const ManageClass = () => {
                 <td>
                   <button className='approve'>Approve</button>
                   <button className='deny'>Deny</button>
-                  <button className='feedback'>Feedback</button>
+                  <button className='feedback' onClick={togglePop} >Feedback</button>
+                  {seen ? <FeedbackPopup toggle={togglePop} /> : null}
                 </td>
               </tr>
             ))}
