@@ -73,12 +73,12 @@ const MyPurchase = () => {
 
         {/* dropdowns for selecting transaction type and role */}
         <div>
-          <select value={selectedType} onChange={e => setSelectedType(e.target.value)}>
+          <select id="transactionType" value={selectedType} onChange={e => setSelectedType(e.target.value)}>
             <option value="All">All Types</option>
             <option value="Course Enrollment">Course Enrollment</option>
             <option value="Course Earnings">Course Earnings</option>
           </select>
-          <select value={selectedRole} onChange={e => setSelectedRole(e.target.value)}>
+          <select id="transactionRole" value={selectedRole} onChange={e => setSelectedRole(e.target.value)}>
             <option value="All">All Roles</option>
             <option value="Student">Student</option>
             <option value="Educator">Educator</option>

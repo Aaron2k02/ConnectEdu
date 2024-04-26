@@ -36,11 +36,9 @@ const MainDashboard = () => {
                     <h2>Popular Course</h2>
                     <div>
                         <Slider {...settings}>
-                            {courses.map((course) => (
-                                <PopularCard key={course.id} item={course} />
-                            ))
-                            }
-
+                            {courses.map((course, index) => (
+                                <PopularCard key={index} item={course} />
+                            ))}
                         </Slider>
                     </div>
                 </div>
@@ -61,12 +59,15 @@ const MainDashboard = () => {
                     </div>
                     
                     
-                    {courseEnroll.length > 0 ? (<div className='courseEnroll' >
-                        {courseEnroll.slice(0, 4).map((course) => (
-                        <LearningCard key={course.id} item={course} />
-                        ))}
-                        </div>) : (
-                        <p>You haven't enrolled in any classes yet.</p> )}
+                    {courseEnroll.length > 0 ? (
+                        <div className='courseEnroll'>
+                            {courseEnroll.slice(0, 4).map((course, index) => (
+                                <LearningCard key={index} item={course} />
+                            ))}
+                        </div>
+                    ) : (
+                        <p>You haven't enrolled in any classes yet.</p>
+                    )}
                     </div>
 
                 <hr className='custom-hr'/>

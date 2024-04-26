@@ -25,9 +25,11 @@ const QuestionAnswerPopupForm = (props) => {
                     <label htmlFor="question">Question</label>
                     <textarea
                         id="question"
+                        name='question'
                         cols="30"
                         rows="16"
                         placeholder='Question from student'
+                        autoComplete='off'
                     >
                     </textarea>
                 </div>
@@ -35,9 +37,11 @@ const QuestionAnswerPopupForm = (props) => {
                     <label htmlFor="answer">Answer</label>
                     <textarea
                         id="answer"
+                        name='answer'
                         cols="30"
                         rows="16"
                         placeholder='Answer to question'
+                        autoComplete='off'
                     ></textarea>
                 </div>
                 <div className='popupNav'>

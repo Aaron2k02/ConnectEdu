@@ -10,8 +10,7 @@ const VerifyOTP = () => {
             <h1>Verify OTP</h1>
             <h4>An authentication code has been sent to your email</h4>
             <div className='input-box'>
-
-              <input type="text" placeholder='Enter code' required />
+              <input id="otpCode" type="text" placeholder='Enter code' required />
             </div>
             <button><a href='/forgotPassword/resetPass' className="link">Verify</a></button>
           </form>

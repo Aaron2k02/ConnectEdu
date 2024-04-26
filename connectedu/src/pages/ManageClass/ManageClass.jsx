@@ -3,7 +3,7 @@ import './ManageClass.scss';
 import FeedbackPopup from '../../components/feedbackPopup/FeedbackPopup';
 
 const ManageClass = () => {
-  
+
   // Sample class data 
   const classes = [
     { courseName: "Intro to Programming", instructorName: "John Doe", status: "Pending" },
@@ -15,10 +15,10 @@ const ManageClass = () => {
     return status === "Approved" ? "approved" : status === "Pending" ? "pending" : "";
   };
 
-  const [seen, setSeen] = useState(false)
+  const [feedbackPopupIndex, setFeedbackPopupIndex] = useState(null);
 
-  function togglePop() {
-    setSeen(!seen);
+  const toggleFeedbackPopup = (index) => {
+    setFeedbackPopupIndex(index === feedbackPopupIndex ? null : index);
   };
 
   return (
@@ -53,8 +53,8 @@ const ManageClass = () => {
                 <td>
                   <button className='approve'>Approve</button>
                   <button className='deny'>Deny</button>
-                  <button className='feedback' onClick={togglePop} >Feedback</button>
-                  {seen ? <FeedbackPopup toggle={togglePop} /> : null}
+                  <button className='feedback' onClick={() => toggleFeedbackPopup(index)}>Feedback</button>
+                  {feedbackPopupIndex === index && <FeedbackPopup toggle={toggleFeedbackPopup} />}
                 </td>
               </tr>
             ))}
