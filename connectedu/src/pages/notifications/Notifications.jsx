@@ -1,27 +1,69 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Notifications.scss";
-import { useState } from 'react'
 import QuestionAnswerPopupForm from "../../components/questionAnswerPopupForm/QuestionAnswerPopupForm";
 
 const Notifications = () => {
+  const navigate = useNavigate();
+  const [popupVisible, setPopupVisible] = useState(false);
+  const [popupNotificationId, setPopupNotificationId] = useState(null);
 
-  const [seen, setSeen] = useState(false)
+  function toTransactionHistory(e) {
+    e.preventDefault();
+    navigate('/myPurchase');
+  }
 
-  function togglePop() {
-    setSeen(!seen);
+  const navigateToCourse = () => {
+    navigate('/course/123'); // Replace '123' with the appropriate course ID
+  }
+
+  const togglePop = (notificationId) => {
+    setPopupNotificationId(notificationId);
+    setPopupVisible(!popupVisible);
   };
 
-  const currentUser = {
-    id: 1,
-    username: "Anna",
-    isEducator: true,
+  const hasAnswered = (notificationId) => {
+    // Placeholder logic, replace with actual implementation in the code backend
+    return false;
   };
 
-  const notification = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-  maxime cum corporis esse aspernatur laborum dolorum? Animi
-  molestias aliquam, cum nesciunt, aut, ut quam vitae saepe repellat
-  nobis praesentium placeat.`;
+  const notifications = [
+    {
+      id: 1,
+      type: "Question",
+      sender: "Alice",
+      content: "Can you provide more details about Module 2?",
+      date: "2 hours ago",
+    },
+    {
+      id: 2,
+      type: "Rating",
+      sender: "Bob",
+      content: "You received a 5-star rating for 'Introduction to React'!",
+      date: "1 day ago",
+    },
+    {
+      id: 3,
+      type: "Transaction",
+      sender: "System",
+      content: "You earned $50 from a course sale.",
+      date: "3 days ago",
+    },
+    {
+      id: 4,
+      type: "Question",
+      sender: "Charlie",
+      content: "What is the deadline for the assignment?",
+      date: "4 days ago",
+    },
+    {
+      id: 5,
+      type: "Rating",
+      sender: "Dave",
+      content: "You received a 4-star rating for 'Advanced JavaScript'!",
+      date: "5 days ago",
+    },
+  ];
 
   return (
     <div className="notifications">
@@ -29,66 +71,43 @@ const Notifications = () => {
         <div className="title">
           <h1>Notifications</h1>
         </div>
+        {popupVisible && (
+          <QuestionAnswerPopupForm
+            toggle={() => togglePop(popupNotificationId)}
+          />
+        )}
         <table>
           <tbody>
             <tr>
-              <th>{currentUser.isEducator ? "Educator" : "Student"}</th>
-              <th>Last notification</th>
+              <th>Type</th>
+              <th>Sender</th>
+              <th>Content</th>
               <th>Date</th>
               <th>Action</th>
             </tr>
-            <tr className="unread">
-              <td>Charley Sharp</td>
-              <td className="notificationContent">
-                <Link to="/notification/123" className="link">
-                  {notification.substring(0, 100)}...
-                </Link>
-              </td>
-              <td>1 hour ago</td>
-              <td>
-                <button onClick={togglePop}> Answer </button>
-                {seen ? <QuestionAnswerPopupForm toggle={togglePop} /> : null}
-              </td>
-            </tr>
-            <tr className="unread">
-              <td>John Doe</td>
-              <td className="notificationContent">
-                <Link to="/notification/123" className="link">
-                  {notification.substring(0, 100)}...
-                </Link>
-              </td>
-              <td>2 hours ago</td>
-              <td>
-                <button >Mark as Read</button>
-              </td>
-            </tr>
-            <tr className="read">
-              <td>Elinor Good</td>
-              <td className="notificationContent">
-                <Link to="/notification/123" className="link">
-                  {notification.substring(0, 100)}...
-                </Link>
-              </td>
-              <td>1 day ago</td>
-            </tr>
-            <tr className="read">
-              <td>Garner David </td>
-              <td className="notificationContent">
-                <Link to="/notification/123" className="link">
-                  {notification.substring(0, 100)}...
-                </Link>
-              </td>
-              <td>2 days ago</td>
-            </tr>
-            <tr className="read">
-              <td>Troy Oliver</td>
-              <td className="notificationContent">
-                <Link to="/notification/123" className="link">
-                  {notification.substring(0, 100)}....
-                </Link>
-              </td>
-              <td>1 week ago</td>
-            </tr>
+            {notifications.map((notification) => (
+              <tr key={notification.id}>
+                <td>{notification.type}</td>
+                <td>{notification.sender}</td>
+                <td>{notification.content}</td>
+                <td>{notification.date}</td>
+                <td>
+                  {notification.type === "Question" && (
+                    <button onClick={() => togglePop(notification.id)}>
+                      {hasAnswered(notification.id) ? "Edit" : "Answer"}
+                    </button>
+                  )}
+                  {notification.type === "Rating" && (
+                    <button onClick={navigateToCourse}>View Rating</button>
+                  )}
+                  {notification.type === "Transaction" && (
+                    <button onClick={toTransactionHistory}>
+                      View Transaction
+                    </button>
+                  )}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

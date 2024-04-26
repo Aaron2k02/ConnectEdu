@@ -10,12 +10,7 @@
     margin: 0 auto;
     padding: 50px;
 
-    .title {
-      display: flex;
-      justify-content: space-between;
-
-
-      button {
+    button {
         background-color: #2B3467;
         color: white;
         font-weight: 500;
@@ -23,11 +18,17 @@
         padding: 10px;
         cursor: pointer;
         transition: background-color 0.3s ease;
-
+        width: 150px;
+        border-radius: 12px;
+    
         &:hover {
-          background-color: #1f2551;
+          background-color: #BAD7E9;
         }
       }
+
+    .title {
+      display: flex;
+      justify-content: space-between;
     }
 
     table {
@@ -80,18 +81,18 @@
           background-color: #f0f0f0;
         }
 
-        button {
-          background-color: #2B3467;
-          color: white;
-          padding: 5px 10px;
-          border: none;
-          cursor: pointer;
-          transition: background-color 0.3s ease;
+        // button {
+        //   background-color: #2B3467;
+        //   color: white;
+        //   padding: 5px 10px;
+        //   border: none;
+        //   cursor: pointer;
+        //   transition: background-color 0.3s ease;
 
-          &:hover {
-            background-color: #1f2551;
-          }
-        }
+        //   &:hover {
+        //     background-color: #1f2551;
+        //   }
+        // }
 
       }
     }
