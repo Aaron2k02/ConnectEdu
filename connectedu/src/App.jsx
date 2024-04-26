@@ -17,7 +17,6 @@ import CreateCourse from "./pages/createCourse/createCourse";
 import Courses from "./pages/courses/courses";
 import Course from "./pages/course/course";
 import Notifications from "./pages/notifications/Notifications";
-import Notification from "./pages/notification/Notification";
 import PaymentCheckout from "./pages/paymentCheckout/paymentCheckout";
 import CheckoutSuccess from "./components/checkoutSuccess/checkoutSuccess";
 
@@ -101,10 +100,6 @@ function App() {
         {
           path: "/notifications",
           element: <Notifications />
-        },
-        {
-          path: "/notification/:id",
-          element: <Notification />
         },
         {
           path: "/signin",

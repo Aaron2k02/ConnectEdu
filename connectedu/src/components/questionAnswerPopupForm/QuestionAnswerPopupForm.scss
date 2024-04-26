@@ -17,7 +17,6 @@
         padding: 20px;
         border-radius: 5px;
         box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
-        width: 40%;
         flex-direction: column;
 
         .popup-inner-header {
@@ -48,10 +47,10 @@
             }
 
             textarea {
-                padding: 20px;
+                padding: 20px 15px;
                 resize: vertical;
-                width: 490px;
-
+                width: 400px;
+                height: 100px;
             }
         }
 
