@@ -42,4 +42,8 @@ const line_items = req.body.cartItems.map(item => {
     res.send({url: session.url});
 });
 
+router.get('/test', (req, res) => {
+    res.send("it works");
+})
+
 module.exports = router;
