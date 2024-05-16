@@ -1,33 +1,29 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-const ReviewSchema = new Schema({
+const SectionSchema = new Schema({
+    title: {
+        type: String,
+        required: true,
+    },
+    url: {
+        type: String,
+        required: true,
+    },
+    description: {
+        type: String,
+        required: true,
+    },
     courseId: {
         type: String,
         required: true,
     },
-    sectionId: {
-        type: String,
-        required: true,
-    },
-    sectionTitle: {
-        type: String,
-        required: true,
-    },
-    sectionVideoId: {
-        type: String,
-        required: true,
-    },
-    sectionVideoTitle: {
-        type: String,
-        required: true,
-    },
-    sectionDescription: {
-        type: String,
+    durationMinutes: {
+        type: int,
         required: true,
     },
 }, {
     timestamps: true
 });
 
-export default mongoose.model("User", ReviewSchema);
+export default mongoose.model("Section", SectionSchema);

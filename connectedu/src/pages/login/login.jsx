@@ -5,12 +5,10 @@ import { users } from "../../data/userData"; // Import the JSON data
 import "./login.scss";
 
 const Login = ({ handleLogin }) => {
-
-  const [user, setUser] = useState({
-    username: "",
-    email: "",
-    password: ""
-  });
+  //backend
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   let navigate = useNavigate();
 
@@ -21,7 +19,8 @@ const Login = ({ handleLogin }) => {
       type: "text",
       placeholder: "Username",
       label: "Username",
-      required: true
+      required: true,
+      onChange: (e) => setUserName(e.target.value)
     },
     {
       id: 2,
@@ -29,7 +28,8 @@ const Login = ({ handleLogin }) => {
       type: "email",
       placeholder: "Email",
       label: "Email",
-      required: true
+      required: true,
+      onChange: (e) => setPassword(e.target.value)
     },
     {
       id: 3,
@@ -37,36 +37,26 @@ const Login = ({ handleLogin }) => {
       type: "password",
       placeholder: "Password",
       label: "Password",
-      required: true
+      required: true,
+      onChange: (e) => setPassword(e.target.value)
     }
   ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Find user with matching username, email, and password
     const matchedUser = users.find(
-      (u) =>
-        u.username === user.username &&
-        u.email === user.email &&
-        u.password === user.password
+      (u) => u.username === username && u.password === password
     );
     if (matchedUser) {
-      // Call handleLogin function with the matched user object
       handleLogin(matchedUser);
-      // Navigate to home page after successful login
       navigate("/");
     } else {
-      // Handle invalid credentials
-      if (!user.username || !user.email || !user.password) {
+      if (!username || !password) {
         alert("Please fill in all fields");
       } else {
-        alert("Incorrect username, email, or password");
+        alert("Incorrect username or password");
       }
     }
-  };
-
-  const onChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   return (
@@ -76,15 +66,14 @@ const Login = ({ handleLogin }) => {
           <form onSubmit={handleSubmit}>
             <div className="welcome-container">
               <h1>Welcome back!</h1>
-              <img src={"/images/ConnectEduLogo-bg.png"} className="welcome-image" />
+              <img src={"/images/ConnectEduLogo-bg.png"} className="welcome-image" alt="ConnectEdu Logo" />
             </div>
             <h2>We miss you!</h2>
             {fields.map((field) => (
               <FormInput
                 key={field.id}
                 {...field}
-                value={user[field.name]}
-                onChange={onChange}
+                value={field.name === "username" ? username : password}
                 autoComplete="off"
               />
             ))}
@@ -93,7 +82,7 @@ const Login = ({ handleLogin }) => {
             </div>
             <button>Login</button>
             <div className="register-link">
-              Dont have an account? <a href="/signin" className="link">Register</a>
+              Don't have an account? <a href="/signin" className="link">Register</a>
             </div>
           </form>
         </div>

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
@@ -12,11 +12,23 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
-    role: {
+    age: {
+        type: Number, // Changed from int to Number
+        required: true,
+    },
+    roleId: {
         type: String,
-        defaultValue: 'user'
+        default: "1" // Changed from defaultValue to default, and wrapped 1 in quotes
     },
     password: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    photoUrl: {
         type: String,
         required: true
     }
@@ -24,4 +36,4 @@ const userSchema = new Schema({
     timestamps: true
 });
 
-export default mongoose.model("User", userSchema);
+module.exports = mongoose.model("User", userSchema);

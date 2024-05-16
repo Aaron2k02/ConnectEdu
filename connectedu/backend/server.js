@@ -1,20 +1,39 @@
 const express = require("express");
 const cors = require("cors");
-const stripe = require("./routes/stripe");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
+const dotenv = require("dotenv");
+
+const stripeRoutes = require("./routes/stripe");
 const courseRoutes = require("./routes/course.route.js");
+const authRoute = require("./routes/auth.route.js");
+const userRoutes = require("./routes/user.route.js");
+
+dotenv.config();
 
 const app = express();
+const port = process.env.PORT || 5000;
 
-require("dotenv").config();
-
+// Middleware
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors());
 
-app.use("/api/stripe", stripe);
+// Middleware for error handling
+app.use((err, req, res, next) => {
+    const errorStatus = err.status || 500;
+    const errorMessage = err.message || "Something went wrong!";
 
-// Mount course routes
+    // Set response status and send error message as plain text
+    res.status(errorStatus).send(errorMessage);
+});
+
+
+// API End-point
+app.use("/api/stripe", stripeRoutes);
 app.use("/api/courses", courseRoutes);
+app.use("/api/auth", authRoute);
+app.use("/api/users", userRoutes);
 
 app.get("/", (req, res) => {
     res.send("Welcome to ConnectEdu API....");
@@ -23,8 +42,6 @@ app.get("/", (req, res) => {
 app.get("/products", (req, res) => {
     res.send([2, 3, 4]);
 });
-
-const port = process.env.PORT || 5000;
 
 // Define connect function before calling it
 const connect = async () => {
@@ -42,4 +59,3 @@ app.listen(port, () => {
     console.log(`Server running on port ${port}`);
     connect();
 });
-

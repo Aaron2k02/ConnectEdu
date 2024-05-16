@@ -2,20 +2,20 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const CourseSectionSchema = new Schema({
-    courseId: {
+    content: {
         type: String,
         required: true,
     },
-    sectionId: {
-        type: String,
-        required: true,
-    },
-    star: {
+    rating: {
         type: Number,
         required: true,
         enum: [1,2,3,4,5]
     },
-    desc: {
+    courseId: {
+        type: String,
+        required: true,
+    },
+    userId: {
         type: String,
         required: true,
     },
