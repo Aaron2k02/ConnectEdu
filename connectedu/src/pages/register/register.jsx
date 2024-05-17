@@ -1,10 +1,17 @@
-
-import FormInput from './featured/FormInput'
-import "./register.scss"
-import React, { useState } from "react"
-
+import { useNavigate } from 'react-router-dom';
+import newRequest from '../../utils/newRequest';
+import FormInput from './featured/FormInput';
+import "./register.scss";
+import React, { useState } from "react";
 
 const Register = () => {
+  const [user, setUser] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPass: ""
+  });
+  const [error, setError] = useState("");
 
   const inputs = [
     {
@@ -43,25 +50,31 @@ const Register = () => {
       placeholder: "Confirm Password",
       errorMessage: "Password does not match",
       label: "Confirm Password",
+      // matched: user.password !== user.confirmPass ? true : false,
       required: true
     },
   ];
 
-  const [values, setValues] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPass: "",
-  })
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData(e.target)
-  }
+    if (user.password !== user.confirmPass) {
+      // Todo fix the following to be included in the form component instead
+      setError("Passwords do not match");
+      return;
+    }
+    try {
+      await newRequest.post("/auth/register", user);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const onChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value })
-  }
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
 
   return (
     <div className='register'>
@@ -73,11 +86,12 @@ const Register = () => {
               <FormInput
                 key={input.id}
                 {...input}
-                value={values[input.name]}
+                value={user[input.name]}
                 onChange={onChange}
                 autoComplete="off"
               />
             ))}
+            {error && <p className="error">{error}</p>}
             <div className='Login'>
               Already have an account? <a href='/login' className='link'>Login</a>
             </div>
@@ -85,11 +99,11 @@ const Register = () => {
           </form>
         </div>
         <div className="right">
-          <img src={"/images/ConnectEduLogo-bg.png"} />
+          <img src={"/images/ConnectEduLogo-bg.png"} alt="ConnectEdu Logo" />
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

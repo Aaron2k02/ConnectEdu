@@ -48,8 +48,13 @@ function App() {
     setCurrentUser(user);
   };
 
-  const handleLogout = () => {
-    setCurrentUser(null);
+  const handleLogout = async () => {
+    try {
+      await newRequest.post("/auth/logout")
+      localStorage.setItem("currentUser", null);
+    } catch (error) {
+      
+    }
   };
 
   const [selectedCategory, setSelectedCategory] = useState("");

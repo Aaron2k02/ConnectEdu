@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import FormInput from "../register/featured/FormInput";
 import { useNavigate } from 'react-router-dom';
-import { users } from "../../data/userData"; // Import the JSON data
 import "./login.scss";
+import newRequest from "../../utils/newRequest";
 
 const Login = ({ handleLogin }) => {
   //backend
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
 
   let navigate = useNavigate();
@@ -29,7 +30,7 @@ const Login = ({ handleLogin }) => {
       placeholder: "Email",
       label: "Email",
       required: true,
-      onChange: (e) => setPassword(e.target.value)
+      onChange: (e) => setEmail(e.target.value)
     },
     {
       id: 3,
@@ -42,20 +43,30 @@ const Login = ({ handleLogin }) => {
     }
   ];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const matchedUser = users.find(
-      (u) => u.username === username && u.password === password
-    );
-    if (matchedUser) {
-      handleLogin(matchedUser);
+
+    // console.log(username);
+    // console.log(email);
+    // console.log(password);
+
+    try {
+      const res = await newRequest.post("/auth/login", {
+        username,
+        password,
+        email,
+      });
+      // console.log(res.data);
+      localStorage.setItem("currentUser", JSON.stringify(res.data));
+
+      // Handle successful login
+      handleLogin(JSON.stringify(res.data));
+
+      // Navigate to home page after successful login
       navigate("/");
-    } else {
-      if (!username || !password) {
-        alert("Please fill in all fields");
-      } else {
-        alert("Incorrect username or password");
-      }
+      
+    } catch (err) {
+      setError(err.response.data);
     }
   };
 
@@ -73,7 +84,7 @@ const Login = ({ handleLogin }) => {
               <FormInput
                 key={field.id}
                 {...field}
-                value={field.name === "username" ? username : password}
+                value={field.name === "username" ? username : field.name === "email" ? email : password}
                 autoComplete="off"
               />
             ))}
@@ -81,6 +92,7 @@ const Login = ({ handleLogin }) => {
               <a href="/forgotPassword" className="link">Forgot Password?</a>
             </div>
             <button>Login</button>
+            { error && error}
             <div className="register-link">
               Don't have an account? <a href="/signin" className="link">Register</a>
             </div>

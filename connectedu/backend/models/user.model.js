@@ -14,7 +14,7 @@ const userSchema = new Schema({
     },
     age: {
         type: Number, // Changed from int to Number
-        required: true,
+        required: false,
     },
     roleId: {
         type: String,
@@ -26,11 +26,11 @@ const userSchema = new Schema({
     },
     description: {
         type: String,
-        required: true
+        required: false
     },
     photoUrl: {
         type: String,
-        required: true
+        required: false
     }
 }, {
     timestamps: true

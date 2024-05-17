@@ -62,9 +62,8 @@ const login = async (req, res, next) => {
     }
 };
 
-// logout token / redish
-const logout = async (req, res) => {
-    // Implement logout functionality
+// Middleware and other routes
+const logout = (req, res) => {
     res.clearCookie("accessToken", {
         sameSite: "none",
         secure: true,
