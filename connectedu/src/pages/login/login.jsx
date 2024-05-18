@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import FormInput from "../register/featured/FormInput";
 import { useNavigate } from 'react-router-dom';
-import { users } from "../../data/userData"; // Import the JSON data
 import "./login.scss";
+import newRequest from "../../utils/newRequest";
 
 const Login = ({ handleLogin }) => {
-
-  const [user, setUser] = useState({
-    username: "",
-    email: "",
-    password: ""
-  });
+  //backend
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState(null);
 
   let navigate = useNavigate();
 
@@ -21,7 +20,8 @@ const Login = ({ handleLogin }) => {
       type: "text",
       placeholder: "Username",
       label: "Username",
-      required: true
+      required: true,
+      onChange: (e) => setUserName(e.target.value)
     },
     {
       id: 2,
@@ -29,7 +29,8 @@ const Login = ({ handleLogin }) => {
       type: "email",
       placeholder: "Email",
       label: "Email",
-      required: true
+      required: true,
+      onChange: (e) => setEmail(e.target.value)
     },
     {
       id: 3,
@@ -37,36 +38,36 @@ const Login = ({ handleLogin }) => {
       type: "password",
       placeholder: "Password",
       label: "Password",
-      required: true
+      required: true,
+      onChange: (e) => setPassword(e.target.value)
     }
   ];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Find user with matching username, email, and password
-    const matchedUser = users.find(
-      (u) =>
-        u.username === user.username &&
-        u.email === user.email &&
-        u.password === user.password
-    );
-    if (matchedUser) {
-      // Call handleLogin function with the matched user object
-      handleLogin(matchedUser);
+
+    // console.log(username);
+    // console.log(email);
+    // console.log(password);
+
+    try {
+      const res = await newRequest.post("/auth/login", {
+        username,
+        password,
+        email,
+      });
+      // console.log(res.data);
+      localStorage.setItem("currentUser", JSON.stringify(res.data));
+
+      // Handle successful login
+      handleLogin(JSON.stringify(res.data));
+
       // Navigate to home page after successful login
       navigate("/");
-    } else {
-      // Handle invalid credentials
-      if (!user.username || !user.email || !user.password) {
-        alert("Please fill in all fields");
-      } else {
-        alert("Incorrect username, email, or password");
-      }
+      
+    } catch (err) {
+      setError(err.response.data);
     }
-  };
-
-  const onChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   return (
@@ -76,15 +77,14 @@ const Login = ({ handleLogin }) => {
           <form onSubmit={handleSubmit}>
             <div className="welcome-container">
               <h1>Welcome back!</h1>
-              <img src={"/images/ConnectEduLogo-bg.png"} className="welcome-image" />
+              <img src={"/images/ConnectEduLogo-bg.png"} className="welcome-image" alt="ConnectEdu Logo" />
             </div>
             <h2>We miss you!</h2>
             {fields.map((field) => (
               <FormInput
                 key={field.id}
                 {...field}
-                value={user[field.name]}
-                onChange={onChange}
+                value={field.name === "username" ? username : field.name === "email" ? email : password}
                 autoComplete="off"
               />
             ))}
@@ -92,8 +92,9 @@ const Login = ({ handleLogin }) => {
               <a href="/forgotPassword" className="link">Forgot Password?</a>
             </div>
             <button>Login</button>
+            { error && error}
             <div className="register-link">
-              Dont have an account? <a href="/signin" className="link">Register</a>
+              Don't have an account? <a href="/signin" className="link">Register</a>
             </div>
           </form>
         </div>

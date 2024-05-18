@@ -2,60 +2,56 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const courseSchema = new Schema({
-    userID: {
-        type: String,
-        require: true,
-    },
     title: {
         type: String,
         require: true,
     },
-    desc: {
-        type: String,
-        require: true,
-    },
-    totalStars: {
-        type: Number,
-        default: 0,
-    },
-    starNumber: {
-        type: Number,
-        require: true
-    },
     category: {
         type: String,
-        require: true
+        require: true,
     },
     price: {
+        type: float,
+        require: true,
+    },
+    description: {
+        type: String,
+        require: true,
+    },
+    thumbnailUrl: {
+        type: [String],
+        default: 0,
+    },
+    educatorId: {
         type: String,
         require: true
     },
-    cover: {
-        type: String,
-        require: true,
+    isApproved: {
+        type: Boolean,
+        default: false
     },
-    shortTitle: {
-        type: String,
-        require: true,
-    },
-    shortDescription: {
-        type: String,
-        require: true,
-    },
-    totalHours: {
-        type: Number,
-        require: true,
-    },
-    coverages: {
+    topics: {
         type: [String],
+        require: false
+    },
+    rateCount: {
+        type: int,
         require: false,
-    }, 
-    sales: {
-        type: Number,
-        default: 0
+    },
+    totalStars: {
+        type: int,
+        require: false,
+    },
+    totalSales: {
+        type: int,
+        require: false,
+    },
+    adminFeedback: {
+        type: String,
+        require: true,
     }
 }, {
     timestamps: true
 });
 
-export default mongoose.model("User", courseSchema);
+export default mongoose.model("Course", courseSchema);

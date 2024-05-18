@@ -4,10 +4,14 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 import LogOutPopup from '../logOutPopup/LogOutPopup';
+import newRequest from '../../utils/newRequest';
 
-const Navbar = ({ currentUser, handleLogout, filterCoursesByCategory }) => {
+const Navbar = ({ filterCoursesByCategory }) => {
+
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
@@ -46,11 +50,18 @@ const Navbar = ({ currentUser, handleLogout, filterCoursesByCategory }) => {
     setShowLogoutPopup(true);
   };
 
-  const handleLogoutConfirm = () => {
-    handleLogout();
-    navigate('/'); // Navigate to logout route after confirmation
+  const handleLogoutConfirm = async () => {
+    try {
+      // await axios.get("http://localhost:5000/api/auth/logout", {
+      //   withCredentials: true, // Ensure credentials (cookies) are sent with the request
+      // });
+      await newRequest.get("/auth/logout")
+      localStorage.setItem("currentUser", null);
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
   };
-
 
   let navigate = useNavigate();
 
@@ -99,8 +110,12 @@ const Navbar = ({ currentUser, handleLogout, filterCoursesByCategory }) => {
                 </>
               )}
               <div className="item" onClick={() => setOpen(!open)}>
-                <AccountCircleIcon />
-                {/* <img src="" alt="" /> */}
+                {/* <AccountCircleIcon /> */}
+                {/* <img src={'/images/ConnectEduLogo-bg.png'} alt="" /> */}
+                <img
+                  src={currentUser.photoUrl ||"/images/noavatar.png"}
+                  alt=""
+                />
                 <span>{currentUser?.username}</span>
               </div>
               {open &&
