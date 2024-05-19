@@ -27,6 +27,7 @@ const Navbar = ({ filterCoursesByCategory }) => {
       setActiveCategory(null);
       filterCoursesByCategory(null);
     }
+    window.scrollTo(0, 0);
   }, [pathname, filterCoursesByCategory]);
 
   const [activeCategory, setActiveCategory] = useState(null);

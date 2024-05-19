@@ -31,7 +31,8 @@ const userSchema = new Schema({
     },
     photoUrl: {
         type: String,
-        required: false
+        required: false,
+        default: null
     }
 }, {
     timestamps: true

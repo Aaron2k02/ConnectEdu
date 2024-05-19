@@ -16,12 +16,13 @@ const Courses = ({ selectedCategory }) => {
     if (searchInput.current.value) {
       query += `&search=${searchInput.current.value}`;
     }
+    console.log(query);
     return query;
   };
 
   // Backend Query handling
   const { isFetching, error, data, refetch } = useQuery({
-    queryKey: ['repoData', search],
+    queryKey: ['courses', search, sort],
     queryFn: () => newRequest.get(`/courses${buildQuery()}`).then((res) => res.data),
   });
 
@@ -45,7 +46,7 @@ const Courses = ({ selectedCategory }) => {
     // Show content with fading effect after a short delay (to allow CSS transition)
     const timeout = setTimeout(() => {
       setIsActive(true);
-      refetch();
+      window.scrollTo(0, 0); 
     }, 100);
 
     // Clear timeout on component unmount to prevent memory leak
