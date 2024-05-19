@@ -6,6 +6,10 @@ const courseSchema = new Schema({
         type: String,
         required: true,
     },
+    shortTitle: {
+        type: String,
+        required: true,
+    },
     category: {
         type: [String],
         required: true,

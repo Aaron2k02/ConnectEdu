@@ -15,6 +15,7 @@ router.delete("/:id", verifyToken, deleteCourse);
 
 router.get("/single/:id", verifyToken, getCourse);
 
-router.get("/", verifyToken, getCourses);
+// Public access routes
+router.get("/", getCourses);
 
 module.exports = router;

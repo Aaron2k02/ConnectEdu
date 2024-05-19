@@ -12,6 +12,10 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
+    country: {
+        type: String,
+        required: true,
+    },
     age: {
         type: Number, // Changed from int to Number
         required: false,

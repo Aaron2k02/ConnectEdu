@@ -14,6 +14,18 @@ const CourseCard = ({ item }) => {
 
     console.log(data);
     
+    //Auth 
+    const handleReadMoreClick = (courseId) => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            // Redirect to login page
+            navigate('/login');
+        } else {
+            // Navigate to course detail page
+            navigate(`/courses/${courseId}`);
+        }
+    };
+
     return (
         <div className='courseCard'>
             <img src={item.thumbnailUrl[0] || '/images/default-thumbnail.jpg'} alt={item.title} />
