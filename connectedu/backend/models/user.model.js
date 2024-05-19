@@ -17,8 +17,9 @@ const userSchema = new Schema({
         required: false,
     },
     roleId: {
-        type: String,
-        default: "1" // Changed from defaultValue to default, and wrapped 1 in quotes
+        type: Number,
+        ref: 'Role',
+        default: 1 // Default to 'user' role
     },
     password: {
         type: String,

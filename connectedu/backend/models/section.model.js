@@ -1,8 +1,12 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const SectionSchema = new Schema({
+const sectionSchema = new Schema({
     title: {
+        type: String,
+        required: true,
+    },
+    videoTitle: {
         type: String,
         required: true,
     },
@@ -15,15 +19,16 @@ const SectionSchema = new Schema({
         required: true,
     },
     courseId: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'Course',
         required: true,
     },
     durationMinutes: {
-        type: int,
+        type: Number,
         required: true,
     },
 }, {
     timestamps: true
 });
 
-export default mongoose.model("Section", SectionSchema);
+module.exports = mongoose.model("Section", sectionSchema);

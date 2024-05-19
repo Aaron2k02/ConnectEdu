@@ -8,6 +8,7 @@ const stripeRoutes = require("./routes/stripe");
 const courseRoutes = require("./routes/course.route.js");
 const authRoute = require("./routes/auth.route.js");
 const userRoutes = require("./routes/user.route.js");
+const roleRoutes = require("./routes/userRole.route.js");
 
 dotenv.config();
 
@@ -34,6 +35,7 @@ app.use("/api/stripe", stripeRoutes);
 app.use("/api/courses", courseRoutes);
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoutes);
+app.use('/api/userRoles', roleRoutes);
 
 app.get("/", (req, res) => {
     res.send("Welcome to ConnectEdu API....");

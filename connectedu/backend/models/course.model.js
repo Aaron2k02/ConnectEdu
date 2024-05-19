@@ -1,30 +1,31 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const courseSchema = new Schema({
     title: {
         type: String,
-        require: true,
+        required: true,
     },
     category: {
-        type: String,
-        require: true,
+        type: [String],
+        required: true,
     },
     price: {
-        type: float,
-        require: true,
+        type: Number,
+        required: true,
     },
     description: {
         type: String,
-        require: true,
+        required: true,
     },
     thumbnailUrl: {
         type: [String],
-        default: 0,
+        required: false,
     },
     educatorId: {
-        type: String,
-        require: true
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
     },
     isApproved: {
         type: Boolean,
@@ -32,26 +33,30 @@ const courseSchema = new Schema({
     },
     topics: {
         type: [String],
-        require: false
+        required: false,
+    },
+    courseDuration: {
+        type: Number,
+        required: true,
     },
     rateCount: {
-        type: int,
-        require: false,
+        type: Number,
+        default: 0,
     },
     totalStars: {
-        type: int,
-        require: false,
+        type: Number,
+        default: 0,
     },
     totalSales: {
-        type: int,
-        require: false,
+        type: Number,
+        default: 0,
     },
     adminFeedback: {
         type: String,
-        require: true,
-    }
+        required: false,
+    },
 }, {
     timestamps: true
 });
 
-export default mongoose.model("Course", courseSchema);
+module.exports = mongoose.model("Course", courseSchema);

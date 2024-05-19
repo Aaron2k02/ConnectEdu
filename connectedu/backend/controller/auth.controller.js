@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { createError } = require("../utils/createError");
 
-
 const register = async (req, res, next) => {
     try {
         // Hash the password with bcrypt

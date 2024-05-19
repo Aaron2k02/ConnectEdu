@@ -1,8 +1,20 @@
 const express = require("express");
-const { deleteCourse } = require("../controller/course.controller.js");
+const {
+    createCourse,
+    deleteCourse,
+    getCourse,
+    getCourses
+} = require("../controller/course.controller.js");
+const { verifyToken } = require("../middleware/jwt.js");
 
 const router = express.Router();
 
-router.get("/test", deleteCourse);
+router.post("/", verifyToken, createCourse);
+
+router.delete("/:id", verifyToken, deleteCourse);
+
+router.get("/single/:id", verifyToken, getCourse);
+
+router.get("/", verifyToken, getCourses);
 
 module.exports = router;

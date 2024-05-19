@@ -2,53 +2,44 @@ import React from 'react';
 import './CourseCard.scss';
 import { Link } from 'react-router-dom';
 
-const courseCard = ({ item }) => {
+const CourseCard = ({ item }) => {
     return (
         <div className='courseCard'>
-            <img src={item.img} alt="" />
+            <img src={item.thumbnailUrl[0] || '/images/default-thumbnail.jpg'} alt={item.title} />
             <div className="info">
                 <div className="user">
-                    <img src={item.pp} alt="" />
-                    <span>{item.username}</span>
+                    <img src={item.pp || '/images/default-user.png'} alt={item.username} />
+                    <span>{item.username || 'Unknown User'}</span>
                 </div>
             </div>
             <div className="courseInfo">
-                <p> {item.desc.length > 30 ? item.desc.substring(0, 70) + '...' : item.desc}</p>
+                <p>{item.description && item.description.length > 70 ? item.description.substring(0, 70) + '...' : item.description}</p>
             </div>
             <div className="stars">
                 <span> Rating: </span>
                 <div className="rating">
-                    <span>{item.star}</span>
-                    <img src={"/images/star.png"} alt="" />
+                    <span>{item.totalStars > 0 ? (item.totalStars / item.rateCount).toFixed(1) : 'N/A'}</span>
+                    <img src="/images/star.png" alt="Rating" />
                 </div>
             </div>
             <div className="courseDescription">
                 <div className="item">
-                    <span> Avaliable Seats: </span>
-                    <p> {item.price}</p>
+                    <span> Available Seats: </span>
+                    <p>{item.availableSeats || 'N/A'}</p>
                 </div>
                 <div className="item price">
                     <span> Course Price: </span>
-                    <p> RM {item.price}</p>
+                    <p> RM {item.price || 'N/A'}</p>
                 </div>
             </div>
             <hr />
             <div className="details">
-                {/* <img src={"/images/heart.png"} alt="" /> */}
-                {/* <div className="price">
-                        <span> Course Price </span>
-                        <h2>${item.price}</h2>
-                    </div> */}
-                <Link to='/course/123' className='link courseDetail'>
+                <Link to={`/course/${item._id}`} className='link courseDetail'>
                     <span>View Course</span>
                 </Link>
-                {/* <Link to='/course/123' className='link courseDetail'>
-                    <span>Purchase Course</span>
-                </Link> */}
             </div>
         </div>
+    );
+};
 
-    )
-}
-
-export default courseCard
+export default CourseCard;
