@@ -3,11 +3,10 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import newRequest from '../../utils/newRequest';
 import SlideShow from '../../components/slideshow/SlideShow';
-import RatingForm from '../../components/ratingForm/RatingForm';
-import ReviewItem from '../../components/reviewItem/ReviewItem';
 import PayButton from "../../components/PayButton/PayButton";
 import { reviewData } from '../../data/reviewData';
 import './course.scss';
+import ReviewItems from '../../components/reviewItems/ReviewItems';
 
 const cartItems = [
   { id: 1, name: "Mobile App Development", price: 59.99, cartQuantity: 1, image: "https://i.imgur.com/2xH1X44.png", desc: "We will explore the world of web development" },
@@ -16,7 +15,6 @@ const cartItems = [
 const cart = { cartItems };
 
 const Course = () => {
-  const [seen, setSeen] = useState(false);
   const { id } = useParams();
 
   const courseQuery = useQuery({
@@ -36,10 +34,6 @@ const Course = () => {
   if (courseQuery.error) return <div>Something went wrong!</div>;
 
   const { course } = courseQuery.data;
-
-  const togglePop = () => {
-    setSeen(!seen);
-  };
 
   return (
     <div className='course'>
@@ -95,16 +89,7 @@ const Course = () => {
                 </div>
               </div>
             )}
-          <div className="reviewHeader">
-            <h2>Reviews</h2>
-            <button onClick={togglePop}>Add Review</button>
-            {seen ? <RatingForm toggle={togglePop} /> : null}
-          </div>
-          <div className="reviews">
-            {reviewData.map(review => (
-              <ReviewItem key={review.id} review={review} />
-            ))}
-          </div>
+          <ReviewItems reviewData={reviewData} courseId={id} />
         </div>
         <div className="right">
           <div className="price">

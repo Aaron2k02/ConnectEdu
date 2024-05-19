@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const CourseSectionSchema = new Schema({
+const reviewSchema = new Schema({
     content: {
         type: String,
         required: true,
@@ -23,4 +23,4 @@ const CourseSectionSchema = new Schema({
     timestamps: true
 });
 
-export default mongoose.model("User", CourseSectionSchema);
+module.exports = mongoose.model("Review", reviewSchema);
