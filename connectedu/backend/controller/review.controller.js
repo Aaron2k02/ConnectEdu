@@ -49,7 +49,7 @@ const createReview = async (req, res, next) => {
 
 const getReviews = async (req, res, next) => {
     try {
-        const courseId = req.body.courseId;
+        const courseId = req.params.courseId;
 
         const reviews = await Review.find({ courseId: courseId });
 

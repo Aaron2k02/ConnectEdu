@@ -9,8 +9,8 @@ const {
 
 router.post("/", verifyToken, createReview);
 
-router.get("/:id", getReviews);
+router.get("/:courseId", getReviews);
 
-router.delete("/:id", deleteReview);
+router.delete("/:courseId", deleteReview);
 
 module.exports = router;
