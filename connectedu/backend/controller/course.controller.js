@@ -2,6 +2,7 @@ const Course = require("../models/course.model.js");
 const { createError } = require("../utils/createError");
 const Section = require("../models/section.model.js");
 const Role = require("../models/userRole.model.js");
+const Order = require("../models/order.model.js");
 
 const createCourse = async (req, res, next) => {
     try {
@@ -124,9 +125,34 @@ const getCourses = async (req, res, next) => {
     }
 };
 
+const getCourseSections = async (req, res, next) => {
+    try {
+        const courseId = req.params.id;
+
+        // Ensure the user has purchased the course
+        const order = await Order.findOne({
+            courseId: courseId,
+            buyerId: req.userId,
+            isCompleted: true
+        });
+
+        if (!order) {
+            return next(createError(403, "You have not purchased this course."));
+        }
+
+        // Find the sections associated with the course
+        const sections = await Section.find({ courseId });
+
+        res.status(200).json(sections);
+    } catch (err) {
+        next(err);
+    }
+};
+
 module.exports = {
     createCourse,
     deleteCourse,
     getCourse,
     getCourses,
+    getCourseSections // Add this line
 };

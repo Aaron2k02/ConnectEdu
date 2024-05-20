@@ -10,6 +10,7 @@ const authRoute = require("./routes/auth.route.js");
 const userRoutes = require("./routes/user.route.js");
 const roleRoutes = require("./routes/userRole.route.js");
 const reviewRoutes = require("./routes/review.route.js");
+const ordersRoutes = require("./routes/order.route.js");
 
 dotenv.config();
 
@@ -38,6 +39,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", userRoutes);
 app.use('/api/userRoles', roleRoutes);
 app.use('/api/reviews', reviewRoutes);
+app.use('/api/orders', ordersRoutes);
 
 app.get("/", (req, res) => {
     res.send("Welcome to ConnectEdu API....");

@@ -163,7 +163,7 @@ function App() {
           element: <MyCourses />
         },
         {
-          path: '/viewCourse',
+          path: '/viewCourse/:courseId',
           element: <ViewCourse />
         },
         {

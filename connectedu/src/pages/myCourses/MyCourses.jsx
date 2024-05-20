@@ -1,17 +1,24 @@
-import React from 'react'
-import './MyCourses.scss'
+import React from 'react';
+import './MyCourses.scss';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import newRequest from '../../utils/newRequest';
 
 const MyCourse = () => {
-
-  const CourseTitle = 'This is the course title for the connectEdu';
-
   let navigate = useNavigate();
 
-  const viewCourse = () => {
-    let path = '/viewCourse';
+  const viewCourse = (courseId) => {
+    let path = `/viewCourse/${courseId}`;
     navigate(path);
-  }
+  };
+
+  const purchasedCoursesQuery = useQuery({
+    queryKey: ["purchasedCourses"],
+    queryFn: () => newRequest.get(`/orders/purchasedCourses`).then((res) => res.data),
+  });
+
+  if (purchasedCoursesQuery.isFetching) return <div>Loading...</div>;
+  if (purchasedCoursesQuery.error) return <div>Something went wrong!</div>;
 
   return (
     <div className='myCourses'>
@@ -27,47 +34,25 @@ const MyCourse = () => {
               <th>Price</th>
               <th>Action</th>
             </tr>
-            <tr>
-              <td>
-                <img src="" alt="" />
-              </td>
-              <td className='courseTitle'>
-                {CourseTitle.length > 30 ? CourseTitle.substring(0, 100) + '...' : CourseTitle}
-              </td>
-              <td> 50 </td>
-              <td>
-                <button className='continue' onClick={viewCourse}>Continue Learning</button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <img src="" alt="" />
-              </td>
-              <td> 
-                {CourseTitle.length > 30 ? CourseTitle.substring(0, 100) + '...' : CourseTitle}
-              </td>
-              <td> 50 </td>
-              <td>
-                <button className='continue' onClick={viewCourse}>Continue Learning</button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <img src="" alt="" />
-              </td>
-              <td>
-                {CourseTitle.length > 30 ? CourseTitle.substring(0, 100) + '...' : CourseTitle}
-              </td>
-              <td> 50 </td>
-              <td>
-                <button className='continue' onClick={viewCourse}>Continue Learning</button>
-              </td>
-            </tr>
+            {purchasedCoursesQuery.data.map((course) => 
+              <tr key={course._id}>
+                <td>
+                  <img src={course.thumbnailUrl[0]} alt="" />
+                </td>
+                <td className='courseTitle'>
+                  {course.title.length > 30 ? course.title.substring(0, 30) + '...' : course.title}
+                </td>
+                <td> RM {course.price} </td>
+                <td>
+                  <button className='continue' onClick={() => viewCourse(course._id)}>Continue Learning</button>
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MyCourse
+export default MyCourse;

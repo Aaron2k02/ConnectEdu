@@ -77,20 +77,20 @@ const Navbar = ({ filterCoursesByCategory }) => {
           )}
           {currentUser && (
             <div className="user">
-              {currentUser.role === "Educator" && (
+              {currentUser.roleId === 2 && (
                 <Link className='link item' to="/manageCourses">Manage Courses</Link>
               )}
-              {currentUser.role === "User" && (
+              {currentUser.roleId === 1 && (
                 <Link className='link item' to="/educatorRegister">Become an Educator</Link>
               )}
-              {currentUser.role === "Admin" && (
+              {currentUser.roleId === 0 && (
                 <>
                   <Link className='link item' to="/Dashboard">Admin Dashboard</Link>
                   <Link className='link item' to="/ManageUser">Manage User</Link>
                   <Link className='link item' to="/ManageClass">Manage Courses</Link>
                 </>
               )}
-              {currentUser.role !== "Admin" && (
+              {currentUser.roleId !== 0 && (
                 <>
                   <Link className='link item' to="/myCourses">My Courses</Link>
                   <Link className='link item' to="/myPurchase">Transaction History</Link>

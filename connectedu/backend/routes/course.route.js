@@ -3,7 +3,8 @@ const {
     createCourse,
     deleteCourse,
     getCourse,
-    getCourses
+    getCourses,
+    getCourseSections
 } = require("../controller/course.controller.js");
 const { verifyToken } = require("../middleware/jwt.js");
 
@@ -17,5 +18,7 @@ router.get("/single/:id", verifyToken, getCourse);
 
 // Public access routes
 router.get("/", getCourses);
+
+router.get('/:id/sections', verifyToken, getCourseSections);
 
 module.exports = router;
