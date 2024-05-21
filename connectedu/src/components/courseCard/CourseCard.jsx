@@ -1,20 +1,18 @@
 import React from 'react';
 import './CourseCard.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import newRequest from '../../utils/newRequest'; // Ensure this is the correct path
 
 const CourseCard = ({ item }) => {
+    const navigate = useNavigate();
 
     // Backend Query handling
     const { isFetching, error, data } = useQuery({
         queryKey: [item.educatorId],
-        queryFn: () => newRequest.get(`/users/${item.educatorId}`).then((res) => { return res.data }),
+        queryFn: () => newRequest.get(`/users/${item.educatorId}`).then((res) => res.data),
     });
 
-    console.log(data);
-    
-    //Auth 
     const handleReadMoreClick = (courseId) => {
         const token = localStorage.getItem('token');
         if (!token) {
@@ -47,7 +45,6 @@ const CourseCard = ({ item }) => {
             <div className="stars">
                 <span> Rating: </span>
                 <div className="rating">
-                    {/* item.totalStars > 0 ? (item.totalStars / item.rateCount).toFixed(1) : 'N/A' */} 
                     <span>{!isNaN((item.totalStars / item.rateCount).toFixed(1)) &&
                         Math.round((item.totalStars / item.rateCount).toFixed(1))}</span>
                     <img src="/images/star.png" alt="Rating" />
@@ -65,9 +62,9 @@ const CourseCard = ({ item }) => {
             </div>
             <hr />
             <div className="details">
-                <Link to={`/course/${item._id}`} className='link courseDetail'>
+                <button onClick={() => handleReadMoreClick(item._id)} className='link courseDetail'>
                     <span>View Course</span>
-                </Link>
+                </button>
             </div>
         </div>
     );

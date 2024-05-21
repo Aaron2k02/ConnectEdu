@@ -138,16 +138,19 @@
 
         .courseDetail {
             padding-top: 0.5rem;
-            padding-bottom: 0.25rem;
+            padding-bottom: 0.5rem;
             margin-top: 1rem;
             margin-bottom: 0px;
             font-weight: 700;
             border-radius: 12px;
             background-color: #2B3467;
             width: 250px;
-            height: 25px;
+            height: 35px;
             text-align: center;
             color: white;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
         }
     }
 }

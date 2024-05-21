@@ -2,21 +2,47 @@ import React, { useState } from 'react';
 import './ViewCourse.scss';
 import { useParams } from 'react-router-dom';
 import newRequest from '../../utils/newRequest';
-import { useQuery } from '@tanstack/react-query';
-
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import ViewCourseSection from '../../components/viewCourseSection/ViewCourseSection';
 
 const ViewCourse = () => {
     const { courseId } = useParams();
     const [selectedSection, setSelectedSection] = useState(null);
+    const [question, setQuestion] = useState('');
+    const queryClient = useQueryClient();
 
     const fetchSections = useQuery({
         queryKey: ["fetchSections", courseId],
         queryFn: () => newRequest.get(`/courses/${courseId}/sections`).then((res) => res.data),
     });
 
+    const mutation = useMutation({
+        mutationFn: (newQuestion) => newRequest.post('/questionAnswer', newQuestion),
+        onSuccess: () => {
+            // Invalidate and refetch
+            queryClient.invalidateQueries(["fetchSections", courseId]);
+            setQuestion('');
+            alert('Question submitted successfully');
+        },
+        onError: (error) => {
+            console.error(error);
+            alert('Failed to submit question');
+        },
+    });
+
     const handleSelectSection = (section) => {
         setSelectedSection(section);
+    };
+
+    const handleQuestionChange = (e) => {
+        setQuestion(e.target.value);
+    };
+
+    const handleQuestionSubmit = () => {
+        if (question.trim()) {
+            mutation.mutate({ content: question, courseId });
+            alert(question);
+        }
     };
 
     if (fetchSections.isFetching) return <div>Loading...</div>;
@@ -53,8 +79,16 @@ const ViewCourse = () => {
                         </div>
                     </div>
                     <div className="write">
-                        <textarea id="questionInput" name="question" placeholder="Ask a question" cols="30" rows="10"></textarea>
-                        <button>Send</button>
+                        <textarea
+                            id="questionInput"
+                            name="question"
+                            placeholder="Ask a question"
+                            cols="30"
+                            rows="10"
+                            value={question}
+                            onChange={handleQuestionChange}
+                        ></textarea>
+                        <button onClick={handleQuestionSubmit}>Send</button>
                     </div>
                 </div>
                 <div className="item">

@@ -37,7 +37,12 @@ const userSchema = new Schema({
         type: String,
         required: false,
         default: null
-    }
+    }, 
+    totalSales: {
+        type: Number,
+        required: false,
+        default: 0
+    },
 }, {
     timestamps: true
 });
