@@ -23,5 +23,11 @@ const deleteUser = async (req, res) => {
     }
 };
 
+// const manageUser = async (req,res) =>{
+//     try{
+        
+//     }
+// }
+
 module.exports = { deleteUser };
 
