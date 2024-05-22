@@ -1,26 +1,52 @@
-import React, { useState } from 'react'
-import './ViewCourse.scss'
-
-import ViewCourseSection from '../../components/viewCourseSection/ViewCourseSection'
-
-import { sectionData } from '../../data/sectionData';
+import React, { useState } from 'react';
+import './ViewCourse.scss';
+import { useParams } from 'react-router-dom';
+import newRequest from '../../utils/newRequest';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import ViewCourseSection from '../../components/viewCourseSection/ViewCourseSection';
 
 const ViewCourse = () => {
-
+    const { courseId } = useParams();
     const [selectedSection, setSelectedSection] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [question, setQuestion] = useState('');
+    const queryClient = useQueryClient();
+
+    const fetchSections = useQuery({
+        queryKey: ["fetchSections", courseId],
+        queryFn: () => newRequest.get(`/courses/${courseId}/sections`).then((res) => res.data),
+    });
+
+    const mutation = useMutation({
+        mutationFn: (newQuestion) => newRequest.post('/questionAnswer', newQuestion),
+        onSuccess: () => {
+            // Invalidate and refetch
+            queryClient.invalidateQueries(["fetchSections", courseId]);
+            setQuestion('');
+            alert('Question submitted successfully');
+        },
+        onError: (error) => {
+            console.error(error);
+            alert('Failed to submit question');
+        },
+    });
 
     const handleSelectSection = (section) => {
-        // Activate loading state
-        setIsLoading(true);
-        // Simulate loading delay with setTimeout
-        setTimeout(() => {
-        // Set selected section after delay
         setSelectedSection(section);
-        // Deactivate loading state
-        setIsLoading(false);
-        }, 1000); // Change 1000 to desired loading delay in milliseconds
     };
+
+    const handleQuestionChange = (e) => {
+        setQuestion(e.target.value);
+    };
+
+    const handleQuestionSubmit = () => {
+        if (question.trim()) {
+            mutation.mutate({ content: question, courseId });
+            alert(question);
+        }
+    };
+
+    if (fetchSections.isFetching) return <div>Loading...</div>;
+    if (fetchSections.error) return <div>Something went wrong!</div>;
 
     return (
         <div className='viewCourse'>
@@ -30,10 +56,11 @@ const ViewCourse = () => {
                         <iframe
                             width="560"
                             height="315"
-                            src={`https://www.youtube.com/embed/${selectedSection.videoId}`}
-                            title={selectedSection.title}
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen 
+                            src={selectedSection.url}
+                            title={selectedSection.videoTitle}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            allowFullScreen
                         ></iframe>
                     )}
                     <div className="courseSectionDescription">
@@ -52,8 +79,16 @@ const ViewCourse = () => {
                         </div>
                     </div>
                     <div className="write">
-                        <textarea id="questionInput" name="question" placeholder="Ask a question" cols="30" rows="10"></textarea>
-                        <button>Send</button>
+                        <textarea
+                            id="questionInput"
+                            name="question"
+                            placeholder="Ask a question"
+                            cols="30"
+                            rows="10"
+                            value={question}
+                            onChange={handleQuestionChange}
+                        ></textarea>
+                        <button onClick={handleQuestionSubmit}>Send</button>
                     </div>
                 </div>
                 <div className="item">
@@ -63,9 +98,9 @@ const ViewCourse = () => {
                                 <img src={'/images/square-fill-play-button.png'} alt="" />
                                 <span className="desc">Course Navigation Pane</span>
                             </div>
-                            {sectionData.map(section => (
+                            {fetchSections.data.map(section => (
                                 <ViewCourseSection
-                                    key={section.id}
+                                    key={section._id}
                                     section={section}
                                     onSelectSection={handleSelectSection}
                                 />
@@ -74,9 +109,8 @@ const ViewCourse = () => {
                     </div>
                 </div>
             </div>
-            {/* {isLoading && <div className="loading">Loading...</div>} */}
         </div>
-    )
-}
+    );
+};
 
-export default ViewCourse
+export default ViewCourse;

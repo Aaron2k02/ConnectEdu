@@ -12,11 +12,11 @@ const cartItems = [
 // Define the cart object
 const cart = {cartItems};
 
-const paymentCheckout = () => {
+const paymentCheckout = ({ courseData }) => {
     return (
         <div className="paymentCheckout">
             <div className="container">
-                <PayButton cartItems ={cart.cartItems} />
+                <PayButton cartItems={courseData} />
             </div>
         </div>
     )

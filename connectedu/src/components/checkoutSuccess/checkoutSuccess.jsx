@@ -1,6 +1,31 @@
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
+import newRequest from "../../utils/newRequest";
+import { useEffect } from "react";
 
 const CheckoutSuccess = () => {
+
+  const { search } = useLocation();
+
+  const params = new URLSearchParams(search);
+
+  const payment_intent = params.get("payment_intent");
+
+  useEffect(() => { 
+    const makeRequest = async (req, res) => {
+
+      try {
+        await newRequest.put("/orders", { payment_intent })
+        
+      } catch (err) {
+        console.log(err);
+      }
+
+    };
+
+    makeRequest();
+  })
+
   return (
     <Container>
       <MessageBox>

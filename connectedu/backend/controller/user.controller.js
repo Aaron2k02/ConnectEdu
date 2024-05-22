@@ -5,6 +5,7 @@ const deleteUser = async (req, res) => {
     try {
         // Find the user by ID
         const user = await User.findById(req.params.id);
+        
 
         if (!user) {
             return next(createError(404, "User not found!"));
@@ -23,5 +24,17 @@ const deleteUser = async (req, res) => {
     }
 };
 
-module.exports = { deleteUser };
+const getUser = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return next(createError(404, "User not found!"));
+        }
+        res.status(200).send(user);
+    } catch (err) {
+        return next(createError(500, "Something went wrong!"));
+    }
+};
+
+module.exports = { deleteUser, getUser };
 

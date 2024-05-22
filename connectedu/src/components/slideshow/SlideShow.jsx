@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
-
 import "./SlideShow.scss";
 
 const SlideShow = ({ data }) => {
@@ -17,33 +16,24 @@ const SlideShow = ({ data }) => {
     return (
         <div className="slideshow">
             <div className="container">
-            <BsArrowLeftCircleFill onClick={prevSlide} className="arrow arrow-left" />
-            {data.map((item, idx) => {
-                return (
+                <BsArrowLeftCircleFill onClick={prevSlide} className="arrow arrow-left" />
+                {data.map((item, idx) => (
                     <img
-                        src={item.src}
-                        alt={item.alt}
+                        src={item}
+                        alt={`Slide ${idx + 1}`}
                         key={idx}
                         className={slide === idx ? "slide" : "slide slide-hidden"}
                     />
-                );
-            })}
-            <BsArrowRightCircleFill
-                onClick={nextSlide}
-                className="arrow arrow-right"
-            />
-            <span className="indicators">
-                {data.map((_, idx) => {
-                    return (
+                ))}
+                <BsArrowRightCircleFill onClick={nextSlide} className="arrow arrow-right" />
+                <span className="indicators">
+                    {data.map((_, idx) => (
                         <button
                             key={idx}
-                            className={
-                                slide === idx ? "indicator" : "indicator indicator-inactive"
-                            }
+                            className={slide === idx ? "indicator" : "indicator indicator-inactive"}
                             onClick={() => setSlide(idx)}
                         ></button>
-                    );
-                })}
+                    ))}
                 </span>
             </div>
         </div>

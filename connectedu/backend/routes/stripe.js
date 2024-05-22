@@ -9,21 +9,21 @@ const router = express.Router()
 
 router.post('/create-checkout-session', async (req, res) => {
 
-const line_items = req.body.cartItems.map(item => {
+    const line_items = req.body.courseData.map(course => {
     return {
         price_data: {
             currency: 'myr',
             product_data: {
-                name: item.name,
-                images:[item.image],
-                description: item.desc,
+                name: course.title,
+                images: [course.thumbnailUrl[0]],
+                description: course.description,
                 metadata:{
-                    id:item.id
+                    id: course._id
                 }
             },
-            unit_amount: item.price * 100,
-        },
-        quantity: item.cartQuantity,
+            unit_amount: course.price * 100,
+        }, 
+        quantity: 1,
     };
 });
 

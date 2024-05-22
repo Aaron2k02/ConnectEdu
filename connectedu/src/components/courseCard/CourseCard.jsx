@@ -1,54 +1,73 @@
 import React from 'react';
 import './CourseCard.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import newRequest from '../../utils/newRequest'; // Ensure this is the correct path
 
-const courseCard = ({ item }) => {
+const CourseCard = ({ item }) => {
+    const navigate = useNavigate();
+
+    // Backend Query handling
+    const { isFetching, error, data } = useQuery({
+        queryKey: [item.educatorId],
+        queryFn: () => newRequest.get(`/users/${item.educatorId}`).then((res) => res.data),
+    });
+
+    const handleReadMoreClick = (courseId) => {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        if (!currentUser) {
+            // Redirect to login page
+            navigate('/login');
+        } else {
+            // Navigate to course detail page
+            navigate(`/course/${courseId}`);
+        }
+    };
+
     return (
         <div className='courseCard'>
-            <img src={item.img} alt="" />
+            <img src={item.thumbnailUrl[0] || '/images/default-thumbnail.jpg'} alt={item.title} />
             <div className="info">
-                <div className="user">
-                    <img src={item.pp} alt="" />
-                    <span>{item.username}</span>
-                </div>
+                {isFetching ? (
+                    "Loading"
+                ) : error ? (
+                    "Something went wrong"
+                ) : (
+                    <div className="user">
+                        <img src={data.photoUrl || '/images/noavatar.png'} alt={data.username || 'Unknown User'} />
+                        <span>{data.username || 'Unknown User'}</span>
+                    </div>
+                )}
             </div>
             <div className="courseInfo">
-                <p> {item.desc.length > 30 ? item.desc.substring(0, 70) + '...' : item.desc}</p>
+                <p>{item.description && item.description.length > 70 ? item.description.substring(0, 70) + '...' : item.description}</p>
             </div>
             <div className="stars">
                 <span> Rating: </span>
                 <div className="rating">
-                    <span>{item.star}</span>
-                    <img src={"/images/star.png"} alt="" />
+                    <span>{!isNaN((item.totalStars / item.rateCount).toFixed(1)) &&
+                        Math.round((item.totalStars / item.rateCount).toFixed(1))}</span>
+                    <img src="/images/star.png" alt="Rating" />
                 </div>
             </div>
             <div className="courseDescription">
                 <div className="item">
-                    <span> Avaliable Seats: </span>
-                    <p> {item.price}</p>
+                    <span> Course Purchase: </span>
+                    <p>{item.totalSales || '0'}</p>
                 </div>
                 <div className="item price">
                     <span> Course Price: </span>
-                    <p> RM {item.price}</p>
+                    <p> RM {item.price || 'N/A'}</p>
                 </div>
             </div>
             <hr />
             <div className="details">
-                {/* <img src={"/images/heart.png"} alt="" /> */}
-                {/* <div className="price">
-                        <span> Course Price </span>
-                        <h2>${item.price}</h2>
-                    </div> */}
-                <Link to='/course/123' className='link courseDetail'>
+                <button onClick={() => handleReadMoreClick(item._id)} className='link courseDetail'>
                     <span>View Course</span>
-                </Link>
-                {/* <Link to='/course/123' className='link courseDetail'>
-                    <span>Purchase Course</span>
-                </Link> */}
+                </button>
             </div>
         </div>
+    );
+};
 
-    )
-}
-
-export default courseCard
+export default CourseCard;

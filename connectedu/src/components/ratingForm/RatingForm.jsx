@@ -1,23 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './RatingForm.scss';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FaStar } from 'react-icons/fa';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import newRequest from '../../utils/newRequest';
 
 const RatingForm = (props) => {
-
-    let navigate = useNavigate();
-
-    function handleLogin(e) {
-        e.preventDefault();
-        // Here you can add your login logic, for now, let's just close the popup
-        let path = '/course/123';
-        navigate(path);
-        props.toggle();
-    }
 
     const [rating, setRating] = useState(null);
 
     const [hover, setHover] = useState(null);
+
+    const content = useRef('');
+
+    let navigate = useNavigate();
+
+    const { pathname } = useLocation();
+
+    // Extract the course ID from the pathname
+    const courseId = pathname.split('/').pop();
+    // Should log the course ID
+    console.log(courseId); 
+
+    const queryClient = useQueryClient();
+
+    const mutation = useMutation({
+        mutationFn: (review) => {
+            return newRequest.post('/reviews', review)
+        },
+        onSuccess: () => { 
+            queryClient.invalidateQueries(["reviews"])
+        }
+    })
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        const review = {
+            courseId,
+            content: content.current.value,
+            rating,
+        };
+        mutation.mutate(review);
+        navigate(`/course/${courseId}`);
+        props.toggle();
+    }
 
     return (
         <div className="rating-popup">
@@ -57,11 +83,12 @@ const RatingForm = (props) => {
                         cols="30"
                         rows="16"
                         placeholder='Let us know your experience about the course'
+                        ref={content}
                     ></textarea>
                 </div>
                 <div className='popupNav'>
                     <button onClick={props.toggle} className='btn-cancel'>Cancel</button>
-                    <button onClick={handleLogin} className='btn-confirm'>Confirm</button>
+                    <button onClick={handleSubmit} className='btn-confirm'>Confirm</button>
                 </div>
             </div>
         </div>

@@ -71,6 +71,12 @@
                 border-radius: 5px;
                 width: 150px;
 
+                &.btn-close {
+                    background-color: #BAD7E9!important;
+                    width: 433px !important;
+                    color: #2B3467;
+                }
+
                 &.btn-cancel {
                     background-color: #EB455F !important;
                 }

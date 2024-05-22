@@ -7,6 +7,13 @@ import {
   Outlet
 } from "react-router-dom";
 
+// import query function callback
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query'
+
 // Import Page Component
 import Navbar from "./components/navbar/Navbar";
 import Home from "./pages/home/home";
@@ -38,8 +45,12 @@ import ViewCourse from "./pages/viewCourse/ViewCourse";
 import StudentDashboard from "./pages/dashboard/StudentDashboard";
 import UserForm from "./pages/userForm/userForm";
 import EducatorRegister from "./pages/register/educatorsRegister";
+import Pay from './components/pay/Pay';
 
 function App() {
+
+  // Backend query handling
+  const queryClient = new QueryClient()
 
   //Handle local login annd logout
   const [currentUser, setCurrentUser] = useState(null);
@@ -66,9 +77,11 @@ function App() {
   const Layout = () => {
     return (
       <div className="app">
-        <Navbar filterCoursesByCategory={filterCoursesByCategory} currentUser={currentUser} handleLogout={handleLogout} />
-        <Outlet />
-        <Footer />
+        <QueryClientProvider client={queryClient}>
+          <Navbar filterCoursesByCategory={filterCoursesByCategory} currentUser={currentUser} handleLogout={handleLogout} />
+          <Outlet />
+          <Footer />
+        </QueryClientProvider>
       </div>
     )
   }
@@ -131,8 +144,8 @@ function App() {
           element: <ResetPassword />
         },
         {
-          path: '/paymentCheckout',
-          element: <PaymentCheckout />
+          path: '/paymentCheckout/:courseId',
+          element: <Pay />
         },
         {
           path: '/checkout-success',
@@ -151,7 +164,7 @@ function App() {
           element: <MyCourses />
         },
         {
-          path: '/viewCourse',
+          path: '/viewCourse/:courseId',
           element: <ViewCourse />
         },
         {
