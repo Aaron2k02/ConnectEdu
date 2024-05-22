@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import './CheckOutForm.scss';
 import {
     PaymentElement,
     useStripe,
@@ -8,6 +9,8 @@ import {
 const CheckOutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
+
+    const [email, setEmail] = useState('');
 
     const [message, setMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -61,6 +64,7 @@ const CheckOutForm = () => {
             confirmParams: {
                 // Make sure to change this to your payment completion page
                 return_url: "http://localhost:5173/checkout-success",
+                receipt_email: email,
             },
         });
 
@@ -79,22 +83,32 @@ const CheckOutForm = () => {
     };
 
     const paymentElementOptions = {
-        layout: "tabs"
+        layout: "accordion"
     }
 
-  return (
-      <form id="payment-form" onSubmit={handleSubmit}>
+    return (
+        <div className="payment-form">
+            <form id="payment-form" onSubmit={handleSubmit}>
+                <label htmlFor="email">Email</label>
+                <input
+                    id="email"
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter Your Email Address"
+                />
+                <PaymentElement id="payment-element" options={paymentElementOptions} />
+                <button disabled={isLoading || !stripe || !elements} id="submit">
+                    <span id="button-text">
+                        {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
+                    </span>
+                </button>
+                {/* Show any error or success messages */}
+                {message && <div id="payment-message">{message}</div>}
+            </form>
+        </div>
 
-          <PaymentElement id="payment-element" options={paymentElementOptions} />
-          <button disabled={isLoading || !stripe || !elements} id="submit">
-              <span id="button-text">
-                  {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
-              </span>
-          </button>
-          {/* Show any error or success messages */}
-          {message && <div id="payment-message">{message}</div>}
-      </form>
-  )
+    )
 }
 
 export default CheckOutForm

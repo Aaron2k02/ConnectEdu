@@ -7,6 +7,9 @@ import {
   Outlet
 } from "react-router-dom";
 
+// Import React Toastify
+import { ToastContainer } from "react-toastify";
+
 // import query function callback
 import {
   QueryClient,
@@ -29,6 +32,7 @@ import CheckoutSuccess from "./components/checkoutSuccess/checkoutSuccess";
 
 // Import Page Styling -- General css
 import './app.scss';
+import 'react-toastify/dist/ReactToastify.css'
 import Login from "./pages/login/login";
 import Register from "./pages/register/register";
 import ForgotPass from "./pages/forgotPass/ForgotPass";
@@ -197,6 +201,7 @@ function App() {
 
   return (
     <div>
+      <ToastContainer/>
       <RouterProvider router={router} />
     </div>
   )
