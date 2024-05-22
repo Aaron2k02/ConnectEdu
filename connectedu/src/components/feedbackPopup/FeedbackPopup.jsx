@@ -1,43 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './FeedbackPopup.scss';
-import { useNavigate } from "react-router-dom";
+import newRequest from '../../utils/newRequest';
 
-const FeedbackPopup = (props) => {
+const FeedbackPopup = ({ course, isAdmin, toggle }) => {
+    const [feedback, setFeedback] = useState(course.adminFeedback || '');
 
-    let navigate = useNavigate();
+    const handleFeedbackChange = (e) => {
+        setFeedback(e.target.value);
+    }
 
-    function handleFeedback(e) {
+    const handleFeedbackSubmit = async (e) => {
         e.preventDefault();
-        // Here you can add your login logic, for now, let's just close the popup
-        let path = '/ManageClass';
-        navigate(path);
-        props.toggle();
+        try {
+            await newRequest.put(`/courses/feedback/${course._id}`, { feedback });
+            toggle();
+        } catch (err) {
+            console.error(err);
+        }
     }
 
     return (
         <div className="feedback-popup">
             <div className="popup-inner">
                 <div className="popup-inner-header">
-                    <h2> Feedback Form Popup </h2>
+                    <h2>Course Feedback</h2>
                     <img src={'/images/ConnectEduLogo-bg.png'} alt="" />
                 </div>
                 <div className="popup-inner-item">
-                    <label htmlFor="question">Provide Feedback</label>
+                    <label htmlFor="feedback">Feedback</label>
                     <textarea
-                        id="question"
+                        id="feedback"
                         cols="30"
                         rows="16"
-                        placeholder='Question from student'
-                    >
-                    </textarea>
+                        value={feedback}
+                        onChange={handleFeedbackChange}
+                        disabled={!isAdmin}
+                    />
                 </div>
                 <div className='popupNav'>
-                    <button onClick={props.toggle} className='btn-cancel'>Cancel</button>
-                    <button onClick={handleFeedback} className='btn-confirm'>Confirm</button>
+                    <button onClick={toggle} className='btn-cancel'>Close</button>
+                    {isAdmin && (
+                        <button onClick={handleFeedbackSubmit} className='btn-confirm'>Confirm</button>
+                    )}
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default FeedbackPopup;

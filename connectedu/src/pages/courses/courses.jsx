@@ -7,8 +7,10 @@ import CourseCard from '../../components/courseCard/CourseCard';
 
 const Courses = ({ selectedCategory }) => {
   const { search } = useLocation();
+  const searchParams = new URLSearchParams(search);
+  const initialSearch = searchParams.get('search') || '';
   const [sort, setSort] = useState("sales");
-  const searchInput = useRef('');
+  const searchInput = useRef(initialSearch);
 
   // Build query string
   const buildQuery = () => {
@@ -46,7 +48,7 @@ const Courses = ({ selectedCategory }) => {
     // Show content with fading effect after a short delay (to allow CSS transition)
     const timeout = setTimeout(() => {
       setIsActive(true);
-      window.scrollTo(0, 0); 
+      window.scrollTo(0, 0);
     }, 100);
 
     // Clear timeout on component unmount to prevent memory leak
@@ -59,6 +61,11 @@ const Courses = ({ selectedCategory }) => {
     setSort(type);
     setOpen(false);
   };
+
+  useEffect(() => {
+    // Refetch data if URL search changes
+    refetch();
+  }, [search]);
 
   return (
     <div className={`courses ${isActive ? 'active' : ''}`}>
@@ -74,11 +81,9 @@ const Courses = ({ selectedCategory }) => {
         </p>
         <div className="menu">
           <div className="left">
-            <span>
-              Search Course
-            </span>
-            <input type="text" id="searchCourseInput" placeholder='Search Course' ref={searchInput} />
-            <button onClick={searchCourse}> Search </button>
+            <span>Search Course</span>
+            <input type="text" id="searchCourseInput" placeholder='Search Course' ref={searchInput} defaultValue={initialSearch} />
+            <button onClick={searchCourse}>Search</button>
           </div>
           <div className="right">
             <div className="sortBy">Sort By: </div>

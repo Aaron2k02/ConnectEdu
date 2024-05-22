@@ -1,23 +1,28 @@
-import React from 'react'
-import { useState } from "react";
+import React, { useReducer, useState } from 'react';
 import "./CreateCourseContent.scss";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { courseReducer, INITIAL_STATE } from '../../reducers/courseReducer';
 
 const CreateCourseContent = () => {
+    const [state, dispatch] = useReducer(courseReducer, INITIAL_STATE);
+    const location = useLocation();
+    const { courseState, files } = location.state;
 
     const [courseSections, setCourseSections] = useState([
-        { sectionTitle: '', videoTitle: '', videoUrl: '', videoDescription: '' }
+        { sectionTitle: '', videoTitle: '', videoUrl: '', videoDescription: '', videoDuration: '' }
     ]);
+
+    // console.log(courseSections);
 
     const handleInputChange = (e, index, field) => {
         const { value } = e.target;
         const updatedSections = [...courseSections];
         updatedSections[index][field] = value;
         setCourseSections(updatedSections);
-    }
+    };
 
     const handleInputAdd = () => {
-        setCourseSections([...courseSections, { sectionTitle: '', videoTitle: '', videoUrl: '', videoDescription: '' }]);
+        setCourseSections([...courseSections, { sectionTitle: '', videoTitle: '', videoUrl: '', videoDescription: '', videoDuration: '' }]);
     };
 
     const handleInputRemove = (index) => {
@@ -28,18 +33,15 @@ const CreateCourseContent = () => {
 
     let navigate = useNavigate();
 
-    // Update after course preview is done
     const routeNext = () => {
-        let path = '/create-course-preview';
-        navigate(path);
-    }
+        dispatch({ type: "ADD_COURSE_CONTENT", payload: { sections: courseSections } });
+        // console.log(...courseState.topics);
+        navigate('/create-course-preview', { state: { courseState, sectionState: state, files } });
+    };
 
     const routeBack = () => {
-        let path = '/createCourse';
-        navigate(path);
-    }
-
-    console.log(courseSections);
+        navigate('/createCourse', { state: { courseState, files } });
+    };
 
     return (
         <div className='createCourseContent'>
@@ -53,7 +55,6 @@ const CreateCourseContent = () => {
                                 <h3>Structure Your Course Content</h3>
 
                                 {courseSections.map((sectionItem, index) => (
-                                    
                                     <div className="sectionItem" key={index}>
 
                                         <div className="input-header">
@@ -78,7 +79,7 @@ const CreateCourseContent = () => {
                                                 onChange={e => handleInputChange(e, index, 'sectionTitle')}
                                                 required
                                             />
-                                        </div>  
+                                        </div>
 
                                         <div className='input-group'>
                                             <label htmlFor={`videoTitle${index}`}>Video Title</label>
@@ -89,7 +90,7 @@ const CreateCourseContent = () => {
                                                 onChange={e => handleInputChange(e, index, 'videoTitle')}
                                                 required
                                             />
-                                        </div> 
+                                        </div>
 
                                         <div className='input-group'>
                                             <label htmlFor={`videoUrl${index}`}>Video URL</label>
@@ -100,7 +101,7 @@ const CreateCourseContent = () => {
                                                 onChange={e => handleInputChange(e, index, 'videoUrl')}
                                                 required
                                             />
-                                        </div> 
+                                        </div>
 
                                         <div className='input-group'>
                                             <label htmlFor={`videoDescription${index}`}>Video Description</label>
@@ -111,8 +112,19 @@ const CreateCourseContent = () => {
                                                 placeholder='Brief Description to introduce your video'
                                                 required
                                             />
-                                        </div> 
-                                    
+                                        </div>
+
+                                        <div className='input-group'>
+                                            <label htmlFor={`videoDuration${index}`}>Video Duration (in minutes)</label>
+                                            <input
+                                                type='number'
+                                                id={`videoDuration${index}`}
+                                                value={sectionItem.videoDuration}
+                                                onChange={e => handleInputChange(e, index, 'videoDuration')}
+                                                required
+                                            />
+                                        </div>
+
                                         <div className="second-division">
                                             {courseSections.length - 1 === index && courseSections.length < 4 && (
                                                 <button
@@ -137,22 +149,22 @@ const CreateCourseContent = () => {
                         <div className="items">
                             <div className="item">
                                 <img src={'/images/fill-check-mark.png'} alt="" />
-                                <h3 htmlFor="">Course Information </h3>
+                                <h3>Course Information </h3>
                             </div>
                             <div className="item">
                                 <img src={'/images/fill-check-mark.png'} alt="" />
-                                <h3 htmlFor="">Course Content</h3>
+                                <h3>Course Content</h3>
                             </div>
                             <div className="item">
                                 <img src={'/images/empty-check-mark.png'} alt="" />
-                                <h3 htmlFor="">Course Preview</h3>
+                                <h3>Course Preview</h3>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default CreateCourseContent
+export default CreateCourseContent;
