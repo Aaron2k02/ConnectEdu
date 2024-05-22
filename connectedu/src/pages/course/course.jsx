@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import newRequest from '../../utils/newRequest';
 import SlideShow from '../../components/slideshow/SlideShow';
@@ -7,12 +7,6 @@ import PayButton from "../../components/PayButton/PayButton";
 import { reviewData } from '../../data/reviewData';
 import './course.scss';
 import ReviewItems from '../../components/reviewItems/ReviewItems';
-
-const cartItems = [
-  { id: 1, name: "Mobile App Development", price: 59.99, cartQuantity: 1, image: "https://i.imgur.com/2xH1X44.png", desc: "We will explore the world of web development" },
-];
-
-const cart = { cartItems };
 
 const Course = () => {
   const { id } = useParams();
@@ -121,8 +115,12 @@ const Course = () => {
               </div>
             ))}
           </div>
-          <PayButton className='payButton' cartItems={cart.cartItems} />
-          {/* <button>Print Certification</button> */}
+          {/* <PayButton className='payButton' courseId={id} courseData={courseQuery.data} /> */}
+          <Link to={`/paymentCheckout/${id}`}>
+            <button>
+              Enroll Course
+            </button>
+          </Link>
         </div>
       </div>
     </div>

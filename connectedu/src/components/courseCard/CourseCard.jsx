@@ -14,13 +14,13 @@ const CourseCard = ({ item }) => {
     });
 
     const handleReadMoreClick = (courseId) => {
-        const token = localStorage.getItem('token');
-        if (!token) {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        if (!currentUser) {
             // Redirect to login page
             navigate('/login');
         } else {
             // Navigate to course detail page
-            navigate(`/courses/${courseId}`);
+            navigate(`/course/${courseId}`);
         }
     };
 

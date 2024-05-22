@@ -34,7 +34,7 @@ app.use((err, req, res, next) => {
 
 
 // API End-point
-app.use("/api/stripe", stripeRoutes);
+// app.use("/api/stripe", stripeRoutes);
 app.use("/api/courses", courseRoutes);
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoutes);

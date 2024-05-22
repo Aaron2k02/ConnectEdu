@@ -30,7 +30,7 @@ const OrderSchema = new Schema({
     },
     // after proper payment this field will be updated 
     isCompleted: {
-        type: String,
+        type: Boolean,
         required: false,
         default: false,
     },

@@ -45,6 +45,7 @@ import ViewCourse from "./pages/viewCourse/ViewCourse";
 import StudentDashboard from "./pages/dashboard/StudentDashboard";
 import UserForm from "./pages/userForm/userForm";
 import EducatorRegister from "./pages/register/educatorsRegister";
+import Pay from './components/pay/Pay';
 
 function App() {
 
@@ -143,8 +144,8 @@ function App() {
           element: <ResetPassword />
         },
         {
-          path: '/paymentCheckout',
-          element: <PaymentCheckout />
+          path: '/paymentCheckout/:courseId',
+          element: <Pay />
         },
         {
           path: '/checkout-success',

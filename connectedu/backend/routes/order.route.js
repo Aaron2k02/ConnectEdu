@@ -1,17 +1,20 @@
 const express = require("express");
 const { verifyToken } = require("../middleware/jwt");
 const {
-    createOrder,
     getOrders,
-    getPurchasedCourses
+    getPurchasedCourses,
+    checkOutSession,
+    confirmCheckOutSession
 } = require("../controller/order.controller.js");
 
 const router = express.Router();
 
-router.post("/:courseId", verifyToken, createOrder);
-
 router.get("/", verifyToken, getOrders);
 
 router.get("/purchasedCourses", verifyToken, getPurchasedCourses);
+
+router.post("/create-checkout-session/:courseId", verifyToken, checkOutSession);
+
+router.put("/", verifyToken, confirmCheckOutSession);
 
 module.exports = router;
