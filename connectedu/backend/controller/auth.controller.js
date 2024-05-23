@@ -91,4 +91,34 @@ const updateUserProfile = async (req, res) => {
     }
 };
 
-module.exports = { register, login, logout, updateUserProfile };
+const changePassword = async (req, res, next) => {
+    try {
+        const { currentPassword, newPassword } = req.body;
+        const { userId } = req.params; // Ensure userId is captured from the URL
+
+        // Find the user by userId (assuming userId is the _id field in MongoDB)
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return next(createError(404, "User not found!"));
+        }
+
+        // Compare the current password with the user's stored password
+        const isCorrect = await bcrypt.compare(currentPassword, user.password);
+        if (!isCorrect) {
+            return next(createError(400, "Current password is incorrect!"));
+        }
+
+        // Hash the new password and save it
+        const hash = await bcrypt.hash(newPassword, 5);
+        user.password = hash;
+        await user.save();
+
+        res.status(200).send("Password changed successfully!");
+    } catch (err) {
+        console.error(err); // Log the error for debugging
+        return next(createError(500, "Something went wrong!"));
+    }
+};
+
+module.exports = { register, login, logout, updateUserProfile,changePassword };
