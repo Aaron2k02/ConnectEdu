@@ -10,8 +10,8 @@ const AccountSettings = () => {
     username: currentUser.username,
     email: currentUser.email,
     
-    fullname: currentUser.fullname,
-    phoneNo: currentUser.phoneNo,
+    fullname: currentUser.fullName,
+    phoneNo: currentUser.phoneNumber,
   })
  // const [message, setMessage] = useState("");
   let navigate = useNavigate();

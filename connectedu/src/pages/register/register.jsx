@@ -70,6 +70,7 @@ const Register = () => {
     } catch (err) {
       console.log(err);
     }
+
   };
 
   const onChange = (e) => {

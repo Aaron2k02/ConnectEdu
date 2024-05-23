@@ -94,17 +94,17 @@ const updateUserProfile = async (req, res) => {
 const updatePersonalInfo = async (req, res) => {
     try {
         const { userId } = req.params;
-        const { username, email, fullname, phoneNo } = req.body;
+        const { username, email, fullName, phoneNumber } = req.body;
 
        
-        if (!username || !email || !fullname || !phoneNo) {
+        if (!username || !email || !fullName || !phoneNumber) {
             return res.status(400).send("All fields are required!");
         }
 
        
         const userProfile = await User.findByIdAndUpdate(
             userId,
-            { username, email, fullname, phoneNo },
+            { username, email, fullName, phoneNumber },
             { new: true } // Return the updated document
         );
 
@@ -113,6 +113,7 @@ const updatePersonalInfo = async (req, res) => {
         }
 
         res.status(200).send("Profile updated successfully!");
+       
     } catch (err) {
         console.error(err); // Log the error for debugging
         res.status(500).send("Something went wrong!");

@@ -12,7 +12,12 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
-    age: {
+    fullName: {
+        type: String,
+        required: false,
+        unique: true
+    },
+    phoneNumber: {
         type: Number, // Changed from int to Number
         required: false,
     },
@@ -23,10 +28,6 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
-    },
-    description: {
-        type: String,
-        required: false
     },
     photoUrl: {
         type: String,
