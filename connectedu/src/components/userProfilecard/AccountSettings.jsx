@@ -1,15 +1,20 @@
 import React, { useState } from "react"
 import FormInput from "../../pages/register/featured/FormInput"
 import "./AccountSettings.scss"
+import { useNavigate } from 'react-router-dom';
+import newRequest from "../../utils/newRequest";
 
 const AccountSettings = () => {
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"))
   const [values, setValues] = useState({
-    username: "",
-    email: "",
-    password: "",
-    fullname: "",
-    phoneNo: "",
+    username: currentUser.username,
+    email: currentUser.email,
+    
+    fullname: currentUser.fullname,
+    phoneNo: currentUser.phoneNo,
   })
+ // const [message, setMessage] = useState("");
+  let navigate = useNavigate();
 
   const inputs = [
     {
@@ -50,14 +55,28 @@ const AccountSettings = () => {
     },
   ]
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your form submission logic here
-  }
+    const userId = currentUser._id;
 
-  const onChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value })
-  }
+    try {
+      await newRequest.put(`/auth/personal-info/${userId}`, {
+        username: values.username,
+        email: values.email,
+        fullname: values.fullname,
+        phoneNo: values.phoneNo,
+      });
+
+      navigate("/");
+
+    } catch (err) {
+      setMessage(err.response.data.message);
+    }
+  };
+
+  const onChange =(e)=>{
+    setValues({...values,[e.target.name]:e.target.value})
+  };
 
   return (
     <div className='accountSettings'>

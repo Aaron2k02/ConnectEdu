@@ -91,6 +91,34 @@ const updateUserProfile = async (req, res) => {
     }
 };
 
+const updatePersonalInfo = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const { username, email, fullname, phoneNo } = req.body;
+
+       
+        if (!username || !email || !fullname || !phoneNo) {
+            return res.status(400).send("All fields are required!");
+        }
+
+       
+        const userProfile = await User.findByIdAndUpdate(
+            userId,
+            { username, email, fullname, phoneNo },
+            { new: true } // Return the updated document
+        );
+
+        if (!userProfile) {
+            return res.status(404).send("Profile not found!");
+        }
+
+        res.status(200).send("Profile updated successfully!");
+    } catch (err) {
+        console.error(err); // Log the error for debugging
+        res.status(500).send("Something went wrong!");
+    }
+};
+
 const changePassword = async (req, res, next) => {
     try {
         const { currentPassword, newPassword } = req.body;
@@ -121,4 +149,4 @@ const changePassword = async (req, res, next) => {
     }
 };
 
-module.exports = { register, login, logout, updateUserProfile,changePassword };
+module.exports = { register, login, logout, updateUserProfile,changePassword ,updatePersonalInfo};
