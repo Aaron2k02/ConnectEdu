@@ -108,7 +108,7 @@ const Course = () => {
           </div>
           <div className="features">
             <h3>What you will learn from this course?</h3>
-            {course.topics.map((topic, index) => (
+            {course.topics && course.topics.map((topic, index) => (
               <div className="item" key={index}>
                 <img src="/images/greencheck.png" alt="" />
                 <span>{topic}</span>
