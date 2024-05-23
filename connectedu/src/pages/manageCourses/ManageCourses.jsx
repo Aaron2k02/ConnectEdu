@@ -26,14 +26,12 @@ const ManageCourses = () => {
 
     const coursesQuery = useQuery({
         queryKey: ["myCourses"],
-        queryFn: () => newRequest.get(`/courses?userId=${currentUser._id}`).then((res) => res.data),
+        queryFn: () => newRequest.get('/courses/myCourses').then((res) => res.data),
         enabled: !!currentUser._id,
     });
 
     const mutation = useMutation({
-        mutationFn: (id) => {
-            return newRequest.delete(`/courses/${id}`);
-        },
+        mutationFn: (id) => newRequest.delete(`/courses/${id}`),
         onSuccess: () => {
             queryClient.invalidateQueries(["myCourses"]);
         }

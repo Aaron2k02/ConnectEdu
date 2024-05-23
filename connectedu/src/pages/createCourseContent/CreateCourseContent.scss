@@ -85,22 +85,29 @@
                                     height: 100px;
                                 }
                             }
+                        }
 
-                           .second-division{
-                                display: flex;
-                                margin: 20px 0px;
-                                flex-direction: row-reverse;
+                        .second-division {
+                            display: flex;
+                            margin: 20px 0px;
+                            flex-direction: row-reverse;
 
-                                button{
-                                    &.add-btn {
-                                        background-color: green;
-                                        width: 200px;
-                                        height: 50px;
-                                    }
+                            button {
+                                &.add-btn {
+                                    background-color: green;
+                                    width: 200px;
+                                    height: 50px;
                                 }
-                           }
+
+                                &.start-button{
+                                    background-color: #BAD7E9;
+                                    color: #2B3467;
+                                    margin: auto;
+                                }
+                            }
                         }
                     }
+
                 }
 
                 .createCourseNav {

@@ -2,24 +2,30 @@ import React, { useReducer, useState, useEffect } from 'react';
 import "./CreateCoursePreview.scss";
 import { useNavigate, useLocation } from "react-router-dom";
 import ConfirmationPopup from '../../components/confirmationPopup/ConfirmationPopup';
-import { courseReducer, INITIAL_STATE } from '../../reducers/courseReducer'; // Ensure INITIAL_STATE is imported
+import { courseReducer, INITIAL_STATE } from '../../reducers/courseReducer';
 import upload from '../../utils/upload';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import newRequest from '../../utils/newRequest';
+import CourseSection from '../../components/courseSection/courseSection';
+import SlideShow from '../../components/slideshow/SlideShow';
 
 const CreateCoursePreview = () => {
     const [state, dispatch] = useReducer(courseReducer, INITIAL_STATE);
     const [seen, setSeen] = useState(false);
     const [uploading, setUploading] = useState(false);
-    const [courseThumbnails, setCourseThumbnails] = useState([]);
-
+    const [uploadComplete, setUploadComplete] = useState(false);
+    const [errorPopup, setErrorPopup] = useState(false); // State for error popup
     const location = useLocation();
-    const { courseState = state, sectionState, files } = location.state || {};
+    const { courseState = state, files = [] } = location.state || {};
+    const navigate = useNavigate();
+    const topicsArray = courseState.topics.map(topic => topic.coverage);
+    const queryClient = useQueryClient();
 
-    // useEffect(() => {
-    //     if (files && files.length > 0) {
-    //         handleUpload(files);
-    //     }
-    //     console.log(sectionState);
-    // }, [files]);
+    useEffect(() => {
+        if (courseState) {
+            dispatch({ type: 'SET_STATE', payload: courseState });
+        }
+    }, [courseState]);
 
     const handleUpload = async (files) => {
         setUploading(true);
@@ -30,37 +36,89 @@ const CreateCoursePreview = () => {
                     return url;
                 })
             );
-            setCourseThumbnails(thumbnails);
             dispatch({
                 type: "ADD_IMAGES",
-                payload: thumbnails
+                payload: { thumbnailUrl: [...thumbnails] }
             });
+            setUploadComplete(true); // Set upload complete
         } catch (err) {
             console.log(err);
         }
         setUploading(false);
     };
 
-    const togglePop = () => {
-        setSeen(!seen);
-        // if (!uploading) {
-        //     handleUpload(files);
-        // }
-        console.log(...courseState.topics);
-        console.log(files);
-        console.log(...sectionState.courseContent.sections);
+    useEffect(() => {
+        if (uploadComplete) {
+            setTimeout(() => {
+                const sectionsData = courseState.sections.map(section => ({
+                    title: section.sectionTitle,
+                    videoTitle: section.videoTitle,
+                    url: section.videoUrl,
+                    description: section.videoDescription,
+                    durationMinutes: section.videoDuration
+                }));
+
+                const courseData = {
+                    title: courseState.title,
+                    shortTitle: courseState.shortTitle,
+                    category: courseState.category,
+                    price: courseState.price,
+                    description: courseState.description,
+                    thumbnailUrl: state.thumbnailUrl,
+                    topics: topicsArray,
+                    courseDuration: courseState.courseDuration,
+                    sections: sectionsData
+                };
+                // Check if all required fields are present
+                if (checkRequiredFields(courseData)) {
+                    mutation.mutate(courseData); // Execute the mutation
+                } else {
+                    setErrorPopup(true); // Show error popup if required fields are missing
+                }
+            }, 2000); // Wait for 2 seconds before proceeding
+        }
+    }, [uploadComplete]);
+
+    const checkRequiredFields = (courseData) => {
+        // Check if all required fields are present
+        return (
+            courseData.title &&
+            courseData.shortTitle &&
+            courseData.category &&
+            courseData.price &&
+            courseData.description &&
+            courseData.courseDuration &&
+            courseData.sections.length > 0 &&
+            courseData.topics.length > 0
+        );
     };
 
-    let navigate = useNavigate();
+    const mutation = useMutation({
+        mutationFn: (course) => newRequest.post('/courses', course),
+        onSuccess: () => {
+            queryClient.invalidateQueries(["myCourses"]);
+            navigate('/myCourses');
+        },
+        onError: (error) => {
+            console.error("Error creating course:", error.response?.data || error.message);
+        }
+    });
+
+    const togglePop = async () => {
+        console.log(errorPopup)
+        setSeen(false);
+        if (!uploading) {
+            await handleUpload(files);
+        } else {
+            console.log("Currently uploading files, please wait.");
+        }
+    };
 
     const routeBack = () => {
-        navigate('/create-course-content', { state: { courseState, sectionState, files } });
-        console.log(sectionState);
+        navigate('/create-course-content', { state: { courseState: state, files } });
     };
 
-    const courseTopics = [...courseState.topics];
-
-    const courseContents = [...sectionState.courseContent.sections];
+    const fileUrls = files.map(file => URL.createObjectURL(file));
 
     return (
         <div className='createCourseContent'>
@@ -68,21 +126,25 @@ const CreateCoursePreview = () => {
                 <h1> Review Course Content</h1>
                 <div className="sections">
                     <div className="left">
-                        <div className="courseImage">
-                            <img src={"/images/ConnectEduLogo-bg.png"} alt="" />
-                        </div>
+                        {files.length === 0 ? (
+                            <div className="courseImage">
+                                <img src={"/images/ConnectEduLogo-bg.png"} alt="ConnectEdu Logo" />
+                            </div>
+                        ) : (
+                            <SlideShow data={fileUrls} className='slider' />
+                        )}
                         <h3>{courseState.title}</h3>
                         <div className="stars">
-                            <img src="/images/star.png" alt="" />
-                            <img src="/images/star.png" alt="" />
-                            <img src="/images/star.png" alt="" />
-                            <img src="/images/star.png" alt="" />
-                            <img src="/images/star.png" alt="" />
+                            <img src="/images/star.png" alt="Star" />
+                            <img src="/images/star.png" alt="Star" />
+                            <img src="/images/star.png" alt="Star" />
+                            <img src="/images/star.png" alt="Star" />
+                            <img src="/images/star.png" alt="Star" />
                             <span> 5 </span>
                         </div>
                         <div className="details">
                             <div className="item">
-                                <img src="/images/clock.png" alt="" />
+                                <img src="/images/clock.png" alt="Clock" />
                                 <span>{courseState.courseDuration} Hours</span>
                             </div>
                             <div className="price">
@@ -95,10 +157,10 @@ const CreateCoursePreview = () => {
                         </div>
                         <div className="features">
                             <h2>What you will learn from this course?</h2>
-                            {courseTopics && courseTopics.map((topic, index) => (
+                            {courseState.topics && courseState.topics.map((topic, index) => (
                                 <div className="item" key={index}>
-                                    <img src="/images/greencheck.png" alt="" />
-                                    <p>{topic.coverage}</p> {/* Adjust this line as needed */}
+                                    <img src="/images/greencheck.png" alt="Check" />
+                                    <p>{topic.coverage}</p>
                                 </div>
                             ))}
                         </div>
@@ -106,41 +168,24 @@ const CreateCoursePreview = () => {
                             <h2>Course Description</h2>
                             <p>{courseState.description}</p>
                         </div>
-                        <div className="sections">
-                            <h2>Course content</h2>
-                            {courseContents && courseContents.map((section, index) => (
-                                <div className="section" key={index}>
-                                    <h3>{section.sectionTitle}</h3>
-                                    <div className="content">
-                                        <div className="item">
-                                            <span>{section.videoTitle}</span>
-                                            <span>{section.videoDescription}</span>
-                                            <span>{section.videoDuration}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                        <CourseSection sectionState={courseState.sections} />
                         <div className="createCourseNav">
                             <button onClick={routeBack}> Back </button>
-                            <button onClick={togglePop}> Publish </button>
-                            <button type="button" onClick={() => handleUpload(files)}>
-                                {uploading ? "Uploading..." : "Upload"}
-                            </button>
+                            <button onClick={togglePop}> {uploading ? "Publishing..." : "Publish"} </button>
                         </div>
                     </div>
                     <div className="right">
                         <div className="items">
                             <div className="item">
-                                <img src={'/images/fill-check-mark.png'} alt="" />
+                                <img src={'/images/fill-check-mark.png'} alt="Check mark" />
                                 <h3>Course Information </h3>
                             </div>
                             <div className="item">
-                                <img src={'/images/fill-check-mark.png'} alt="" />
+                                <img src={'/images/fill-check-mark.png'} alt="Check mark" />
                                 <h3>Course Content</h3>
                             </div>
                             <div className="item">
-                                <img src={'/images/fill-check-mark.png'} alt="" />
+                                <img src={'/images/fill-check-mark.png'} alt="Check mark" />
                                 <h3>Course Preview</h3>
                             </div>
                         </div>
@@ -148,6 +193,9 @@ const CreateCoursePreview = () => {
                 </div>
             </div>
             {seen ? <ConfirmationPopup toggle={togglePop} /> : null}
+            {errorPopup && (
+                <ConfirmationPopup toggle={togglePop} />
+            )}
         </div>
     );
 };

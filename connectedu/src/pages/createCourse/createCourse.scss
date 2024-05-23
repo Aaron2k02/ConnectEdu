@@ -37,6 +37,38 @@
                     display: flex;
                     align-items: center;
                     gap: 20px;
+                    margin: 15px 0px;
+
+                    img{
+                        height: 100px;
+                        width: 100px;
+                    }
+
+                    button {
+                        height: 30px;
+                        font-size: 12px;
+                        font-weight: 400;
+                        background: transparent;
+                        color: red;
+                        border: 1px solid red;
+                        display: flex;
+                        align-items: center;
+                        gap: 20px;
+                    }
+
+                    .imagesInputs{
+
+                        .thumbnails{
+                            display: flex;
+                            flex-direction: column;
+                            gap: 45px;
+
+                            .thumbnail{
+                                display: flex;
+                                gap: 20px;
+                            }
+                        }
+                    }
                 }
 
                 button{

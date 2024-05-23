@@ -4,6 +4,7 @@ const {
     deleteCourse,
     getCourse,
     getCourses,
+    getMyCourses,
     getCourseSections,
     updateCourseFeedback
 } = require("../controller/course.controller.js");
@@ -12,6 +13,8 @@ const { verifyToken } = require("../middleware/jwt.js");
 const router = express.Router();
 
 router.post("/", verifyToken, createCourse);
+
+router.get('/myCourses', verifyToken, getMyCourses);  // Educator-specific courses
 
 router.delete("/:id", verifyToken, deleteCourse);
 

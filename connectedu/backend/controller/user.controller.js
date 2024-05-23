@@ -6,7 +6,6 @@ const deleteUser = async (req, res) => {
         // Find the user by ID
         const user = await User.findById(req.params.id);
         
-
         if (!user) {
             return next(createError(404, "User not found!"));
         }

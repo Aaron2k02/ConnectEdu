@@ -174,11 +174,29 @@ const updateCourseFeedback = async (req, res, next) => {
     }
 };
 
+const getMyCourses = async (req, res, next) => {
+    try {
+        const educatorId = req.userId;
+
+        // Find courses created by the authenticated educator
+        const courses = await Course.find({ educatorId });
+
+        if (courses.length === 0) {
+            return next(createError(404, "No courses found for this educator."));
+        }
+
+        res.status(200).json(courses);
+    } catch (err) {
+        next(err);
+    }
+};
+
 module.exports = {
     createCourse,
     deleteCourse,
     getCourse,
     getCourses,
+    getMyCourses,  // Add this line
     getCourseSections,
-    updateCourseFeedback // Add this line
+    updateCourseFeedback
 };
