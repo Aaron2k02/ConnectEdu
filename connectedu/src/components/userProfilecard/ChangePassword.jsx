@@ -66,6 +66,7 @@ const ChangePassword = () => {
             {inputs.map((input)=>(
               <FormInput key={input.id}{...input} value={values[input.name]} onChange={onChange} />
             ))}
+             {message && <p>{message}</p>}
             <button>Save changes</button>
           </form>
         </div>
