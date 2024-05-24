@@ -8,13 +8,15 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import newRequest from '../../utils/newRequest';
 import CourseSection from '../../components/courseSection/courseSection';
 import SlideShow from '../../components/slideshow/SlideShow';
+import CreateCourseErrorPopop from '../../components/createCourseErrorPopup/createCourseErrorPopop';
+
 
 const CreateCoursePreview = () => {
     const [state, dispatch] = useReducer(courseReducer, INITIAL_STATE);
     const [seen, setSeen] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [uploadComplete, setUploadComplete] = useState(false);
-    const [errorPopup, setErrorPopup] = useState(false); // State for error popup
+    const [error, setError] = useState(null); // State for error message
     const location = useLocation();
     const { courseState = state, files = [] } = location.state || {};
     const navigate = useNavigate();
@@ -38,13 +40,35 @@ const CreateCoursePreview = () => {
             );
             dispatch({
                 type: "ADD_IMAGES",
-                payload: { thumbnailUrl: [...thumbnails] }
+                payload: { thumbnailUrl: state.thumbnailUrl.concat(thumbnails) }
             });
             setUploadComplete(true); // Set upload complete
         } catch (err) {
             console.log(err);
         }
         setUploading(false);
+    };
+
+    const validateCourse = () => {
+        const requiredFields = ['title', 'shortTitle', 'category', 'price', 'description', 'courseDuration'];
+        const missingFields = requiredFields.filter(field => !courseState[field]);
+
+        const invalidSections = courseState.sections.filter(section =>
+            !section.sectionTitle || !section.videoTitle || !section.videoUrl || !section.videoDescription || !section.videoDuration
+        );
+
+        if (missingFields.length > 0 || invalidSections.length > 0) {
+            let errorMsg = "Please fill in the required fields:\n";
+            if (missingFields.length > 0) {
+                errorMsg += `Course Info: ${missingFields.join(', ')}\n`;
+            }
+            if (invalidSections.length > 0) {
+                errorMsg += "Sections: Missing required fields in one or more sections.";
+            }
+            setError(errorMsg);
+            return false;
+        }
+        return true;
     };
 
     useEffect(() => {
@@ -59,6 +83,7 @@ const CreateCoursePreview = () => {
                 }));
 
                 const courseData = {
+                    _id: courseState._id === null ? null : courseState._id,
                     title: courseState.title,
                     shortTitle: courseState.shortTitle,
                     category: courseState.category,
@@ -71,12 +96,13 @@ const CreateCoursePreview = () => {
                 };
                 // Check if all required fields are present
                 if (checkRequiredFields(courseData)) {
-                    mutation.mutate(courseData); // Execute the mutation
+                    mutation.mutate(courseData); // Execute the mutation to create course
                 } else {
                     setErrorPopup(true); // Show error popup if required fields are missing
                 }
             }, 2000); // Wait for 2 seconds before proceeding
         }
+        console.log(state.thumbnailUrl);
     }, [uploadComplete]);
 
     const checkRequiredFields = (courseData) => {
@@ -105,20 +131,25 @@ const CreateCoursePreview = () => {
     });
 
     const togglePop = async () => {
-        console.log(errorPopup)
-        setSeen(false);
+        // setSeen(false);
         if (!uploading) {
-            await handleUpload(files);
+            if (validateCourse()) {
+                await handleUpload(files);
+            }
         } else {
             console.log("Currently uploading files, please wait.");
         }
     };
 
     const routeBack = () => {
-        navigate('/create-course-content', { state: { courseState: state, files } });
+        // navigate('/create-course-content', { state: { courseState: state, files } }); 
+        // console.log(state.thumbnailUrl);
+        console.log(courseState._id);
     };
 
     const fileUrls = files.map(file => URL.createObjectURL(file));
+    // Combine existing thumbnails and uploaded images
+    const allThumbnails = state.thumbnailUrl.concat(fileUrls); 
 
     return (
         <div className='createCourseContent'>
@@ -126,14 +157,14 @@ const CreateCoursePreview = () => {
                 <h1> Review Course Content</h1>
                 <div className="sections">
                     <div className="left">
-                        {files.length === 0 ? (
+                        {allThumbnails.length === 0 ? (
                             <div className="courseImage">
                                 <img src={"/images/ConnectEduLogo-bg.png"} alt="ConnectEdu Logo" />
                             </div>
                         ) : (
-                            <SlideShow data={fileUrls} className='slider' />
+                                <SlideShow data={allThumbnails} className='slider' />
                         )}
-                        <h3>{courseState.title}</h3>
+                        <h3>{courseState.title || "No title provided"}</h3>
                         <div className="stars">
                             <img src="/images/star.png" alt="Star" />
                             <img src="/images/star.png" alt="Star" />
@@ -145,28 +176,32 @@ const CreateCoursePreview = () => {
                         <div className="details">
                             <div className="item">
                                 <img src="/images/clock.png" alt="Clock" />
-                                <span>{courseState.courseDuration} Hours</span>
+                                <span>{courseState.courseDuration ? `${courseState.courseDuration} Hours` : "No duration provided"}</span>
                             </div>
                             <div className="price">
-                                <h2>${courseState.price} </h2>
+                                <h2>${courseState.price || "No price provided"} </h2>
                             </div>
                         </div>
                         <div className="courseDescription">
                             <h2>About this course</h2>
-                            <p>{courseState.shortTitle}</p>
+                            <p>{courseState.shortTitle || "No short title provided"}</p>
                         </div>
                         <div className="features">
                             <h2>What you will learn from this course?</h2>
-                            {courseState.topics && courseState.topics.map((topic, index) => (
-                                <div className="item" key={index}>
-                                    <img src="/images/greencheck.png" alt="Check" />
-                                    <p>{topic.coverage}</p>
-                                </div>
-                            ))}
+                            {courseState.topics.length > 0 ? (
+                                courseState.topics.map((topic, index) => (
+                                    <div className="item" key={index}>
+                                        <img src="/images/greencheck.png" alt="" />
+                                        <p>{topic.coverage || "No topic coverage provided"}</p>
+                                    </div>
+                                ))
+                            ) : (
+                                <p>No topics provided</p>
+                            )}
                         </div>
                         <div className="courseDescription">
                             <h2>Course Description</h2>
-                            <p>{courseState.description}</p>
+                            <p>{courseState.description || "No description provided"}</p>
                         </div>
                         <CourseSection sectionState={courseState.sections} />
                         <div className="createCourseNav">
@@ -192,9 +227,9 @@ const CreateCoursePreview = () => {
                     </div>
                 </div>
             </div>
-            {seen ? <ConfirmationPopup toggle={togglePop} /> : null}
-            {errorPopup && (
-                <ConfirmationPopup toggle={togglePop} />
+            {seen && <ConfirmationPopup message={error} toggle={() => setSeen(false)} />}
+            {error && (
+                <CreateCourseErrorPopop message={error} toggle={() => setError(null)} />
             )}
         </div>
     );

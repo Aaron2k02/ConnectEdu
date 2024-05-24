@@ -6,7 +6,7 @@ import { courseReducer, INITIAL_STATE } from '../../reducers/courseReducer';
 const CreateCourseContent = () => {
     const [state, dispatch] = useReducer(courseReducer, INITIAL_STATE);
     const location = useLocation();
-    const { courseState, files } = location.state || {};
+    const { courseState, files, isCreateCourse } = location.state || {};
     const navigate = useNavigate();
 
     // Initialize sections if courseState is provided
@@ -38,8 +38,13 @@ const CreateCourseContent = () => {
     };
 
     const routeBack = () => {
-        navigate('/createCourse', { state: { courseState: state, files } });
-        // console.log(files);
+        if (isCreateCourse){
+            navigate('/createCourse', { state: { courseState: state, files } });
+            // console.log(files);
+        } else {
+            // console.log(courseState._id);
+            navigate(`/updateCourse/${courseState._id}`, { state: { courseState: state, files } });
+        }
     };
 
     return (

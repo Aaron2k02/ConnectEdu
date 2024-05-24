@@ -75,7 +75,7 @@ const ManageCourses = () => {
                                             <img className="image" src={course.thumbnailUrl[0]} alt="" />
                                         </td>
                                         <td className='courseTitle'>
-                                            {course.title.length > 30 ? course.title.substring(0, 20) + '...' : course.title}
+                                            {course.title.length > 20 ? course.title.substring(0, 20) + '...' : course.title}
                                         </td>
                                         <td>RM {course.price}</td>
                                         <td>{course.totalSales}</td>
@@ -86,7 +86,7 @@ const ManageCourses = () => {
                                             <button className='feedback' onClick={() => togglePop(course)}>Feedback</button>
                                         </td>
                                         <td>
-                                            <button className='update'>Update</button>
+                                            <button className='update' onClick={() => navigate(`/updateCourse/${course._id}`)}>Update</button>
                                         </td>
                                         <td>
                                             <button className='delete' onClick={() => handleDelete(course._id)}>Delete</button>

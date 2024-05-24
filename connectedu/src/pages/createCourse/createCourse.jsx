@@ -7,6 +7,7 @@ const CreateCourse = () => {
   const [state, dispatch] = useReducer(courseReducer, INITIAL_STATE);
   const navigate = useNavigate();
   const location = useLocation();
+  const [isCreateCourse, SetIsCreateCourse] = useState(true);
   const { courseState, files: prevFiles = [] } = location.state || {};
 
   const [files, setFiles] = useState(Array.from(prevFiles));
@@ -57,11 +58,12 @@ const CreateCourse = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/create-course-content', { state: { courseState: state, files } });
+    navigate('/create-course-content', { state: { courseState: state, files, isCreateCourse} });
   };
 
   const handleCancel = () => {
-    console.log(files);
+    console.log(courseState);
+    // navigate('/manageCourses');
   };
 
   return (

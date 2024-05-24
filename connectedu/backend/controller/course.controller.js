@@ -48,6 +48,83 @@ const createCourse = async (req, res, next) => {
     }
 };
 
+const manageCourse = async (req, res, next) => {
+    try {
+        // Find the user's role by ID
+        const userRole = await Role.findOne({ roleId: req.roleId });
+
+        if (userRole.name !== "Educator") {
+            return next(createError(403, "You are not authorized to create or update a course."));
+        }
+
+        const { sections, ...courseData } = req.body;
+
+        // Check if courseId is provided in the request body
+        if (courseData._id) {
+            // Update existing course
+            const course = await Course.findById(courseData._id);
+
+            if (!course) {
+                return next(createError(404, "Course not found!"));
+            }
+
+            // Check if the educatorId matches the userId from the token
+            if (course.educatorId.toString() !== req.userId) {
+                return next(createError(403, "You can update only your course!"));
+            }
+
+            // Update course information
+            Object.assign(course, courseData);
+            const updatedCourse = await course.save();
+
+            if (sections && sections.length > 0) {
+                // Delete old sections
+                await Section.deleteMany({ courseId: course._id });
+
+                // Create new sections
+                const sectionPromises = sections.map(section => {
+                    return new Section({
+                        ...section,
+                        courseId: course._id,
+                    }).save();
+                });
+
+                await Promise.all(sectionPromises);
+            }
+
+            res.status(200).json(updatedCourse);
+        } else {
+            // Create new course
+            const newCourse = new Course({
+                educatorId: req.userId,
+                ...courseData,
+            });
+
+            try {
+                const savedCourse = await newCourse.save();
+
+                if (sections && sections.length > 0) {
+                    const sectionPromises = sections.map(section => {
+                        return new Section({
+                            ...section,
+                            courseId: savedCourse._id,
+                        }).save();
+                    });
+
+                    await Promise.all(sectionPromises);
+                }
+
+                res.status(201).json(savedCourse);
+            } catch (err) {
+                next(err);
+            }
+        }
+
+    } catch (err) {
+        next(err);
+    }
+};
+
 const deleteCourse = async (req, res, next) => {
     // Implement delete course logic
     try {
@@ -108,7 +185,10 @@ const getCourses = async (req, res, next) => {
         // spread the object to return the respective results only if there is input from end-user
         ...(query.category && {category: query.category}),
         //  $option: "i" remove case sensitive search
-        ...(query.search && {title: { $regex: query.search, $options: "i" }}),
+        ...(query.search && { title: { $regex: query.search, $options: "i" } }),
+        
+        // filter for approved courses only
+        isApproved: true
     }
     
     try {
@@ -191,12 +271,61 @@ const getMyCourses = async (req, res, next) => {
     }
 };
 
+const updateCourse = async (req, res, next) => {
+    try {
+        const courseId = req.params.id;
+        const userRole = await Role.findOne({ roleId: req.roleId });
+
+        if (userRole.name !== "Educator") {
+            return next(createError(403, "You are not authorized to update this course."));
+        }
+
+        const course = await Course.findById(courseId);
+
+        if (!course) {
+            return next(createError(404, "Course not found!"));
+        }
+
+        // Check if the educatorId matches the userId from the token
+        if (course.educatorId.toString() !== req.userId) {
+            return next(createError(403, "You can update only your course!"));
+        }
+
+        const { sections, ...courseData } = req.body;
+
+        // Update course information
+        Object.assign(course, courseData);
+        const updatedCourse = await course.save();
+
+        if (sections && sections.length > 0) {
+            // Delete old sections
+            await Section.deleteMany({ courseId: course._id });
+
+            // Create new sections
+            const sectionPromises = sections.map(section => {
+                return new Section({
+                    ...section,
+                    courseId: course._id,
+                }).save();
+            });
+
+            await Promise.all(sectionPromises);
+        }
+
+        res.status(200).json(updatedCourse);
+    } catch (err) {
+        next(err);
+    }
+};
+
 module.exports = {
+    manageCourse,
     createCourse,
     deleteCourse,
     getCourse,
     getCourses,
-    getMyCourses,  // Add this line
+    getMyCourses,
     getCourseSections,
-    updateCourseFeedback
+    updateCourseFeedback,
+    updateCourse, // Add this line
 };

@@ -1,6 +1,7 @@
 const express = require("express");
 const {
     createCourse,
+    manageCourse,
     deleteCourse,
     getCourse,
     getCourses,
@@ -12,7 +13,9 @@ const { verifyToken } = require("../middleware/jwt.js");
 
 const router = express.Router();
 
-router.post("/", verifyToken, createCourse);
+// router.post("/", verifyToken, createCourse);
+
+router.post("/", verifyToken, manageCourse);
 
 router.get('/myCourses', verifyToken, getMyCourses);  // Educator-specific courses
 

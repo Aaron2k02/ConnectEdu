@@ -50,6 +50,7 @@ import StudentDashboard from "./pages/dashboard/StudentDashboard";
 import UserForm from "./pages/userForm/userForm";
 import EducatorRegister from "./pages/register/educatorsRegister";
 import Pay from './components/pay/Pay';
+import UpdateCourseInfo from './pages/updateCourse/UpdateCourseInfo';
 
 function App() {
 
@@ -166,6 +167,10 @@ function App() {
         {
           path: '/myCourses',
           element: <MyCourses />
+        },
+        {
+          path: '/updateCourse/:courseId',
+          element: <UpdateCourseInfo />
         },
         {
           path: '/viewCourse/:courseId',

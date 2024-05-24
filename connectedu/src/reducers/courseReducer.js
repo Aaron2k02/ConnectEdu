@@ -2,7 +2,7 @@
 export const INITIAL_STATE = {
     userId: JSON.parse(localStorage.getItem("currentUser"))?._id,
     title: "",
-    category: "UI UX Design",
+    category: "",
     thumbnailUrl: [],
     description: "",
     shortTitle: "",
@@ -63,6 +63,11 @@ export const courseReducer = (state, action) => {
             return {
                 ...state,
                 ...action.payload
+            };
+        case "SET_THUMBNAIL_URL":
+            return {
+                ...state,
+                thumbnailUrl: action.payload,
             };
         default:
             return state;
