@@ -14,7 +14,7 @@ const userSchema = new Schema({
     },
     country: {
         type: String,
-        required: true,
+        required: false,
     },
     age: {
         type: Number, // Changed from int to Number
@@ -23,7 +23,7 @@ const userSchema = new Schema({
     roleId: {
         type: Number,
         ref: 'Role',
-        default: 1 // Default to 'user' role
+        // default: 1 // Default to 'user' role
     },
     password: {
         type: String,
@@ -38,6 +38,11 @@ const userSchema = new Schema({
         required: false,
         default: null
     }, 
+    educatorApplication: {
+        type: Boolean,
+        required: false,
+        default: false,
+    },
     totalSales: {
         type: Number,
         required: false,

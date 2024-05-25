@@ -70,6 +70,7 @@ const logout = (req, res) => {
 };
 
 const updateUserProfile = async (req, res) => {
+    
     try {
         const { userId } = req.params;
         const { skills, qualifications, professionalExperience, educationalBackground } = req.body;

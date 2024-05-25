@@ -47,7 +47,7 @@ import CreateCourseContent from "./pages/createCourseContent/CreateCourseContent
 import ManageCourses from "./pages/manageCourses/ManageCourses";
 import ViewCourse from "./pages/viewCourse/ViewCourse";
 import StudentDashboard from "./pages/dashboard/StudentDashboard";
-import UserForm from "./pages/userForm/userForm";
+import UserForm from "./pages/userForm/UserForm";
 import EducatorRegister from "./pages/register/educatorsRegister";
 import Pay from './components/pay/Pay';
 import UpdateCourseInfo from './pages/updateCourse/UpdateCourseInfo';
@@ -193,7 +193,7 @@ function App() {
           element:<StudentDashboard/>
         },
         {
-          path: '/userForm',
+          path: '/userForm/:userId',
           element: <UserForm />
         },
         {

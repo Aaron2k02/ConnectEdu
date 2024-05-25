@@ -175,7 +175,7 @@ const getCourse = async (req, res, next) => {
     }
 };
 
-const getCourses = async (req, res, next) => {
+const getApprovedCourses = async (req, res, next) => {
 
     const query = req.query;
 
@@ -209,6 +209,9 @@ const getCourseSections = async (req, res, next) => {
     try {
         const courseId = req.params.id;
 
+        const userRole = await Role.findOne({ roleId: req.roleId });
+
+        if (userRole.name !== "Admin"){
         // Ensure the user has purchased the course
         const order = await Order.findOne({
             courseId: courseId,
@@ -218,8 +221,8 @@ const getCourseSections = async (req, res, next) => {
 
         if (!order) {
             return next(createError(403, "You have not purchased this course."));
+            }
         }
-
         // Find the sections associated with the course
         const sections = await Section.find({ courseId });
 
@@ -236,11 +239,13 @@ const updateCourseFeedback = async (req, res, next) => {
 
         // Ensure the user is an admin
         const userRole = await Role.findOne({ roleId: req.roleId });
+
         if (userRole.name !== "Admin") {
             return next(createError(403, "You are not authorized to provide feedback."));
         }
 
         const course = await Course.findById(courseId);
+        
         if (!course) {
             return next(createError(404, "Course not found!"));
         }
@@ -260,9 +265,26 @@ const getMyCourses = async (req, res, next) => {
 
         // Find courses created by the authenticated educator
         const courses = await Course.find({ educatorId });
+        
+        res.status(200).json(courses);
+    } catch (err) {
+        next(err);
+    }
+};
+
+const getCourses = async (req, res, next) => {
+    try {
+
+        const userRole = await Role.findOne({ roleId: req.roleId });
+
+        if (userRole.name !== "Admin") {
+            return next(createError(403, "You are not authorized to get this information."));
+        }
+
+        const courses = await Course.find().populate('educatorId');
 
         if (courses.length === 0) {
-            return next(createError(404, "No courses found for this educator."));
+            return next(createError(404, "No courses found."));
         }
 
         res.status(200).json(courses);
@@ -318,14 +340,57 @@ const updateCourse = async (req, res, next) => {
     }
 };
 
+const getCourseCounts = async (req, res, next) => {
+    try {
+
+        const userRole = await Role.findOne({ roleId: req.roleId });
+
+        if (userRole.name !== "Admin") {
+            return next(createError(403, "You are not authorized to get this information."));
+        }
+
+        const approvedCourses = await Course.countDocuments({ isApproved: true });
+        const pendingCourses = await Course.countDocuments({ isApproved: false });
+
+        res.status(200).json({
+            approvedCourses,
+            pendingCourses
+        });
+    } catch (err) {
+        next(err);
+    }
+};
+
+const courseApproval = async (req, res, next) => {
+    try {
+
+        const userRole = await Role.findOne({ roleId: req.roleId });
+
+        if (userRole.name !== "Admin") {
+            return next(createError(403, "You are not authorized to perform this action."));
+        }
+
+        const { courseId, Approval } = req.body;
+
+        await Course.findByIdAndUpdate(courseId, { isApproved: Approval });
+
+        res.status(200).send("Course approved successfully");
+    } catch (err) {
+        next(err);
+    }
+};
+
 module.exports = {
     manageCourse,
     createCourse,
     deleteCourse,
     getCourse,
+    getApprovedCourses,
     getCourses,
     getMyCourses,
     getCourseSections,
     updateCourseFeedback,
-    updateCourse, // Add this line
+    updateCourse, 
+    getCourseCounts,
+    courseApproval
 };

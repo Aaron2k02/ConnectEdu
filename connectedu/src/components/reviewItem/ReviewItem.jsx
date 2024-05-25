@@ -4,29 +4,26 @@ import { useQuery } from '@tanstack/react-query';
 import newRequest from '../../utils/newRequest';
 
 const ReviewItem = ({ review }) => {
-
     const reviewQuery = useQuery({
         queryKey: ["reviewUser", review._id],
         queryFn: () => newRequest.get(`/users/${review.userId}`).then((res) => res.data),
         enabled: !!review._id,
     });
 
-    // reviewsQuery.data 
-
     return (
         <div className="reviewItem">
             <div className="container">
-                {reviewQuery.isFetching ? "loading" :
-                    reviewQuery.error ? "Error has occured" :
-                       <div className="user">
+                {reviewQuery.isFetching ? "Loading..." :
+                    reviewQuery.error ? "Error has occurred" :
+                        <div className="user">
                             <img className="pp" src={reviewQuery.data.photoUrl || '/images/noavatar.png'} alt="" />
-                    <div className="info">
-                        <span>{reviewQuery.data.username}</span>
-                        <div className="country">
-                            <span>{reviewQuery.data.country}</span>
-                        </div>
-                    </div>
-                </div>}
+                            <div className="info">
+                                <span>{reviewQuery.data.username}</span>
+                                <div className="country">
+                                    <span>{reviewQuery.data.country}</span>
+                                </div>
+                            </div>
+                        </div>}
                 <div className="stars">
                     {Array.from({ length: review.rating }, (_, index) => (
                         <img key={index} src="/images/star.png" alt="" />
@@ -41,9 +38,7 @@ const ReviewItem = ({ review }) => {
                     <img src="/images/dislike.png" alt="" />
                     <span>No</span>
                 </div>
-                <hr />
             </div>
-            
         </div>
     );
 };
