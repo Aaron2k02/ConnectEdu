@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 
-const stripeRoutes = require("./routes/stripe");
 const courseRoutes = require("./routes/course.route.js");
 const authRoute = require("./routes/auth.route.js");
 const userRoutes = require("./routes/user.route.js");

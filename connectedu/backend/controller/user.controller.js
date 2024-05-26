@@ -55,12 +55,6 @@ const getUsers = async (req, res, next) => {
     }
 };
 
-// const manageUser = async (req,res) =>{
-//     try{
-        
-//     }
-// }
-
 const getUserCounts = async (req, res, next) => {
     try {
         
