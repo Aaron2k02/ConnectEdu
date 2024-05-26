@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Dashboard.scss';
 import newRequest from '../../utils/newRequest';
 import { useQuery } from '@tanstack/react-query';
@@ -14,10 +14,8 @@ const StatCard = ({ icon, label, count }) => (
   </div>
 );
 
-const currentUser = getCurrentUser();
-
 const fetchUserCounts = async () => {
-  const response = await newRequest.get('/users');
+  const response = await newRequest.get('/users/counts');
   return response.data;
 };
 
@@ -27,6 +25,15 @@ const fetchCourseCounts = async () => {
 };
 
 const Dashboard = () => {
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isLoadingCurrentUser, setIsLoadingCurrentUser] = useState(true);
+
+  useEffect(() => {
+    const user = getCurrentUser();
+    setCurrentUser(user);
+    setIsLoadingCurrentUser(false);
+  }, []);
+
   const {
     data: userCounts,
     error: userError,
@@ -45,7 +52,7 @@ const Dashboard = () => {
     queryFn: fetchCourseCounts,
   });
 
-  if (userLoading || courseLoading) return <div>Loading...</div>;
+  if (userLoading || courseLoading || isLoadingCurrentUser) return <div>Loading...</div>;
   if (userError || courseError) return <div>Error loading data</div>;
 
   const icons = {
@@ -66,7 +73,7 @@ const Dashboard = () => {
         <StatCard icon={icons.pending} label="Pending Courses" count={courseCounts.pendingCourses} />
         <StatCard icon={icons.application} label="Pending Applications" count={userCounts.pendingApplications} />
       </div>
-      <img src={'/images/ConnectEduLogo-bg.png'} alt="" />
+      <img src={'/images/ConnectEduLogo-bg.png'} alt="ConnectEdu Logo" />
     </div>
   );
 };
