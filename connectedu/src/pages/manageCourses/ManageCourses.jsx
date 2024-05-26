@@ -83,7 +83,9 @@ const ManageCourses = () => {
                                             <td>RM {course.price}</td>
                                             <td>{course.totalSales}</td>
                                             <td>
-                                                {course.isApproved ? "Approved" : "Pending"}
+                                                <span className={course.isApproved ? "Approved" : "Pending"}>
+                                                    {course.isApproved ? "Approved" : "Pending"}
+                                                </span>
                                             </td>
                                             <td>
                                                 <button className='feedback' onClick={() => togglePop(course)}>Feedback</button>

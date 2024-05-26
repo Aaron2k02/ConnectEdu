@@ -68,7 +68,11 @@ const ManageUser = () => {
                 </td>
                 <td>{user.username}</td>
                 <td>{user.roleId === 1 ? 'Student' : user.roleId === 2 ? 'Educator' : 'Admin'}</td>
-                <td>{user.educatorApplication ? 'Applied' : 'Not Applied'}</td>
+                <td>
+                  <span className={user.educatorApplication ? 'Applied' : 'NotApplied'}>
+                    {user.educatorApplication ? 'Applied' : 'Not Applied'}
+                  </span>
+                </td>
                 <td>
                   <button className='update' onClick={() => routeUpdate(user._id)}> Update </button>
                 </td>

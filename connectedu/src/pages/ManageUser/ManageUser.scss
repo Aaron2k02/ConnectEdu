@@ -23,6 +23,21 @@
             }
         }
 
+        span{
+            font-weight: 500;
+            padding: 5px 15px;
+            border-radius: 5px;
+
+            &.Applied{
+                background-color: green;
+            }
+
+            &.NotApplied {
+                background-color: yellowgreen;
+                color: #2B3467;
+            }
+        }
+
         table{
             width: 100%;
             border-spacing: 0;
@@ -62,10 +77,8 @@
                     }
 
                     .update{
-                        background-color: green;
-                        color: white;
-
-
+                        background-color:#BAD7E9;
+                        color: #2B3467;
                     }
                     
                     .delete{

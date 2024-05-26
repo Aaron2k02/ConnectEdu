@@ -2,6 +2,7 @@ import React from 'react';
 import './Dashboard.scss';
 import newRequest from '../../utils/newRequest';
 import { useQuery } from '@tanstack/react-query';
+import getCurrentUser from '../../utils/getCurrentUser';
 
 const StatCard = ({ icon, label, count }) => (
   <div className="stat-card">
@@ -13,7 +14,7 @@ const StatCard = ({ icon, label, count }) => (
   </div>
 );
 
-const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+const currentUser = getCurrentUser();
 
 const fetchUserCounts = async () => {
   const response = await newRequest.get('/users');

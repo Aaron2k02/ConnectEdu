@@ -67,7 +67,7 @@ const ManageClass = () => {
               <th>Course Name</th>
               <th>Instructor Name</th>
               <th>Status</th>
-              <th>Details</th>
+              <th>Actions </th>
             </tr>
           </thead>
           <tbody>
@@ -79,9 +79,9 @@ const ManageClass = () => {
                 <td>{classInfo.title}</td>
                 <td>{classInfo.educatorId.username}</td>
                 <td>
-                  <button className={classInfo.isApproved ? "Approved" : "Pending"}>
+                  <span className={classInfo.isApproved ? "Approved" : "Pending"}>
                     {classInfo.isApproved ? "Approved" : "Pending"}
-                  </button>
+                  </span>
                 </td>
                 <td>
                   <button className='view' onClick={() => viewCourse(classInfo._id)} >View</button>
