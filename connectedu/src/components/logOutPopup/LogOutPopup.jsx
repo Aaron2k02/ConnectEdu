@@ -1,6 +1,5 @@
 import React from 'react';
 import './LogOutPopup.scss';
-import { useNavigate } from "react-router-dom";
 
 const LogOutPopup = (props) => {
 

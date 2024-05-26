@@ -1,30 +1,28 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const QuestionAnswer = new Schema({
-    Id: {
-        type: String,
-        required: true,
-        unique: true,
+const questionAnswerSchema = new Schema({
+    questionId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Question',
+        required: true
     },
-    sellerId: {
-        type: String,
-        required: true,
-    },
-    buyerId: {
-        type: String,
-        required: true,
+    responderId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
     question: {
         type: String,
-        required: true,
+        required: true
     },
     answer: {
         type: String,
         required: false,
+        default:"No Answer"
     },
 }, {
     timestamps: true
 });
 
-export default mongoose.model("User", ReviewSchema);
+module.exports = mongoose.model('QuestionAnswer', questionAnswerSchema);

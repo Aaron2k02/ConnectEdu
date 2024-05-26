@@ -1,53 +1,100 @@
-import React from 'react'
-import { useState } from "react";
-import "./CreateCourse.scss";
-import { useNavigate } from "react-router-dom";
+import React, { useReducer, useState, useEffect } from 'react';
+import { useNavigate, useLocation } from "react-router-dom";
+import "./createCourse.scss";
+import { courseReducer, INITIAL_STATE } from '../../reducers/courseReducer';
 
 const CreateCourse = () => {
+  const [state, dispatch] = useReducer(courseReducer, INITIAL_STATE);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [isCreateCourse, SetIsCreateCourse] = useState(true);
+  const { courseState, files: prevFiles = [] } = location.state || {};
 
-  const [coverageList, setCoverageList] = useState([{ coverage: "" }]);
+  const [files, setFiles] = useState(Array.from(prevFiles));
 
-  const handleInputChange = (e, index) => {
+  useEffect(() => {
+    if (courseState) {
+      dispatch({ type: 'SET_STATE', payload: courseState });
+    }
+    if (prevFiles.length > 0) {
+      setFiles(Array.from(prevFiles));
+    }
+  }, [courseState, prevFiles]);
+
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    const list = [...coverageList];
-    list[index][name] = value;
-    setCoverageList(list);
-  }
-
-  const handleInputAdd = () => {
-    setCoverageList([...coverageList, { coverage: "" }]);
+    dispatch({
+      type: "CHANGE_INPUT",
+      payload: { name, value },
+    });
   };
 
-  const handleInputRemove = (index) => {
-    const list = [...coverageList];
-    list.splice(index, 1);
-    setCoverageList(list);
+  const handleCoverageChange = (e, index) => {
+    dispatch({
+      type: "CHANGE_TOPIC",
+      payload: { index, value: e.target.value },
+    });
   };
 
-  let navigate = useNavigate();
+  const handleCoverageAdd = () => {
+    dispatch({ type: "ADD_TOPIC" });
+  };
 
-  const routeNext = () => {
-    let path = '/create-course-content';
-    navigate(path);
-  }
+  const handleCoverageRemove = (index) => {
+    dispatch({
+      type: "REMOVE_TOPIC",
+      payload: index,
+    });
+  };
 
-  const routeCancel = () => {
-    let path = '/manageCourses';
-    navigate(path);
-  }
+  const handleFileChange = (e) => {
+    const newFiles = Array.from(e.target.files);
+    setFiles((prevFiles) => [...prevFiles, ...newFiles]);
+  };
+
+  const handleRemoveFile = (index) => {
+    setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate('/create-course-content', { state: { courseState: state, files, isCreateCourse} });
+  };
+
+  const handleCancel = () => {
+    console.log(courseState);
+    // navigate('/manageCourses');
+  };
 
   return (
     <div className='createCourse'>
       <div className="container">
         <h1>Create new Course</h1>
-        <div className="sections">
+        <form onSubmit={handleSubmit} className="sections">
           <div className="left">
-            <label htmlFor="courseThumbnail">Course Thumbnail</label>
-            <input type="file" id="courseThumbnail" />
+            <div className="images">
+              <div className="imagesInputs">
+                <label htmlFor="courseThumbnail">Course Thumbnail</label>
+                <input type="file" id="courseThumbnail" multiple onChange={handleFileChange} />
+                <div className="thumbnails">
+                  {files.length > 0 && files.map((file, index) => (
+                    <div key={index} className="thumbnail">
+                      <img src={URL.createObjectURL(file)} alt={`Thumbnail ${index}`} />
+                      <button type="button" onClick={() => handleRemoveFile(index)}>Remove</button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             <label htmlFor="courseTitle">Title</label>
-            <input type="text" id="courseTitle" placeholder="e.g. I will teach something I am really experienced at" />
+            <input type="text" id="courseTitle" name="title" value={state.title} onChange={handleInputChange} placeholder="e.g. I will teach something I am really experienced at" />
+
+            <label htmlFor="shortTitle">Short Title</label>
+            <input type="text" id="shortTitle" name="shortTitle" value={state.shortTitle} onChange={handleInputChange} placeholder="e.g. Quick React Course" />
+
             <label htmlFor="categories">Category</label>
-            <select name="categories" id="categories">
+            <select name="category" id="categories" value={state.category} onChange={handleInputChange}>
               <option value="UI UX Design">UI UX Design</option>
               <option value="Web Development">Web Development</option>
               <option value="Mobile App Development">Mobile App Development</option>
@@ -56,35 +103,40 @@ const CreateCourse = () => {
               <option value="Artificial Intelligence">Artificial Intelligence</option>
               <option value="Cybersecurity">Cybersecurity</option>
             </select>
+
             <label htmlFor="courseDuration">Total Course Duration (e.g. 10 hours)</label>
-            <input type="number" id="courseDuration" min={1} />
+            <input type="number" id="courseDuration" name="courseDuration" min={1} value={state.courseDuration} onChange={handleInputChange} />
+
             <label htmlFor="coursePrice">Course Price</label>
-            <input type="number" id="coursePrice" min={1} />
+            <input type="number" id="coursePrice" name="price" min={1} value={state.price} onChange={handleInputChange} />
+
             <label htmlFor="courseDescription">Course Description</label>
             <textarea
               id="courseDescription"
+              name="description"
               cols="30"
               rows="16"
+              value={state.description}
+              onChange={handleInputChange}
               placeholder='Brief Description to introduce your course'
             ></textarea>
-            <form id="courseCoverageForm" className="courseCoverage" autoComplete="off">
+
+            <div className="courseCoverage">
               <div className="form-field">
-                <h3>What will the course cover</h3>
-                {coverageList.map((coverageItem, index) => (
+                <h3>What will be the topic of this course</h3>
+                {state.topics.map((topic, index) => (
                   <div className="coverages" key={index}>
                     <div className="first-section">
                       <input
                         type="text"
-                        id={`coverage${index}`} // Ensure each input has a unique id
-                        value={coverageItem.coverage}
-                        onChange={(e) => handleInputChange(e, index)}
-                        required
+                        value={topic.coverage}
+                        onChange={(e) => handleCoverageChange(e, index)}
                         placeholder='e.g. Learning React'
                       />
-                      {coverageList.length !== 1 && (
+                      {state.topics.length > 1 && (
                         <button
                           type='button'
-                          onClick={() => handleInputRemove(index)}
+                          onClick={() => handleCoverageRemove(index)}
                           className='remove-btn'
                         >
                           <span>Remove</span>
@@ -92,55 +144,46 @@ const CreateCourse = () => {
                       )}
                     </div>
                     <div className="second-division">
-                      {coverageList.length - 1 === index && coverageList.length < 4 && (
+                      {state.topics.length - 1 === index && state.topics.length < 4 && (
                         <button
                           type='button'
-                          onClick={handleInputAdd}
+                          onClick={handleCoverageAdd}
                           className='add-btn'
                         >
-                          <span>Add a coverage </span>
+                          <span>Add Topic</span>
                         </button>
                       )}
                     </div>
                   </div>
                 ))}
-                {/* <div className="testOutput">
-                  <h2>Output</h2>
-                  {
-                    coverageList && 
-                    coverageList.map((singleCoverage, index) => (
-                      <ul key={index}>
-                        {singleCoverage.coverage && <li>{singleCoverage.coverage}</li>}
-                      </ul>
-                    ))}
-                </div> */}
               </div>
-            </form>
+            </div>
+
             <div className="createCourseNav">
-              <button className='cancel-btn' onClick={routeCancel}> Cancel </button>
-              <button onClick={routeNext}> Next </button>
+              <button type="button" className='cancel-btn' onClick={handleCancel}> Cancel </button>
+              <button type="submit"> Next </button>
             </div>
           </div>
           <div className="right">
             <div className="items">
               <div className="item">
                 <img src={'/images/fill-check-mark.png'} alt="" />
-                <h3 htmlFor="">Course Information </h3>
+                <h3>Course Information</h3>
               </div>
               <div className="item">
                 <img src={'/images/empty-check-mark.png'} alt="" />
-                <h3 htmlFor="">Course Content</h3>
+                <h3>Course Content</h3>
               </div>
               <div className="item">
                 <img src={'/images/empty-check-mark.png'} alt="" />
-                <h3 htmlFor="">Course Preview</h3>
+                <h3>Course Preview</h3>
               </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CreateCourse
+export default CreateCourse;

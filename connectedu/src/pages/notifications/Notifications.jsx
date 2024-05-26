@@ -1,69 +1,44 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useQuery } from '@tanstack/react-query';
 import "./Notifications.scss";
 import QuestionAnswerPopupForm from "../../components/questionAnswerPopupForm/QuestionAnswerPopupForm";
+import newRequest from "../../utils/newRequest";
 
 const Notifications = () => {
-  const navigate = useNavigate();
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupNotificationId, setPopupNotificationId] = useState(null);
+  const [questionData, setQuestionData] = useState(null);
 
-  function toTransactionHistory(e) {
-    e.preventDefault();
-    navigate('/myPurchase');
-  }
+  const { data: questions, isFetching, error } = useQuery({
+    queryKey: ['fetchQuestions'],
+    queryFn: async () => {
+      const res = await newRequest.get('/questionAnswer');
+      return res.data;
+    },
+  });
 
-  const navigateToCourse = () => {
-    navigate('/course/123'); // Replace '123' with the appropriate course ID
-  }
-
-  const togglePop = (notificationId) => {
-    setPopupNotificationId(notificationId);
+  const togglePop = async (questionId) => {
+    if (!popupVisible) {
+      const res = await newRequest.get(`/questionAnswer/${questionId}/answer`);
+      setQuestionData(res.data);
+    }
+    setPopupNotificationId(questionId);
     setPopupVisible(!popupVisible);
   };
 
-  const hasAnswered = (notificationId) => {
-    // Placeholder logic, replace with actual implementation in the code backend
-    return false;
-  };
+  if (isFetching) return <div>Loading...</div>;
+  if (error) return <div>Something went wrong!</div>;
 
-  const notifications = [
-    {
-      id: 1,
-      type: "Question",
-      sender: "Alice",
-      content: "Can you provide more details about Module 2?",
-      date: "2 hours ago",
-    },
-    {
-      id: 2,
-      type: "Rating",
-      sender: "Bob",
-      content: "You received a 5-star rating for 'Introduction to React'!",
-      date: "1 day ago",
-    },
-    {
-      id: 3,
-      type: "Transaction",
-      sender: "System",
-      content: "You earned $50 from a course sale.",
-      date: "3 days ago",
-    },
-    {
-      id: 4,
-      type: "Question",
-      sender: "Charlie",
-      content: "What is the deadline for the assignment?",
-      date: "4 days ago",
-    },
-    {
-      id: 5,
-      type: "Rating",
-      sender: "Dave",
-      content: "You received a 4-star rating for 'Advanced JavaScript'!",
-      date: "5 days ago",
-    },
-  ];
+  // Enhance sorting logic
+  const sortedQuestions = [...questions].sort((a, b) => {
+    const aUpdated = new Date(a.updatedAt).getTime();
+    const aAnswerUpdated = a.answerId ? new Date(a.answerId.updatedAt).getTime() : 0;
+    const bUpdated = new Date(b.updatedAt).getTime();
+    const bAnswerUpdated = b.answerId ? new Date(b.answerId.updatedAt).getTime() : 0;
+    return Math.max(bUpdated, bAnswerUpdated) - Math.max(aUpdated, aAnswerUpdated);
+  });
 
   return (
     <div className="notifications">
@@ -73,6 +48,9 @@ const Notifications = () => {
         </div>
         {popupVisible && (
           <QuestionAnswerPopupForm
+            questionId={popupNotificationId}
+            questionData={questionData}
+            currentUser={currentUser}
             toggle={() => togglePop(popupNotificationId)}
           />
         )}
@@ -80,34 +58,34 @@ const Notifications = () => {
           <tbody>
             <tr>
               <th>Type</th>
-              <th>Sender</th>
-              <th>Content</th>
+              <th>Course</th>
+              <th>Question</th>
               <th>Date</th>
               <th>Action</th>
             </tr>
-            {notifications.map((notification) => (
-              <tr key={notification.id}>
-                <td>{notification.type}</td>
-                <td>{notification.sender}</td>
-                <td>{notification.content}</td>
-                <td>{notification.date}</td>
-                <td>
-                  {notification.type === "Question" && (
-                    <button onClick={() => togglePop(notification.id)}>
-                      {hasAnswered(notification.id) ? "Edit" : "Answer"}
+            {sortedQuestions.map((question) => {
+              const isAsker = currentUser._id === question.askerId._id;
+              const isResponder = currentUser._id === question.answerId?.responderId;
+              const buttonLabel = isResponder && new Date(question.updatedAt).getTime() === new Date(question.answerId?.updatedAt).getTime()
+                ? "Answer"
+                : "Edit";
+
+              const displayDate = new Date(Math.max(new Date(question.updatedAt), new Date(question.answerId?.updatedAt || 0))).toLocaleDateString();
+
+              return (
+                <tr key={question._id}>
+                  <td>{isAsker ? "My Question" : `Question from ${question.askerId.username}`}</td>
+                  <td>{question.courseId.title}</td>
+                  <td>{question.content}</td>
+                  <td>{displayDate}</td>
+                  <td>
+                    <button onClick={() => togglePop(question._id)}>
+                      {isAsker ? "View" : buttonLabel}
                     </button>
-                  )}
-                  {notification.type === "Rating" && (
-                    <button onClick={navigateToCourse}>View Rating</button>
-                  )}
-                  {notification.type === "Transaction" && (
-                    <button onClick={toTransactionHistory}>
-                      View Transaction
-                    </button>
-                  )}
-                </td>
-              </tr>
-            ))}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

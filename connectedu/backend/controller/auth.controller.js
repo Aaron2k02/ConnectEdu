@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { createError } = require("../utils/createError");
 
-
 const register = async (req, res, next) => {
     try {
         // Hash the password with bcrypt
@@ -71,6 +70,7 @@ const logout = (req, res) => {
 };
 
 const updateUserProfile = async (req, res) => {
+    
     try {
         const { userId } = req.params;
         const { skills, qualifications, professionalExperience, educationalBackground } = req.body;

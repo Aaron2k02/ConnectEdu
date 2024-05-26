@@ -8,13 +8,6 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { url } from "../../slices/api"
 
-//Dummy user data from userData.js
-const user = {
-    id:1,
-    username:"user1",
-    email:"user1@example.com"
-};
-
 const PaymentButton = styled(Button)(({ theme }) => ({
     color: 'white',
     backgroundColor: green[500],
@@ -24,15 +17,17 @@ const PaymentButton = styled(Button)(({ theme }) => ({
     textTransform: 'none'
 }));
 
-const PayButton = ({ cartItems }) => {
+const PayButton = ({ courseData }) => {
 
     //const user = useSelector((state) => state.auth)
+
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
     const handleCheckout = () => {
         //console.log(cartItems);
         axios.post(`${url}/stripe/create-checkout-session`, {
-            cartItems,
-            userId: user.id
+            courseData,
+            userId: currentUser._id
         }).then((res) => {
             if (res.data.url) {
                 window.location.href = res.data.url;

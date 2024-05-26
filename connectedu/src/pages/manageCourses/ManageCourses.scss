@@ -52,6 +52,22 @@
                         object-fit: cover;
                     }
 
+                    span {
+                        font-weight: 400;
+                        padding: 5px 15px;
+                        border-radius: 5px;
+
+                        &.Approved {
+                            background-color: green;
+                            color: white;
+                        }
+
+                        &.Pending {
+                            background-color: yellowgreen;
+                            color: #2B3467;
+                        }
+                    }
+
                     button {
                         color: #2B3467;
                         font-weight: 500;

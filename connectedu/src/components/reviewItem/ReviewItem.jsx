@@ -1,27 +1,36 @@
 import React from 'react';
 import './ReviewItem.scss';
+import { useQuery } from '@tanstack/react-query';
+import newRequest from '../../utils/newRequest';
 
 const ReviewItem = ({ review }) => {
+    const reviewQuery = useQuery({
+        queryKey: ["reviewUser", review._id],
+        queryFn: () => newRequest.get(`/users/${review.userId}`).then((res) => res.data),
+        enabled: !!review._id,
+    });
+
     return (
         <div className="reviewItem">
             <div className="container">
-                <div className="user">
-                    <img className="pp" src={review.userImage} alt="" />
-                    <div className="info">
-                        <span>{review.userName}</span>
-                        <div className="country">
-                            <img src={review.countryFlag} alt="" />
-                            <span>{review.country}</span>
-                        </div>
-                    </div>
-                </div>
+                {reviewQuery.isFetching ? "Loading..." :
+                    reviewQuery.error ? "Error has occurred" :
+                        <div className="user">
+                            <img className="pp" src={reviewQuery.data.photoUrl || '/images/noavatar.png'} alt="" />
+                            <div className="info">
+                                <span>{reviewQuery.data.username}</span>
+                                <div className="country">
+                                    <span>{reviewQuery.data.country}</span>
+                                </div>
+                            </div>
+                        </div>}
                 <div className="stars">
                     {Array.from({ length: review.rating }, (_, index) => (
                         <img key={index} src="/images/star.png" alt="" />
                     ))}
                     <span>{review.rating}</span>
                 </div>
-                <p>{review.comment}</p>
+                <p>{review.content}</p>
                 <div className="helpful">
                     <span>Helpful?</span>
                     <img src="/images/like.png" alt="" />
@@ -29,9 +38,7 @@ const ReviewItem = ({ review }) => {
                     <img src="/images/dislike.png" alt="" />
                     <span>No</span>
                 </div>
-                <hr />
             </div>
-            
         </div>
     );
 };
