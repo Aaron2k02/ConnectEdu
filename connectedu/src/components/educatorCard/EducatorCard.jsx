@@ -17,7 +17,7 @@ const EducatorCard = ({ item }) => {
           </span>
         </div>
         <div className="educatorDetail">
-          <p>Total Student: 0</p>
+          <p>Total Courses: 0</p>
         </div>
       </div>
       <div className="social">

@@ -41,11 +41,20 @@ const Navbar = ({ filterCoursesByCategory }) => {
     setShowLogoutPopup(true);
   };
 
+  // Check if the user is an admin
+  const isAdmin = currentUser && currentUser.roleId === 0;
+
   const handleLogoutConfirm = async () => {
     try {
       await newRequest.get("/auth/logout");
       localStorage.setItem("currentUser", null);
-      navigate('/');
+      setShowLogoutPopup(false); // Reset the popup state
+      if (currentUser && isAdmin) {
+        navigate('/Dashboard'); // Navigate to Dashboard for admin
+      } 
+      navigate('/'); // Navigate to home 
+      setOpen(false);
+      
     } catch (error) {
       console.log(error);
     }
@@ -56,6 +65,20 @@ const Navbar = ({ filterCoursesByCategory }) => {
   const routeSignIn = () => {
     navigate('/signin');
   };
+
+  // Redirect admin to admin dashboard upon login
+  useEffect(() => {
+    if (isAdmin) {
+      navigate('/Dashboard');
+    }
+  }, [isAdmin, navigate]);
+
+  // Prevent admin from accessing certain pages
+  useEffect(() => {
+    if (isAdmin && pathname === "/") {
+      navigate('/Dashboard');
+    }
+  }, [isAdmin, pathname, navigate]);
 
   return (
     <div className={active || (pathname !== "/" && pathname !== "/signin") ? "navbar active" : "navbar"}>
@@ -83,14 +106,14 @@ const Navbar = ({ filterCoursesByCategory }) => {
               {currentUser.roleId === 1 && (
                 <Link className='link item' to="/educatorRegister">Become an Educator</Link>
               )}
-              {currentUser.roleId === 0 && (
+              {isAdmin && (
                 <>
                   <Link className='link item' to="/Dashboard">Admin Dashboard</Link>
                   <Link className='link item' to="/ManageUser">Manage User</Link>
                   <Link className='link item' to="/ManageClass">Manage Courses</Link>
                 </>
               )}
-              {currentUser.roleId !== 0 && (
+              {!isAdmin && (
                 <>
                   <Link className='link item' to="/myCourses">My Courses</Link>
                   <Link className='link item' to="/myPurchase">Transaction History</Link>
@@ -103,7 +126,7 @@ const Navbar = ({ filterCoursesByCategory }) => {
               </div>
               {open &&
                 <div className='options'>
-                  {currentUser.role !== "Admin" && (
+                  {!isAdmin && (
                     <>
                       <Link className='link' to='/users/accountSettings'>My Profile</Link>
                       <Link className='link' to="/dashboard/MainDashboard">My Dashboard</Link>

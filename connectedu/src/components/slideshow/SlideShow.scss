@@ -21,8 +21,8 @@
             height: 100%;
 
             &.slide-hidden {
-                    display: none;
-                }
+                display: none;
+            }
         }
         
         .arrow {
@@ -49,6 +49,11 @@
             display: flex;
             position: absolute;
             bottom: 1rem;
+
+            button{
+                height: 0.5rem!important;
+                width: 0.5rem!important;
+            }
 
             .indicator {
                 background-color: white;

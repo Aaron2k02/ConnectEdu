@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import newRequest from '../../utils/newRequest';
 import SlideShow from '../../components/slideshow/SlideShow';
-import PayButton from "../../components/PayButton/PayButton";
-import { reviewData } from '../../data/reviewData';
-import './course.scss';
 import ReviewItems from '../../components/reviewItems/ReviewItems';
+import './course.scss';
 
 const Course = () => {
   const { id } = useParams();
@@ -24,10 +22,21 @@ const Course = () => {
     enabled: !!educatorId,
   });
 
-  if (courseQuery.isFetching) return <div>Loading...</div>;
-  if (courseQuery.error) return <div>Something went wrong!</div>;
+  const purchasedCoursesQuery = useQuery({
+    queryKey: ["purchasedCourses"],
+    queryFn: () => newRequest.get(`/orders/purchasedCourses`).then((res) => res.data),
+  });
+
+  if (courseQuery.isFetching || purchasedCoursesQuery.isFetching) return <div>Loading...</div>;
+  if (courseQuery.error || purchasedCoursesQuery.error) return <div>Something went wrong!</div>;
 
   const { course } = courseQuery.data;
+  const purchasedCourses = purchasedCoursesQuery.data;
+
+  const hasPurchasedCourse = purchasedCourses.some(purchasedCourse => purchasedCourse._id === id);
+
+  console.log("console.log(hasPurchasedCourse);", course);
+  console.log("console.log(hasPurchasedCourse);" ,hasPurchasedCourse);
 
   return (
     <div className='course'>
@@ -40,36 +49,33 @@ const Course = () => {
           <SlideShow data={course.thumbnailUrl} className='slider' />
 
           <h2>About This Course</h2>
-          <p>{course.description}</p>
+          <p className='course-description'>{course.description}</p>
           {userQuery.isFetching ? ("Loading...") :
             userQuery.error ? ("Something went wrong!") : (
               <div className="educator">
                 <h2>About The Educator</h2>
-                <div className="user">
-                  <img
-                    src={userQuery.data.photoUrl || '/images/noavatar.png'}
-                    alt=""
-                  />
-                  <div className="info">
-                    <span>{userQuery.data.username}</span>
-                    {!isNaN((course.totalStars / course.rateCount).toFixed(1)) &&
-                      <div className="stars">
-                        {Array(Math.round((course.totalStars / course.rateCount).toFixed(1))).fill().map((item, i) => (
-                          <img src="/images/star.png" key={i} alt="" />
-                        ))}
-                        <span>
-                          {Math.round((course.totalStars / course.rateCount).toFixed(1))}
-                        </span>
-                      </div>
-                    }
-                    <button>Details</button>
-                  </div>
-                </div>
                 <div className="box">
                   <div className="items">
                     <div className="item">
-                      <span className="title">From</span>
-                      <span className="desc">{userQuery.data.country}</span>
+                      <div className="user">
+                        <img
+                          src={userQuery.data.photoUrl || '/images/noavatar.png'}
+                          alt=""
+                        />
+                        <div className="info">
+                          <span>{userQuery.data.username}</span>
+                          {!isNaN((course.totalStars / course.rateCount).toFixed(1)) &&
+                            <div className="stars">
+                              {Array(Math.round((course.totalStars / course.rateCount).toFixed(1))).fill().map((item, i) => (
+                                <img src="/images/star.png" key={i} alt="" />
+                              ))}
+                              <span>
+                                {Math.round((course.totalStars / course.rateCount).toFixed(1))}
+                              </span>
+                            </div>
+                          }
+                        </div>
+                      </div>
                     </div>
                     <div className="item">
                       <span className="title">Educator since</span>
@@ -83,7 +89,7 @@ const Course = () => {
                 </div>
               </div>
             )}
-          <ReviewItems reviewData={reviewData} courseId={id} />
+          <ReviewItems courseId={id} hasPurchasedCourse={ hasPurchasedCourse } />
         </div>
         <div className="right">
           <div className="price">
@@ -115,10 +121,9 @@ const Course = () => {
               </div>
             ))}
           </div>
-          {/* <PayButton className='payButton' courseId={id} courseData={courseQuery.data} /> */}
-          <Link to={`/paymentCheckout/${id}`}>
+          <Link to={hasPurchasedCourse ? `/viewCourse/${id}` : `/paymentCheckout/${id}`}>
             <button>
-              Enroll Course
+              {hasPurchasedCourse ? "Continue Learning" : "Enroll Course"}
             </button>
           </Link>
         </div>

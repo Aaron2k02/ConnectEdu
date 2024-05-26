@@ -36,7 +36,7 @@ const courseSchema = new Schema({
         default: false
     },
     topics: {
-        type: String,
+        type: [String],
         required: false,
     },
     courseDuration: {

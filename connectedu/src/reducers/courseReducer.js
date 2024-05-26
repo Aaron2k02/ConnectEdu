@@ -2,7 +2,7 @@
 export const INITIAL_STATE = {
     userId: JSON.parse(localStorage.getItem("currentUser"))?._id,
     title: "",
-    category: "UI UX Design",
+    category: "",
     thumbnailUrl: [],
     description: "",
     shortTitle: "",
@@ -10,7 +10,8 @@ export const INITIAL_STATE = {
     topics: [{ coverage: "" }],
     price: 1,
     adminFeedback: "No feedback available",
-    courseContent: [] // Add courseContent field to the initial state
+    courseContent: [],
+    sections: [], // Add sections field to the initial state
 };
 
 // Reducer function
@@ -24,7 +25,7 @@ export const courseReducer = (state, action) => {
         case "ADD_IMAGES":
             return {
                 ...state,
-                thumbnailUrl: action.payload,
+                thumbnailUrl: action.payload.thumbnailUrl,
             };
         case "ADD_TOPIC":
             return {
@@ -53,10 +54,20 @@ export const courseReducer = (state, action) => {
                 ...state,
                 sections: state.sections.filter((_, index) => index !== action.payload),
             };
-        case "ADD_COURSE_CONTENT": // Add case to handle adding courseContent
+        case "ADD_COURSE_CONTENT":
             return {
                 ...state,
-                courseContent: action.payload,
+                sections: action.payload, // Ensure payload is an array of sections
+            };
+        case 'SET_STATE':
+            return {
+                ...state,
+                ...action.payload
+            };
+        case "SET_THUMBNAIL_URL":
+            return {
+                ...state,
+                thumbnailUrl: action.payload,
             };
         default:
             return state;

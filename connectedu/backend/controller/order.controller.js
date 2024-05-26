@@ -5,7 +5,9 @@ const User = require("../models/user.model");
 const Stripe = require("stripe");
 
 const getOrders = async (req, res, next) => {
+
     try {
+        
         const orders = await Order.find({
             $or: [
                 { buyerId: req.userId },
@@ -108,7 +110,7 @@ const confirmCheckOutSession = async (req, res, next) => {
                 }
             }
         )
-        res.status(200).json("Order has been confirmed!");
+        res.status(200).json(orders);
     } catch (err) {
         next(err);
     }
