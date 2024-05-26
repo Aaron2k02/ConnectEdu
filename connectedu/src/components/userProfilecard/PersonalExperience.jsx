@@ -1,24 +1,24 @@
 import React, { useState } from "react"
 import FormInput from "../../pages/register/featured/FormInput"
 import "./AccountSettings.scss"
-import { useNavigate } from 'react-router-dom';
+
 import newRequest from "../../utils/newRequest";
 
 const PersonalExperience = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"))
-  let navigate = useNavigate();
+ 
   const [message, setMessage] = useState("");
   const [values, setValues] = useState({
-    skills:"", 
-    professionalExperience:'', 
-    educationalBackground:''
+    qualifications:currentUser.profile.qualifications, 
+    professionalExperience:currentUser.profile.professionalExperience, 
+    educationalBackground:currentUser.profile.educationalBackground
 
   })
 
   const inputs = [
     {
       id: 1,
-      name: "EducationalBackground",
+      name: "educationalBackground",
       type: "text",
       placeholder: "Educational Background",
       errorMessage: "Enter your education level",
@@ -27,7 +27,7 @@ const PersonalExperience = () => {
     },
     {
       id: 2,
-      name: "Professional Experience",
+      name: "professionalExperience",
       type: "text",
       placeholder: "Previous Teaching Experience (if any)",
       label: "Professional Experience",
@@ -35,7 +35,7 @@ const PersonalExperience = () => {
     },
     {
       id: 3,
-      name: "Skills and Qualifications",
+      name: "qualifications",
       type: "text",
       placeholder: "Skills and Qualifications",
       label: "Skills and Qualifications",
@@ -50,15 +50,16 @@ const PersonalExperience = () => {
 
     try {
       await newRequest.put(`/auth/profile/${userId}`, {
-        skills:values.skills, 
-        qualifications:values.skills, 
+       
+        qualifications:values.qualifications, 
         professionalExperience:values.professionalExperience, 
         educationalBackground:values.educationalBackground
        
       });
       setMessage('Profile updated successfully');
 
-      navigate("/");
+
+     
 
     } catch (err) {
       setMessage(err.response.data.message);

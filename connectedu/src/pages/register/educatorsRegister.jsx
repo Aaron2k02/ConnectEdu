@@ -2,15 +2,18 @@ import FormInput from './featured/FormInput'
 import "./educatorRegister.scss"
 import React, { useState } from "react"
 
+import newRequest from "../../utils/newRequest";
+
 const EducatorRegister = () => {
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"))
+  
+  const [message, setMessage] = useState("");
   const [values, setValues] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPass: "",
-    educationalBackground: "",
-    professionalExperience: "",
-    skillsAndQualifications: "",
+    username: currentUser.username,
+    email: currentUser.email,
+    educationalBackground: currentUser.profile.educationalBackground,
+    professionalExperience: currentUser.profile.professionalExperience,
+    skillsAndQualifications: currentUser.profile.qualifications,
   })
 
   const inputs = [
@@ -55,7 +58,7 @@ const EducatorRegister = () => {
     },
     {
       id: 5,
-      name: "skillsAndQualifications",
+      name: "qualification",
       type: "text",
       placeholder: "Skills and Qualifications",
       label: "Skills and Qualifications",
@@ -63,15 +66,45 @@ const EducatorRegister = () => {
     },
   ]
 
-  const handleSubmit = (e) => {
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData(e.target)
-  }
+    const userId = currentUser._id;
 
-  const onChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value })
-  }
+    setMessage('');
 
+    // Validate email and username before making the API call
+    if (values.email !== currentUser.email) {
+        setMessage('Wrong email');
+        return; // Exit the function if email is wrong
+    }
+
+    if (values.username !== currentUser.username) {
+        setMessage('Wrong username');
+        return; // Exit the function if username is wrong
+    }
+    try {
+      const response = await newRequest.put(`/users/register-educator/${userId}`, {
+        email: values.email,
+        username: values.username,
+        qualifications: values.qualification, 
+        professionalExperience: values.professionalExperience, 
+        educationalBackground: values.educationalBackground
+      });
+      if (response.status === 200) {
+        setMessage('Profile updated successfully');
+      } else {
+        setMessage('Failed to update profile');
+      }
+    } catch (err) {
+      setMessage(err.response?.data?.message || 'An error occurred');
+    }
+  };
+
+  const onChange =(e)=>{
+    setValues({...values,[e.target.name]:e.target.value})
+  };
   return (
     <div className='educatorRegister'>
       <div className="container">
@@ -89,6 +122,7 @@ const EducatorRegister = () => {
             {inputs.map((input) => (
               <FormInput key={input.id} {...input} value={values[input.name]} onChange={onChange} />
             ))}
+             {message && <p>{message}</p>}
             <button type="submit">Submit</button>
           </form>
         </div>

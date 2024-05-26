@@ -1,20 +1,20 @@
 import React, { useState } from "react"
 import FormInput from "../../pages/register/featured/FormInput"
 import "./AccountSettings.scss"
-import { useNavigate } from 'react-router-dom';
+
 import newRequest from "../../utils/newRequest";
 
 const AccountSettings = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"))
+  const [message, setMessage] = useState("");
   const [values, setValues] = useState({
     username: currentUser.username,
     email: currentUser.email,
-    
-    fullname: currentUser.fullName,
-    phoneNo: currentUser.phoneNumber,
+    fullName: currentUser.fullName,
+    phoneNumber: currentUser.phoneNumber,
   })
- // const [message, setMessage] = useState("");
-  let navigate = useNavigate();
+ 
+ 
 
   const inputs = [
     {
@@ -28,7 +28,7 @@ const AccountSettings = () => {
     },
     {
       id: 2,
-      name: "fullname",
+      name: "fullName",
       type: "text",
       placeholder: "Full name",
       label: "Full name",
@@ -46,7 +46,7 @@ const AccountSettings = () => {
     },
     {
       id: 4,
-      name: "phoneNo",
+      name: "phoneNumber",
       type: "tel", // Corrected to "tel" type
       placeholder: "Mobile Phone",
       label: "Phone/Mobile",
@@ -63,12 +63,10 @@ const AccountSettings = () => {
       await newRequest.put(`/auth/personal-info/${userId}`, {
         username: values.username,
         email: values.email,
-        fullname: values.fullname,
-        phoneNo: values.phoneNo,
+        fullName: values.fullName,
+        phoneNumber: values.phoneNumber,
       });
-
-      navigate("/");
-
+      setMessage('Profile updated successfully');
     } catch (err) {
       setMessage(err.response.data.message);
     }
@@ -85,6 +83,7 @@ const AccountSettings = () => {
         {inputs.map((input) => (
           <FormInput key={input.id} {...input} value={values[input.name]} onChange={onChange} />
         ))}
+         {message && <p>{message}</p>}
         <button type="submit">Save changes</button>
       </form>
     </div>

@@ -27,6 +27,15 @@ const register = async (req, res, next) => {
 
         await newUserProfile.save();
 
+        const userData = {
+            ...newUser._doc,
+            profile: newUserProfile,
+        };
+
+      
+        res.status(201).json(userData);
+
+
         res.status(201).send("User has been created and profile has been set up!");
     } catch (err) {
         next(err)
@@ -51,11 +60,22 @@ const login = async (req, res, next) => {
             roleId: user.roleId
         }, process.env.JWT_KEY)
 
+        const userProfile = await UserProfile.findOne({ userId: user._id });
+        
+        if (!userProfile) {
+            return next(createError(404, "User profile not found!"));
+        }
+
         const { password, ...info } = user._doc;
+
+        const userWithProfile = {
+            ...info,
+            profile: userProfile._doc,
+        };
 
         res.cookie("accessToken", token, {
             httpOnly: true,
-        }).status(200).send(info);
+        }).status(200).send(userWithProfile);
     } catch (err) {
         return next(createError(500, "Something went wrong!"));
     }
@@ -84,6 +104,8 @@ const updateUserProfile = async (req, res) => {
         if (!userProfile) {
             return res.status(404).send("Profile not found!");
         }
+       
+
 
         res.status(200).send("Profile updated successfully!");
     } catch (err) {
