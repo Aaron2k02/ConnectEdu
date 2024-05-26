@@ -8,6 +8,10 @@ const stripeRoutes = require("./routes/stripe");
 const courseRoutes = require("./routes/course.route.js");
 const authRoute = require("./routes/auth.route.js");
 const userRoutes = require("./routes/user.route.js");
+const roleRoutes = require("./routes/userRole.route.js");
+const reviewRoutes = require("./routes/review.route.js");
+const ordersRoutes = require("./routes/order.route.js");
+const questionAnswerRoutes = require("./routes/questionAnswer.route.js");
 const otpRoutes= require("./routes/otp.route.js");
 
 dotenv.config();
@@ -31,10 +35,14 @@ app.use((err, req, res, next) => {
 
 
 // API End-point
-app.use("/api/stripe", stripeRoutes);
+// app.use("/api/stripe", stripeRoutes);
 app.use("/api/courses", courseRoutes);
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoutes);
+app.use('/api/userRoles', roleRoutes);
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/orders', ordersRoutes);
+app.use('/api/questionAnswer', questionAnswerRoutes);
 app.use("/api/otp",otpRoutes);
 
 

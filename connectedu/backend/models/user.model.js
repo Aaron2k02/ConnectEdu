@@ -12,6 +12,10 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
+    country: {
+        type: String,
+        required: false,
+    },
     fullName: {
         type: String,
         required: false,
@@ -22,8 +26,9 @@ const userSchema = new Schema({
         required: false,
     },
     roleId: {
-        type: String,
-        default: "1" // Changed from defaultValue to default, and wrapped 1 in quotes
+        type: Number,
+        ref: 'Role',
+        // default: 1 // Default to 'user' role
     },
     password: {
         type: String,
@@ -31,8 +36,19 @@ const userSchema = new Schema({
     },
     photoUrl: {
         type: String,
-        required: false
-    }
+        required: false,
+        default: null
+    }, 
+    educatorApplication: {
+        type: Boolean,
+        required: false,
+        default: false,
+    },
+    totalSales: {
+        type: Number,
+        required: false,
+        default: 0
+    },
 }, {
     timestamps: true
 });

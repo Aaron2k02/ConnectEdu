@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const OrderSchema = new Schema({
@@ -30,8 +30,9 @@ const OrderSchema = new Schema({
     },
     // after proper payment this field will be updated 
     isCompleted: {
-        type: String,
-        required: true,
+        type: Boolean,
+        required: false,
+        default: false,
     },
     payment_intent: {
         type: String,
@@ -41,4 +42,4 @@ const OrderSchema = new Schema({
     timestamps: true
 });
 
-export default mongoose.model("User", OrderSchema);
+module.exports = mongoose.model("Order", OrderSchema);

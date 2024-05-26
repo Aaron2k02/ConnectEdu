@@ -3,7 +3,6 @@
   justify-content: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-
   .container {
     width: 100%;
     max-width: 1400px;
@@ -38,7 +37,7 @@
       margin-top: 20px;
 
       tr {
-        height: 100px;
+        height: 45px;
         transition: background-color 0.3s ease;
 
         th {

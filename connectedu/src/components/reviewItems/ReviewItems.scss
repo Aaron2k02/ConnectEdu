@@ -1,0 +1,44 @@
+.reviewItems {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    .reviewHeader {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        button {
+            background-color: #2B3467;
+            width: 200px;
+            padding: 15px;
+            color: white;
+            font-weight: 500;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 12px;
+        }
+    }
+
+    .reviews {
+        max-height: 700px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: min-content;
+        border: 1px solid lightgray;
+        border-radius: 12px;
+
+        .no-reviews {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                height: 300px;
+                width: 300px;
+            }
+        }
+    }
+}

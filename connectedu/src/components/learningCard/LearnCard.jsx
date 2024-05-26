@@ -2,41 +2,42 @@ import React from 'react'
 import ProgressBar from './ProgressBar'
 import './LearnCard.scss'
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
-import { Link } from 'react-router-dom';
 import StarBorderSharpIcon from '@mui/icons-material/StarBorderSharp';
-const LearnCard = ({item}) => {
-  return (
-    <div className='learnCard'>
-    <div className='imgCard'>
-        <img src={item.img} alt="" />
-    </div>
-    <div className='title'>
-        <span>{item.title}</span>
-        <ProgressBar/>
-    </div>
-    
+import { Link } from 'react-router-dom';
 
-    <div className='bottom'>
-    <Link className='view' to='/viewCourse' >
-        <span>Continue</span>
-        <ArrowForwardOutlinedIcon/>
-    </Link>
+const LearnCard = ({ item }) => {
 
-    <div className='review'>
-        <Link className='starLink'>Leave a rating</Link>
-        <div className='stars'>
-        <StarBorderSharpIcon/>
-        <StarBorderSharpIcon/>
-        <StarBorderSharpIcon/>
-        <StarBorderSharpIcon/>
-        <StarBorderSharpIcon/>
+    const handleReadMoreClick = (courseId) => {
+        navigate(`/course/${courseId}`);
+    };
+
+    return (
+        <div className='learnCard'>
+            <Link to={`/viewCourse/${item._id}`} className='link'>
+                <div className='imgCard'>
+                    <img src={item.thumbnailUrl[0]} alt="" />
+                </div>
+
+                <div className='title'>
+                    <span>{item.title}</span>
+                    {/* <ProgressBar/> */}
+                </div>
+
+                <div className='bottom'>
+                    <div className='review'>
+                        <button onClick={() => handleReadMoreClick(item._id)} className='link starLink' >Leave a rating</button>
+                        <div className='stars'>
+                            <StarBorderSharpIcon />
+                            <StarBorderSharpIcon />
+                            <StarBorderSharpIcon />
+                            <StarBorderSharpIcon />
+                            <StarBorderSharpIcon />
+                        </div>
+                    </div>
+                </div>
+            </Link>
         </div>
-    </div>
-
-    </div>
-   
-</div>
-  )
+    );
 }
 
-export default LearnCard
+export default LearnCard;

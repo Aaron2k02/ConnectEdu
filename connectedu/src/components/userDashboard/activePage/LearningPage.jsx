@@ -1,15 +1,18 @@
 import React from 'react';
 import './LearningPage.scss';
 import LearnCard from '../../learningCard/LearnCard';
+import { useQuery } from '@tanstack/react-query';
+import newRequest from '../../../utils/newRequest';
 
 const LearningPage = () => {
-    const courseEnroll = [
-        {
-            id: 1, // Add a unique identifier for each course
-            title: 'Web Development',
-            img: "https://images.pexels.com/photos/4145190/pexels-photo-4145190.jpeg?auto=compress&cs=tinysrgb&w=1600",
-        }
-    ];
+
+    const purchasedCourses = useQuery({
+        queryKey: ["purchasedCourses"],
+        queryFn: () => newRequest.get(`/orders/purchasedCourses`).then((res) => res.data),
+    });
+
+    if (purchasedCourses.isFetching) return <div>Loading...</div>;
+    if (purchasedCourses.error) return <div>Something went wrong!</div>;
 
     return (
         <div className='learningPage'>
@@ -18,10 +21,12 @@ const LearningPage = () => {
                     <h2>My Courses</h2>
                 </div>
                 <div className='enrollList'>
-                    {courseEnroll.length > 0 ? (
-                        <div className='courseEnroll'>
-                            <LearnCard key={courseEnroll[0].id} item={courseEnroll[0]} />
-                        </div>
+                    {purchasedCourses.data && purchasedCourses.data.length > 0 ? (
+                        purchasedCourses.data.map((course) => (
+                            <div className='courseEnroll' key={course._id}>
+                                <LearnCard item={course} />
+                            </div>
+                        ))
                     ) : (
                         <p>You haven't enrolled in any classes yet.</p>
                     )}
