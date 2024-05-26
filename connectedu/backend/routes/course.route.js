@@ -4,7 +4,8 @@ const {
     deleteCourse,
     getCourse,
     getCourses,
-    getCourseSections
+    getCourseSections,
+    updateCourseFeedback
 } = require("../controller/course.controller.js");
 const { verifyToken } = require("../middleware/jwt.js");
 
@@ -20,5 +21,7 @@ router.get("/single/:id", verifyToken, getCourse);
 router.get("/", getCourses);
 
 router.get('/:id/sections', verifyToken, getCourseSections);
+
+router.put('/feedback/:id', verifyToken, updateCourseFeedback);
 
 module.exports = router;

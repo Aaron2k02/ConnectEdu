@@ -149,10 +149,36 @@ const getCourseSections = async (req, res, next) => {
     }
 };
 
+const updateCourseFeedback = async (req, res, next) => {
+    try {
+        const courseId = req.params.id;
+        const { feedback } = req.body;
+
+        // Ensure the user is an admin
+        const userRole = await Role.findOne({ roleId: req.roleId });
+        if (userRole.name !== "Admin") {
+            return next(createError(403, "You are not authorized to provide feedback."));
+        }
+
+        const course = await Course.findById(courseId);
+        if (!course) {
+            return next(createError(404, "Course not found!"));
+        }
+
+        course.adminFeedback = feedback;
+        await course.save();
+
+        res.status(200).json(course);
+    } catch (err) {
+        next(err);
+    }
+};
+
 module.exports = {
     createCourse,
     deleteCourse,
     getCourse,
     getCourses,
-    getCourseSections // Add this line
+    getCourseSections,
+    updateCourseFeedback // Add this line
 };

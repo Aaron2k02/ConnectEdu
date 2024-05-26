@@ -36,7 +36,7 @@ const courseSchema = new Schema({
         default: false
     },
     topics: {
-        type: [String],
+        type: String,
         required: false,
     },
     courseDuration: {
@@ -58,6 +58,7 @@ const courseSchema = new Schema({
     adminFeedback: {
         type: String,
         required: false,
+        default: "No feedback available",
     },
 }, {
     timestamps: true
