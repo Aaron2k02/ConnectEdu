@@ -12,10 +12,6 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
-    country: {
-        type: String,
-        required: false,
-    },
     fullName: {
         type: String,
         required: false

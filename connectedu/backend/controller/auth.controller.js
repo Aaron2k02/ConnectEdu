@@ -129,9 +129,7 @@ const updateUserProfile = async (req, res) => {
         if (!userProfile) {
             return res.status(404).send("Profile not found!");
         }
-       
-
-
+    
         res.status(200).send("Profile updated successfully!");
     } catch (err) {
         res.status(500).send("Something went wrong!");
