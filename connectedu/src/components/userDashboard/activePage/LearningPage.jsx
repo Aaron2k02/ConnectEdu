@@ -5,14 +5,13 @@ import { useQuery } from '@tanstack/react-query';
 import newRequest from '../../../utils/newRequest';
 
 const LearningPage = () => {
-
-    const purchasedCourses = useQuery({
+    const { data: courses, isFetching, error } = useQuery({
         queryKey: ["purchasedCourses"],
         queryFn: () => newRequest.get(`/orders/purchasedCourses`).then((res) => res.data),
     });
 
-    if (purchasedCourses.isFetching) return <div>Loading...</div>;
-    if (purchasedCourses.error) return <div>Something went wrong!</div>;
+    if (isFetching) return <div>Loading...</div>;
+    if (error) return <div>Something went wrong!</div>;
 
     return (
         <div className='learningPage'>
@@ -21,8 +20,8 @@ const LearningPage = () => {
                     <h2>My Courses</h2>
                 </div>
                 <div className='enrollList'>
-                    {purchasedCourses.data && purchasedCourses.data.length > 0 ? (
-                        purchasedCourses.data.map((course) => (
+                    {courses && courses.length > 0 ? (
+                        courses.map((course) => (
                             <div className='courseEnroll' key={course._id}>
                                 <LearnCard item={course} />
                             </div>

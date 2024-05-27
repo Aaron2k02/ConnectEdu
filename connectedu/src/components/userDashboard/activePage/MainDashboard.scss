@@ -1,98 +1,95 @@
-.mainDash{
- justify-content: center;
- align-items: center;
- padding-left: 20px;
+.mainDash {
+  justify-content: center;
+  align-items: center;
+  padding-left: 20px;
 
-   .PopularDash{
+  .PopularDash {
     padding-bottom: 10px;
     width: 70%;
     align-items: center;
-    
-    h2{
-        padding-bottom: 20px;
+
+    h2 {
+      padding-bottom: 20px;
     }
+  }
 
-   }
-
-   .custom-hr{
-    border: none; /* Remove default border */
-    height: 2px; /* Set the height of the line */
-    background-color: gray; /* Set the color of the line */
+  .custom-hr {
+    border: none;
+    /* Remove default border */
+    height: 2px;
+    /* Set the height of the line */
+    background-color: gray;
+    /* Set the color of the line */
     margin: 20px 0;
     width: 70%;
-   }
+  }
 
-   .LearningDash{
-     .desc{
+  .LearningDash {
+    .desc {
       font-size: 16px;
       padding-top: 5px;
       padding-bottom: 10px;
-     }
-    
-     .learninghead{
-        width: 70%;
-        display: flex;
-        justify-content: space-between;
-        flex-direction: row;
+    }
 
-        .view{
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          color: white;
-        }
-        
-        
-     }
-
-     .courseEnroll{
+    .learninghead {
+      width: 70%;
       display: flex;
+      justify-content: space-between;
       flex-direction: row;
-     }
 
-     
-   
-   }
+      .view {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+      }
+    }
 
-   .qnaDash{
-     h2{
+    .courseEnroll {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 10px;
+      overflow: hidden;
+      /* Hide overflow */
+    }
+        
+  }
+
+  .qnaDash {
+    h2 {
       padding-top: 20px;
       padding-bottom: 20px;
-     }
-
-    .qnaBox{
-        width: 60%;
-         border: 2px solid black;
-         display: flex;
-         flex-direction: row;
-         justify-content: space-between;
-         height: 100px;
-         align-items: center;
-         padding-left:30px ;
-         padding-right: 30px;
-         border-radius: 10px;
-         background-color: wheat;
-         color: #2B3467;
-        
-
-         button{
-          width: 100px;
-          height: 50px;
-          border-radius: 50px;
-          cursor: pointer;
-          background-color: #BAD7E9;
-          font-weight: bold;
-          border: 2px solid #2B3467;
-         }
-
-         .qnaLine{
-          display: flex;
-          align-items: flex-start;
-          flex-direction: column;
-          
-         }
     }
-   }
- 
-}
 
+    .qnaBox {
+      width: 60%;
+      border: 2px solid black;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      height: 100px;
+      align-items: center;
+      padding-left: 30px;
+      padding-right: 30px;
+      border-radius: 10px;
+      background-color: wheat;
+      color: #2B3467;
+
+      button {
+        width: 100px;
+        height: 50px;
+        border-radius: 50px;
+        cursor: pointer;
+        background-color: #BAD7E9;
+        font-weight: bold;
+        border: 2px solid #2B3467;
+      }
+
+      .qnaLine {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  }
+}
