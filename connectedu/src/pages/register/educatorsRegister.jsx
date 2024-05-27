@@ -1,20 +1,23 @@
 import FormInput from './featured/FormInput'
 import "./educatorRegister.scss"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 import newRequest from "../../utils/newRequest";
+import getCurrentUser from '../../utils/getCurrentUser';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { educatorRegister } from '../../utils/updateCurrentUser';
 
 const EducatorRegister = () => {
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"))
-  
+  const currentUser = getCurrentUser();
+  const [hasApplied, setHasApplied] = useState(false);
   const [message, setMessage] = useState("");
   const [values, setValues] = useState({
-    username: currentUser.username,
-    email: currentUser.email,
-    educationalBackground: currentUser.profile.educationalBackground,
-    professionalExperience: currentUser.profile.professionalExperience,
-    skillsAndQualifications: currentUser.profile.qualifications,
-  })
+    username: "No User Name Provided",
+    email: "No Email Provided",
+    educationalBackground: "No qualifications Provided",
+    professionalExperience: "No Experience Provided",
+    skillsAndQualifications: "No Educational Background Provided",
+  });
 
   const inputs = [
     {
@@ -40,6 +43,16 @@ const EducatorRegister = () => {
     },
     {
       id: 3,
+      name: "skills",
+      type: "text",
+      placeholder: "Educational Skills",
+      errorMessage: "Enter your education skills",
+      label: "Educational Skills",
+      required: true,
+      autoComplete: "skills", // Add autoComplete attribute
+    },
+    {
+      id: 4,
       name: "educationalBackground",
       type: "text",
       placeholder: "Educational Background",
@@ -49,7 +62,7 @@ const EducatorRegister = () => {
       autoComplete: "education", // Add autoComplete attribute
     },
     {
-      id: 4,
+      id: 5,
       name: "professionalExperience",
       type: "text",
       placeholder: "Previous Teaching Experience (if any)",
@@ -57,54 +70,93 @@ const EducatorRegister = () => {
       autoComplete: "experience", // Add autoComplete attribute
     },
     {
-      id: 5,
-      name: "qualification",
+      id: 6,
+      name: "qualifications",
       type: "text",
-      placeholder: "Skills and Qualifications",
-      label: "Skills and Qualifications",
-      autoComplete: "qualification", // Add autoComplete attribute
+      placeholder: "Qualifications",
+      label: "Qualifications",
+      autoComplete: "qualifications", // Add autoComplete attribute
     },
   ]
 
-
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const userId = currentUser._id;
-
-    setMessage('');
-
-    // Validate email and username before making the API call
-    if (values.email !== currentUser.email) {
-        setMessage('Wrong email');
-        return; // Exit the function if email is wrong
-    }
-
-    if (values.username !== currentUser.username) {
-        setMessage('Wrong username');
-        return; // Exit the function if username is wrong
-    }
-    try {
-      const response = await newRequest.put(`/users/register-educator/${userId}`, {
-        email: values.email,
-        username: values.username,
-        qualifications: values.qualification, 
-        professionalExperience: values.professionalExperience, 
-        educationalBackground: values.educationalBackground
-      });
-      if (response.status === 200) {
-        setMessage('Profile updated successfully');
-      } else {
-        setMessage('Failed to update profile');
-      }
-    } catch (err) {
-      setMessage(err.response?.data?.message || 'An error occurred');
-    }
+  const fetchCurrentUserProfile = async () => {
+    const response = await newRequest.get(`/users/${currentUser?._id}`);
+    return response.data;
   };
+
+  const queryClient = useQueryClient();
+
+  const { data, error, isLoading } = useQuery({
+    queryKey: ['userProfile'],
+    queryFn: fetchCurrentUserProfile,
+  });
+
+  useEffect(() => {
+    const fetchUserApplicationStatus = async () => {
+      try {
+        const response = await newRequest.post("/auth/check-application");
+        setHasApplied(response.data.hasApplied);
+      } catch (error) {
+        console.error("Error fetching user application status:", error);
+      }
+    };
+
+    fetchUserApplicationStatus();
+  }, [data]);
+
+  const mutation = useMutation({
+    mutationFn: educatorRegister,
+    onSuccess: () => {
+      queryClient.invalidateQueries(['userProfile']);
+      setMessage("Registered successfully!");
+      setTimeout(() => {
+        setMessage(""); // Clear message after a delay
+      }, 3000); // Set delay duration in milliseconds
+    },
+    onError: () => {
+      setMessage("Failed to update profile.");
+    }
+  });
+
+  useEffect(() => {
+    if (data && data.userProfile) {
+      setValues({
+        username: data.user?.username || "No User Name Provided",
+        email: data.user?.email || "No Email Provided",
+        skills: data.userProfile?.skills || "No Skills Provided",
+        qualifications: data.userProfile?.qualifications || "No qualifications Provided",
+        professionalExperience: data.userProfile?.professionalExperience || "No Experience Provided",
+        educationalBackground: data.userProfile?.educationalBackground || "No Educational Background Provided",
+      });
+    }
+  }, [data]);
 
   const onChange =(e)=>{
     setValues({...values,[e.target.name]:e.target.value})
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setMessage('');
+
+    // Validate email and username before making the API call
+    if (values.email !== data.user?.email) {
+      setMessage('Wrong email');
+      return; // Exit the function if email is wrong
+    }
+
+    if (values.username !== data.user?.username) {
+      setMessage('Wrong username');
+      return; // Exit the function if username is wrong
+    }
+
+    mutation.mutate(values);
+  };
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading user</div>;
+
   return (
     <div className='educatorRegister'>
       <div className="container">
@@ -112,23 +164,33 @@ const EducatorRegister = () => {
           <div className='header'>
             <div>
               <h1>Empower Minds, Shape Futures:</h1>
-              <h2> Join us as an educator</h2>
+              {hasApplied ? (
+                <h2> Thank you for applying with us as an educator</h2>
+              ) : (
+                <h2> Join us as an educator</h2>
+              )}
             </div>
             <div>
               <img src={"/images/ConnectEduLogo-bg.png"} alt="ConnectEdu Logo" />
             </div>
           </div>
-          <form onSubmit={handleSubmit}>
-            {inputs.map((input) => (
-              <FormInput key={input.id} {...input} value={values[input.name]} onChange={onChange} />
-            ))}
-             {message && <p>{message}</p>}
-            <button type="submit">Submit</button>
-          </form>
+          {hasApplied ? (
+            <form onSubmit={handleSubmit}>
+              <p>You have already applied as an educator.</p>
+            </form>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              {inputs.map((input) => (
+                <FormInput key={input.id} {...input} value={values[input.name]} onChange={onChange} />
+              ))}
+              {message && <p>{message}</p>}
+              <button type="submit">Submit</button>
+            </form>
+          )}
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default EducatorRegister

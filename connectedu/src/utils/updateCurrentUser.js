@@ -32,3 +32,8 @@ export const changePassword = async (data) => {
     const response = await newRequest.post(`/auth/change-password`, data);
     return response.data;
 };
+
+export const educatorRegister = async (data) => {
+    const response = await newRequest.put(`/users/register-educator`, data);
+    return response.data;
+};

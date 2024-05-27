@@ -17,6 +17,21 @@ const checkUser = async (req, res, next) => {
     }
 };
 
+const checkUserApplication = async (req, res, next) => {
+    try {
+        const userId = req.userId;
+
+        const user = await User.findById(userId);
+
+        if (user.educatorApplication === true) {
+            return res.status(200).json({ hasApplied: true });
+        }
+        return res.status(200).json({ hasApplied: false });
+    } catch (err) {
+        next(createError(500, "Something went wrong!"));
+    }
+};
+
 const register = async (req, res, next) => {
     try {
         // Hash the password with bcrypt
@@ -207,4 +222,4 @@ const changePassword = async (req, res, next) => {
     }
 };
 
-module.exports = { register, login, logout, updateUserProfile, validatePassword, changePassword, updatePersonalInfo, checkUser};
+module.exports = { register, login, logout, updateUserProfile, validatePassword, changePassword, updatePersonalInfo, checkUser, checkUserApplication};

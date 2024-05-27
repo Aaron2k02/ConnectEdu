@@ -102,7 +102,7 @@ const updateUserRole = async (req, res, next) => {
 const applyEducator = async (req, res) => {
     
     try {
-        const { userId } = req.params;
+        const userId = req.userId;
         const { skills, qualifications, professionalExperience, educationalBackground } = req.body;
 
         const userProfile = await UserProfile.findOneAndUpdate(
@@ -110,8 +110,6 @@ const applyEducator = async (req, res) => {
             { skills, qualifications, professionalExperience, educationalBackground },
             { new: true, runValidators: true }
         );
-
-
 
         const user = await User.findByIdAndUpdate(
             userId,
@@ -132,7 +130,5 @@ const applyEducator = async (req, res) => {
         res.status(500).send("Something went wrong!");
     }
 };
-
-
 
 module.exports = { deleteUser, getUser, getUsers, getUserCounts, updateUserRole,applyEducator };

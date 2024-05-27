@@ -77,8 +77,15 @@ const PersonalExperience = () => {
       id: 3,
       name: "skills",
       type: "text",
-      placeholder: "Skills and Qualifications",
-      label: "Skills and Qualifications",
+      placeholder: "Skills",
+      label: "Skills",
+    },
+    {
+      id: 4,
+      name: "qualifications",
+      type: "text",
+      placeholder: "Skills",
+      label: "Qualifications",
     },
   ];
 
