@@ -50,7 +50,6 @@ const Register = () => {
       placeholder: "Confirm Password",
       errorMessage: "Password does not match",
       label: "Confirm Password",
-      // matched: user.password !== user.confirmPass ? true : false,
       required: true
     },
   ];
@@ -60,12 +59,28 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (user.password !== user.confirmPass) {
-      // Todo fix the following to be included in the form component instead
       setError("Passwords do not match");
       return;
     }
     try {
-      await newRequest.post("/auth/register", user);
+      // Check if the user already exists
+      const existingUserResponse = await newRequest.post("/auth/check-user", {
+        email: user.email,
+        username: user.username
+      });
+
+      if (existingUserResponse.data.exists) {
+        // Redirect to login if user already exists
+        navigate("/login");
+        return;
+      }
+
+      // If user doesn't exist, proceed with registration
+      await newRequest.post("/auth/register", {
+        username: user.username,
+        email: user.email,
+        password: user.password,
+      });
       navigate("/");
     } catch (err) {
       console.log(err);

@@ -99,4 +99,36 @@ const updateUserRole = async (req, res, next) => {
     }
 };
 
-module.exports = { deleteUser, getUser, getUsers, getUserCounts, updateUserRole };
+const applyEducator = async (req, res) => {
+    
+    try {
+        const userId = req.userId;
+        const { skills, qualifications, professionalExperience, educationalBackground } = req.body;
+
+        const userProfile = await UserProfile.findOneAndUpdate(
+            { userId },
+            { skills, qualifications, professionalExperience, educationalBackground },
+            { new: true, runValidators: true }
+        );
+
+        const user = await User.findByIdAndUpdate(
+            userId,
+            { educatorApplication:true},
+            { new: true } // Return the updated document
+        );
+
+        if (!userProfile) {
+            return res.status(404).send("Profile not found!");
+        }
+
+        if(!user){
+            return res.status(404).send("User not found!");
+        }
+
+        res.status(200).send("Profile updated successfully!");
+    } catch (err) {
+        res.status(500).send("Something went wrong!");
+    }
+};
+
+module.exports = { deleteUser, getUser, getUsers, getUserCounts, updateUserRole,applyEducator };

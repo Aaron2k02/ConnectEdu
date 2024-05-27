@@ -21,11 +21,13 @@ const OrderSchema = new Schema({
     // to indentify the seller info
     sellerId: {
         type: String,
+        ref: 'User',
         required: true,
     },
     // to identify tge buyer info 
     buyerId: {
         type: String,
+        ref: 'User',
         required: true,
     },
     // after proper payment this field will be updated 

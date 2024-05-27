@@ -48,6 +48,7 @@ const Navbar = ({ filterCoursesByCategory }) => {
     try {
       await newRequest.get("/auth/logout");
       localStorage.setItem("currentUser", null);
+      localStorage.setItem("userProfile", null);
       setShowLogoutPopup(false); // Reset the popup state
       if (currentUser && isAdmin) {
         navigate('/Dashboard'); // Navigate to Dashboard for admin

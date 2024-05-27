@@ -16,22 +16,22 @@ const userSchema = new Schema({
         type: String,
         required: false,
     },
-    age: {
-        type: Number, // Changed from int to Number
+    fullName: {
+        type: String,
+        required: false
+    },
+    phoneNumber: {
+        type: String, // Changed from int to Number
         required: false,
     },
     roleId: {
         type: Number,
         ref: 'Role',
-        // default: 1 // Default to 'user' role
+        default: 1 // Default to 'user' role
     },
     password: {
         type: String,
         required: true
-    },
-    description: {
-        type: String,
-        required: false
     },
     photoUrl: {
         type: String,

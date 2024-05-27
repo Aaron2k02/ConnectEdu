@@ -9,7 +9,7 @@ const userProfileSchema = new Schema({
         required: true,
     },
     skills: {
-        type: [String],
+        type: String,
         required: false,
     },
     qualifications: {
