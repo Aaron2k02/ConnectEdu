@@ -58,7 +58,6 @@ const PersonalExperience = () => {
     {
       id: 1,
       name: "educationalBackground",
-      name: "educationalBackground",
       type: "text",
       placeholder: "Educational Background",
       errorMessage: "Enter your education level",
@@ -67,7 +66,6 @@ const PersonalExperience = () => {
     },
     {
       id: 2,
-      name: "professionalExperience",
       name: "professionalExperience",
       type: "text",
       placeholder: "Previous Teaching Experience (if any)",

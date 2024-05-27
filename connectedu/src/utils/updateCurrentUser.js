@@ -12,7 +12,6 @@ export const updateUserProfile = async (data) => {
 
 export const updatePersonalInfo = async (data) => {
     const response = await newRequest.put(`/auth/personal-info`, data);
-    console.log("update date",data)
     return response.data;
 };
 

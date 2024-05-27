@@ -131,8 +131,8 @@ const EducatorRegister = () => {
     }
   }, [data]);
 
-  const onChange =(e)=>{
-    setValues({...values,[e.target.name]:e.target.value})
+  const onChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value })
   };
 
   const handleSubmit = async (e) => {
@@ -181,7 +181,7 @@ const EducatorRegister = () => {
           ) : (
             <form onSubmit={handleSubmit}>
               {inputs.map((input) => (
-                <FormInput key={input.id} {...input} value={values[input.name]} onChange={onChange} />
+                <FormInput key={input.id} {...input} value={values[input.name] || ''} onChange={onChange} />
               ))}
               {message && <p>{message}</p>}
               <button type="submit">Submit</button>
@@ -193,4 +193,4 @@ const EducatorRegister = () => {
   );
 }
 
-export default EducatorRegister
+export default EducatorRegister;

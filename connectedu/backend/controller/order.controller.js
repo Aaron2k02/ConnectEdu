@@ -5,16 +5,15 @@ const User = require("../models/user.model");
 const Stripe = require("stripe");
 
 const getOrders = async (req, res, next) => {
-
     try {
-        
         const orders = await Order.find({
             $or: [
                 { buyerId: req.userId },
                 { sellerId: req.userId }
             ],
             isCompleted: true,
-        });
+        }).populate('buyerId', 'username email')
+            .populate('sellerId', 'username email');
 
         res.status(200).send(orders);
     } catch (err) {

@@ -139,22 +139,17 @@ const updateUserProfile = async (req, res) => {
 };
 
 const updatePersonalInfo = async (req, res) => {
-
     try {
-
         const userId = req.userId;
+        const { username, email, fullName, phoneNumber, photoUrl } = req.body;
 
-        const { username, email, fullName, phoneNumber } = req.body;
-        // res.status(200).json(req.body);
-
-       
         if (!username || !email || !fullName || !phoneNumber) {
             return res.status(400).send("All fields are required!");
         }
 
         const userProfile = await User.findByIdAndUpdate(
             userId,
-            { username, email, fullName, phoneNumber },
+            { username, email, fullName, phoneNumber, photoUrl },
             { new: true } // Return the updated document
         );
 
@@ -162,8 +157,8 @@ const updatePersonalInfo = async (req, res) => {
             return res.status(404).send("Profile not found!");
         }
 
-        res.status(200).send(userProfile);
-       
+        // Return the updated user profile
+        res.status(200).json({ user: userProfile });
     } catch (err) {
         console.error(err); // Log the error for debugging
         res.status(500).send("Something went wrong!");

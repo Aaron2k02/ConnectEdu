@@ -23,8 +23,6 @@ const ManageUser = () => {
     queryFn: fetchUsers,
   });
 
-  console.log(users);
-
   const mutation = useMutation({
     mutationFn: deleteUser,
     onSuccess: () => {
@@ -64,7 +62,7 @@ const ManageUser = () => {
             {users.map((user) => (
               <tr key={user._id}>
                 <td>
-                  <img src={user.photoUrl || 'default-avatar.png'} alt={user.username} />
+                  <img src={user.photoUrl || 'images/noavatar.png'} alt={user.username} />
                 </td>
                 <td>{user.username}</td>
                 <td>{user.roleId === 1 ? 'Student' : user.roleId === 2 ? 'Educator' : 'Admin'}</td>

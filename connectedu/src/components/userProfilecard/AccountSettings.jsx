@@ -3,6 +3,7 @@ import FormInput from "../../pages/register/featured/FormInput";
 import "./AccountSettings.scss";
 import newRequest from "../../utils/newRequest";
 import getCurrentUser from "../../utils/getCurrentUser";
+import upload from "../../utils/upload";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { updatePersonalInfo } from "../../utils/updateCurrentUser";
 
@@ -23,9 +24,13 @@ const AccountSettings = () => {
 
   const mutation = useMutation({
     mutationFn: updatePersonalInfo,
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries(['user']);
       setMessage("Profile updated successfully!");
+
+      // Update local storage with the new user info
+      localStorage.setItem("currentUser", JSON.stringify(data.user));
+
       setTimeout(() => {
         setMessage(""); // Clear message after a delay
       }, 3000); // Set delay duration in milliseconds
@@ -36,13 +41,14 @@ const AccountSettings = () => {
   });
 
   const [message, setMessage] = useState("");
-
   const [values, setValues] = useState({
     username: '',
     email: '',
     fullName: '',
     phoneNumber: '',
   });
+  const [file, setFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
 
   useEffect(() => {
     if (data && data.user) {
@@ -52,6 +58,7 @@ const AccountSettings = () => {
         fullName: data.user.fullName || '',
         phoneNumber: data.user.phoneNumber || '',
       });
+      setPreviewUrl(data.user.photoUrl || null);
     }
   }, [data]);
 
@@ -67,7 +74,6 @@ const AccountSettings = () => {
     },
     {
       id: 2,
-      name: "fullName",
       name: "fullName",
       type: "text",
       placeholder: "Full name",
@@ -95,13 +101,30 @@ const AccountSettings = () => {
     },
   ];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    mutation.mutate(values);
+    let photoUrl = previewUrl;
+
+    if (file) {
+      photoUrl = await upload(file);
+    }
+
+    mutation.mutate({ ...values, photoUrl });
   };
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+    setPreviewUrl(URL.createObjectURL(selectedFile));
+  };
+
+  const handleRemoveImage = () => {
+    setFile(null);
+    setPreviewUrl(null);
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -111,6 +134,16 @@ const AccountSettings = () => {
     <div className='accountSettings'>
       <h1 className='mainHead1'>Personal Information</h1>
       <form onSubmit={handleSubmit}>
+        <div className="image-upload">
+          <label htmlFor="profileImage">Profile Image</label>
+          <input type="file" id="profileImage" accept="image/*" onChange={handleFileChange} />
+          {previewUrl && (
+            <div className="image-preview">
+              <img src={previewUrl} alt="Profile Preview" />
+              <button type="button" onClick={handleRemoveImage}>Remove</button>
+            </div>
+          )}
+        </div>
         {inputs.map((input) => (
           <FormInput key={input.id} {...input} value={values[input.name]} onChange={onChange} />
         ))}
