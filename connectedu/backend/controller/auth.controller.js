@@ -83,12 +83,6 @@ const login = async (req, res, next) => {
 
         const { password, ...userInfo } = user._doc;
 
-        // Fetch the user profile
-        const userProfile = await UserProfile.findOne({ userId: user._id });
-        if (!userProfile) {
-            return next(createError(404, "User profile not found!"));
-        }
-
         res.cookie("accessToken", token, {
             httpOnly: true,
         }).status(200).send({ userInfo, userProfile });
