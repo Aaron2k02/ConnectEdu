@@ -18,11 +18,10 @@ const userSchema = new Schema({
     },
     fullName: {
         type: String,
-        required: false,
-        unique: true
+        required: false
     },
     phoneNumber: {
-        type: Number, // Changed from int to Number
+        type: String, // Changed from int to Number
         required: false,
     },
     roleId: {

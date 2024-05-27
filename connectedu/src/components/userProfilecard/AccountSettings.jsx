@@ -1,20 +1,59 @@
-import React, { useState } from "react"
-import FormInput from "../../pages/register/featured/FormInput"
-import "./AccountSettings.scss"
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import FormInput from "../../pages/register/featured/FormInput";
+import "./AccountSettings.scss";
 import newRequest from "../../utils/newRequest";
+import getCurrentUser from "../../utils/getCurrentUser";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { updatePersonalInfo } from "../../utils/updateCurrentUser";
 
 const AccountSettings = () => {
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"))
+  const currentUser = getCurrentUser();
+
+  const fetchCurrentUser = async () => {
+    const response = await newRequest.get(`/users/${currentUser?._id}`);
+    return response.data;
+  };
+
+  const queryClient = useQueryClient();
+
+  const { data, error, isLoading } = useQuery({
+    queryKey: ['user'],
+    queryFn: fetchCurrentUser,
+  });
+
+  const mutation = useMutation({
+    mutationFn: updatePersonalInfo,
+    onSuccess: () => {
+      queryClient.invalidateQueries(['user']);
+      setMessage("Profile updated successfully!");
+      setTimeout(() => {
+        setMessage(""); // Clear message after a delay
+      }, 3000); // Set delay duration in milliseconds
+    },
+    onError: () => {
+      setMessage("Failed to update profile.");
+    }
+  });
+
+  const [message, setMessage] = useState("");
+
   const [values, setValues] = useState({
-    username: currentUser.username,
-    email: currentUser.email,
-    
-    fullname: currentUser.fullName,
-    phoneNo: currentUser.phoneNumber,
-  })
- // const [message, setMessage] = useState("");
-  let navigate = useNavigate();
+    username: '',
+    email: '',
+    fullName: '',
+    phoneNumber: '',
+  });
+
+  useEffect(() => {
+    if (data && data.user) {
+      setValues({
+        username: data.user.username || '',
+        email: data.user.email || '',
+        fullName: data.user.fullName || '',
+        phoneNumber: data.user.phoneNumber || '',
+      });
+    }
+  }, [data]);
 
   const inputs = [
     {
@@ -24,59 +63,48 @@ const AccountSettings = () => {
       placeholder: "Username",
       label: "Username",
       required: true,
-      autoComplete: "username", // Add autoComplete attribute
+      autoComplete: "username",
     },
     {
       id: 2,
-      name: "fullname",
+      name: "fullName",
       type: "text",
       placeholder: "Full name",
       label: "Full name",
       required: true,
-      autoComplete: "name", // Add autoComplete attribute
+      autoComplete: "name",
     },
     {
       id: 3,
       name: "email",
-      type: "email", // Corrected to "email" type
+      type: "email",
       placeholder: "Email",
       label: "Email",
       required: true,
-      autoComplete: "email", // Add autoComplete attribute
+      autoComplete: "email",
     },
     {
       id: 4,
-      name: "phoneNo",
-      type: "tel", // Corrected to "tel" type
+      name: "phoneNumber",
+      type: "tel",
       placeholder: "Mobile Phone",
       label: "Phone/Mobile",
       required: true,
-      autoComplete: "tel", // Add autoComplete attribute
+      autoComplete: "tel",
     },
-  ]
+  ];
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const userId = currentUser._id;
-
-    try {
-      await newRequest.put(`/auth/personal-info/${userId}`, {
-        username: values.username,
-        email: values.email,
-        fullname: values.fullname,
-        phoneNo: values.phoneNo,
-      });
-
-      navigate("/");
-
-    } catch (err) {
-      setMessage(err.response.data.message);
-    }
+    mutation.mutate(values);
   };
 
-  const onChange =(e)=>{
-    setValues({...values,[e.target.name]:e.target.value})
+  const onChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
   };
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading user</div>;
 
   return (
     <div className='accountSettings'>
@@ -85,10 +113,11 @@ const AccountSettings = () => {
         {inputs.map((input) => (
           <FormInput key={input.id} {...input} value={values[input.name]} onChange={onChange} />
         ))}
+        {message && <p>{message}</p>}
         <button type="submit">Save changes</button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default AccountSettings
+export default AccountSettings;

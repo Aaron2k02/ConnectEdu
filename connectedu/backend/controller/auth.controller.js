@@ -4,6 +4,19 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { createError } = require("../utils/createError");
 
+const checkUser = async (req, res, next) => {
+    try {
+        const { email, username } = req.body;
+        const user = await User.findOne({ $or: [{ email }, { username }] });
+        if (user) {
+            return res.status(200).json({ exists: true });
+        }
+        return res.status(200).json({ exists: false });
+    } catch (err) {
+        next(createError(500, "Something went wrong!"));
+    }
+};
+
 const register = async (req, res, next) => {
     try {
         // Hash the password with bcrypt
@@ -13,6 +26,8 @@ const register = async (req, res, next) => {
         const newUser = new User({
             ...req.body,
             password: hash,
+            // User registered will be set as normal user
+            roleId: 1,
         });
 
         await newUser.save();
@@ -36,7 +51,7 @@ const register = async (req, res, next) => {
 const login = async (req, res, next) => {
     try {
         const user = await User.findOne({ username: req.body.username });
-        
+
         if (!user) {
             return next(createError(404, "User not found!"));
         }
@@ -51,11 +66,17 @@ const login = async (req, res, next) => {
             roleId: user.roleId
         }, process.env.JWT_KEY)
 
-        const { password, ...info } = user._doc;
+        const { password, ...userInfo } = user._doc;
+
+        // Fetch the user profile
+        const userProfile = await UserProfile.findOne({ userId: user._id });
+        if (!userProfile) {
+            return next(createError(404, "User profile not found!"));
+        }
 
         res.cookie("accessToken", token, {
             httpOnly: true,
-        }).status(200).send(info);
+        }).status(200).send({ userInfo, userProfile });
     } catch (err) {
         return next(createError(500, "Something went wrong!"));
     }
@@ -72,7 +93,7 @@ const logout = (req, res) => {
 const updateUserProfile = async (req, res) => {
     
     try {
-        const { userId } = req.params;
+        const  userId  = req.userId;
         const { skills, qualifications, professionalExperience, educationalBackground } = req.body;
 
         const userProfile = await UserProfile.findOneAndUpdate(
@@ -92,16 +113,19 @@ const updateUserProfile = async (req, res) => {
 };
 
 const updatePersonalInfo = async (req, res) => {
+
     try {
-        const { userId } = req.params;
+
+        const userId = req.userId;
+
         const { username, email, fullName, phoneNumber } = req.body;
+        // res.status(200).json(req.body);
 
        
         if (!username || !email || !fullName || !phoneNumber) {
             return res.status(400).send("All fields are required!");
         }
 
-       
         const userProfile = await User.findByIdAndUpdate(
             userId,
             { username, email, fullName, phoneNumber },
@@ -112,7 +136,7 @@ const updatePersonalInfo = async (req, res) => {
             return res.status(404).send("Profile not found!");
         }
 
-        res.status(200).send("Profile updated successfully!");
+        res.status(200).send(userProfile);
        
     } catch (err) {
         console.error(err); // Log the error for debugging
@@ -120,10 +144,32 @@ const updatePersonalInfo = async (req, res) => {
     }
 };
 
+const validatePassword = async (req, res, next) => {
+    try {
+        const userId = req.userId; // Ensure userId is captured from the URL
+        const { currentPassword } = req.body;
+
+        // Find the user by userId (assuming userId is the _id field in MongoDB)
+        const user = await User.findById(userId);
+
+        // Compare the current password with the user's stored password
+        const isCorrect = await bcrypt.compare(currentPassword, user.password);
+
+        if (!isCorrect) {
+            return res.status(200).json({ match: false });
+        }
+
+        return res.status(200).json({ match: true });
+    } catch (err) {
+        console.error(err); // Log the error for debugging
+        return next(createError(500, "Something went wrong!"));
+    }
+};
+
 const changePassword = async (req, res, next) => {
     try {
         const { currentPassword, newPassword } = req.body;
-        const { userId } = req.params; // Ensure userId is captured from the URL
+        const userId = req.userId; // Ensure userId is captured from the URL
 
         // Find the user by userId (assuming userId is the _id field in MongoDB)
         const user = await User.findById(userId);
@@ -150,4 +196,4 @@ const changePassword = async (req, res, next) => {
     }
 };
 
-module.exports = { register, login, logout, updateUserProfile,changePassword ,updatePersonalInfo};
+module.exports = { register, login, logout, updateUserProfile, validatePassword, changePassword, updatePersonalInfo, checkUser};

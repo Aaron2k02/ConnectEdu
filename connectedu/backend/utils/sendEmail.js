@@ -1,11 +1,16 @@
-const nodemailer=require("nodemailer");
+const nodemailer = require("nodemailer");
+// Load environment variables from .env file
+require('dotenv').config();
 
+// Trim whitespace from environment variables
+const authEmail = process.env.AUTH_EMAIL;
+const authPass = process.env.AUTH_PASS;
 
 let transporter = nodemailer.createTransport({
-    host:"smtp-mail.outlook.com",
-    auth:{
-        user:process.env.AUTH_EMAIL,
-        pass:process.env.AUTH_PASS,
+    host: "smtp-mail.outlook.com",
+    auth: {
+        user: authEmail,
+        pass: authPass,
     }
 });
 
