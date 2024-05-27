@@ -18,7 +18,6 @@ const Courses = ({ selectedCategory }) => {
     if (searchInput.current.value) {
       query += `&search=${searchInput.current.value}`;
     }
-    console.log(query);
     return query;
   };
 

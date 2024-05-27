@@ -99,17 +99,29 @@ const checkOutSession = async (req, res, next) => {
 
 const confirmCheckOutSession = async (req, res, next) => {
     try {
-        // Find orders where the user is the buyer and the order is completed
-        const orders = await Order.findOneAndUpdate({
-                payment_intent: req.body.payment_intent
-            },
-            {
-                $set: {
-                    isCompleted: true
-                }
-            }
-        )
-        res.status(200).json(orders);
+        // Find the order based on the payment_intent
+        const order = await Order.findOne({ payment_intent: req.body.payment_intent });
+
+        if (!order) {
+            return next(createError(404, "Order not found!"));
+        }
+
+        // Check if the order is already completed
+        if (order.isCompleted) {
+            return res.status(200).json({ message: "Order already completed" });
+        }
+
+        // Update the order to mark it as completed
+        order.isCompleted = true;
+        await order.save();
+        
+        // Increment the totalSales field of the corresponding course
+        await Course.findByIdAndUpdate(order.courseId, { $inc: { totalSales: 1 } });
+
+        // Increment the totalSales field of the corresponding educator
+        await User.findByIdAndUpdate(order.sellerId, { $inc: { totalSales: 1 } });
+
+        res.status(200).json(order);
     } catch (err) {
         next(err);
     }

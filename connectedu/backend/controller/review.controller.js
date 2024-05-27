@@ -4,22 +4,17 @@ const Role = require("../models/userRole.model.js");
 const { createError } = require("../utils/createError.js");
 
 const createReview = async (req, res, next) => {
-    try {
-        // Find the user's role by ID
-        // const userRole = await Role.findOne({ roleId: req.roleId });
 
-        // after implemented in the front-end
-        // const courseId = req.params.id;
+    try {
+
         const courseId = req.body.courseId;
 
         const course = await Course.findById(courseId);
 
-        // if (userRole.name === "Educator") {
-            // Check if the educatorId matches the userId from the token 
-            if (course.educatorId.toString() === req.userId) {
-                return next(createError(403, "You cannot rate your own course!"));
-            }
-        // }
+ 
+        if (course.educatorId.toString() === req.userId) {
+            return next(createError(403, "You cannot rate your own course!"));
+        }
 
         const newReview = new Review({
             userId: req.userId,
@@ -28,13 +23,13 @@ const createReview = async (req, res, next) => {
             content: req.body.content,
         })
 
-        const review = await Review.findOne({
+        const existingReview = await Review.findOne({
             courseId: courseId,
             userId: req.userId,
         })
 
         // create condition if the user has already purchased the course using the order model
-        if (review) return next(createError(403, "You have already created a review for this course!"));
+        if (existingReview) return next(createError(403, "You have already created a review for this course!"));
 
         const savedReview = await newReview.save();
 
@@ -43,7 +38,9 @@ const createReview = async (req, res, next) => {
         await Course.findByIdAndUpdate(courseId, { $inc: { totalStars: req.body.rating, rateCount: 1 } });
 
     } catch (err) {
+
         return next(createError(500, "Something went wrong!"));
+
     }
 };
 
@@ -51,7 +48,7 @@ const getReviews = async (req, res, next) => {
     try {
         const courseId = req.params.courseId;
 
-        const reviews = await Review.find({ courseId: courseId });
+        const reviews = await Review.find({ courseId: courseId }).populate('userId', 'photoUrl username');
 
         res.status(201).send(reviews);
 

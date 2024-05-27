@@ -157,7 +157,7 @@ const getCourse = async (req, res, next) => {
         const courseId = req.params.id;
 
         // Find the course by ID
-        const course = await Course.findById(courseId);
+        const course = await Course.findById(courseId).populate('educatorId');
 
         if (!course) {
             return next(createError(404, "Course not found!"));
@@ -186,14 +186,13 @@ const getApprovedCourses = async (req, res, next) => {
         ...(query.category && {category: query.category}),
         //  $option: "i" remove case sensitive search
         ...(query.search && { title: { $regex: query.search, $options: "i" } }),
-        
         // filter for approved courses only
         isApproved: true
     }
     
     try {
         // Find courses created by the authenticated || user { educatorId: req.userId }
-        const courses = await Course.find(filters).sort({ [query.sort]: -1});
+        const courses = await Course.find(filters).sort({ [query.sort]: -1 }).populate('educatorId', 'photoUrl username');
 
         if (courses.length === 0) {
             return next(createError(404, "No courses found for this educator."));
@@ -209,20 +208,27 @@ const getCourseSections = async (req, res, next) => {
     try {
         const courseId = req.params.id;
 
+        const course = await Course.findById(courseId);
+
+        if (!course) {
+            return next(createError(404, "Course not found."));
+        }
+
         const userRole = await Role.findOne({ roleId: req.roleId });
 
-        if (userRole.name !== "Admin"){
-        // Ensure the user has purchased the course
-        const order = await Order.findOne({
-            courseId: courseId,
-            buyerId: req.userId,
-            isCompleted: true
-        });
+        if ((userRole.name !== "Admin") && (req.userId !== course.educatorId.toString())) {
+            // Ensure the user has purchased the course
+            const order = await Order.findOne({
+                courseId: courseId,
+                buyerId: req.userId,
+                isCompleted: true
+            });
 
-        if (!order) {
-            return next(createError(403, "You have not purchased this course."));
+            if (!order) {
+                return next(createError(403, "You have not purchased this course."));
             }
         }
+
         // Find the sections associated with the course
         const sections = await Section.find({ courseId });
 

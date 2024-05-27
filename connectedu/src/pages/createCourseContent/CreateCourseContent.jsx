@@ -34,28 +34,29 @@ const CreateCourseContent = () => {
     };
 
     const routeNext = () => {
-        navigate('/create-course-preview', { state: { courseState: state, files } });
+        navigate('/create-course-preview', { state: { courseState: state, files, isCreateCourse } });
     };
 
     const routeBack = () => {
         if (isCreateCourse){
             navigate('/createCourse', { state: { courseState: state, files } });
-            // console.log(files);
         } else {
-            // console.log(courseState._id);
-            navigate(`/updateCourse/${courseState._id}`, { state: { courseState: state, files } });
+            navigate(`/updateCourse/${courseState._id}`, { state: { courseState: state, files, isCreateCourse } });
         }
     };
 
     return (
         <div className='createCourseContent'>
             <div className="container">
-                <h1>Create Course Content</h1>
+                {isCreateCourse ?
+                    (<h1>Create Your Course Content</h1>)
+                    :
+                    (<h1>Update Your Course Content</h1>)
+                }
                 <div className="sections">
                     <div className="left">
                         <form id="courseSections" className="courseSections" autoComplete="off">
                             <div className="form-field">
-                                <h3>Structure Your Course Content</h3>
                                 {state.sections.length > 0 ? (
                                     state.sections.map((sectionItem, index) => (
                                         <div className="sectionItem" key={index}>

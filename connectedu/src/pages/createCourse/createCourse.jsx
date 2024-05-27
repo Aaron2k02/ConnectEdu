@@ -62,8 +62,7 @@ const CreateCourse = () => {
   };
 
   const handleCancel = () => {
-    console.log(courseState);
-    // navigate('/manageCourses');
+    navigate('/manageCourses');
   };
 
   return (

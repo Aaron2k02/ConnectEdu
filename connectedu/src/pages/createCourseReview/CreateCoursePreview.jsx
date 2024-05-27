@@ -18,7 +18,7 @@ const CreateCoursePreview = () => {
     const [uploadComplete, setUploadComplete] = useState(false);
     const [error, setError] = useState(null); // State for error message
     const location = useLocation();
-    const { courseState = state, files = [] } = location.state || {};
+    const { courseState = state, files = [], isCreateCourse } = location.state || {};
     const navigate = useNavigate();
     const topicsArray = courseState.topics.map(topic => topic.coverage);
     const queryClient = useQueryClient();
@@ -102,7 +102,6 @@ const CreateCoursePreview = () => {
                 }
             }, 2000); // Wait for 2 seconds before proceeding
         }
-        console.log(state.thumbnailUrl);
     }, [uploadComplete]);
 
     const checkRequiredFields = (courseData) => {
@@ -123,7 +122,7 @@ const CreateCoursePreview = () => {
         mutationFn: (course) => newRequest.post('/courses', course),
         onSuccess: () => {
             queryClient.invalidateQueries(["myCourses"]);
-            navigate('/myCourses');
+            navigate('/manageCourses');
         },
         onError: (error) => {
             console.error("Error creating course:", error.response?.data || error.message);
@@ -131,7 +130,7 @@ const CreateCoursePreview = () => {
     });
 
     const togglePop = async () => {
-        // setSeen(false);
+        setSeen(false);
         if (!uploading) {
             if (validateCourse()) {
                 await handleUpload(files);
@@ -142,9 +141,7 @@ const CreateCoursePreview = () => {
     };
 
     const routeBack = () => {
-        // navigate('/create-course-content', { state: { courseState: state, files } }); 
-        // console.log(state.thumbnailUrl);
-        console.log(courseState._id);
+        navigate('/create-course-content', { state: { courseState: state, files, isCreateCourse } }); 
     };
 
     const fileUrls = files.map(file => URL.createObjectURL(file));

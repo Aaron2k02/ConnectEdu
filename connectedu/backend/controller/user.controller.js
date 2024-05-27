@@ -131,4 +131,17 @@ const applyEducator = async (req, res) => {
     }
 };
 
-module.exports = { deleteUser, getUser, getUsers, getUserCounts, updateUserRole,applyEducator };
+const getEducators = async (req, res, next) => {
+    try {
+        const educators = await User.find({ roleId: 2 }); // Assuming roleId 2 represents educators
+        const educatorsWithProfile = await Promise.all(educators.map(async educator => {
+            const profile = await UserProfile.findOne({ userId: educator._id });
+            return { ...educator.toObject(), profile };
+        }));
+        res.status(200).json(educatorsWithProfile);
+    } catch (err) {
+        return next(createError(500, "Something went wrong!"));
+    }
+};
+
+module.exports = { deleteUser, getUser, getUsers, getUserCounts, updateUserRole, applyEducator, getEducators};
