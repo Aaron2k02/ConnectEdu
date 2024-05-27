@@ -68,6 +68,7 @@ const AccountSettings = () => {
     {
       id: 2,
       name: "fullName",
+      name: "fullName",
       type: "text",
       placeholder: "Full name",
       label: "Full name",

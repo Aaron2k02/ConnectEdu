@@ -42,6 +42,15 @@ const register = async (req, res, next) => {
 
         await newUserProfile.save();
 
+        const userData = {
+            ...newUser._doc,
+            profile: newUserProfile,
+        };
+
+      
+        res.status(201).json(userData);
+
+
         res.status(201).send("User has been created and profile has been set up!");
     } catch (err) {
         next(err)
@@ -65,6 +74,12 @@ const login = async (req, res, next) => {
             id: user._id,
             roleId: user.roleId
         }, process.env.JWT_KEY)
+
+        const userProfile = await UserProfile.findOne({ userId: user._id });
+        
+        if (!userProfile) {
+            return next(createError(404, "User profile not found!"));
+        }
 
         const { password, ...userInfo } = user._doc;
 
@@ -105,6 +120,8 @@ const updateUserProfile = async (req, res) => {
         if (!userProfile) {
             return res.status(404).send("Profile not found!");
         }
+       
+
 
         res.status(200).send("Profile updated successfully!");
     } catch (err) {
