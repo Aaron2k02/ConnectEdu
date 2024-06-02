@@ -12,12 +12,12 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
-    country: {
+    fullName: {
         type: String,
-        required: true,
+        required: false
     },
-    age: {
-        type: Number, // Changed from int to Number
+    phoneNumber: {
+        type: String, // Changed from int to Number
         required: false,
     },
     roleId: {
@@ -29,15 +29,16 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    description: {
-        type: String,
-        required: false
-    },
     photoUrl: {
         type: String,
         required: false,
         default: null
     }, 
+    educatorApplication: {
+        type: Boolean,
+        required: false,
+        default: false,
+    },
     totalSales: {
         type: Number,
         required: false,

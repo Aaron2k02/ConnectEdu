@@ -3,7 +3,6 @@ import "./Profile.scss"
 import UserSidebar from '../../components/userProfilecard/UserSidebar'
 import AccountSettings from '../../components/userProfilecard/AccountSettings'
 import { useParams } from 'react-router-dom'
-import Course from '../course/course'
 import ChangePassword from '../../components/userProfilecard/ChangePassword'
 import PersonalExperience from '../../components/userProfilecard/PersonalExperience'
 

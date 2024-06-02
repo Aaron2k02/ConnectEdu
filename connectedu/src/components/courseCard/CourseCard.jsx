@@ -7,12 +7,6 @@ import newRequest from '../../utils/newRequest'; // Ensure this is the correct p
 const CourseCard = ({ item }) => {
     const navigate = useNavigate();
 
-    // Backend Query handling
-    const { isFetching, error, data } = useQuery({
-        queryKey: [item.educatorId],
-        queryFn: () => newRequest.get(`/users/${item.educatorId}`).then((res) => res.data),
-    });
-
     const handleReadMoreClick = (courseId) => {
         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
         if (!currentUser) {
@@ -28,16 +22,10 @@ const CourseCard = ({ item }) => {
         <div className='courseCard'>
             <img src={item.thumbnailUrl[0] || '/images/default-thumbnail.jpg'} alt={item.title} />
             <div className="info">
-                {isFetching ? (
-                    "Loading"
-                ) : error ? (
-                    "Something went wrong"
-                ) : (
-                    <div className="user">
-                        <img src={data.photoUrl || '/images/noavatar.png'} alt={data.username || 'Unknown User'} />
-                        <span>{data.username || 'Unknown User'}</span>
-                    </div>
-                )}
+                <div className="user">
+                    <img src={item.educatorId.photoUrl || '/images/noavatar.png'} alt={item.educatorId.username || 'Unknown User'} />
+                    <span>{item.educatorId.username || 'Unknown User'}</span>
+                </div>
             </div>
             <div className="courseInfo">
                 <p>{item.description && item.description.length > 70 ? item.description.substring(0, 70) + '...' : item.description}</p>

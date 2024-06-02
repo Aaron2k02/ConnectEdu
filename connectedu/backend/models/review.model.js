@@ -18,6 +18,7 @@ const reviewSchema = new Schema({
     userId: {
         type: String,
         required: true,
+        ref: 'User',
     },
 }, {
     timestamps: true

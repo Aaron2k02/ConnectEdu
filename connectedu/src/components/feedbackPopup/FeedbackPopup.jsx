@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 import './FeedbackPopup.scss';
 import newRequest from '../../utils/newRequest';
+import { useQueryClient } from '@tanstack/react-query'; // Import useQueryClient
 
 const FeedbackPopup = ({ course, isAdmin, toggle }) => {
     const [feedback, setFeedback] = useState(course.adminFeedback || '');
+    const queryClient = useQueryClient(); // Initialize useQueryClient
 
-    const handleFeedbackChange = (e) => {
-        setFeedback(e.target.value);
-    }
-
-    const handleFeedbackSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            await newRequest.put(`/courses/feedback/${course._id}`, { feedback });
-            toggle();
-        } catch (err) {
-            console.error(err);
+        if (isAdmin) {
+            // Send feedback to the server
+            await newRequest.post(`/courses/feedback/${course._id}`, { feedback });
+            // Invalidate the query to trigger a refetch
+            queryClient.invalidateQueries(['courseFeedback', course._id]);
         }
-    }
+        // Close the feedback popup
+        toggle();
+    };
 
     return (
         <div className="feedback-popup">
@@ -33,14 +33,14 @@ const FeedbackPopup = ({ course, isAdmin, toggle }) => {
                         cols="30"
                         rows="16"
                         value={feedback}
-                        onChange={handleFeedbackChange}
+                        onChange={(e) => setFeedback(e.target.value)}
                         disabled={!isAdmin}
                     />
                 </div>
                 <div className='popupNav'>
                     <button onClick={toggle} className='btn-cancel'>Close</button>
                     {isAdmin && (
-                        <button onClick={handleFeedbackSubmit} className='btn-confirm'>Confirm</button>
+                        <button onClick={handleSubmit} className='btn-confirm'>Confirm</button>
                     )}
                 </div>
             </div>

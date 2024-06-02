@@ -11,7 +11,7 @@ const courseSchema = new Schema({
         required: true,
     },
     category: {
-        type: [String],
+        type: String,
         required: true,
     },
     price: {
@@ -36,7 +36,7 @@ const courseSchema = new Schema({
         default: false
     },
     topics: {
-        type: String,
+        type: [String],
         required: false,
     },
     courseDuration: {

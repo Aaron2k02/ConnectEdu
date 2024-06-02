@@ -1,32 +1,31 @@
-import React from 'react'
-import './LearningCard.scss'
-import { Link } from 'react-router-dom';
+import React from 'react';
+import './LearningCard.scss';
+import { Link, useNavigate } from 'react-router-dom';
 
+const LearningCard = ({ item }) => {
+  let navigate = useNavigate();
 
+  const viewCourse = (courseId) => {
+    let path = `/viewCourse/${courseId}`;
+    navigate(path);
+  };
 
+  // Truncate the course title if it exceeds 15 characters
+  const truncatedTitle = item.title.length > 15 ? `${item.title.substring(0, 15)}...` : item.title;
 
-const LearningCard = ({item}) => {
   return (
     <div className='learningCard'>
-        <div className='imgCard'>
-            <img src={item.img} alt="" />
-        </div>
-        <div className='title'>
-            <span>{item.title}</span>
-            
-        </div>
-        <div></div>
-        
-
-        
-        <div className='btn'>
-        <Link to='/viewCourse'> 
-        <button>Continue..</button>
-        </Link>
-        </div>
+      <div className='imgCard'>
+        <img src={item.thumbnailUrl[0]} alt="" />
+      </div>
+      <div className='title'>
+        <span>{truncatedTitle}</span>
+      </div>
+      <div className='btn'>
+        <button onClick={() => viewCourse(item._id)}>Continue Learning</button>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default LearningCard
-
+export default LearningCard;

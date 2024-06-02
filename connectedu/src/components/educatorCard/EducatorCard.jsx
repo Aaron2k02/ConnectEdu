@@ -1,23 +1,23 @@
 import React from 'react';
 import './EducatorCard.scss';
 
-const EducatorCard = ({ item }) => {
+const EducatorCard = ({ educator }) => {
   return (
     // Will be handled in the backend component
     // <Link to='/course?category=design'>
     <div className='EducatorCard'>
       <div className="educatorInfo">
-        <img src={item.pp} />
+        <img src={educator.photoUrl ||"/images/noavatar.png"} />
         <div className="texts">
           <h2>
-            {item.cat}
+            {educator.profile.qualifications || "Pending Qualifications"}
           </h2>
           <span>
-            {item.username}
+            {educator.username}
           </span>
         </div>
         <div className="educatorDetail">
-          <p>Total Student: 0</p>
+          <p>Total Sales: {educator.totalSales}</p>
         </div>
       </div>
       <div className="social">

@@ -8,57 +8,55 @@
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
 
-    .popup-inner {
-        background-color: white;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
-        width: 40%;
-
-        h2 {
-            margin: 20px 0px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        input {
-            width: 100%;
-            padding: 5px;
+    .container{
+        .popup-inner {
+            background-color: white;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            gap: 35px;
+            transform: translate(-50%, -50%);
+            padding: 25px;
             border-radius: 5px;
-            border: 1px solid #ccc;
-            margin-bottom: 10px;
-        }
-
-        .popupNav {
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+            height: 130px;
+            width: 350px; // Adjusted width
             display: flex;
-            justify-content: space-between;
-            margin-top: 50px;
+            flex-direction: column;
 
-            button {
-                color: white;
-                border: none;
-                padding: 10px 10px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-                margin-right: 10px;
-                cursor: pointer;
-                border-radius: 5px;
+            .popup-inner-header {
+                display: flex;
+                align-items: center;
+                justify-content: center;
 
-                &.btn-cancel {
-                    background-color: #EB455F !important;
+                h2 {
+                    margin: 10px 20px;
                 }
+            }
 
-                &.btn-confirm {
-                    background-color: green !important;
+            .popupNav {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 10px;
+
+                button {
+                    color: white;
+                    border: none;
+                    padding: 10px 20px; // Adjusted padding
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 20px;
+                    cursor: pointer;
+                    border-radius: 5px;
+
+                    &.btn-cancel {
+                        background-color: #EB455F !important;
+                    }
+
+                    &.btn-confirm {
+                        background-color: green !important;
+                    }
                 }
             }
         }

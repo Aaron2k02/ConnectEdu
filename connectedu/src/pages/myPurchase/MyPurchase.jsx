@@ -1,49 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './MyPurchase.scss';
-import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import newRequest from '../../utils/newRequest';
 
 const MyPurchase = () => {
-
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   // Fetch orders
-  const ordersQuery = useQuery({
-    queryKey: ["orders"],
-    queryFn: () => newRequest.get(`/orders`).then((res) => res.data),
-  });
-
-  // Fetch user data for each order
-  const userQueries = useQuery({
-    queryKey: ["users", ordersQuery.data?.flatMap(order => [order.buyerId, order.sellerId])],
-    queryFn: async () => {
-      const userIds = Array.from(new Set(ordersQuery.data.flatMap(order => [order.buyerId, order.sellerId])));
-      const userPromises = userIds.map(userId =>
-        newRequest.get(`/users/${userId}`).then((res) => res.data)
-      );
-      return Promise.all(userPromises);
-    },
-    enabled: !!ordersQuery.data,
+  const { data: orders, isFetching, error } = useQuery({
+    queryKey: ['orders'],
+    queryFn: () => newRequest.get('/orders').then((res) => res.data)
   });
 
   let transactions = [];
-  if (ordersQuery.data && userQueries.data) {
-    const usersMap = userQueries.data.reduce((map, user) => {
-      map[user._id] = user;
-      return map;
-    }, {});
-
-    transactions = ordersQuery.data.map(order => {
-      const buyer = usersMap[order.buyerId];
-      const seller = usersMap[order.sellerId];
-      const isBuyer = currentUser._id === order.buyerId;
+  if (orders) {
+    transactions = orders.map(order => {
+      const buyer = order.buyerId;
+      const seller = order.sellerId;
+      const isBuyer = currentUser._id === order.buyerId._id;
       const otherUser = isBuyer ? seller : buyer;
 
       return {
         date: new Date(order.createdAt).toLocaleDateString(),
-        name: otherUser.username,
-        email: otherUser.email,
+        name: otherUser?.username || 'Unknown User',
+        email: otherUser?.email || 'Unknown Email',
         course: order.title,
         amount: `RM${order.price.toFixed(2)}`,
         type: isBuyer ? 'Course Enrollment' : 'Course Earnings',
@@ -64,11 +44,11 @@ const MyPurchase = () => {
 
   return (
     <div className='MyPurchase'>
-      {ordersQuery.isFetching ? "Loading..." :
-        ordersQuery.error ? "Something went wrong!" :
+      {isFetching ? "Loading..." :
+        error ? "Something went wrong!" :
           <div className="container">
             <div className="title">
-              <h1> Transaction History </h1>
+              <h1>Transaction History</h1>
             </div>
             {/* dropdowns for selecting transaction type and role */}
             <div>
@@ -96,8 +76,7 @@ const MyPurchase = () => {
                   <th>Role</th>
                 </tr>
                 {filteredTransactions.map((transaction, index) => (
-                  <tr key={index}
-                    onClick={() => alert(JSON.stringify(transaction))}>
+                  <tr key={index} onClick={() => alert(JSON.stringify(transaction))}>
                     <td>{transaction.date}</td>
                     <td>{transaction.name}</td>
                     <td>{transaction.email}</td>

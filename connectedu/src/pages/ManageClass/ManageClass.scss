@@ -57,6 +57,22 @@
                             border-radius: 50%;
                         }
 
+                        span {
+                            font-weight: 500;
+                            padding: 5px 15px;
+                            border-radius: 5px;
+                            color: white;
+
+                            &.Approved {
+                                background-color: green;
+                            }
+
+                            &.Pending {
+                                background-color: yellowgreen;
+                                color: #2B3467;
+                            }
+                        }
+
                         .status {
                             padding: 5px 10px;
                             font-size: 0.75rem;
@@ -97,6 +113,10 @@
 
                             &.feedback {
                                 background-color: blue;
+                            }
+
+                            &.view{
+                                background-color: #BAD7E9;
                             }
                         }
                     }

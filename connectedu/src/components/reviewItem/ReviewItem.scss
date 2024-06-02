@@ -2,14 +2,15 @@
     width: 900px;
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    background-color: #fcffe7;
 
     .container {
         flex: 1;
         display: flex;
         flex-direction: column;
-        gap: 20px;
-
+        gap: 15px !important;
+        margin-left: 25px;
+    
         p {
             word-wrap: break-word;
             width: 100%;
@@ -31,7 +32,7 @@
             .info {
                 display: flex;
                 flex-direction: column;
-                gap: 5px 0px;
+                gap: 5px;
             }
         }
 
@@ -60,12 +61,6 @@
                 cursor: pointer;
                 width: 14px;
             }
-        }
-
-        hr {
-            height: 0;
-            border: 0.5px solid lightgray;
-            margin: 10px 0px;
         }
     }
 }

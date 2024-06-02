@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Home.scss'
 
 import "react-multi-carousel/lib/styles.css";
@@ -10,15 +10,27 @@ import Slide from '../../components/Slide/Slide';
 
 // local data
 import { cards } from '../../data/categoryData';
-import { educators } from '../../data/educatorsData';
 import CategoryCard from '../../components/categoryCard/CategoryCard';
 import EducatorCard from '../../components/educatorCard/EducatorCard';
 
 import { useNavigate } from 'react-router-dom';
+import newRequest from '../../utils/newRequest';
 
 const Home = () => {
-
+  const [educators, setEducators] = useState([]);
   let navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchEducators = async () => {
+      try {
+        const response = await newRequest.get('/users/educators');
+        setEducators(response.data);
+      } catch (error) {
+        console.error('Error fetching educators:', error);
+      }
+    };
+    fetchEducators();
+  }, []);
 
   const routeSignIn = () => {
     navigate('/signin');
@@ -78,8 +90,8 @@ const Home = () => {
         <h1> Our Amazing Educators </h1>
         <Slide slidesToSlide={1}>
           {
-            educators.map(card => (
-              <EducatorCard key={card.id} item={card} />
+            educators.map(educator => (
+              <EducatorCard key={educator._id} educator={educator} />
             ))
           }
         </Slide>

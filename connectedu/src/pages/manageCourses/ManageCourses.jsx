@@ -26,14 +26,12 @@ const ManageCourses = () => {
 
     const coursesQuery = useQuery({
         queryKey: ["myCourses"],
-        queryFn: () => newRequest.get(`/courses?userId=${currentUser._id}`).then((res) => res.data),
+        queryFn: () => newRequest.get('/courses/myCourses').then((res) => res.data),
         enabled: !!currentUser._id,
     });
 
     const mutation = useMutation({
-        mutationFn: (id) => {
-            return newRequest.delete(`/courses/${id}`);
-        },
+        mutationFn: (id) => newRequest.delete(`/courses/${id}`),
         onSuccess: () => {
             queryClient.invalidateQueries(["myCourses"]);
         }
@@ -45,8 +43,8 @@ const ManageCourses = () => {
 
     return (
         <div className='manageCourses'>
-            {coursesQuery.isFetching ? "Loading" :
-                coursesQuery.error ? "Error" :
+            {coursesQuery.isFetching ? "Loading..." :
+                coursesQuery.error ? "Error loading courses" :
                     <div className="container">
                         {popupVisible && (
                             <FeedbackPopup
@@ -60,7 +58,7 @@ const ManageCourses = () => {
                             <button onClick={createCourse}>Create New Course</button>
                         </div>
                         <table>
-                            <tbody>
+                            <thead>
                                 <tr>
                                     <th>Image</th>
                                     <th>Title</th>
@@ -71,33 +69,44 @@ const ManageCourses = () => {
                                     <th>Update</th>
                                     <th>Action</th>
                                 </tr>
-                                {coursesQuery.data && coursesQuery.data.map((course) => (
-                                    <tr key={course._id}>
-                                        <td>
-                                            <img className="image" src={course.thumbnailUrl[0]} alt="" />
-                                        </td>
-                                        <td className='courseTitle'>
-                                            {course.title.length > 30 ? course.title.substring(0, 20) + '...' : course.title}
-                                        </td>
-                                        <td>RM {course.price}</td>
-                                        <td>{course.totalSales}</td>
-                                        <td>
-                                            {course.isApproved ? "Approved" : "Pending"}
-                                        </td>
-                                        <td>
-                                            <button className='feedback' onClick={() => togglePop(course)}>Feedback</button>
-                                        </td>
-                                        <td>
-                                            <button className='update'>Update</button>
-                                        </td>
-                                        <td>
-                                            <button className='delete' onClick={() => handleDelete(course._id)}>Delete</button>
-                                        </td>
+                            </thead>
+                            <tbody>
+                                {coursesQuery.data && coursesQuery.data.length > 0 ? (
+                                    coursesQuery.data.map((course) => (
+                                        <tr key={course._id}>
+                                            <td>
+                                                <img className="image" src={course.thumbnailUrl[0]} alt="" />
+                                            </td>
+                                            <td className='courseTitle'>
+                                                {course.title.length > 20 ? course.title.substring(0, 20) + '...' : course.title}
+                                            </td>
+                                            <td>RM {course.price}</td>
+                                            <td>{course.totalSales}</td>
+                                            <td>
+                                                <span className={course.isApproved ? "Approved" : "Pending"}>
+                                                    {course.isApproved ? "Approved" : "Pending"}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <button className='feedback' onClick={() => togglePop(course)}>Feedback</button>
+                                            </td>
+                                            <td>
+                                                <button className='update' onClick={() => navigate(`/updateCourse/${course._id}`)}>Update</button>
+                                            </td>
+                                            <td>
+                                                <button className='delete' onClick={() => handleDelete(course._id)}>Delete</button>
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan="8">No courses found.</td>
                                     </tr>
-                                ))}
+                                )}
                             </tbody>
                         </table>
-                    </div>}
+                    </div>
+            }
         </div>
     );
 }

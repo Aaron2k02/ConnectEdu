@@ -56,8 +56,11 @@ const Login = ({ handleLogin }) => {
         password,
         email,
       });
-      // console.log(res.data);
-      localStorage.setItem("currentUser", JSON.stringify(res.data));
+      
+      const { userInfo, userProfile } = res.data;
+
+      localStorage.setItem("currentUser", JSON.stringify(userInfo));
+      localStorage.setItem("userProfile", JSON.stringify(userProfile));
 
       // Handle successful login
       handleLogin(JSON.stringify(res.data));

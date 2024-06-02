@@ -52,11 +52,13 @@ const QuestionAnswerPopupForm = ({ questionData, currentUser, toggle }) => {
                     />
                 </div>
                 <div className='popupNav'>
-                    <button onClick={toggle} className='btn-close'>Close</button>
                     {currentUser._id !== questionData.question.askerId._id && (<>
-                        <button onClick={handleSubmit} className='btn-confirm'>Confirm</button>
                         <button onClick={toggle} className='btn-cancel'>Cancel</button>
+                        <button onClick={handleSubmit} className='btn-confirm'>Confirm</button>
                     </>
+                    )}
+                    {currentUser._id === questionData.question.askerId._id && (
+                        <button onClick={toggle} className='btn-close'>Close</button>
                     )}
                 </div>
             </div>

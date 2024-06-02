@@ -1,12 +1,25 @@
-import React, { useReducer, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import React, { useReducer, useState, useEffect } from 'react';
+import { useNavigate, useLocation } from "react-router-dom";
 import "./createCourse.scss";
 import { courseReducer, INITIAL_STATE } from '../../reducers/courseReducer';
 
 const CreateCourse = () => {
   const [state, dispatch] = useReducer(courseReducer, INITIAL_STATE);
-  const [files, setFiles] = useState([]);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [isCreateCourse, SetIsCreateCourse] = useState(true);
+  const { courseState, files: prevFiles = [] } = location.state || {};
+
+  const [files, setFiles] = useState(Array.from(prevFiles));
+
+  useEffect(() => {
+    if (courseState) {
+      dispatch({ type: 'SET_STATE', payload: courseState });
+    }
+    if (prevFiles.length > 0) {
+      setFiles(Array.from(prevFiles));
+    }
+  }, [courseState, prevFiles]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -34,9 +47,18 @@ const CreateCourse = () => {
     });
   };
 
+  const handleFileChange = (e) => {
+    const newFiles = Array.from(e.target.files);
+    setFiles((prevFiles) => [...prevFiles, ...newFiles]);
+  };
+
+  const handleRemoveFile = (index) => {
+    setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/create-course-content', { state: { courseState: state, files } });
+    navigate('/create-course-content', { state: { courseState: state, files, isCreateCourse} });
   };
 
   const handleCancel = () => {
@@ -52,7 +74,15 @@ const CreateCourse = () => {
             <div className="images">
               <div className="imagesInputs">
                 <label htmlFor="courseThumbnail">Course Thumbnail</label>
-                <input type="file" id="courseThumbnail" multiple onChange={e => setFiles(e.target.files)} />
+                <input type="file" id="courseThumbnail" multiple onChange={handleFileChange} />
+                <div className="thumbnails">
+                  {files.length > 0 && files.map((file, index) => (
+                    <div key={index} className="thumbnail">
+                      <img src={URL.createObjectURL(file)} alt={`Thumbnail ${index}`} />
+                      <button type="button" onClick={() => handleRemoveFile(index)}>Remove</button>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -96,31 +126,31 @@ const CreateCourse = () => {
                 {state.topics.map((topic, index) => (
                   <div className="coverages" key={index}>
                     <div className="first-section">
-                    <input
-                      type="text"
-                      value={topic.coverage}
-                      onChange={(e) => handleCoverageChange(e, index)}
-                      placeholder='e.g. Learning React'
-                    />
-                    {state.topics.length > 1 && (
-                      <button
-                        type='button'
-                        onClick={() => handleCoverageRemove(index)}
-                        className='remove-btn'
-                      >
-                        <span>Remove</span>
-                      </button>
-                    )}
+                      <input
+                        type="text"
+                        value={topic.coverage}
+                        onChange={(e) => handleCoverageChange(e, index)}
+                        placeholder='e.g. Learning React'
+                      />
+                      {state.topics.length > 1 && (
+                        <button
+                          type='button'
+                          onClick={() => handleCoverageRemove(index)}
+                          className='remove-btn'
+                        >
+                          <span>Remove</span>
+                        </button>
+                      )}
                     </div>
                     <div className="second-division">
-                    {state.topics.length - 1 === index && state.topics.length < 4 && (
-                      <button
-                        type='button'
-                        onClick={handleCoverageAdd}
-                        className='add-btn'
-                      >
-                        <span>Add Topic</span>
-                      </button>
+                      {state.topics.length - 1 === index && state.topics.length < 4 && (
+                        <button
+                          type='button'
+                          onClick={handleCoverageAdd}
+                          className='add-btn'
+                        >
+                          <span>Add Topic</span>
+                        </button>
                       )}
                     </div>
                   </div>
