@@ -44,6 +44,10 @@ const ManageClass = () => {
     navigate(path);
   };
 
+  const truncateText = (text, maxLength) => {
+    return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+  };
+
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading courses</div>;
 
@@ -76,7 +80,7 @@ const ManageClass = () => {
                 <td>
                   <img src={classInfo.thumbnailUrl[0] || "/images/ConnectEduLogo-bg.png"} alt="Class" />
                 </td>
-                <td>{classInfo.title}</td>
+                <td>{truncateText(classInfo.title, 25)}</td>
                 <td>{classInfo.educatorId.username}</td>
                 <td>
                   <span className={classInfo.isApproved ? "Approved" : "Pending"}>

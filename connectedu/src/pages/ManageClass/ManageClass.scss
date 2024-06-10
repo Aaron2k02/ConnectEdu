@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     background-color: #BAD7E9;
-    
+
     .container {
         width: 1400px;
         padding: 50px 0px;
@@ -49,6 +49,8 @@
                     td {
                         text-align: center;
                         padding: 10px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
 
                         img {
                             width: 50px;
@@ -82,13 +84,13 @@
                             transition: background-color 0.3s;
 
                             &.approved {
-                                background-color: green;// Green for "Approved" status
+                                background-color: green; // Green for "Approved" status
                                 color: white;
                             }
 
                             &.pending {
                                 background-color: yellow; // Yellow for "Pending" status
-                                color: black; 
+                                color: black;
                             }
                         }
 
@@ -106,7 +108,7 @@
                             &.approve {
                                 background-color: green;
                             }
-                            
+
                             &.deny {
                                 background-color: red;
                             }
@@ -115,7 +117,7 @@
                                 background-color: blue;
                             }
 
-                            &.view{
+                            &.view {
                                 background-color: #BAD7E9;
                             }
                         }

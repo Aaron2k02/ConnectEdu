@@ -49,7 +49,7 @@ const register = async (req, res, next) => {
 
         const newUserProfile = new UserProfile({
             userId: newUser._id,
-            skills: [],
+            skills: "",
             qualifications: "",
             professionalExperience: "",
             educationalBackground: "",
@@ -120,6 +120,7 @@ const updateUserProfile = async (req, res) => {
         const  userId  = req.userId;
         const { skills, qualifications, professionalExperience, educationalBackground } = req.body;
 
+        // Using parameterized query with moongoose
         const userProfile = await UserProfile.findOneAndUpdate(
             { userId },
             { skills, qualifications, professionalExperience, educationalBackground },

@@ -42,6 +42,10 @@ const MyPurchase = () => {
     (selectedRole === 'All' || transaction.role === selectedRole)
   );
 
+  const truncateText = (text, maxLength) => {
+    return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+  };
+
   return (
     <div className='MyPurchase'>
       {isFetching ? "Loading..." :
@@ -80,7 +84,7 @@ const MyPurchase = () => {
                     <td>{transaction.date}</td>
                     <td>{transaction.name}</td>
                     <td>{transaction.email}</td>
-                    <td>{transaction.course}</td>
+                    <td>{truncateText(transaction.course, 25)}</td>
                     <td>{transaction.amount}</td>
                     <td>{transaction.type}</td>
                     <td>{transaction.role}</td>

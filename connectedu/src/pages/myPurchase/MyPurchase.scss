@@ -1,17 +1,17 @@
-.MyPurchase{
+.MyPurchase {
     display: flex;
     justify-content: center;
-    
-    .container{
+
+    .container {
         width: 1400px;
         padding: 50px 0px;
 
-        .title{
+        .title {
             display: flex;
             align-items: center;
             justify-content: space-between;
 
-            button{
+            button {
                 background-color: #2B3467;
                 color: white;
                 font-weight: 500;
@@ -21,7 +21,7 @@
             }
         }
 
-        select{
+        select {
             padding: 10px 10px;
             margin: 5px 10px;
             border-radius: 5px;
@@ -32,38 +32,36 @@
             cursor: pointer;
         }
 
-        table{
+        table {
             width: 100%;
             border-spacing: 0;
             table-layout: fixed;
             margin-top: 20px;
 
-            tr{
+            tr {
                 height: 50px;
-                // overflow: hidden;
                 white-space: nowrap;
 
-                .PurchaseTitle {
-                        width: 100px;
-                        // overflow: hidden;
-                    }
-
-                th{
-                    text-align: center; 
+                th {
+                    text-align: center;
                     background-color: #2B3467;
                     color: white;
+                    padding: 10px;
                 }
 
-                td{
+                td {
                     text-align: center;
-                    
-                    img{
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    padding: 10px;
+
+                    img {
                         width: 50px;
                         height: 25px;
                         object-fit: cover;
                     }
 
-                    button{
+                    button {
                         color: #2B3467;
                         font-weight: 500;
                         border: none;
@@ -73,20 +71,20 @@
                         width: 100px;
                     }
 
-                    .update{
+                    .update {
                         background-color: yellow;
                     }
-                    
-                    .delete{
+
+                    .delete {
                         background-color: #EB455F;
                     }
                 }
 
-                &:nth-child(even){
+                &:nth-child(even) {
                     background-color: #BAD7E9;
                 }
 
-                &:hover{
+                &:hover {
                     background-color: #e0e0e0;
                 }
             }
