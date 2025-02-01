@@ -1,4 +1,7 @@
 # ConnectEdu
+[**Project Documentation**](https://docs.google.com/document/d/18dprI1fkXn1Z60pfyD-oGvQFFzp9_P4C/edit?usp=sharing&ouid=103057367026896609070&rtpof=true&sd=true)
+[**Project Summary**](https://www.canva.com/design/DAGHzPlC5So/O0rKtXtHmmioYy81-ikJkw/edit?utm_content=DAGHzPlC5So&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
 ## __Group Members__
 1. Aaron Chee Thian Shin (u2102810)
 2. Siti Maisarah (u2000534)
